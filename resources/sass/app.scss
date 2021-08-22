@@ -1,5 +1,6 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
 
 // Variables
 @import "variables";
@@ -9,6 +10,7 @@
 
 //imports
 @import "navbar";
+@import "typed";
 
 html {
     font-size: 16px;
@@ -16,12 +18,13 @@ html {
 
 body {
     margin: 0;
-    color: $font-color;
-    font-family: "Poppins";
+    color: $font-color-primary;
+    font-family: $font-family-primary;
     overflow-x: hidden;
 }
 
 h1 {
+    color: $font-color-primary;
     font-weight: 600;
     font-size: clamp(40px, 5vw, 70px);
 }
@@ -49,9 +52,23 @@ p {
     background-size: cover;
 }
 
-.landing-page_content {
-    // padding-left: 5em;
-    // padding-top: 25em;
+.fluid-margin {
+    padding-left: clamp(20px, 7.5vw, 250px) !important;
+}
+
+.landing-page_content_text {
+    font-size: clamp(0.8rem, 1.75vw, 1rem);
+    font-family: $font-family-secondary;
+    color: #24ff66;
+}
+
+.landing-page_content_text_second {
+    max-width: 30rem;
+}
+
+.we-create-header {
+    font-size: clamp(rem, 2vw, 1.2rem);
+    line-height: 0.5em;
 }
 
 .scroller {

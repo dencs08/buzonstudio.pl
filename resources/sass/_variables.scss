@@ -2,13 +2,16 @@
 $body-bg: #111111;
 
 // Typography
-$font-family-sans-serif: "Nunito", sans-serif;
-$font-size-base: 0.9rem;
+$font-family-primary: "Poppins";
+$font-family-secondary: "Ubuntu Mono", monospace;
+$font-size-base: 1rem;
 $line-height-base: 1.6;
 
 // Colors
-$header-color: #ffffff;
-$font-color: #ffffff;
+$font-color-primary: #ffffff;
+$font-color-secondary: #f3f3f3;
+$font-color-tertiary: #f0f0f0;
 $primary-color: #0d1541;
 $secondary-color: #57219e;
-$fill-color: #2c8cb3;
+$fill-color-primary: #2c8cb3;
+$fill-color-secondary: #24ff66;
