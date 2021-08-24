@@ -15,10 +15,10 @@ docReady(function () {
         strings: ["doświadczenia.", "pomysły.", "aplikacje.", "strony internetowe.", "wizaulizacje."],
         backSpeed: 75,
         typeSpeed: 100,
-        backDelay: 100,
-        startDelay: 100,
+        backDelay: 500,
+        startDelay: 500,
         loop: true,
         cursorChar: '_',
-        shuffle: true
+        // shuffle: true
     });
 });
