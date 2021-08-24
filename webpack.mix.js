@@ -18,7 +18,8 @@ const mix = require('laravel-mix');
 mix.js([
     'resources/js/app.js',
     'resources/js/three.js',
-    'resources/js/typeAnim.js'
+    'resources/js/typeAnim.js',
+    'resources/js/gsapAnims.js'
 ], 'public/js/app.js').version()
     .sass('resources/sass/app.scss', 'public/css');
 
