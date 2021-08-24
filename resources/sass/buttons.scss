@@ -1,0 +1,176 @@
+.btn {
+    border: none;
+    outline: none;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    font-family: $font-family-primary;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    border-radius: 5em;
+    padding: 0.8em 4em;
+}
+
+.btn-primary {
+    background-color: $fill-color-secondary;
+    color: $body-bg;
+    transition: 0.5s;
+}
+
+.btn-primary:hover {
+    background-color: $fill-color-secondary-darker;
+    transform: scale(0.95);
+    transition: 0.5s;
+}
+
+.btn-primary:focus {
+    background-color: $fill-color-secondary-lighter;
+    transform: scale(1.1);
+    transform: 0.25s;
+}
+
+.btn-secondary {
+    background-color: $fill-color-primary;
+    color: $font-color-primary;
+}
+
+.btn-outline-primary {
+    background-color: transparent;
+    border: 2px solid $fill-color-secondary;
+    color: $fill-color-secondary;
+    transition: 0.5s;
+}
+
+.btn-outline-primary:hover {
+    background-color: $fill-color-secondary;
+    color: $body-bg-color-lighter;
+    font-weight: bold;
+    transform: scale(1.05);
+    transition: 0.5s;
+}
+
+.btn-outline-primary:focus {
+    background-color: $fill-color-secondary-darker;
+    transform: scale(0.95);
+    transform: 0.25s;
+}
+
+.btn-outline-secondary {
+    background-color: transparent;
+    border: 2px solid $fill-color-primary;
+    color: $fill-color-primary;
+    transition: 0.5s;
+}
+
+.btn-outline-secondary:hover {
+    background-color: $fill-color-primary;
+    color: $font-color-primary;
+    transition: 0.5s;
+}
+
+.button-trail form a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: $fill-color-secondary;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    margin-top: 40px;
+    letter-spacing: 4px;
+}
+
+.button-trail a:hover {
+    background: $fill-color-secondary;
+    color: #fff;
+    border-radius: 50px;
+    box-shadow: 0 0 5px $fill-color-secondary, 0 0 12.5px $fill-color-secondary,
+        0 0 25px $fill-color-secondary, 0 0 50px $fill-color-secondary;
+}
+
+.button-trail a span {
+    position: absolute;
+    display: block;
+}
+
+.button-trail a span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, $fill-color-secondary);
+    animation: btn-anim1 1s linear infinite;
+    animation-delay: 0s;
+}
+
+@keyframes btn-anim1 {
+    0% {
+        left: -100%;
+    }
+    50%,
+    100% {
+        left: 100%;
+    }
+}
+
+.button-trail a span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, $fill-color-secondary);
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: 0.25s;
+}
+
+@keyframes btn-anim2 {
+    0% {
+        top: -100%;
+    }
+    50%,
+    100% {
+        top: 100%;
+    }
+}
+
+.button-trail a span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, $fill-color-secondary);
+    animation: btn-anim3 1s linear infinite;
+    animation-delay: 0.5s;
+}
+
+@keyframes btn-anim3 {
+    0% {
+        right: -100%;
+    }
+    50%,
+    100% {
+        right: 100%;
+    }
+}
+
+.button-trail a span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, $fill-color-secondary);
+    animation: btn-anim4 1s linear infinite;
+    animation-delay: 0.75s;
+}
+
+@keyframes btn-anim4 {
+    0% {
+        bottom: -100%;
+    }
+    50%,
+    100% {
+        bottom: 100%;
+    }
+}

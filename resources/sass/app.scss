@@ -5,12 +5,29 @@
 // Variables
 @import "variables";
 
-// Bootstrap
-@import "~bootstrap/scss/bootstrap";
+//Bootstrap
+// required bootstrap components
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+//additional bootstrap components
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/utilities/api";
 
 //imports
 @import "navbar";
 @import "typed";
+@import "utilities";
+@import "buttons";
+
+//main rules
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
 html {
     font-size: 16px;
@@ -18,19 +35,34 @@ html {
 
 body {
     margin: 0;
+    padding: 0;
     color: $font-color-primary;
     font-family: $font-family-primary;
     overflow-x: hidden;
+    background-color: $body-bg;
 }
 
 h1 {
     color: $font-color-primary;
     font-weight: 600;
     font-size: clamp(40px, 5vw, 70px);
+    line-height: clamp(10px, 2.5vw, 20px);
 }
 
 p {
-    font-size: 1rem;
+    font-size: clamp(0.8rem, 1.75vw, 1rem);
+}
+
+hr {
+    display: block;
+    border: 1px solid $font-color-primary;
+    overflow: hidden;
+    width: clamp(3em, 5vw, 7em);
+    float: left;
+}
+
+img {
+    width: 100%;
 }
 
 #web_gl {
@@ -38,11 +70,11 @@ p {
     top: 0;
     left: 0;
     outline: none;
-    mix-blend-mode: exclusion;
+    // mix-blend-mode: exclusion;
 }
 
 //landingpage
-.landing-page {
+#landing-page-section {
     height: 100vh;
     display: grid;
     place-items: center;
@@ -52,25 +84,63 @@ p {
     background-size: cover;
 }
 
-.fluid-margin {
-    padding-left: clamp(20px, 7.5vw, 250px) !important;
-}
-
 .landing-page_content_text {
-    font-size: clamp(0.8rem, 1.75vw, 1rem);
     font-family: $font-family-secondary;
     color: #24ff66;
 }
 
 .landing-page_content_text_second {
-    max-width: 30rem;
+    width: clamp(15em, 30vw, 30em);
 }
 
-.we-create-header {
-    font-size: clamp(rem, 2vw, 1.2rem);
-    line-height: 0.5em;
+//wecreate
+#we-create-section {
+    margin: clamp(3em, 4vw, 10em) auto;
 }
 
-.scroller {
-    height: 100vh;
+.mb-card-we-create {
+    margin-bottom: clamp(5em, 40vh, 25em);
 }
+
+//portfolio
+#portfolio-section {
+    display: grid;
+    place-items: center;
+}
+
+.portfolio-img {
+    overflow: hidden;
+    border-radius: 1em;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: 0.5s;
+}
+
+.portfolio-img:hover {
+    cursor: pointer;
+    filter: none;
+    transition: 0.5s;
+    transform: scale(1.05);
+}
+
+//footer contact
+
+#contact-section {
+    position: relative;
+}
+
+.contact-content {
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    transform: translate(-50%, -70%);
+    z-index: 5;
+}
+
+.footer-svg {
+    min-height: 75vh !important;
+    height: 100%;
+    width: 100%;
+}
+
+//media queries

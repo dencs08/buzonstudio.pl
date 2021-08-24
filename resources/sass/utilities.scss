@@ -1,0 +1,27 @@
+.container {
+    width: 90%;
+}
+
+.container-md {
+    width: 75%;
+}
+
+.section-header {
+    font-size: clamp(1.3rem, 2vw, 1.9rem);
+}
+
+.fluid-margin {
+    padding-left: clamp(2em, 7.5vw, 18em) !important;
+}
+
+.card {
+    background-color: $body-bg-color-lighter;
+    width: clamp(5em, 25vw, 35em);
+    border-radius: 1em;
+    padding: 1.5em 3.5em;
+    box-shadow: 5px 10px #0e0e0ea9;
+}
+
+.card-header {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+}
