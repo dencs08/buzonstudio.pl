@@ -18,9 +18,10 @@
 
 //imports
 @import "navbar";
-@import "typed";
 @import "utilities";
 @import "buttons";
+@import "modal";
+@import "typed";
 
 //main rules
 *,
@@ -31,6 +32,7 @@
 
 html {
     font-size: 16px;
+    scroll-behavior: smooth;
 }
 
 body {
