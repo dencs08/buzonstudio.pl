@@ -13,20 +13,34 @@
         <nav id="navbar">
             <img src="images/logo_white.svg" class="img-nav" alt="" />
             <input type="checkbox" id="active" />
-            <label for="active" class="menu-btn"><span></span></label>
+            <label for="active" class="menu-btn"
+                ><span id="nav-closer"></span
+            ></label>
             <div class="wrapper">
                 <ul>
-                    <li><a href="#">Start</a></li>
-                    <li><a href="#">Oferta</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                    <li><a href="#">Kontakt</a></li>
+                    <li>
+                        <a href="#landing-page-section" class="nav-item"
+                            >Start</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#we-create-section" class="nav-item">Oferta</a>
+                    </li>
+                    <li>
+                        <a href="#portfolio-section" class="nav-item"
+                            >Portfolio</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#contact-section" class="nav-item">Kontakt</a>
+                    </li>
                 </ul>
             </div>
         </nav>
 
         <!-- Landing Page -->
 
-        <div id="landing-page-section">
+        <section id="landing-page-section">
             <div class="container fluid-margin">
                 <p class="landing-page_content_text">Cześć, jesteśmy</p>
                 <h1 class="gsap-left-to-right-slide-in">bisonstudio.</h1>
@@ -34,20 +48,26 @@
                     Twoje kompleksowe rozwiązanie na wszystkie technologiczne
                     potrzeby!
                 </p>
-                <a href="#"
-                    ><button class="btn btn-outline-primary mt-4 gsap-top-to-bottom-slide-in">
-                        Porozmawiajmy!
+                <a href="#portfolio-section"
+                    ><button
+                        class="
+                            btn btn-outline-primary
+                            mt-4
+                            gsap-top-to-bottom-slide-in
+                        "
+                    >
+                        Portfolio
                     </button></a
                 >
             </div>
-        </div>
+        </section>
 
         <!-- WEBGL -->
         <canvas id="web_gl"></canvas>
 
         <!-- We Create Section -->
 
-        <div id="we-create-section" class="container fluid-margin row">
+        <section id="we-create-section" class="container fluid-margin row">
             <div class="col-lg-6">
                 <h2 class="section-header we-create-section-header">
                     Tworzymy wspaniałe <span id="typed"></span>
@@ -91,11 +111,11 @@
                     </p>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Portfolio -->
 
-        <div id="portfolio-section" class="container-md mx-auto">
+        <section id="portfolio-section" class="container-md mx-auto">
             <h2 class="section-header text-center">
                 Kochamy rozmawiać, ale niech nasze portfolio wypowie się za nas.
             </h2>
@@ -120,20 +140,20 @@
                     Portfolio
                 </button></a
             >
-        </div>
+        </section>
 
         <!-- Footer Contact -->
 
         <footer>
-            <div id="contact-section">
+            <section id="contact-section">
                 <img src="images/footer.svg" class="footer-svg" alt="" />
                 <div class="contact-content container text-center">
                     <h2 class="section-header">
                         Zatrudnij nas a my zajmiemy się resztą ✌
                     </h2>
-                    <div class="button-trail mt-5">
+                    <div id="trigger" class="button-trail mt-5">
                         <form>
-                            <a href="#">
+                            <a href="#contact">
                                 <span></span>
                                 <span></span>
                                 <span></span>
@@ -143,8 +163,43 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </section>
         </footer>
+
+        <!-- Modal -->
+
+        <div id="modal-content" class="modal-container">
+            <h3>Porozmawiajmy!</h3>
+            <p class="modal-p">
+                Odezwiemy się tak szybko jak to możliwe, pamiętaj, żeby w razie
+                czego sprawdzić folder spam!
+            </p>
+
+            <div id="form-main">
+                <div id="form-div">
+                  <form class="form" id="form1">
+                    
+                    <p class="name">
+                      <input name="name" type="text" class="feedback-input" placeholder="Name" id="name" />
+                    </p>
+                    
+                    <p class="email">
+                      <input name="email" type="text" class="feedback-input" id="email" placeholder="Email" />
+                    </p>
+                    
+                    <p class="text">
+                      <textarea name="text" class="feedback-input" id="comment" placeholder="Message"></textarea>
+                    </p>
+                    
+                    
+                    <div class="submit">
+                        <button class="btn btn-primary mt-5">Wyślij</button>
+                      <div class="ease"></div>
+                    </div>
+                  </form>
+                </div>
+
+        </div>
 
         <script src="js/app.js"></script>
     </body>
