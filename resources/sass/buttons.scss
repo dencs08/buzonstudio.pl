@@ -174,3 +174,9 @@
         bottom: 100%;
     }
 }
+
+@media (max-width: 425px) {
+    .btn-outline-primary {
+        width: 90% !important;
+    }
+}

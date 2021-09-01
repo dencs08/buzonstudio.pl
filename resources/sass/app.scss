@@ -22,12 +22,18 @@
 @import "buttons";
 @import "modal";
 @import "typed";
+@import "animations";
 
 //main rules
 *,
 *::before,
 *::after {
     box-sizing: border-box;
+}
+
+::selection {
+    background-color: $font-color-primary;
+    color: $body-bg;
 }
 
 html {
@@ -46,13 +52,13 @@ body {
 
 h1 {
     color: $font-color-primary;
-    font-weight: 600;
-    font-size: clamp(40px, 5vw, 70px);
+    font-weight: 500;
+    font-size: clamp(1.75rem, 2.75vw, 2.5rem);
     line-height: clamp(10px, 2.5vw, 20px);
 }
 
 p {
-    font-size: clamp(0.8rem, 1.75vw, 1rem);
+    font-size: clamp(0.7rem, 1.75vw, 1rem);
 }
 
 hr {
@@ -72,6 +78,7 @@ img {
     top: 0;
     left: 0;
     outline: none;
+    z-index: 1;
     // mix-blend-mode: exclusion;
 }
 
@@ -88,11 +95,16 @@ img {
 
 .landing-page_content_text {
     font-family: $font-family-secondary;
-    color: #24ff66;
+    color: $fill-color-secondary;
 }
 
 .landing-page_content_text_second {
-    width: clamp(15em, 30vw, 30em);
+    font-size: clamp(1.5rem, 2.6vw, 3rem);
+    font-weight: 600;
+
+    line-height: clamp(50px, 2vw, 70px);
+
+    width: clamp(25em, 55vw, 90em);
 }
 
 //wecreate
@@ -146,3 +158,14 @@ img {
 }
 
 //media queries
+@media (max-width: 650px) {
+    h1 {
+        font-size: clamp(0.9rem, 5vw, 1.6rem);
+    }
+
+    .landing-page_content_text_second {
+        width: 11em;
+        line-height: clamp(30px, 2vw, 55px);
+        font-size: clamp(1.2rem, 5vw, 1.75rem);
+    }
+}

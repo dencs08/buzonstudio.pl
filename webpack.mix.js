@@ -18,6 +18,7 @@ const mix = require('laravel-mix');
 mix.js([
     'resources/js/app.js',
     'resources/js/modal.js',
+    'resources/js/contactform.js',
     'resources/js/three.js',
     'resources/js/typeAnim.js',
     'resources/js/gsapAnims.js',

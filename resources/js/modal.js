@@ -18,7 +18,7 @@
             className: 'fade-and-drop',
             closeButton: true,
             content: "",
-            maxWidth: 760,
+            maxWidth: 650,
             minWidth: 240,
             overlay: true
         }
@@ -151,7 +151,8 @@ var myModal = new Modal({
 
 var triggerButton = document.getElementById('trigger');
 
+var modalBg = document.getElementById('modal-bg');
+
 triggerButton.addEventListener('click', function () {
     myModal.open();
 });
-

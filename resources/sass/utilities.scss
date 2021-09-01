@@ -11,7 +11,7 @@
 }
 
 .fluid-margin {
-    padding-left: clamp(2em, 7.5vw, 18em) !important;
+    padding-left: clamp(1.5em, 7.5vw, 18em) !important;
 }
 
 .card {
@@ -24,4 +24,8 @@
 
 .card-header {
     font-size: clamp(1.1rem, 2vw, 1.5rem);
+}
+
+.green-highlight {
+    color: $fill-color-secondary;
 }

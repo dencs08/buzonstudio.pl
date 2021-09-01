@@ -37,24 +37,23 @@
                 </ul>
             </div>
         </nav>
+        
+        <!-- WEBGL -->
+        <canvas id="web_gl"></canvas>
 
         <!-- Landing Page -->
 
         <section id="landing-page-section">
-            <div class="container fluid-margin">
+            <div class="container fluid-margin landing-page-content">
                 <p class="landing-page_content_text">Cześć, jesteśmy</p>
-                <h1 class="gsap-left-to-right-slide-in">bisonstudio.</h1>
-                <p class="gsap-fade-in landing-page_content_text_second">
-                    Twoje kompleksowe rozwiązanie na wszystkie technologiczne
-                    potrzeby!
+                <h1 class="">bisonstudio.</h1>
+                <p class="landing-page_content_text_second">
+                    Tworzymy wspaniałe
+                    <span id="typed"></span>
                 </p>
                 <a href="#portfolio-section"
                     ><button
-                        class="
-                            btn btn-outline-primary
-                            mt-4
-                            gsap-top-to-bottom-slide-in
-                        "
+                        class="btn btn-outline-primary"
                     >
                         Portfolio
                     </button></a
@@ -62,15 +61,14 @@
             </div>
         </section>
 
-        <!-- WEBGL -->
-        <canvas id="web_gl"></canvas>
 
         <!-- We Create Section -->
 
         <section id="we-create-section" class="container fluid-margin row">
             <div class="col-lg-6">
                 <h2 class="section-header we-create-section-header">
-                    Tworzymy wspaniałe <span id="typed"></span>
+                    Jesteśmy Twoim <span class="green-highlight">kompleksowym</span> rozwiązaniem na <span class="green-highlight">wszystkie</span> technologiczne
+                    potrzeby!
                 </h2>
             </div>
             <div class="col-lg-6">
@@ -117,7 +115,7 @@
 
         <section id="portfolio-section" class="container-md mx-auto">
             <h2 class="section-header text-center">
-                Kochamy rozmawiać, ale niech nasze portfolio wypowie się za nas.
+                <span class="green-highlight">Kochamy</span> rozmawiać, ale niech nasze <span class="green-highlight">portfolio</span> wypowie się za nas.
             </h2>
             <div class="row">
                 <div class="col-lg-6 text-center">
@@ -169,37 +167,43 @@
         <!-- Modal -->
 
         <div id="modal-content" class="modal-container">
-            <h3>Porozmawiajmy!</h3>
-            <p class="modal-p">
-                Odezwiemy się tak szybko jak to możliwe, pamiętaj, żeby w razie
-                czego sprawdzić folder spam!
-            </p>
+            <img src="images/modal.svg" id="modal-bg" class="modal-bg" alt="">
+            <img src="images/modal-full.svg" id="modal-bg" class="modal-bg2" alt="">
 
-            <div id="form-main">
-                <div id="form-div">
-                  <form class="form" id="form1">
-                    
-                    <p class="name">
-                      <input name="name" type="text" class="feedback-input" placeholder="Name" id="name" />
-                    </p>
-                    
-                    <p class="email">
-                      <input name="email" type="text" class="feedback-input" id="email" placeholder="Email" />
-                    </p>
-                    
-                    <p class="text">
-                      <textarea name="text" class="feedback-input" id="comment" placeholder="Message"></textarea>
-                    </p>
-                    
-                    
-                    <div class="submit">
-                        <button class="btn btn-primary mt-5">Wyślij</button>
-                      <div class="ease"></div>
-                    </div>
-                  </form>
-                </div>
-
+            <section class="modal-content">
+                <h3>Porozmawiajmy!</h3>
+                <p class="mb-5">
+                    Odezwiemy się tak szybko jak to możliwe, pamiętaj, żeby w razie
+                    czego sprawdzić folder spam!
+                </p>       
+    
+                <!-- Contact form -->
+    
+                    <form name="contact-form" class="contact-form">
+                       <div class="form-field">
+                          <input id="name" name="name" class="input-text js-input" type="text" required>
+                          <label class="label" for="name">Imię</label>
+                       </div>
+                       <div class="form-field">
+                          <input id="email" name="email" class="input-text js-input" type="email" required>
+                          <label class="label" for="email">E-mail</label>
+                       </div>
+                       <div class="form-field">
+                        <input id="subject" name="subject" class="input-text js-input" type="text" required>
+                        <label class="label" for="subject">Temat</label>
+                     </div>
+                       <div class="form-field">
+                           <textarea id="message" name="message" class="input-text js-input" cols="30" rows="5" required></textarea>
+                          <label class="label" for="message">Wiadomość</label>
+                       </div>
+                       <div class="form-field">
+                          <input type="submit" value="Wyślij" class="btn btn-primary mt-5 w-100"></input>
+                       </div>
+                    </form>
+            </section>
         </div>
+
+
 
         <script src="js/app.js"></script>
     </body>

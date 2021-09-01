@@ -4,7 +4,6 @@
 }
 .menu-btn {
     position: fixed;
-    z-index: 99;
     right: 20px;
     top: 20px;
     height: 50px;
@@ -16,6 +15,7 @@
     cursor: pointer;
     color: #fff;
     transition: all 0.3s ease-in-out;
+    z-index: 99;
 }
 .menu-btn span,
 .menu-btn:before,
