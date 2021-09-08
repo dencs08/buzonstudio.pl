@@ -8,6 +8,10 @@
         <title>bisonstudio</title>
     </head>
     <body class="antialiased">
+        
+        <!-- WEBGL -->
+        <canvas id="web_gl"></canvas>
+
         <!-- Navbar -->
 
         <nav id="navbar">
@@ -38,8 +42,6 @@
             </div>
         </nav>
         
-        <!-- WEBGL -->
-        <canvas id="web_gl"></canvas>
 
         <!-- Landing Page -->
 
