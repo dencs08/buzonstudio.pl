@@ -47,19 +47,21 @@
 
         <section id="landing-page-section">
             <div class="container fluid-margin landing-page-content">
-                <p class="landing-page_content_text">Cześć, jesteśmy</p>
-                <h1 class="">bisonstudio.</h1>
-                <p class="landing-page_content_text_second">
+                <p class="gs gs_fromLeft landing-page_content_text">Cześć, jesteśmy</p>
+                <h1 class="gs gs_fromLeft">bisonstudio.</h1>
+                <p class="gs gs_fromLeft landing-page_content_text_second">
                     Tworzymy wspaniałe
                     <span id="typed"></span>
                 </p>
-                <a href="#portfolio-section"
-                    ><button
-                        class="btn btn-outline-primary"
+                <div class="gs gs_fromBotom">
+                    <a href="#portfolio-section"
+                        ><button 
+                            class="btn btn-outline-primary"
+                        >
+                            Portfolio
+                        </button></a
                     >
-                        Portfolio
-                    </button></a
-                >
+                </div>
             </div>
         </section>
 
@@ -68,7 +70,7 @@
 
         <section id="we-create-section" class="container fluid-margin row">
             <div class="col-lg-6">
-                <h2 class="section-header we-create-section-header">
+                <h2 class="gs gs_fromLeft section-header we-create-section-header">
                     Jesteśmy Twoim <span class="green-highlight">kompleksowym</span> rozwiązaniem na <span class="green-highlight">wszystkie</span> technologiczne
                     potrzeby!
                 </h2>
@@ -116,18 +118,18 @@
         <!-- Portfolio -->
 
         <section id="portfolio-section" class="container-md mx-auto">
-            <h2 class="section-header text-center">
+            <h2 class="gs gs_fromTop section-header text-center">
                 <span class="green-highlight">Kochamy</span> rozmawiać, ale niech nasze <span class="green-highlight">portfolio</span> wypowie się za nas.
             </h2>
             <div class="row">
-                <div class="col-lg-6 text-center">
+                <div class="gs gs_fromLeft col-lg-6 text-center">
                     <img
                         src="images/portfolio1.png"
                         class="portfolio-img"
                         alt=""
                     />
                 </div>
-                <div class="col-lg-6 text-center">
+                <div class="gs gs_fromRight col-lg-6 text-center">
                     <img
                         src="images/portfolio2.png"
                         class="portfolio-img"
@@ -135,11 +137,13 @@
                     />
                 </div>
             </div>
-            <a href="#"
-                ><button class="btn btn-primary fw-bold mt-5">
-                    Portfolio
-                </button></a
-            >
+            <div class="gs gs_fromBottom">
+                <a href="#"
+                    ><button class="btn btn-primary fw-bold mt-5">
+                        Portfolio
+                    </button></a
+                >
+            </div>
         </section>
 
         <!-- Footer Contact -->
@@ -148,10 +152,10 @@
             <section id="contact-section">
                 <img src="images/footer.svg" class="footer-svg" alt="" />
                 <div class="contact-content container text-center">
-                    <h2 class="section-header">
+                    <h2 class="gs gs_fromTop section-header">
                         Zatrudnij nas a my zajmiemy się resztą ✌
                     </h2>
-                    <div id="trigger" class="button-trail mt-5">
+                    <div id="trigger" class="gs gs_fromBottom button-trail mt-5">
                         <form>
                             <a href="#contact">
                                 <span></span>
