@@ -93,8 +93,7 @@ function animateFrom(elem, direction) {
     y: 0,
     autoAlpha: 1,
     ease: "expo",
-    lazy: false,
-    delay: 0.5 // overwrite: "auto"
+    lazy: false // overwrite: "auto"
 
   });
 }
@@ -112,9 +111,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__.ScrollTrigger.create({
       trigger: elem,
+      start: "-250 center",
       onEnter: function onEnter() {
         animateFrom(elem);
-      } // onEnterBack: function () { animateFrom(elem, -1) },
+      },
+      once: true // onEnterBack: function () { animateFrom(elem, -1) },
       // onLeave: function () { hide(elem) } // assure that the element is hidden when scrolled into view
 
     });

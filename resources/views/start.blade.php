@@ -76,7 +76,7 @@
                 </h2>
             </div>
             <div class="col-lg-6">
-                <div class="card mb-card-we-create text-left">
+                <div class="gs gs_fromRight card mb-card-we-create text-left">
                     <h2 class="card-header">Koncept</h2>
                     <hr />
                     <br />
@@ -88,7 +88,7 @@
                         sed cumque. Odit!
                     </p>
                 </div>
-                <div class="card mb-card-we-create text-left">
+                <div class="gs gs_fromRight card mb-card-we-create text-left">
                     <h2 class="card-header">Design</h2>
                     <hr />
                     <br />
@@ -100,7 +100,7 @@
                         sed cumque. Odit!
                     </p>
                 </div>
-                <div class="card mb-card-we-create text-left">
+                <div class="gs gs_fromRight card mb-card-we-create text-left">
                     <h2 class="card-header">Kod</h2>
                     <hr />
                     <br />

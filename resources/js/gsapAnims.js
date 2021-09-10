@@ -43,7 +43,6 @@ function animateFrom(elem, direction) {
         autoAlpha: 1,
         ease: "expo",
         lazy: false,
-        delay: 0.5
         // overwrite: "auto"
     });
 }
@@ -60,7 +59,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         ScrollTrigger.create({
             trigger: elem,
+            start: "-250 center",
             onEnter: function () { animateFrom(elem) },
+            once: true,
             // onEnterBack: function () { animateFrom(elem, -1) },
             // onLeave: function () { hide(elem) } // assure that the element is hidden when scrolled into view
         });
