@@ -45,18 +45,28 @@
 
         <!-- Landing Page -->
 
+
+        <div class="courtain">
+            <div class="top-side">
+
+            </div>
+            <div class="bottom-side">
+
+            </div>
+        </div>
         <section id="landing-page-section">
             <div class="container fluid-margin landing-page-content">
-                <p class="gs gs_fromLeft landing-page_content_text">Cześć, jesteśmy</p>
-                <h1 class="gs gs_fromLeft">bisonstudio.</h1>
-                <p class="gs gs_fromLeft landing-page_content_text_second">
-                    Tworzymy wspaniałe
-                    <span id="typed"></span>
+                <h1 class="">Cześć! Jesteśmy bisonstudio.
+                    Twoje kompleksowe rozwiązanie na wszystkie technologiczne potrzeby!
+                </h1>
+                <p class="landing-page_content_text_second">
+                    <span class="green-highlight">Bogacimy</span> więź pomiędzy Twoim <span class="green-highlight">produktem</span> a Waszymi użytkownikami.
+                    <!-- <span id="typed"></span> -->
                 </p>
-                <div class="gs gs_fromBotom">
+                <div class="">
                     <a href="#portfolio-section"
                         ><button 
-                            class="btn btn-outline-primary"
+                            class="btn btn-outline-primary btn-landing"
                         >
                             Portfolio
                         </button></a
@@ -121,20 +131,37 @@
             <h2 class="gs gs_fromTop section-header text-center">
                 <span class="green-highlight">Kochamy</span> rozmawiać, ale niech nasze <span class="green-highlight">portfolio</span> wypowie się za nas.
             </h2>
-            <div class="row">
-                <div class="gs gs_fromLeft col-lg-6 text-center">
-                    <img
-                        src="images/portfolio1.png"
-                        class="portfolio-img"
-                        alt=""
-                    />
-                </div>
-                <div class="gs gs_fromRight col-lg-6 text-center">
-                    <img
-                        src="images/portfolio2.png"
-                        class="portfolio-img"
-                        alt=""
-                    />
+
+            <div class="gs gs_fromFadeIn slider mt-5 mb-5">
+                <div class="slide-track">
+                    <div class="slide">
+                        <img src="images/portfolio2.png" class="portfolio-img">
+                    </div>
+                    <div class="slide">
+                        <img src="images/portfolio2.png" class="portfolio-img">
+                    </div>
+                    <div class="slide">
+                        <img src="images/portfolio2.png" class="portfolio-img">
+                    </div>
+                    <div class="slide">
+                        <img src="images/portfolio2.png" class="portfolio-img">
+                    </div>
+
+                    <!-- Same -->
+
+                    <div class="slide">
+                        <img src="images/portfolio2.png" class="portfolio-img">
+                    </div>
+                    <div class="slide">
+                        <img src="images/portfolio2.png" class="portfolio-img">
+                    </div>
+                    <div class="slide">
+                        <img src="images/portfolio2.png" class="portfolio-img">
+                    </div>
+                    <div class="slide">
+                        <img src="images/portfolio2.png" class="portfolio-img">
+                    </div>
+
                 </div>
             </div>
             <div class="gs gs_fromBottom">

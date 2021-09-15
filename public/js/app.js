@@ -44,21 +44,69 @@ triggerButton.addEventListener('click', function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
-/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
+/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
+/* harmony import */ var gsap_CSSPlugin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap/CSSPlugin */ "./node_modules/gsap/CSSPlugin.js");
+/* harmony import */ var gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! gsap/CSSRulePlugin */ "./node_modules/gsap/CSSRulePlugin.js");
  // import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-// gsap.registerPlugin(ScrollToPlugin);
 
 
-gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__.ScrollTrigger);
+
+
+gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_CSSPlugin__WEBPACK_IMPORTED_MODULE_1__.CSSPlugin, gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_2__.CSSRulePlugin);
+var content = gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_2__.CSSRulePlugin.getRule('.landing-page-content:before');
+var h1 = document.querySelector('h1');
+var secondHeader = document.getElementsByClassName("landing-page_content_text_second");
+var landingButton = document.getElementsByClassName("btn-landing");
+var topCover = document.getElementsByClassName("top-side");
+var bottomCover = document.getElementsByClassName("bottom-side");
+var tl = gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.timeline();
+tl.to(topCover, {
+  delay: .5,
+  duration: 1.5,
+  ease: 'expo.out',
+  y: '-50vh'
+});
+tl.to(bottomCover, {
+  duration: 1.5,
+  ease: 'expo.out',
+  y: '50vh'
+}, "-=1.5");
+tl.from(content, {
+  duration: 2,
+  ease: "expo",
+  cssRule: {
+    scaleY: 0
+  }
+}, "-=0.5");
+tl.to(h1, {
+  duration: 1.25,
+  ease: "expo",
+  clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+  opacity: 1,
+  x: '30px'
+}, "-=1.125");
+tl.to(secondHeader, {
+  duration: 1.75,
+  ease: "expo",
+  clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+  opacity: 1,
+  x: '30px'
+}, "-=0.75");
+tl.to(landingButton, {
+  duration: 0.1,
+  ease: "expo",
+  clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+  opacity: 1,
+  x: '30px'
+}, "-=1.25");
+gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_3__.ScrollTrigger);
 gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(".we-create-section-header", {
   scrollTrigger: {
     trigger: ".we-create-section-header",
     start: "-150 top",
     end: "+=1625",
     markers: true,
-    pin: true // start: "top bottom",
-    // end: "bottom bottom"
-
+    pin: true
   }
 });
 
@@ -79,6 +127,9 @@ function animateFrom(elem, direction) {
   } else if (elem.classList.contains("gs_fromTop")) {
     y = -250;
     x = 0;
+  } else if (elem.classList.contains("gs_fromFadeIn")) {
+    y = 0;
+    x = 0;
   }
 
   elem.style.transform = "translate(" + x + "px, " + y + "px)";
@@ -93,7 +144,8 @@ function animateFrom(elem, direction) {
     y: 0,
     autoAlpha: 1,
     ease: "expo",
-    lazy: false // overwrite: "auto"
+    lazy: false,
+    delay: 0.25 // overwrite: "auto"
 
   });
 }
@@ -105,11 +157,11 @@ function hide(elem) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__.ScrollTrigger);
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_3__.ScrollTrigger);
   gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.utils.toArray(".gs").forEach(function (elem) {
     hide(elem); // assure that the element is hidden when scrolled into view
 
-    gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__.ScrollTrigger.create({
+    gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_3__.ScrollTrigger.create({
       trigger: elem,
       start: "-250 center",
       onEnter: function onEnter() {
@@ -1861,6 +1913,155 @@ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.gsap.utils.checkPrefix = _checkPropPr
 });
 
 _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(CSSPlugin);
+
+
+/***/ }),
+
+/***/ "./node_modules/gsap/CSSRulePlugin.js":
+/*!********************************************!*\
+  !*** ./node_modules/gsap/CSSRulePlugin.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CSSRulePlugin": () => (/* binding */ CSSRulePlugin),
+/* harmony export */   "default": () => (/* binding */ CSSRulePlugin)
+/* harmony export */ });
+/*!
+ * CSSRulePlugin 3.7.1
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2021, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/* eslint-disable */
+var gsap,
+    _coreInitted,
+    _win,
+    _doc,
+    CSSPlugin,
+    _windowExists = function _windowExists() {
+  return typeof window !== "undefined";
+},
+    _getGSAP = function _getGSAP() {
+  return gsap || _windowExists() && (gsap = window.gsap) && gsap.registerPlugin && gsap;
+},
+    _checkRegister = function _checkRegister() {
+  if (!_coreInitted) {
+    _initCore();
+
+    if (!CSSPlugin) {
+      console.warn("Please gsap.registerPlugin(CSSPlugin, CSSRulePlugin)");
+    }
+  }
+
+  return _coreInitted;
+},
+    _initCore = function _initCore(core) {
+  gsap = core || _getGSAP();
+
+  if (_windowExists()) {
+    _win = window;
+    _doc = document;
+  }
+
+  if (gsap) {
+    CSSPlugin = gsap.plugins.css;
+
+    if (CSSPlugin) {
+      _coreInitted = 1;
+    }
+  }
+};
+
+var CSSRulePlugin = {
+  version: "3.7.1",
+  name: "cssRule",
+  init: function init(target, value, tween, index, targets) {
+    if (!_checkRegister() || typeof target.cssText === "undefined") {
+      return false;
+    }
+
+    var div = target._gsProxy = target._gsProxy || _doc.createElement("div");
+
+    this.ss = target;
+    this.style = div.style;
+    div.style.cssText = target.cssText;
+    CSSPlugin.prototype.init.call(this, div, value, tween, index, targets); //we just offload all the work to the regular CSSPlugin and then copy the cssText back over to the rule in the render() method. This allows us to have all of the updates to CSSPlugin automatically flow through to CSSRulePlugin instead of having to maintain both
+  },
+  render: function render(ratio, data) {
+    var pt = data._pt,
+        style = data.style,
+        ss = data.ss,
+        i;
+
+    while (pt) {
+      pt.r(ratio, pt.d);
+      pt = pt._next;
+    }
+
+    i = style.length;
+
+    while (--i > -1) {
+      ss[style[i]] = style[style[i]];
+    }
+  },
+  getRule: function getRule(selector) {
+    _checkRegister();
+
+    var ruleProp = _doc.all ? "rules" : "cssRules",
+        styleSheets = _doc.styleSheets,
+        i = styleSheets.length,
+        pseudo = selector.charAt(0) === ":",
+        j,
+        curSS,
+        cs,
+        a;
+    selector = (pseudo ? "" : ",") + selector.split("::").join(":").toLowerCase() + ","; //note: old versions of IE report tag name selectors as upper case, so we just change everything to lowercase.
+
+    if (pseudo) {
+      a = [];
+    }
+
+    while (i--) {
+      //Firefox may throw insecure operation errors when css is loaded from other domains, so try/catch.
+      try {
+        curSS = styleSheets[i][ruleProp];
+
+        if (!curSS) {
+          continue;
+        }
+
+        j = curSS.length;
+      } catch (e) {
+        console.warn(e);
+        continue;
+      }
+
+      while (--j > -1) {
+        cs = curSS[j];
+
+        if (cs.selectorText && ("," + cs.selectorText.split("::").join(":").toLowerCase() + ",").indexOf(selector) !== -1) {
+          //note: IE adds an extra ":" to pseudo selectors, so .myClass:after becomes .myClass::after, so we need to strip the extra one out.
+          if (pseudo) {
+            a.push(cs.style);
+          } else {
+            return cs.style;
+          }
+        }
+      }
+    }
+
+    return a;
+  },
+  register: _initCore
+};
+_getGSAP() && gsap.registerPlugin(CSSRulePlugin);
 
 
 /***/ }),

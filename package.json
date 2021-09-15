@@ -29,6 +29,7 @@
     "dependencies": {
         "@popperjs/core": "^2.9.3",
         "gsap": "^3.7.1",
+        "smooth-scrollbar": "^8.6.3",
         "three": "^0.131.3",
         "typed.js": "^2.0.12"
     }

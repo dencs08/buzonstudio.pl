@@ -1,8 +1,67 @@
 import { gsap } from "gsap";
 // import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-// gsap.registerPlugin(ScrollToPlugin);
-
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CSSPlugin } from "gsap/CSSPlugin";
+import { CSSRulePlugin } from "gsap/CSSRulePlugin";
+
+
+
+gsap.registerPlugin(CSSPlugin, CSSRulePlugin);
+
+const content = CSSRulePlugin.getRule('.landing-page-content:before')
+const h1 = document.querySelector('h1');
+const secondHeader = document.getElementsByClassName("landing-page_content_text_second")
+const landingButton = document.getElementsByClassName("btn-landing")
+const topCover = document.getElementsByClassName("top-side")
+const bottomCover = document.getElementsByClassName("bottom-side")
+const tl = gsap.timeline()
+
+tl.to(topCover, {
+    delay: .5,
+    duration: 1.5,
+    ease: 'expo.out',
+    y: '-50vh'
+})
+tl.to(bottomCover, {
+    duration: 1.5,
+    ease: 'expo.out',
+    y: '50vh'
+},
+    "-=1.5")
+tl.from(content, {
+    duration: 2,
+    ease: "expo",
+    cssRule: {
+        scaleY: 0
+    }
+},
+    "-=0.5")
+tl.to(h1, {
+    duration: 1.25,
+    ease: "expo",
+    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+    opacity: 1,
+    x: '30px'
+},
+    "-=1.125")
+tl.to(secondHeader, {
+    duration: 1.75,
+    ease: "expo",
+    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+    opacity: 1,
+    x: '30px'
+},
+    "-=0.75")
+tl.to(landingButton, {
+    duration: 0.1,
+    ease: "expo",
+    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+    opacity: 1,
+    x: '30px'
+},
+    "-=1.25")
+
+
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.to(".we-create-section-header", {
@@ -12,8 +71,6 @@ gsap.to(".we-create-section-header", {
         end: "+=1625",
         markers: true,
         pin: true,
-        // start: "top bottom",
-        // end: "bottom bottom"
     },
 });
 
@@ -33,6 +90,9 @@ function animateFrom(elem, direction) {
     } else if (elem.classList.contains("gs_fromTop")) {
         y = -250;
         x = 0;
+    } else if (elem.classList.contains("gs_fromFadeIn")) {
+        y = 0;
+        x = 0;
     }
     elem.style.transform = "translate(" + x + "px, " + y + "px)";
     elem.style.opacity = "0";
@@ -43,6 +103,7 @@ function animateFrom(elem, direction) {
         autoAlpha: 1,
         ease: "expo",
         lazy: false,
+        delay: 0.25
         // overwrite: "auto"
     });
 }
