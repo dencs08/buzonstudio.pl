@@ -6735,7 +6735,7 @@ h1,
   content: "";
   height: 100%;
   position: absolute;
-  width: 30%;
+  width: 15%;
   z-index: 1;
 }
 
@@ -6745,7 +6745,7 @@ h1,
 }
 
 .slider::after {
-  right: 0;
+  right: -1px;
   top: 0;
   transform: rotateZ(180deg);
 }

@@ -60,8 +60,7 @@
                     Twoje kompleksowe rozwiązanie na wszystkie technologiczne potrzeby!
                 </h1>
                 <p class="landing-page_content_text_second">
-                    <span class="green-highlight">Bogacimy</span> więź pomiędzy Twoim <span class="green-highlight">produktem</span> a Waszymi użytkownikami.
-                    <!-- <span id="typed"></span> -->
+                    <span class="green-highlight">Budujemy</span> więź pomiędzy Twoim <span class="green-highlight">produktem</span> a Waszymi użytkownikami.
                 </p>
                 <div class="">
                     <a href="#portfolio-section"
@@ -81,8 +80,9 @@
         <section id="we-create-section" class="container fluid-margin row">
             <div class="col-lg-6">
                 <h2 class="gs gs_fromLeft section-header we-create-section-header">
-                    Jesteśmy Twoim <span class="green-highlight">kompleksowym</span> rozwiązaniem na <span class="green-highlight">wszystkie</span> technologiczne
-                    potrzeby!
+                    Tworzymy piękne <span class="green-highlight">wizualizacje   </span>
+                    Tworzymy niesamowite <span class="green-highlight">aplikacje     </span> 
+                    Tworzymy wspaniałe <span class="green-highlight">strony internetowe</span>
                 </h2>
             </div>
             <div class="col-lg-6">

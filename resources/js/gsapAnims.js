@@ -60,6 +60,14 @@ tl.to(landingButton, {
     x: '30px'
 },
     "-=1.25")
+tl.to(content, {
+    duration: 1,
+    ease: "expo",
+    cssRule: {
+        scaleY: 0
+    }
+},
+    "-=0.35")
 
 
 

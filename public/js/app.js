@@ -99,6 +99,13 @@ tl.to(landingButton, {
   opacity: 1,
   x: '30px'
 }, "-=1.25");
+tl.to(content, {
+  duration: 1,
+  ease: "expo",
+  cssRule: {
+    scaleY: 0
+  }
+}, "-=0.35");
 gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_3__.ScrollTrigger);
 gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(".we-create-section-header", {
   scrollTrigger: {
