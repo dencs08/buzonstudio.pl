@@ -6575,10 +6575,9 @@ img {
 }
 
 #web_gl {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  outline: none;
 }
 
 .courtain {
@@ -6591,7 +6590,7 @@ img {
   left: 0;
   width: 100vw;
   height: 50vh;
-  background-color: #111111;
+  background-color: #161616;
   z-index: 999;
 }
 
@@ -6601,7 +6600,7 @@ img {
   left: 0;
   width: 100vw;
   height: 50vh;
-  background-color: #111111;
+  background-color: #161616;
   z-index: 999;
 }
 
@@ -6609,7 +6608,6 @@ img {
   height: 100vh;
   display: grid;
   place-items: center;
-  background-image: url(/images/website_background.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -6620,13 +6618,13 @@ img {
 }
 
 .landing-page-content:before {
-  content: "";
   position: absolute;
   top: 0;
   left: 0;
+  content: "";
   height: 115%;
   margin-top: -25px;
-  margin-left: clamp(30px, 5vw, 60px);
+  margin-left: clamp(-50px, -2vw, 0px);
   border-left: 1px solid #c7c7c7;
   transform: scaleY(1);
 }

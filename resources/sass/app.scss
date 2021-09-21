@@ -16,6 +16,9 @@
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/scss/utilities/api";
 
+//other imports
+// @import "~fullpage.js/dist/fullpage.css";
+
 //imports
 @import "navbar";
 @import "utilities";
@@ -73,10 +76,10 @@ img {
 }
 
 #web_gl {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    outline: none;
+    // outline: none;
     // z-index: 1;
     // mix-blend-mode: exclusion;
 }
@@ -94,7 +97,7 @@ img {
     width: 100vw;
     height: 50vh;
 
-    background-color: $body-bg;
+    background-color: $body-bg-color-lighter;
 
     z-index: 999;
 }
@@ -107,7 +110,7 @@ img {
     width: 100vw;
     height: 50vh;
 
-    background-color: $body-bg;
+    background-color: $body-bg-color-lighter;
 
     z-index: 999;
 }
@@ -117,7 +120,7 @@ img {
     height: 100vh;
     display: grid;
     place-items: center;
-    background-image: url(/images/website_background.png);
+    // background-image: url(/images/website_background_2.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -128,13 +131,17 @@ img {
 }
 
 .landing-page-content:before {
-    content: "";
     position: absolute;
     top: 0;
     left: 0;
+
+    content: "";
+
     height: 115%;
+
     margin-top: -25px;
-    margin-left: clamp(30px, 5vw, 60px);
+    margin-left: clamp(-50px, -2vw, 0px);
+
     border-left: 1px solid rgb(199, 199, 199);
     transform: scaleY(1);
 }

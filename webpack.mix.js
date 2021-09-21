@@ -16,13 +16,14 @@ const mix = require('laravel-mix');
 //     .sass('resources/sass/app.scss', 'public/css');
 
 mix.js([
-    'resources/js/app.js',
-    'resources/js/modal.js',
-    'resources/js/contactform.js',
     'resources/js/three.js',
-    'resources/js/typeAnim.js',
     'resources/js/gsapAnims.js',
-    'resources/js/navbar.js'
+    'resources/js/fullpage_scroll.js',
+    'resources/js/typeAnim.js',
+    'resources/js/contactform.js',
+    'resources/js/modal.js',
+    'resources/js/navbar.js',
+    'resources/js/app.js'
 ], 'public/js/app.js').version()
     .sass('resources/sass/app.scss', 'public/css');
 

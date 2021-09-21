@@ -8,13 +8,9 @@
         <title>bisonstudio</title>
     </head>
     <body class="antialiased">
-        
-        <!-- WEBGL -->
-        <canvas id="web_gl"></canvas>
-
         <!-- Navbar -->
 
-        <nav id="navbar">
+        <!-- <nav id="navbar">
             <img src="images/logo_white.svg" class="img-nav" alt="" />
             <input type="checkbox" id="active" />
             <label for="active" class="menu-btn"
@@ -40,166 +36,170 @@
                     </li>
                 </ul>
             </div>
-        </nav>
-        
+        </nav> -->
 
-        <!-- Landing Page -->
+        <!-- Courtain -->
 
-
-        <div class="courtain">
+        <!-- <div class="courtain">
             <div class="top-side">
 
             </div>
             <div class="bottom-side">
 
             </div>
-        </div>
-        <section id="landing-page-section">
-            <div class="container fluid-margin landing-page-content">
-                <h1 class="">Cześć! Jesteśmy bisonstudio.
-                    Twoje kompleksowe rozwiązanie na wszystkie technologiczne potrzeby!
-                </h1>
-                <p class="landing-page_content_text_second">
-                    <span class="green-highlight">Budujemy</span> więź pomiędzy Twoim <span class="green-highlight">produktem</span> a Waszymi użytkownikami.
-                </p>
-                <div class="">
-                    <a href="#portfolio-section"
-                        ><button 
-                            class="btn btn-outline-primary btn-landing"
+        </div> -->
+
+        <!-- Landing Page -->
+
+        <!-- <section id="landing-page-section" class="">
+                <div class="container landing-page-content">
+                    <h1 class="">Cześć! Jesteśmy bisonstudio.
+                        Twoje kompleksowe rozwiązanie na wszystkie technologiczne potrzeby!
+                    </h1>
+                    <p class="landing-page_content_text_second">
+                        <span class="green-highlight">Budujemy</span> więź pomiędzy Twoim <span class="green-highlight">produktem</span> a Waszymi użytkownikami.
+                    </p>
+                    <div class="">
+                        <a href="#portfolio-section"
+                            ><button 
+                                class="btn btn-outline-primary btn-landing"
+                            >
+                                Portfolio
+                            </button></a
                         >
+                    </div>
+                </div>
+            </section>
+     -->
+
+        <!-- WEBGL -->
+        <canvas id="web_gl"></canvas>
+
+        <!-- We Create Section -->
+
+        <!-- <section id="we-create-section" class="container row">
+                <div class="col-lg-8">
+                    <h2 class="gs gs_fromLeft section-header we-create-section-header">
+                        Tworzymy piękne <span class="green-highlight">wizualizacje   </span> <br>
+                        Tworzymy niesamowite <span class="green-highlight">aplikacje     </span>  <br>
+                        Tworzymy wspaniałe <span class="green-highlight">strony internetowe</span>
+                    </h2>
+                </div>
+                <div class="col-lg-4">
+                    <div class="gs gs_fromRight card mb-card-we-create text-left">
+                        <h2 class="card-header">Koncept</h2>
+                        <hr />
+                        <br />
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Eligendi commodi culpa, unde corrupti nam perferendis
+                            molestiae, ipsum soluta vitae cupiditate aliquid
+                            voluptatibus voluptatum explicabo. Delectus harum odio
+                            sed cumque. Odit!
+                        </p>
+                    </div>
+                    <div class="gs gs_fromRight card mb-card-we-create text-left">
+                        <h2 class="card-header">Design</h2>
+                        <hr />
+                        <br />
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Eligendi commodi culpa, unde corrupti nam perferendis
+                            molestiae, ipsum soluta vitae cupiditate aliquid
+                            voluptatibus voluptatum explicabo. Delectus harum odio
+                            sed cumque. Odit!
+                        </p>
+                    </div>
+                    <div class="gs gs_fromRight card mb-card-we-create text-left">
+                        <h2 class="card-header">Kod</h2>
+                        <hr />
+                        <br />
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Eligendi commodi culpa, unde corrupti nam perferendis
+                            molestiae, ipsum soluta vitae cupiditate aliquid
+                            voluptatibus voluptatum explicabo. Delectus harum odio
+                            sed cumque. Odit!
+                        </p>
+                    </div>
+                </div>
+            </section> -->
+
+        <!-- Portfolio -->
+
+        <!-- <section id="portfolio-section" class="container-md mx-auto">
+                <h2 class="gs gs_fromTop section-header text-center">
+                    <span class="green-highlight">Kochamy</span> rozmawiać, ale niech nasze <span class="green-highlight">portfolio</span> wypowie się za nas.
+                </h2>
+    
+                <div class="gs gs_fromFadeIn slider mt-5 mb-5">
+                    <div class="slide-track">
+                        <div class="slide">
+                            <img src="images/portfolio2.png" class="portfolio-img">
+                        </div>
+                        <div class="slide">
+                            <img src="images/portfolio2.png" class="portfolio-img">
+                        </div>
+                        <div class="slide">
+                            <img src="images/portfolio2.png" class="portfolio-img">
+                        </div>
+                        <div class="slide">
+                            <img src="images/portfolio2.png" class="portfolio-img">
+                        </div>
+     -->
+        <!-- Same -->
+
+        <!-- <div class="slide">
+                            <img src="images/portfolio2.png" class="portfolio-img">
+                        </div>
+                        <div class="slide">
+                            <img src="images/portfolio2.png" class="portfolio-img">
+                        </div>
+                        <div class="slide">
+                            <img src="images/portfolio2.png" class="portfolio-img">
+                        </div>
+                        <div class="slide">
+                            <img src="images/portfolio2.png" class="portfolio-img">
+                        </div>
+    
+                    </div>
+                </div>
+                <div class="gs gs_fromBottom">
+                    <a href="#"
+                        ><button class="btn btn-primary fw-bold mt-5">
                             Portfolio
                         </button></a
                     >
                 </div>
-            </div>
-        </section>
-
-
-        <!-- We Create Section -->
-
-        <section id="we-create-section" class="container fluid-margin row">
-            <div class="col-lg-6">
-                <h2 class="gs gs_fromLeft section-header we-create-section-header">
-                    Tworzymy piękne <span class="green-highlight">wizualizacje   </span>
-                    Tworzymy niesamowite <span class="green-highlight">aplikacje     </span> 
-                    Tworzymy wspaniałe <span class="green-highlight">strony internetowe</span>
-                </h2>
-            </div>
-            <div class="col-lg-6">
-                <div class="gs gs_fromRight card mb-card-we-create text-left">
-                    <h2 class="card-header">Koncept</h2>
-                    <hr />
-                    <br />
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Eligendi commodi culpa, unde corrupti nam perferendis
-                        molestiae, ipsum soluta vitae cupiditate aliquid
-                        voluptatibus voluptatum explicabo. Delectus harum odio
-                        sed cumque. Odit!
-                    </p>
-                </div>
-                <div class="gs gs_fromRight card mb-card-we-create text-left">
-                    <h2 class="card-header">Design</h2>
-                    <hr />
-                    <br />
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Eligendi commodi culpa, unde corrupti nam perferendis
-                        molestiae, ipsum soluta vitae cupiditate aliquid
-                        voluptatibus voluptatum explicabo. Delectus harum odio
-                        sed cumque. Odit!
-                    </p>
-                </div>
-                <div class="gs gs_fromRight card mb-card-we-create text-left">
-                    <h2 class="card-header">Kod</h2>
-                    <hr />
-                    <br />
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Eligendi commodi culpa, unde corrupti nam perferendis
-                        molestiae, ipsum soluta vitae cupiditate aliquid
-                        voluptatibus voluptatum explicabo. Delectus harum odio
-                        sed cumque. Odit!
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Portfolio -->
-
-        <section id="portfolio-section" class="container-md mx-auto">
-            <h2 class="gs gs_fromTop section-header text-center">
-                <span class="green-highlight">Kochamy</span> rozmawiać, ale niech nasze <span class="green-highlight">portfolio</span> wypowie się za nas.
-            </h2>
-
-            <div class="gs gs_fromFadeIn slider mt-5 mb-5">
-                <div class="slide-track">
-                    <div class="slide">
-                        <img src="images/portfolio2.png" class="portfolio-img">
-                    </div>
-                    <div class="slide">
-                        <img src="images/portfolio2.png" class="portfolio-img">
-                    </div>
-                    <div class="slide">
-                        <img src="images/portfolio2.png" class="portfolio-img">
-                    </div>
-                    <div class="slide">
-                        <img src="images/portfolio2.png" class="portfolio-img">
-                    </div>
-
-                    <!-- Same -->
-
-                    <div class="slide">
-                        <img src="images/portfolio2.png" class="portfolio-img">
-                    </div>
-                    <div class="slide">
-                        <img src="images/portfolio2.png" class="portfolio-img">
-                    </div>
-                    <div class="slide">
-                        <img src="images/portfolio2.png" class="portfolio-img">
-                    </div>
-                    <div class="slide">
-                        <img src="images/portfolio2.png" class="portfolio-img">
-                    </div>
-
-                </div>
-            </div>
-            <div class="gs gs_fromBottom">
-                <a href="#"
-                    ><button class="btn btn-primary fw-bold mt-5">
-                        Portfolio
-                    </button></a
-                >
-            </div>
-        </section>
+            </section> -->
 
         <!-- Footer Contact -->
 
-        <footer>
-            <section id="contact-section">
-                <img src="images/footer.svg" class="footer-svg" alt="" />
-                <div class="contact-content container text-center">
-                    <h2 class="gs gs_fromTop section-header">
-                        Zatrudnij nas a my zajmiemy się resztą ✌
-                    </h2>
-                    <div id="trigger" class="gs gs_fromBottom button-trail mt-5">
-                        <form>
-                            <a href="#contact">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                Porozmawiajmy!
-                            </a>
-                        </form>
+        <!-- <footer>
+                <section id="contact-section">
+                    <img src="images/footer.svg" class="footer-svg" alt="" />
+                    <div class="contact-content container text-center">
+                        <h2 class="gs gs_fromTop section-header">
+                            Zatrudnij nas a my zajmiemy się resztą ✌
+                        </h2>
+                        <div id="trigger" class="gs gs_fromBottom button-trail mt-5">
+                            <form>
+                                <a href="#contact">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    Porozmawiajmy!
+                                </a>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </section>
-        </footer>
+                </section>
+            </footer> -->
 
         <!-- Modal -->
 
-        <div id="modal-content" class="modal-container">
+        <!-- <div id="modal-content" class="modal-container">
             <img src="images/modal.svg" id="modal-bg" class="modal-bg" alt="">
             <img src="images/modal-full.svg" id="modal-bg" class="modal-bg2" alt="">
 
@@ -208,11 +208,11 @@
                 <p class="mb-5">
                     Odezwiemy się tak szybko jak to możliwe, pamiętaj, żeby w razie
                     czego sprawdzić folder spam!
-                </p>       
-    
-                <!-- Contact form -->
-    
-                    <form name="contact-form" class="contact-form">
+                </p>        -->
+
+        <!-- Contact form -->
+
+        <!-- <form name="contact-form" class="contact-form">
                        <div class="form-field">
                           <input id="name" name="name" class="input-text js-input" type="text" required>
                           <label class="label" for="name">Imię</label>
@@ -234,10 +234,9 @@
                        </div>
                     </form>
             </section>
-        </div>
+        </div> -->
 
-
-
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.5/fullpage.js"></script> -->
         <script src="js/app.js"></script>
     </body>
 </html>
