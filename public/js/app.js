@@ -349,8 +349,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three_examples_jsm_postprocessing_RenderPass_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/examples/jsm/postprocessing/RenderPass.js */ "./node_modules/three/examples/jsm/postprocessing/RenderPass.js");
 /* harmony import */ var three_examples_jsm_postprocessing_UnrealBloomPass__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! three/examples/jsm/postprocessing/UnrealBloomPass */ "./node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js");
 /* harmony import */ var three_examples_jsm_postprocessing_FilmPass__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three/examples/jsm/postprocessing/FilmPass */ "./node_modules/three/examples/jsm/postprocessing/FilmPass.js");
-/* harmony import */ var three_examples_jsm_postprocessing_AfterimagePass__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! three/examples/jsm/postprocessing/AfterimagePass */ "./node_modules/three/examples/jsm/postprocessing/AfterimagePass.js");
-/* harmony import */ var three_examples_jsm_postprocessing_BokehPass__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! three/examples/jsm/postprocessing/BokehPass */ "./node_modules/three/examples/jsm/postprocessing/BokehPass.js");
+/* harmony import */ var three_examples_jsm_postprocessing_BokehPass__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! three/examples/jsm/postprocessing/BokehPass */ "./node_modules/three/examples/jsm/postprocessing/BokehPass.js");
+/* harmony import */ var three_examples_jsm_libs_stats_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! three/examples/jsm/libs/stats.module */ "./node_modules/three/examples/jsm/libs/stats.module.js");
 
 
 
@@ -380,197 +380,227 @@ var filmParams = {
   scanLinesCount: 300,
   greyScale: false
 };
-var effectController = {
-  focus: 500.0,
-  aperture: 5,
-  maxblur: 0.01
+var bokehParams = {
+  focus: 6,
+  aperture: 10.7,
+  maxblur: 0.1
 };
 var cameraParams = {
-  renderDistanceMin: 1,
+  renderDistanceMin: 0.1,
   renderDistanceMax: 100,
   fov: 60
 };
 var fogParams = {
-  density: 0.01
-}; //Texture Loader
+  density: 0.0125
+}; //Objects
 
-var textureLoader = new three__WEBPACK_IMPORTED_MODULE_10__.TextureLoader(); //GLTF loader
+var knotObj, ground, human;
+var camera, cameraTarget, scene, renderer, stats, parameters, cubeMaterial, controls, clock; //Shaders
 
-var gltfLoader = new three_examples_jsm_loaders_GLTFLoader_js__WEBPACK_IMPORTED_MODULE_2__.GLTFLoader(); //gsap Timeline init
+var uniforms; //Loaders
 
-var tl = gsap__WEBPACK_IMPORTED_MODULE_11__.default.timeline(); //Gui init
+var textureLoader = new three__WEBPACK_IMPORTED_MODULE_10__.TextureLoader();
+var gltfLoader = new three_examples_jsm_loaders_GLTFLoader_js__WEBPACK_IMPORTED_MODULE_2__.GLTFLoader();
+var tl = gsap__WEBPACK_IMPORTED_MODULE_11__.default.timeline();
+var gui = new three_examples_jsm_libs_dat_gui_module__WEBPACK_IMPORTED_MODULE_3__.GUI();
+var canvas = document.querySelector('#web_gl');
+clock = new three__WEBPACK_IMPORTED_MODULE_10__.Clock();
+var mouseX = 0,
+    mouseY = 0;
+var windowHalfX = window.innerWidth / 2;
+var windowHalfY = window.innerHeight / 2;
+var width = window.innerWidth;
+var height = window.innerHeight;
+var materials = [],
+    objects = [];
+var postprocessing = {};
 
-var gui = new three_examples_jsm_libs_dat_gui_module__WEBPACK_IMPORTED_MODULE_3__.GUI(); // Canvas
+function init() {
+  var container = document.createElement('div');
+  document.body.appendChild(container); //!Base camera
 
-var canvas = document.querySelector('#web_gl'); //! Scene
+  camera = new three__WEBPACK_IMPORTED_MODULE_10__.PerspectiveCamera(cameraParams.fov, width / height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax);
+  camera.position.set(0, 1.5, -2);
+  camera.rotation.set(0, 0, 0);
+  var cameraTargetGeo = new three__WEBPACK_IMPORTED_MODULE_10__.SphereGeometry(1, 32, 16);
+  var cameraTargetMat = new three__WEBPACK_IMPORTED_MODULE_10__.MeshStandardMaterial();
+  cameraTarget = new three__WEBPACK_IMPORTED_MODULE_10__.Mesh(cameraTargetGeo, cameraTargetMat);
+  cameraTarget.position.set(-25, 1, -20);
+  scene = new three__WEBPACK_IMPORTED_MODULE_10__.Scene();
+  renderer = new three__WEBPACK_IMPORTED_MODULE_10__.WebGLRenderer();
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(width, height); // renderer.outputEncoding = THREE.sRGBEncoding
+  // renderer.toneMapping = THREE.ACESFilmicToneMapping
 
-var scene = new three__WEBPACK_IMPORTED_MODULE_10__.Scene();
-new three__WEBPACK_IMPORTED_MODULE_10__.CubeTextureLoader().load(['3d/textures/skybox/stars_ft.jpg', '3d/textures/skybox/stars_bk.jpg', '3d/textures/skybox/stars_up.jpg', '3d/textures/skybox/stars_dn.jpg', '3d/textures/skybox/stars_rt.jpg', '3d/textures/skybox/stars_lf.jpg'], function (cubeTexture) {
-  cubeTexture.encoding = three__WEBPACK_IMPORTED_MODULE_10__.sRGBEncoding;
-  scene.background = cubeTexture;
-  lightProbe.copy(three_examples_jsm_lights_LightProbeGenerator__WEBPACK_IMPORTED_MODULE_1__.LightProbeGenerator.fromCubeTexture(cubeTexture));
-  var geometry = new three__WEBPACK_IMPORTED_MODULE_10__.SphereGeometry(5, 64, 64);
-  var material = new three__WEBPACK_IMPORTED_MODULE_10__.MeshStandardMaterial({
-    color: 0xffffff,
-    metalness: 0,
-    roughness: 0,
-    envMap: cubeTexture,
-    envMapIntensity: API.envMapIntensity
+  container.appendChild(renderer.domElement);
+  parameters = {
+    color: 0xff1100
+  }; //, envMap: textureCube 
+
+  cubeMaterial = new three__WEBPACK_IMPORTED_MODULE_10__.MeshBasicMaterial(parameters); //! Controls
+
+  controls = new three_examples_jsm_controls_OrbitControls_js__WEBPACK_IMPORTED_MODULE_0__.OrbitControls(camera, renderer.domElement); //! Scene
+
+  new three__WEBPACK_IMPORTED_MODULE_10__.CubeTextureLoader().load(['3d/textures/skybox/stars_ft.jpg', '3d/textures/skybox/stars_bk.jpg', '3d/textures/skybox/stars_up.jpg', '3d/textures/skybox/stars_dn.jpg', '3d/textures/skybox/stars_rt.jpg', '3d/textures/skybox/stars_lf.jpg'], function (cubeTexture) {
+    cubeTexture.encoding = three__WEBPACK_IMPORTED_MODULE_10__.sRGBEncoding;
+    scene.background = cubeTexture;
+    lightProbe.copy(three_examples_jsm_lights_LightProbeGenerator__WEBPACK_IMPORTED_MODULE_1__.LightProbeGenerator.fromCubeTexture(cubeTexture));
   });
-});
-scene.fog = new three__WEBPACK_IMPORTED_MODULE_10__.FogExp2(0x000000, fogParams.density); // const fogCol = { color: '#ffffff' }
-// gui.addColor(fogCol, 'color').onChange(() => {
-//     scene.fog.color.set(fogCol.color)
-// })
-//!
-//! Objects
-//!
-//Ground
+  scene.fog = new three__WEBPACK_IMPORTED_MODULE_10__.FogExp2(0x000000, fogParams.density); //!Lights
 
-var groundTexture = textureLoader.load('3d/textures/ground_texture.jpg');
-var groundDisplacement = textureLoader.load('3d/textures/ground_displacement.jpg');
-var groundRoughness = textureLoader.load('3d/textures/ground_roughness.jpg');
-var groundScale = 1; // groundTexture.repeat.set(groundScale, groundScale)
-// groundTexture.wrapS = THREE.RepeatWrapping;
-// groundTexture.wrapT = THREE.RepeatWrapping;
-// groundDisplacement.repeat.set(groundScale, groundScale)
-// groundDisplacement.wrapS = THREE.RepeatWrapping;
-// groundDisplacement.wrapT = THREE.RepeatWrapping;
+  var lightProbe;
+  var directionalLight;
+  var API = {
+    lightProbeIntensity: .1,
+    directionalLightIntensity: 0.55,
+    envMapIntensity: 0.1
+  };
+  lightProbe = new three__WEBPACK_IMPORTED_MODULE_10__.LightProbe();
+  scene.add(lightProbe);
+  directionalLight = new three__WEBPACK_IMPORTED_MODULE_10__.DirectionalLight(0xffffff, API.directionalLightIntensity);
+  directionalLight.position.set(10, 10, 10);
+  scene.add(directionalLight);
+  initPostprocessing();
+  renderer.autoClear = false;
+  stats = new three_examples_jsm_libs_stats_module__WEBPACK_IMPORTED_MODULE_9__.default();
+  container.appendChild(stats.dom);
+  container.style.touchAction = 'none';
+  container.addEventListener('pointermove', onPointerMove);
+  window.addEventListener('resize', onWindowResize); //bokehPass live changer
 
-groundRoughness.repeat.set(1, 1);
-groundRoughness.wrapS = three__WEBPACK_IMPORTED_MODULE_10__.RepeatWrapping;
-groundRoughness.wrapT = three__WEBPACK_IMPORTED_MODULE_10__.RepeatWrapping;
-var groundGeo = new three__WEBPACK_IMPORTED_MODULE_10__.PlaneBufferGeometry(planeScale, planeScale, planeResolution, planeResolution);
-var groundMat = new three__WEBPACK_IMPORTED_MODULE_10__.MeshStandardMaterial({
-  map: groundTexture,
-  roughnessMap: groundRoughness,
-  roughness: 3.5,
-  metalness: 0,
-  displacementMap: groundDisplacement,
-  displacementScale: 10
-});
-var ground = new three__WEBPACK_IMPORTED_MODULE_10__.Mesh(groundGeo, groundMat);
-scene.add(ground);
-ground.rotation.x = -1.571;
-ground.rotation.z = 3.141; //Knot
+  var matChanger = function matChanger() {
+    postprocessing.bokeh.uniforms["focus"].value = bokehParams.focus;
+    postprocessing.bokeh.uniforms["aperture"].value = bokehParams.aperture * 0.00001;
+    postprocessing.bokeh.uniforms["maxblur"].value = bokehParams.maxblur;
+  };
 
-var knotGeo = new three__WEBPACK_IMPORTED_MODULE_10__.TorusKnotGeometry(1, 0.2, 150, 20, 3, 10);
-var knotMat = new three__WEBPACK_IMPORTED_MODULE_10__.MeshStandardMaterial({
-  color: 0x95ff00,
-  emissive: 0x95ff00,
-  emissiveIntensity: 100
-});
-var knotObj = new three__WEBPACK_IMPORTED_MODULE_10__.Mesh(knotGeo, knotMat);
-var knotObj2 = new three__WEBPACK_IMPORTED_MODULE_10__.Mesh(knotGeo, knotMat);
-knotObj.position.set(-25, 2, -20);
-scene.add(knotObj);
-scene.add(knotObj2);
-knotObj2.position.set(0, 2, 0); //!Lights
-// let knobeLight = new THREE.PointLight(0x95ff00, 0.025)
-// scene.add(knobeLight)
-// knobeLight.position.set(-25, 2, -20)
+  gui.add(bokehParams, "focus", -50, 300.0, 1).onChange(matChanger);
+  gui.add(bokehParams, "aperture", 0, 50, 0.1).onChange(matChanger);
+  gui.add(bokehParams, "maxblur", 0.0, 0.1, 0.001).onChange(matChanger);
+  gui.close();
+  matChanger(); //!
+  //! Objects
+  //!
+  //Ground
+  // const groundTexture = textureLoader.load('3d/textures/ground_texture.jpg')
+  // const groundDisplacement = textureLoader.load('3d/textures/ground_displacement.jpg')
+  // const groundRoughness = textureLoader.load('3d/textures/ground_roughness.jpg')
+  // groundRoughness.repeat.set(1, 1)
+  // groundRoughness.wrapS = THREE.RepeatWrapping;
+  // groundRoughness.wrapT = THREE.RepeatWrapping;
+  // const groundGeo = new THREE.PlaneBufferGeometry(planeScale, planeScale, planeResolution, planeResolution)
+  // const groundMat = new THREE.MeshStandardMaterial({
+  //     map: groundTexture,
+  //     roughnessMap: groundRoughness,
+  //     roughness: 3.5,
+  //     metalness: 0,
+  //     displacementMap: groundDisplacement,
+  //     displacementScale: 10,
+  // })
+  // ground = new THREE.Mesh(groundGeo, groundMat)
+  // scene.add(ground)
+  // ground.rotation.x = -1.571
+  // ground.rotation.z = 3.141
 
-var lightProbe;
-var directionalLight;
-var API = {
-  lightProbeIntensity: .1,
-  directionalLightIntensity: 0.55,
-  envMapIntensity: 0.1
-};
-lightProbe = new three__WEBPACK_IMPORTED_MODULE_10__.LightProbe();
-scene.add(lightProbe);
-directionalLight = new three__WEBPACK_IMPORTED_MODULE_10__.DirectionalLight(0xffffff, API.directionalLightIntensity);
-directionalLight.position.set(10, 10, 10);
-scene.add(directionalLight); //Sizes
+  uniforms = {
+    "time": {
+      value: 1.0
+    }
+  };
+  var wallGeo = new three__WEBPACK_IMPORTED_MODULE_10__.PlaneGeometry(2, 2);
+  var wallMat = new three__WEBPACK_IMPORTED_MODULE_10__.ShaderMaterial({
+    uniforms: uniforms,
+    vertexShader: vertexShader(),
+    fragmentShader: fragmentShader()
+  });
+  var wall = new three__WEBPACK_IMPORTED_MODULE_10__.Mesh(wallGeo, wallMat);
+  scene.add(wall);
+  wall.position.set(0, 2, -5); //human
 
-var sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight
-}; //!Base camera
-
-var camera = new three__WEBPACK_IMPORTED_MODULE_10__.PerspectiveCamera(cameraParams.fov, sizes.width / sizes.height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax);
-camera.position.set(-30, 1, -27.5);
-camera.rotation.set(0, 4.1, 0);
-scene.add(camera);
-window.addEventListener('resize', function () {
-  // Update sizes
-  sizes.width = window.innerWidth;
-  sizes.height = window.innerHeight; // Update camera
-
-  camera.aspect = sizes.width / sizes.height;
-  camera.updateProjectionMatrix(); // Update renderer
-
-  renderer.setSize(sizes.width, sizes.height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-}); //!Renderer
-
-var renderer = new three__WEBPACK_IMPORTED_MODULE_10__.WebGLRenderer({
-  canvas: canvas,
-  alpha: true
-});
-renderer.toneMappingExposure = 1;
-renderer.outputEncoding = three__WEBPACK_IMPORTED_MODULE_10__.sRGBEncoding;
-renderer.setSize(sizes.width, sizes.height);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-var bokehController = {
-  focus: 11.5,
-  aperture: 0.00005,
-  maxblur: 0.01
-}; //composer + passes
-
-var composer = new three_examples_jsm_postprocessing_EffectComposer_js__WEBPACK_IMPORTED_MODULE_4__.EffectComposer(renderer);
-var renderPass = new three_examples_jsm_postprocessing_RenderPass_js__WEBPACK_IMPORTED_MODULE_5__.RenderPass(scene, camera);
-var ubloomPass = new three_examples_jsm_postprocessing_UnrealBloomPass__WEBPACK_IMPORTED_MODULE_6__.UnrealBloomPass(new three__WEBPACK_IMPORTED_MODULE_10__.Vector2(window.innerWidth, window.innerHeight), bloomParams.bloomStrength, bloomParams.bloomRadius, bloomParams.bloomThreshold);
-var filmPass = new three_examples_jsm_postprocessing_FilmPass__WEBPACK_IMPORTED_MODULE_7__.FilmPass(filmParams.noiseIntensity, filmParams.scanLinesIntensity, filmParams.scanLinesCount, filmParams.greyScale);
-var bokehPass = new three_examples_jsm_postprocessing_BokehPass__WEBPACK_IMPORTED_MODULE_9__.BokehPass(scene, camera, {
-  focus: bokehController.focus,
-  aperture: bokehController.aperture,
-  maxblur: bokehController.maxblur,
-  width: window.innerWidth,
-  height: window.innerHeight
-});
-composer.addPass(renderPass);
-composer.addPass(ubloomPass);
-composer.addPass(filmPass);
-composer.addPass(bokehPass); //! Controls
-// const controls = new OrbitControls(camera, canvas)
-// controls.enableDamping = true
-//!
-//! Animate
-//!
-
-document.addEventListener('mousemove', animateTerrain);
-var mouseY = 0;
-var mouseX = 0;
-
-function animateTerrain(event) {
-  mouseY = event.clientY;
-  mouseX = event.clientX;
+  var humanMaterial = new three__WEBPACK_IMPORTED_MODULE_10__.MeshStandardMaterial({
+    color: 0x95ff00,
+    emissive: 0x95ff00,
+    emissiveIntensity: 100
+  });
+  gltfLoader.load('3d/models/human.gltf', function (gltf) {
+    human = gltf.scene;
+    human.traverse(function (o) {
+      if (o.isMesh) o.material = humanMaterial;
+    });
+    scene.add(human);
+    human.position.set(0, 0, 0);
+  });
 }
 
-var clock = new three__WEBPACK_IMPORTED_MODULE_10__.Clock();
+function onPointerMove(event) {
+  if (event.isPrimary === false) return;
+  mouseX = event.clientX - windowHalfX;
+  mouseY = event.clientY - windowHalfY;
+}
+
+function onWindowResize() {
+  windowHalfX = window.innerWidth / 2;
+  windowHalfY = window.innerHeight / 2;
+  width = window.innerWidth;
+  height = window.innerHeight;
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width, height);
+  postprocessing.composer.setSize(width, height);
+}
+
+function initPostprocessing() {
+  var renderPass = new three_examples_jsm_postprocessing_RenderPass_js__WEBPACK_IMPORTED_MODULE_5__.RenderPass(scene, camera);
+  var bokehPass = new three_examples_jsm_postprocessing_BokehPass__WEBPACK_IMPORTED_MODULE_8__.BokehPass(scene, camera, {
+    focus: 6,
+    aperture: 10.7,
+    maxblur: 0.1,
+    width: width,
+    height: height
+  });
+  var ubloomPass = new three_examples_jsm_postprocessing_UnrealBloomPass__WEBPACK_IMPORTED_MODULE_6__.UnrealBloomPass(new three__WEBPACK_IMPORTED_MODULE_10__.Vector2(window.innerWidth, window.innerHeight), bloomParams.bloomStrength, bloomParams.bloomRadius, bloomParams.bloomThreshold);
+  var filmPass = new three_examples_jsm_postprocessing_FilmPass__WEBPACK_IMPORTED_MODULE_7__.FilmPass(filmParams.noiseIntensity, filmParams.scanLinesIntensity, filmParams.scanLinesCount, filmParams.greyScale);
+  var composer = new three_examples_jsm_postprocessing_EffectComposer_js__WEBPACK_IMPORTED_MODULE_4__.EffectComposer(renderer);
+  composer.addPass(renderPass);
+  composer.addPass(ubloomPass);
+  composer.addPass(filmPass);
+  composer.addPass(bokehPass);
+  postprocessing.composer = composer;
+  postprocessing.bokeh = bokehPass;
+}
 
 function animate() {
-  requestAnimationFrame(animate);
-  var time = clock.getElapsedTime();
-  knotObj.rotation.x = mouseY * 0.001;
-  knotObj.rotation.y = mouseX * 0.0025; //! Update Orbital Controls
-  // controls.update()
-
-  composer.render();
+  // controls.update();
+  requestAnimationFrame(animate, renderer.domElement);
+  stats.begin();
+  render();
+  stats.end();
 }
 
-animate(); //!Helpers
-// const gridHelper = new THREE.GridHelper(100, 100);
-// scene.add(gridHelper);
-// const axesHelper = new THREE.AxesHelper(20);
-// scene.add(axesHelper);
-// gui.add(camera.rotation, 'x').min(-5).max(5)
-// gui.add(camera.rotation, 'y').min(-5).max(5)
-// gui.add(camera.rotation, 'z').min(-5).max(5)
-// gui.add(camera.position, 'x').min(-100).max(100)
-// gui.add(camera.position, 'y').min(-100).max(100)
-// gui.add(camera.position, 'z').min(-100).max(100)
+function render() {
+  var time = Date.now() * 0.00005;
+  var delta = clock.getDelta();
+  uniforms["time"].value += delta * 5;
+  mouseInteractivity();
+  postprocessing.composer.render(0.1);
+}
+
+function mouseInteractivity() {// camera.position.x += (- (mouseX) - camera.position.x) * 0.00001;
+  // camera.position.y += (- (mouseY) - camera.position.y) * 0.000002;
+  // camera.position.z += (- (mouseX) - camera.position.z) * 0.00001;
+  // camera.lookAt(cameraTarget.position);
+}
+
+function vertexShader() {
+  return "\n    varying vec2 vUv;\n\n    void main()\n    {\n        vUv = uv;\n        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );\n        gl_Position = projectionMatrix * mvPosition;\n    }\n    ";
+}
+
+function fragmentShader() {
+  return "\n    uniform float time;\n\n    varying vec2 vUv;\n\n    void main( void ) {\n\n        vec2 position = - 1.0 + 2.0 * vUv;\n\n        float red = abs( sin( position.x * position.y + time / 5.0 ) );\n        float green = abs( sin( position.x * position.y + time / 4.0 ) );\n        float blue = abs( sin( position.x * position.y + time / 3.0 ) );\n        gl_FragColor = vec4( red, green, blue, 1.0 );\n\n    }\n";
+}
+
+init();
+animate();
 
 /***/ }),
 
@@ -62131,6 +62161,188 @@ var index = {
 
 /***/ }),
 
+/***/ "./node_modules/three/examples/jsm/libs/stats.module.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/three/examples/jsm/libs/stats.module.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var Stats = function () {
+
+	var mode = 0;
+
+	var container = document.createElement( 'div' );
+	container.style.cssText = 'position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000';
+	container.addEventListener( 'click', function ( event ) {
+
+		event.preventDefault();
+		showPanel( ++ mode % container.children.length );
+
+	}, false );
+
+	//
+
+	function addPanel( panel ) {
+
+		container.appendChild( panel.dom );
+		return panel;
+
+	}
+
+	function showPanel( id ) {
+
+		for ( var i = 0; i < container.children.length; i ++ ) {
+
+			container.children[ i ].style.display = i === id ? 'block' : 'none';
+
+		}
+
+		mode = id;
+
+	}
+
+	//
+
+	var beginTime = ( performance || Date ).now(), prevTime = beginTime, frames = 0;
+
+	var fpsPanel = addPanel( new Stats.Panel( 'FPS', '#0ff', '#002' ) );
+	var msPanel = addPanel( new Stats.Panel( 'MS', '#0f0', '#020' ) );
+
+	if ( self.performance && self.performance.memory ) {
+
+		var memPanel = addPanel( new Stats.Panel( 'MB', '#f08', '#201' ) );
+
+	}
+
+	showPanel( 0 );
+
+	return {
+
+		REVISION: 16,
+
+		dom: container,
+
+		addPanel: addPanel,
+		showPanel: showPanel,
+
+		begin: function () {
+
+			beginTime = ( performance || Date ).now();
+
+		},
+
+		end: function () {
+
+			frames ++;
+
+			var time = ( performance || Date ).now();
+
+			msPanel.update( time - beginTime, 200 );
+
+			if ( time >= prevTime + 1000 ) {
+
+				fpsPanel.update( ( frames * 1000 ) / ( time - prevTime ), 100 );
+
+				prevTime = time;
+				frames = 0;
+
+				if ( memPanel ) {
+
+					var memory = performance.memory;
+					memPanel.update( memory.usedJSHeapSize / 1048576, memory.jsHeapSizeLimit / 1048576 );
+
+				}
+
+			}
+
+			return time;
+
+		},
+
+		update: function () {
+
+			beginTime = this.end();
+
+		},
+
+		// Backwards Compatibility
+
+		domElement: container,
+		setMode: showPanel
+
+	};
+
+};
+
+Stats.Panel = function ( name, fg, bg ) {
+
+	var min = Infinity, max = 0, round = Math.round;
+	var PR = round( window.devicePixelRatio || 1 );
+
+	var WIDTH = 80 * PR, HEIGHT = 48 * PR,
+		TEXT_X = 3 * PR, TEXT_Y = 2 * PR,
+		GRAPH_X = 3 * PR, GRAPH_Y = 15 * PR,
+		GRAPH_WIDTH = 74 * PR, GRAPH_HEIGHT = 30 * PR;
+
+	var canvas = document.createElement( 'canvas' );
+	canvas.width = WIDTH;
+	canvas.height = HEIGHT;
+	canvas.style.cssText = 'width:80px;height:48px';
+
+	var context = canvas.getContext( '2d' );
+	context.font = 'bold ' + ( 9 * PR ) + 'px Helvetica,Arial,sans-serif';
+	context.textBaseline = 'top';
+
+	context.fillStyle = bg;
+	context.fillRect( 0, 0, WIDTH, HEIGHT );
+
+	context.fillStyle = fg;
+	context.fillText( name, TEXT_X, TEXT_Y );
+	context.fillRect( GRAPH_X, GRAPH_Y, GRAPH_WIDTH, GRAPH_HEIGHT );
+
+	context.fillStyle = bg;
+	context.globalAlpha = 0.9;
+	context.fillRect( GRAPH_X, GRAPH_Y, GRAPH_WIDTH, GRAPH_HEIGHT );
+
+	return {
+
+		dom: canvas,
+
+		update: function ( value, maxValue ) {
+
+			min = Math.min( min, value );
+			max = Math.max( max, value );
+
+			context.fillStyle = bg;
+			context.globalAlpha = 1;
+			context.fillRect( 0, 0, WIDTH, GRAPH_Y );
+			context.fillStyle = fg;
+			context.fillText( round( value ) + ' ' + name + ' (' + round( min ) + '-' + round( max ) + ')', TEXT_X, TEXT_Y );
+
+			context.drawImage( canvas, GRAPH_X + PR, GRAPH_Y, GRAPH_WIDTH - PR, GRAPH_HEIGHT, GRAPH_X, GRAPH_Y, GRAPH_WIDTH - PR, GRAPH_HEIGHT );
+
+			context.fillRect( GRAPH_X + GRAPH_WIDTH - PR, GRAPH_Y, PR, GRAPH_HEIGHT );
+
+			context.fillStyle = bg;
+			context.globalAlpha = 0.9;
+			context.fillRect( GRAPH_X + GRAPH_WIDTH - PR, GRAPH_Y, PR, round( ( 1 - ( value / maxValue ) ) * GRAPH_HEIGHT ) );
+
+		}
+
+	};
+
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Stats);
+
+
+/***/ }),
+
 /***/ "./node_modules/three/examples/jsm/lights/LightProbeGenerator.js":
 /*!***********************************************************************!*\
   !*** ./node_modules/three/examples/jsm/lights/LightProbeGenerator.js ***!
@@ -66559,116 +66771,6 @@ function toTrianglesDrawMode( geometry, drawMode ) {
 
 /***/ }),
 
-/***/ "./node_modules/three/examples/jsm/postprocessing/AfterimagePass.js":
-/*!**************************************************************************!*\
-  !*** ./node_modules/three/examples/jsm/postprocessing/AfterimagePass.js ***!
-  \**************************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AfterimagePass": () => (/* binding */ AfterimagePass)
-/* harmony export */ });
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
-/* harmony import */ var _postprocessing_Pass_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../postprocessing/Pass.js */ "./node_modules/three/examples/jsm/postprocessing/Pass.js");
-/* harmony import */ var _shaders_AfterimageShader_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shaders/AfterimageShader.js */ "./node_modules/three/examples/jsm/shaders/AfterimageShader.js");
-
-
-
-
-class AfterimagePass extends _postprocessing_Pass_js__WEBPACK_IMPORTED_MODULE_0__.Pass {
-
-	constructor( damp = 0.96 ) {
-
-		super();
-
-		if ( _shaders_AfterimageShader_js__WEBPACK_IMPORTED_MODULE_1__.AfterimageShader === undefined ) console.error( 'THREE.AfterimagePass relies on AfterimageShader' );
-
-		this.shader = _shaders_AfterimageShader_js__WEBPACK_IMPORTED_MODULE_1__.AfterimageShader;
-
-		this.uniforms = three__WEBPACK_IMPORTED_MODULE_2__.UniformsUtils.clone( this.shader.uniforms );
-
-		this.uniforms[ 'damp' ].value = damp;
-
-		this.textureComp = new three__WEBPACK_IMPORTED_MODULE_2__.WebGLRenderTarget( window.innerWidth, window.innerHeight, {
-
-			minFilter: three__WEBPACK_IMPORTED_MODULE_2__.LinearFilter,
-			magFilter: three__WEBPACK_IMPORTED_MODULE_2__.NearestFilter,
-			format: three__WEBPACK_IMPORTED_MODULE_2__.RGBAFormat
-
-		} );
-
-		this.textureOld = new three__WEBPACK_IMPORTED_MODULE_2__.WebGLRenderTarget( window.innerWidth, window.innerHeight, {
-
-			minFilter: three__WEBPACK_IMPORTED_MODULE_2__.LinearFilter,
-			magFilter: three__WEBPACK_IMPORTED_MODULE_2__.NearestFilter,
-			format: three__WEBPACK_IMPORTED_MODULE_2__.RGBAFormat
-
-		} );
-
-		this.shaderMaterial = new three__WEBPACK_IMPORTED_MODULE_2__.ShaderMaterial( {
-
-			uniforms: this.uniforms,
-			vertexShader: this.shader.vertexShader,
-			fragmentShader: this.shader.fragmentShader
-
-		} );
-
-		this.compFsQuad = new _postprocessing_Pass_js__WEBPACK_IMPORTED_MODULE_0__.FullScreenQuad( this.shaderMaterial );
-
-		const material = new three__WEBPACK_IMPORTED_MODULE_2__.MeshBasicMaterial();
-		this.copyFsQuad = new _postprocessing_Pass_js__WEBPACK_IMPORTED_MODULE_0__.FullScreenQuad( material );
-
-	}
-
-	render( renderer, writeBuffer, readBuffer/*, deltaTime, maskActive*/ ) {
-
-		this.uniforms[ 'tOld' ].value = this.textureOld.texture;
-		this.uniforms[ 'tNew' ].value = readBuffer.texture;
-
-		renderer.setRenderTarget( this.textureComp );
-		this.compFsQuad.render( renderer );
-
-		this.copyFsQuad.material.map = this.textureComp.texture;
-
-		if ( this.renderToScreen ) {
-
-			renderer.setRenderTarget( null );
-			this.copyFsQuad.render( renderer );
-
-		} else {
-
-			renderer.setRenderTarget( writeBuffer );
-
-			if ( this.clear ) renderer.clear();
-
-			this.copyFsQuad.render( renderer );
-
-		}
-
-		// Swap buffers.
-		const temp = this.textureOld;
-		this.textureOld = this.textureComp;
-		this.textureComp = temp;
-		// Now textureOld contains the latest image, ready for the next frame.
-
-	}
-
-	setSize( width, height ) {
-
-		this.textureComp.setSize( width, height );
-		this.textureOld.setSize( width, height );
-
-	}
-
-}
-
-
-
-
-/***/ }),
-
 /***/ "./node_modules/three/examples/jsm/postprocessing/BokehPass.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/three/examples/jsm/postprocessing/BokehPass.js ***!
@@ -68010,77 +68112,6 @@ class UnrealBloomPass extends _postprocessing_Pass_js__WEBPACK_IMPORTED_MODULE_0
 
 UnrealBloomPass.BlurDirectionX = new three__WEBPACK_IMPORTED_MODULE_3__.Vector2( 1.0, 0.0 );
 UnrealBloomPass.BlurDirectionY = new three__WEBPACK_IMPORTED_MODULE_3__.Vector2( 0.0, 1.0 );
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/three/examples/jsm/shaders/AfterimageShader.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/three/examples/jsm/shaders/AfterimageShader.js ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AfterimageShader": () => (/* binding */ AfterimageShader)
-/* harmony export */ });
-/**
- * Afterimage shader
- * I created this effect inspired by a demo on codepen:
- * https://codepen.io/brunoimbrizi/pen/MoRJaN?page=1&
- */
-
-const AfterimageShader = {
-
-	uniforms: {
-
-		'damp': { value: 0.96 },
-		'tOld': { value: null },
-		'tNew': { value: null }
-
-	},
-
-	vertexShader: /* glsl */`
-
-		varying vec2 vUv;
-
-		void main() {
-
-			vUv = uv;
-			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-
-		}`,
-
-	fragmentShader: /* glsl */`
-
-		uniform float damp;
-
-		uniform sampler2D tOld;
-		uniform sampler2D tNew;
-
-		varying vec2 vUv;
-
-		vec4 when_gt( vec4 x, float y ) {
-
-			return max( sign( x - y ), 0.0 );
-
-		}
-
-		void main() {
-
-			vec4 texelOld = texture2D( tOld, vUv );
-			vec4 texelNew = texture2D( tNew, vUv );
-
-			texelOld *= damp * when_gt( texelOld, 0.1 );
-
-			gl_FragColor = max(texelNew, texelOld);
-
-		}`
-
-};
 
 
 

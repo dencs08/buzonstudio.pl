@@ -10,8 +10,8 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
 import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass'
-import { AfterImagePass } from 'three/examples/jsm/postprocessing/AfterimagePass'
 import { BokehPass } from 'three/examples/jsm/postprocessing/BokehPass'
+import Stats from 'three/examples/jsm/libs/stats.module'
 
 // ***
 // *** MAIN PROPERITES
@@ -33,253 +33,328 @@ const filmParams = {
     greyScale: false
 }
 
-const effectController = {
-    focus: 500.0,
-    aperture: 5,
-    maxblur: 0.01
-};
+const bokehParams = {
+    focus: 6,
+    aperture: 10.7,
+    maxblur: 0.1,
+}
 
 const cameraParams = {
-    renderDistanceMin: 1,
+    renderDistanceMin: 0.1,
     renderDistanceMax: 100,
     fov: 60,
 }
 
 const fogParams = {
-    density: 0.01,
+    density: 0.0125,
 }
 
-//Texture Loader
-const textureLoader = new THREE.TextureLoader()
+//Objects
+let knotObj, ground, human
 
-//GLTF loader
+
+let camera, cameraTarget, scene, renderer, stats,
+    parameters, cubeMaterial, controls, clock;
+
+//Shaders
+let uniforms
+
+//Loaders
+const textureLoader = new THREE.TextureLoader()
 const gltfLoader = new GLTFLoader()
 
-//gsap Timeline init
 let tl = gsap.timeline()
 
-//Gui init
 const gui = new GUI()
 
-// Canvas
 const canvas = document.querySelector('#web_gl')
 
-//! Scene
-const scene = new THREE.Scene()
+clock = new THREE.Clock();
 
-new THREE.CubeTextureLoader().load([
-    '3d/textures/skybox/stars_ft.jpg',
-    '3d/textures/skybox/stars_bk.jpg',
-    '3d/textures/skybox/stars_up.jpg',
-    '3d/textures/skybox/stars_dn.jpg',
-    '3d/textures/skybox/stars_rt.jpg',
-    '3d/textures/skybox/stars_lf.jpg'
-], function (cubeTexture) {
+let mouseX = 0, mouseY = 0;
 
-    cubeTexture.encoding = THREE.sRGBEncoding;
+let windowHalfX = window.innerWidth / 2;
+let windowHalfY = window.innerHeight / 2;
 
-    scene.background = cubeTexture;
+let width = window.innerWidth;
+let height = window.innerHeight;
 
-    lightProbe.copy(LightProbeGenerator.fromCubeTexture(cubeTexture));
+const materials = [], objects = [];
 
-    const geometry = new THREE.SphereGeometry(5, 64, 64);
+const postprocessing = {};
 
-    const material = new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-        metalness: 0,
-        roughness: 0,
-        envMap: cubeTexture,
-        envMapIntensity: API.envMapIntensity,
+function init() {
+
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+
+    //!Base camera
+    camera = new THREE.PerspectiveCamera(cameraParams.fov, width / height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax)
+    camera.position.set(0, 1.5, -2)
+    camera.rotation.set(0, 0, 0)
+
+    const cameraTargetGeo = new THREE.SphereGeometry(1, 32, 16)
+    const cameraTargetMat = new THREE.MeshStandardMaterial()
+
+    cameraTarget = new THREE.Mesh(cameraTargetGeo, cameraTargetMat)
+    cameraTarget.position.set(-25, 1, -20)
+
+    scene = new THREE.Scene();
+
+    renderer = new THREE.WebGLRenderer();
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(width, height);
+
+    // renderer.outputEncoding = THREE.sRGBEncoding
+    // renderer.toneMapping = THREE.ACESFilmicToneMapping
+
+    container.appendChild(renderer.domElement);
+
+    parameters = { color: 0xff1100 }; //, envMap: textureCube 
+    cubeMaterial = new THREE.MeshBasicMaterial(parameters);
+
+    //! Controls
+    controls = new OrbitControls(camera, renderer.domElement)
+
+    //! Scene
+    new THREE.CubeTextureLoader().load([
+        '3d/textures/skybox/stars_ft.jpg',
+        '3d/textures/skybox/stars_bk.jpg',
+        '3d/textures/skybox/stars_up.jpg',
+        '3d/textures/skybox/stars_dn.jpg',
+        '3d/textures/skybox/stars_rt.jpg',
+        '3d/textures/skybox/stars_lf.jpg'
+    ], function (cubeTexture) {
+
+        cubeTexture.encoding = THREE.sRGBEncoding;
+
+        scene.background = cubeTexture;
+
+        lightProbe.copy(LightProbeGenerator.fromCubeTexture(cubeTexture));
     });
-});
 
-scene.fog = new THREE.FogExp2(0x000000, fogParams.density)
-// const fogCol = { color: '#ffffff' }
-// gui.addColor(fogCol, 'color').onChange(() => {
-//     scene.fog.color.set(fogCol.color)
-// })
+    scene.fog = new THREE.FogExp2(0x000000, fogParams.density)
 
-//!
-//! Objects
-//!
-//Ground
-const groundTexture = textureLoader.load('3d/textures/ground_texture.jpg')
-const groundDisplacement = textureLoader.load('3d/textures/ground_displacement.jpg')
-const groundRoughness = textureLoader.load('3d/textures/ground_roughness.jpg')
+    //!Lights
+    let lightProbe;
+    let directionalLight;
 
-const groundScale = 1
-// groundTexture.repeat.set(groundScale, groundScale)
-// groundTexture.wrapS = THREE.RepeatWrapping;
-// groundTexture.wrapT = THREE.RepeatWrapping;
+    const API = {
+        lightProbeIntensity: .1,
+        directionalLightIntensity: 0.55,
+        envMapIntensity: 0.1
+    };
 
-// groundDisplacement.repeat.set(groundScale, groundScale)
-// groundDisplacement.wrapS = THREE.RepeatWrapping;
-// groundDisplacement.wrapT = THREE.RepeatWrapping;
+    lightProbe = new THREE.LightProbe();
+    scene.add(lightProbe);
 
-groundRoughness.repeat.set(1, 1)
-groundRoughness.wrapS = THREE.RepeatWrapping;
-groundRoughness.wrapT = THREE.RepeatWrapping;
+    directionalLight = new THREE.DirectionalLight(0xffffff, API.directionalLightIntensity);
+    directionalLight.position.set(10, 10, 10);
+    scene.add(directionalLight);
 
-const groundGeo = new THREE.PlaneBufferGeometry(planeScale, planeScale, planeResolution, planeResolution)
-const groundMat = new THREE.MeshStandardMaterial({
-    map: groundTexture,
-    roughnessMap: groundRoughness,
-    roughness: 3.5,
-    metalness: 0,
-    displacementMap: groundDisplacement,
-    displacementScale: 10,
-})
-const ground = new THREE.Mesh(groundGeo, groundMat)
-scene.add(ground)
-ground.rotation.x = -1.571
-ground.rotation.z = 3.141
+    initPostprocessing();
 
-//Knot
-const knotGeo = new THREE.TorusKnotGeometry(1, 0.2, 150, 20, 3, 10);
+    renderer.autoClear = false;
 
-const knotMat = new THREE.MeshStandardMaterial({
-    color: 0x95ff00,
-    emissive: 0x95ff00,
-    emissiveIntensity: 100,
-})
+    stats = new Stats();
+    container.appendChild(stats.dom);
 
-const knotObj = new THREE.Mesh(knotGeo, knotMat);
-const knotObj2 = new THREE.Mesh(knotGeo, knotMat);
-knotObj.position.set(-25, 2, -20)
-scene.add(knotObj)
-scene.add(knotObj2)
+    container.style.touchAction = 'none';
+    container.addEventListener('pointermove', onPointerMove);
 
-knotObj2.position.set(0, 2, 0);
+    window.addEventListener('resize', onWindowResize);
 
-//!Lights
+    //bokehPass live changer
+    const matChanger = function () {
 
-// let knobeLight = new THREE.PointLight(0x95ff00, 0.025)
-// scene.add(knobeLight)
-// knobeLight.position.set(-25, 2, -20)
+        postprocessing.bokeh.uniforms["focus"].value = bokehParams.focus;
+        postprocessing.bokeh.uniforms["aperture"].value = bokehParams.aperture * 0.00001;
+        postprocessing.bokeh.uniforms["maxblur"].value = bokehParams.maxblur;
 
-let lightProbe;
-let directionalLight;
+    };
+    gui.add(bokehParams, "focus", -50, 300.0, 1).onChange(matChanger);
+    gui.add(bokehParams, "aperture", 0, 50, 0.1).onChange(matChanger);
+    gui.add(bokehParams, "maxblur", 0.0, 0.1, 0.001).onChange(matChanger);
+    gui.close();
+    matChanger();
 
-const API = {
-    lightProbeIntensity: .1,
-    directionalLightIntensity: 0.55,
-    envMapIntensity: 0.1
-};
+    //!
+    //! Objects
+    //!
+    //Ground
+    // const groundTexture = textureLoader.load('3d/textures/ground_texture.jpg')
+    // const groundDisplacement = textureLoader.load('3d/textures/ground_displacement.jpg')
+    // const groundRoughness = textureLoader.load('3d/textures/ground_roughness.jpg')
 
-lightProbe = new THREE.LightProbe();
-scene.add(lightProbe);
+    // groundRoughness.repeat.set(1, 1)
+    // groundRoughness.wrapS = THREE.RepeatWrapping;
+    // groundRoughness.wrapT = THREE.RepeatWrapping;
 
-directionalLight = new THREE.DirectionalLight(0xffffff, API.directionalLightIntensity);
-directionalLight.position.set(10, 10, 10);
-scene.add(directionalLight);
+    // const groundGeo = new THREE.PlaneBufferGeometry(planeScale, planeScale, planeResolution, planeResolution)
+    // const groundMat = new THREE.MeshStandardMaterial({
+    //     map: groundTexture,
+    //     roughnessMap: groundRoughness,
+    //     roughness: 3.5,
+    //     metalness: 0,
+    //     displacementMap: groundDisplacement,
+    //     displacementScale: 10,
+    // })
 
-//Sizes
-const sizes = {
-    width: window.innerWidth,
-    height: window.innerHeight
+    // ground = new THREE.Mesh(groundGeo, groundMat)
+    // scene.add(ground)
+    // ground.rotation.x = -1.571
+    // ground.rotation.z = 3.141
+
+
+    uniforms = {
+        "time": { value: 1.0 }
+    };
+
+    const wallGeo = new THREE.PlaneGeometry(2, 2)
+    const wallMat = new THREE.ShaderMaterial({
+        uniforms: uniforms,
+        vertexShader: vertexShader(),
+        fragmentShader: fragmentShader()
+    });
+
+    const wall = new THREE.Mesh(wallGeo, wallMat)
+
+    scene.add(wall)
+    wall.position.set(0, 2, -5)
+
+
+    //human
+    const humanMaterial = new THREE.MeshStandardMaterial({
+        color: 0x95ff00,
+        emissive: 0x95ff00,
+        emissiveIntensity: 100,
+    })
+
+    gltfLoader.load('3d/models/human.gltf', (gltf) => {
+        human = gltf.scene
+        human.traverse((o) => {
+            if (o.isMesh) o.material = humanMaterial;
+        });
+        scene.add(human)
+        human.position.set(0, 0, 0)
+    })
+
 }
 
-//!Base camera
-const camera = new THREE.PerspectiveCamera(cameraParams.fov, sizes.width / sizes.height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax)
-camera.position.set(-30, 1, -27.5)
-camera.rotation.set(0, 4.1, 0)
+function onPointerMove(event) {
+    if (event.isPrimary === false) return;
 
-scene.add(camera)
-
-window.addEventListener('resize', () => {
-    // Update sizes
-    sizes.width = window.innerWidth
-    sizes.height = window.innerHeight
-
-    // Update camera
-    camera.aspect = sizes.width / sizes.height
-    camera.updateProjectionMatrix()
-
-    // Update renderer
-    renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-})
-
-
-
-//!Renderer
-const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    alpha: true,
-})
-renderer.toneMappingExposure = 1
-renderer.outputEncoding = THREE.sRGBEncoding
-renderer.setSize(sizes.width, sizes.height)
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-
-let bokehController = {
-    focus: 11.5,
-    aperture: 0.00005,
-    maxblur: 0.01,
+    mouseX = event.clientX - windowHalfX;
+    mouseY = event.clientY - windowHalfY;
 }
 
-//composer + passes
-const composer = new EffectComposer(renderer)
-const renderPass = new RenderPass(scene, camera)
-const ubloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), bloomParams.bloomStrength, bloomParams.bloomRadius, bloomParams.bloomThreshold)
-const filmPass = new FilmPass(filmParams.noiseIntensity, filmParams.scanLinesIntensity, filmParams.scanLinesCount, filmParams.greyScale)
-const bokehPass = new BokehPass(scene, camera, { focus: bokehController.focus, aperture: bokehController.aperture, maxblur: bokehController.maxblur, width: window.innerWidth, height: window.innerHeight })
-composer.addPass(renderPass)
-composer.addPass(ubloomPass)
-composer.addPass(filmPass)
-composer.addPass(bokehPass)
+function onWindowResize() {
+    windowHalfX = window.innerWidth / 2;
+    windowHalfY = window.innerHeight / 2;
 
+    width = window.innerWidth;
+    height = window.innerHeight;
 
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
 
-//! Controls
-// const controls = new OrbitControls(camera, canvas)
-// controls.enableDamping = true
-
-
-//!
-//! Animate
-//!
-
-document.addEventListener('mousemove', animateTerrain)
-
-let mouseY = 0
-let mouseX = 0
-
-function animateTerrain(event) {
-    mouseY = event.clientY
-    mouseX = event.clientX
+    renderer.setSize(width, height);
+    postprocessing.composer.setSize(width, height);
 }
 
-const clock = new THREE.Clock()
+function initPostprocessing() {
+    const renderPass = new RenderPass(scene, camera);
+
+    const bokehPass = new BokehPass(scene, camera, {
+        focus: 6,
+        aperture: 10.7,
+        maxblur: 0.1,
+
+        width: width,
+        height: height
+    })
+
+    const ubloomPass = new UnrealBloomPass(
+        new THREE.Vector2(window.innerWidth, window.innerHeight),
+        bloomParams.bloomStrength,
+        bloomParams.bloomRadius,
+        bloomParams.bloomThreshold)
+
+    const filmPass = new FilmPass(
+        filmParams.noiseIntensity,
+        filmParams.scanLinesIntensity,
+        filmParams.scanLinesCount,
+        filmParams.greyScale)
+
+    const composer = new EffectComposer(renderer);
+
+    composer.addPass(renderPass);
+    composer.addPass(ubloomPass)
+    composer.addPass(filmPass)
+    composer.addPass(bokehPass);
+
+    postprocessing.composer = composer;
+    postprocessing.bokeh = bokehPass;
+}
+
 function animate() {
-    requestAnimationFrame(animate);
+    // controls.update();
+    requestAnimationFrame(animate, renderer.domElement);
 
-    const time = clock.getElapsedTime()
-
-    knotObj.rotation.x = mouseY * 0.001
-    knotObj.rotation.y = mouseX * 0.0025
-
-    //! Update Orbital Controls
-    // controls.update()
-
-
-
-    composer.render();
+    stats.begin();
+    render();
+    stats.end();
 }
+
+function render() {
+    const time = Date.now() * 0.00005;
+
+    const delta = clock.getDelta()
+    uniforms["time"].value += delta * 5
+
+    mouseInteractivity()
+
+    postprocessing.composer.render(0.1);
+}
+
+function mouseInteractivity() {
+    // camera.position.x += (- (mouseX) - camera.position.x) * 0.00001;
+    // camera.position.y += (- (mouseY) - camera.position.y) * 0.000002;
+    // camera.position.z += (- (mouseX) - camera.position.z) * 0.00001;
+    // camera.lookAt(cameraTarget.position);
+}
+
+function vertexShader() {
+    return `
+    varying vec2 vUv;
+
+    void main()
+    {
+        vUv = uv;
+        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+        gl_Position = projectionMatrix * mvPosition;
+    }
+    `
+}
+
+function fragmentShader() {
+    return `
+    uniform float time;
+
+    varying vec2 vUv;
+
+    void main( void ) {
+
+        vec2 position = - 1.0 + 2.0 * vUv;
+
+        float red = abs( sin( position.x * position.y + time / 5.0 ) );
+        float green = abs( sin( position.x * position.y + time / 4.0 ) );
+        float blue = abs( sin( position.x * position.y + time / 3.0 ) );
+        gl_FragColor = vec4( red, green, blue, 1.0 );
+
+    }
+`
+}
+
+init()
 animate()
-
-
-//!Helpers
-// const gridHelper = new THREE.GridHelper(100, 100);
-// scene.add(gridHelper);
-
-// const axesHelper = new THREE.AxesHelper(20);
-// scene.add(axesHelper);
-
-// gui.add(camera.rotation, 'x').min(-5).max(5)
-// gui.add(camera.rotation, 'y').min(-5).max(5)
-// gui.add(camera.rotation, 'z').min(-5).max(5)
-
-// gui.add(camera.position, 'x').min(-100).max(100)
-// gui.add(camera.position, 'y').min(-100).max(100)
-// gui.add(camera.position, 'z').min(-100).max(100)
