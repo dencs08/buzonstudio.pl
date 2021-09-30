@@ -51,7 +51,7 @@
 
         <!-- Landing Page -->
 
-        <!-- <section id="landing-page-section" class="">
+        <section id="landing-page-section" class="">
                 <div class="container landing-page-content">
                     <h1 class="">Cześć! Jesteśmy bisonstudio.
                         Twoje kompleksowe rozwiązanie na wszystkie technologiczne potrzeby!
@@ -70,14 +70,14 @@
                     </div>
                 </div>
             </section>
-     -->
+    
 
         <!-- WEBGL -->
         <canvas id="web_gl"></canvas>
 
         <!-- We Create Section -->
 
-        <!-- <section id="we-create-section" class="container row">
+        <section id="we-create-section" class="container row">
                 <div class="col-lg-8">
                     <h2 class="gs gs_fromLeft section-header we-create-section-header">
                         Tworzymy piękne <span class="green-highlight">wizualizacje   </span> <br>
@@ -123,11 +123,11 @@
                         </p>
                     </div>
                 </div>
-            </section> -->
+            </section>
 
         <!-- Portfolio -->
 
-        <!-- <section id="portfolio-section" class="container-md mx-auto">
+        <section id="portfolio-section" class="container-md mx-auto">
                 <h2 class="gs gs_fromTop section-header text-center">
                     <span class="green-highlight">Kochamy</span> rozmawiać, ale niech nasze <span class="green-highlight">portfolio</span> wypowie się za nas.
                 </h2>
@@ -146,10 +146,10 @@
                         <div class="slide">
                             <img src="images/portfolio2.png" class="portfolio-img">
                         </div>
-     -->
+    
         <!-- Same -->
 
-        <!-- <div class="slide">
+        <div class="slide">
                             <img src="images/portfolio2.png" class="portfolio-img">
                         </div>
                         <div class="slide">
@@ -171,11 +171,11 @@
                         </button></a
                     >
                 </div>
-            </section> -->
+            </section>
 
         <!-- Footer Contact -->
 
-        <!-- <footer>
+        <footer>
                 <section id="contact-section">
                     <img src="images/footer.svg" class="footer-svg" alt="" />
                     <div class="contact-content container text-center">
@@ -195,11 +195,11 @@
                         </div>
                     </div>
                 </section>
-            </footer> -->
+            </footer>
 
         <!-- Modal -->
 
-        <!-- <div id="modal-content" class="modal-container">
+        <div id="modal-content" class="modal-container">
             <img src="images/modal.svg" id="modal-bg" class="modal-bg" alt="">
             <img src="images/modal-full.svg" id="modal-bg" class="modal-bg2" alt="">
 
@@ -208,11 +208,11 @@
                 <p class="mb-5">
                     Odezwiemy się tak szybko jak to możliwe, pamiętaj, żeby w razie
                     czego sprawdzić folder spam!
-                </p>        -->
+                </p>       
 
         <!-- Contact form -->
 
-        <!-- <form name="contact-form" class="contact-form">
+        <form name="contact-form" class="contact-form">
                        <div class="form-field">
                           <input id="name" name="name" class="input-text js-input" type="text" required>
                           <label class="label" for="name">Imię</label>
@@ -234,9 +234,9 @@
                        </div>
                     </form>
             </section>
-        </div> -->
+        </div>
 
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.5/fullpage.js"></script> -->
         <script src="js/app.js"></script>
     </body>
-</html>
+</html> -->

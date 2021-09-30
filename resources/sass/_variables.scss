@@ -1,5 +1,6 @@
 // Body
 $body-bg: #111111;
+$body-bg-color-lighter: #161616;
 
 // Typography
 $font-family-primary: "Poppins";
@@ -9,13 +10,12 @@ $line-height-base: 1.6;
 
 // Colors
 $font-color-primary: #ffffff;
-$font-color-secondary: #f3f3f3;
-$font-color-tertiary: #f0f0f0;
-$font-color-fourth: #afafaf;
-$primary-color: #0d1541;
-$secondary-color: #57219e;
-$fill-color-primary: #2c8cb3;
-$fill-color-secondary: #24ff66;
-$fill-color-secondary-darker: #1db64b;
-$fill-color-secondary-lighter: #6bff97;
-$body-bg-color-lighter: #161616;
+$font-color-secondary: #ececec;
+$font-color-tertiary: #bebebe;
+$font-color-fourth: #707070;
+
+$primary-color: #24ff66;
+$secondary-color: #2c8cb3;
+
+$primary-color-dark: #1db64b;
+$primary-color-light: #6bff97;

@@ -1,0 +1,61 @@
+//!footer
+#footer h4 {
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 48px;
+    color: $font-color-tertiary;
+}
+
+h4 span {
+    position: relative;
+    padding-bottom: 5px;
+}
+
+h4 span::after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px solid $primary-color;
+    content: "";
+}
+
+.mail-href-div {
+    width: fit-content;
+}
+
+.mail-href {
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 48px;
+    color: $font-color-tertiary;
+}
+
+.underfooter-container {
+    margin-top: 125px;
+    margin-bottom: 25px;
+}
+
+.copyright-container {
+    margin-top: -26px;
+}
+
+.privacy-container {
+    width: fit-content;
+}
+
+.privacy-policy {
+    color: $font-color-tertiary;
+
+    padding-bottom: 0.15rem;
+}
+
+.copyright {
+    color: $font-color-fourth;
+}
+
+.arrow-right-icon {
+    margin-left: 10px;
+    fill: $primary-color;
+}

@@ -1,0 +1,40 @@
+#testimonials {
+    // display: flex;
+
+    // justify-content: center;
+    // place-items: center;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    place-items: center;
+
+    width: clamp(325px, 40vw, 550px);
+    height: clamp(250px, 35vh, 400px);
+
+    background: $body-bg-color-lighter;
+
+    padding: 30px 50px;
+    margin-bottom: 100px;
+
+    border-radius: 15px;
+}
+
+.card-body {
+    width: 100%;
+
+    h3 {
+        font-weight: 600;
+    }
+
+    h4 {
+        font-weight: 500;
+        color: $font-color-tertiary;
+    }
+
+    p {
+        font-weight: 400;
+        color: $font-color-fourth;
+    }
+}

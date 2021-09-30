@@ -1,0 +1,30 @@
+//courtain
+.courtain {
+    position: relative;
+}
+
+.top-side {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 50vh;
+
+    background-color: $body-bg-color-lighter;
+
+    z-index: 999;
+}
+
+.bottom-side {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 50vh;
+
+    background-color: $body-bg-color-lighter;
+
+    z-index: 999;
+}

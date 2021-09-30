@@ -17,6 +17,29 @@ Route::get('/', function () {
     return view('start');
 });
 
+Route::get('start', function () {
+    return view('start');
+});
+
+Route::get('kontakt', function () {
+    return view('kontakt');
+});
+
+Route::get('oferta', function () {
+    return view('oferta');
+});
+
+Route::get('opinie', function () {
+    return view('opinie');
+});
+
+Route::get('polityka_prywatnosci', function () {
+    return view('polityka_prywatnosci');
+});
+
+
+
+
 // Route::get('/', function () {
 //     return view('start');
 // });
