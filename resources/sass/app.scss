@@ -20,15 +20,15 @@
 // @import "~fullpage.js/dist/fullpage.css";
 
 //imports
-@import "navbar";
+@import "components/navbar";
+@import "components/footer";
+@import "components/contact";
+@import "components/testimonials";
+@import "components/offer";
 @import "utilities";
 @import "buttons";
 @import "typed";
 @import "animations";
-@import "footer";
-@import "contact";
-@import "testimonials";
-@import "offer";
 
 //main rules
 *,

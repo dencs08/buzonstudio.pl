@@ -1,6 +1,5 @@
         <!-- Footer -->
         <hr class="section-divider mt-250" />
-
         <footer>
             <section id="footer">
                 <div class="container">
@@ -8,9 +7,12 @@
                         <div class="col-md-6">
                             <h3 class="mt-0 mb-4">Zostańmy w kontakcie</h3>
                             <div class="mail-href-div">
-                                <a href = "mailto:biuro@bisonstudio.pl?subject = Oferta&body = Wiadomość" class="my-0 mb-2 mail-href underline">biuro@bisonstudio.pl</a>
+                                <a href = "mailto:biuro@bisonstudio.pl?subject = Oferta&body = Wiadomość" class="my-0 mail-href underline">biuro@bisonstudio.pl</a>
                             </div>
-                            <h4 class="my-0">+48 882 031 130</h4>
+                            <h4 class="my-0 mt-2">+48 882 031 130</h4>
+                            <img src="images/facebook.svg" class="img-fluid footer-icon" alt="">
+                            <img src="images/facebook.svg" class="img-fluid footer-icon" alt="">
+                            <img src="images/facebook.svg" class="img-fluid footer-icon" alt="">
                         </div>
                         <div class="col-md-6">
                             <div class="float-md-end">
