@@ -67,7 +67,6 @@
                       <span class="label-name">Coś Innego</span>
                     </label>
                 </div>
-
             </div>
 
             <hr class="section-divider mt-5" />

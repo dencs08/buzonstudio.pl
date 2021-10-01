@@ -28,3 +28,40 @@
 
     z-index: 999;
 }
+
+//!landingpage
+
+#landing-page {
+    h1 {
+        clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    }
+    h2 {
+        clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    }
+    .btn-landing1 {
+        clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    }
+    .btn-landing2 {
+        clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    }
+
+    .landing-page-content {
+        position: relative;
+    }
+
+    .test:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        content: "";
+
+        height: 115%;
+
+        margin-top: -25px;
+        margin-left: clamp(-50px, -2vw, 0px);
+
+        border-left: 1px solid rgb(199, 199, 199);
+        transform: scaleY(1);
+    }
+}

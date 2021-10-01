@@ -12,15 +12,15 @@
         <x-navbar/>
         <!-- Courtain -->
 
-        <!-- <div class="courtain">
+        <div class="courtain">
             <div class="top-side"></div>
             <div class="bottom-side"></div>
-        </div> -->
+        </div>
 
         <!-- Landing Page -->
 
         <section id="landing-page">
-            <div class="container landing-page-content">
+            <div class="container landing-page-content test">
                 <h1>
                     Tworzymy dla marek <br />
                     Pracujemy dla ludzi
@@ -28,8 +28,8 @@
 
                 <h2 class="mb-5">digital products, branding & marketing</h2>
 
-                <button class="btn btn-primary mr-5">PORTFOLIO</button>
-                <a href="oferta"><button class="btn btn-primary">CO ROBIMY?</button></a>
+                <button class="btn btn-primary mr-5 btn-landing1">PORTFOLIO</button>
+                <a href="oferta"><button class="btn btn-primary btn-landing2">CO ROBIMY?</button></a>
             </div>
         </section>
 

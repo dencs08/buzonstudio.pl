@@ -6690,6 +6690,37 @@ h4 span::after {
   z-index: 999;
 }
 
+#landing-page h1 {
+  -webkit-clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+          clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+#landing-page h2 {
+  -webkit-clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+          clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+#landing-page .btn-landing1 {
+  -webkit-clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+          clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+#landing-page .btn-landing2 {
+  -webkit-clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+          clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+#landing-page .landing-page-content {
+  position: relative;
+}
+#landing-page .test:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  height: 115%;
+  margin-top: -25px;
+  margin-left: clamp(-50px, -2vw, 0px);
+  border-left: 1px solid #c7c7c7;
+  transform: scaleY(1);
+}
+
 *,
 *::before,
 *::after {
