@@ -21,11 +21,11 @@
         
         <x-navbar/>
 
-        <div id="web-content">
+        <div data-scroll-container id="web-content">
 
         <!-- Landing Page -->
-        <section id="landing-page">
-            <div class="container landing-page-content">
+        <section data-scroll-section id="landing-page">
+            <div data-scroll class="container landing-page-content">
                 <h1>
                     Tworzymy dla marek <br />
                     Pracujemy dla ludzi
@@ -40,11 +40,11 @@
 
         <!-- Clients section -->
 
-        <section id="clients">
-            <div class="container clients-content">
-                <h4 class="lh-sm my-2">Oni juz nam zaufali:</h4>
+        <section data-scroll-section id="clients">
+            <div data-scroll class="container clients-content">
+                <h4 data-scroll data-scroll-speed="3" class="lh-sm my-2">Oni juz nam zaufali:</h4>
                 <div style="text-align:center;"> <div></div>
-                <div class="client-logos">
+                <div data-scroll data-scroll-speed="2" class="client-logos">
                     <div align="center" class="client-logo">
                         <img
                             src="images/logos/danfit.svg"
@@ -86,11 +86,11 @@
 
         <!-- Attention -->
 
-        <section id="attention">
-            <div class="container aboutus">
-                <h4 class="my-0 headerline">Wyróżnij się od konkurencji</h4>
-                <h3 class="mt-2 mb-3">Przyciągaj uwagę</h3>
-                <p>
+        <section  data-scroll-section id="attention">
+            <div data-scroll class="container aboutus">
+                <h4 data-scroll data-scroll-speed="0.75" class="my-0 headerline">Wyróżnij się od konkurencji</h4>
+                <h3 data-scroll data-scroll-speed="0.75" class="mt-2 mb-3">Przyciągaj uwagę</h3>
+                <p data-scroll data-scroll-speed="1">
                     Poprzez współpracę z nami, Twoja marka będzie wyjątkowa,
                     sama w sobie będzie "przyciągać wzrok", pozwala to na
                     rozkwit całkowitego potencjału.
@@ -100,15 +100,15 @@
 
         <!-- Remembered -->
 
-        <section id="remembered">
-            <div class="container aboutus row">
+        <section data-scroll-section id="remembered">
+            <div data-scroll class="container aboutus row">
                 <div class="col-md-6 d-none d-md-block"></div>
                     <div class="col-md-6">
-                        <h4 class="my-0 headerline">
+                        <h4 data-scroll data-scroll-speed="0.75" class="my-0 headerline">
                             Tworzymy więż pomiędzy klientem a Twoim produktem
                         </h4>
-                        <h3 class="mt-2 mb-3">Bądź rozpoznawany i zapadnij w pamięć</h3>
-                        <p>
+                        <h3 data-scroll data-scroll-speed="0.75" class="mt-2 mb-3">Bądź rozpoznawany i zapadnij w pamięć</h3>
+                        <p data-scroll data-scroll-speed="1">
                             Twoi klienci będą łączyć Twoją markę z jej unikatowym
                             charakterem. Nie pozwól klientom o sobie zapomnieć!
                         </p>
@@ -118,13 +118,13 @@
 
         <!-- Sales -->
 
-        <section id="sales">
-            <div class="container aboutus">
-                <h4 class="my-0 headerline">Pozwól swojemu biznesowi na rozwój</h4>
-                <h3 class="mt-2 mb-3">
+        <section data-scroll-section id="sales">
+            <div data-scroll class="container aboutus">
+                <h4 data-scroll data-scroll-speed="0.75" class="my-0 headerline">Pozwól swojemu biznesowi na rozwój</h4>
+                <h3 data-scroll data-scroll-speed="0.75" class="mt-2 mb-3">
                     Pomagamy w zwiększeniu <br> Twojej sprzedaży
                 </h3>
-                <p>
+                <p data-scroll data-scroll-speed="1">
                     Z wieloletnim doświadczeniem, które zebraliśmy, doskonale
                     wiemy jak przekonać Twojego klienta do Ciebie i Twojego
                     produktu.
@@ -134,20 +134,20 @@
 
         <!-- Portfolio -->
 
-        <section id="portfolio">
-            <div class="container">
-                <h4 class="my-0 headerline">Nasze prace</h4>
-                <h3 class="mt-3 mb-5">
+        <section data-scroll-section id="portfolio">
+            <div data-scroll class="container">
+                <h4 data-scroll data-scroll-speed="0.75" class="my-0 headerline">Nasze prace</h4>
+                <h3 data-scroll data-scroll-speed="0.75" class="mt-3 mb-5">
                     Kochamy rozmawiać, ale niech nasze potrfolio wypowie się za
                     nas.
                 </h3>
-                <div class="container porfolio-container">
+                <div data-scroll data-scroll-speed="1" class="container porfolio-container">
                     <div class="slide-track">
                         <div class="container portfolio-img"></div>
                         <div class="container portfolio-img"></div>
                     </div>
                 </div>
-                <div class="portfolio-btn-container">
+                <div data-scroll data-scroll-speed="1" class="portfolio-btn-container">
                     <button class="btn btn-primary my-5">WIĘCEJ PRAC</button>
                 </div>
             </div>
@@ -155,11 +155,11 @@
 
         <!-- Lets talk -->
 
-        <section id="letsTalk-section">
-            <div class="container text-center">
-                <h4>Rozwiń swój biznes!</h4>
-                <h3>Zatrudnij nas a my zajmiemy się resztą ✌</h3>
-                <div class="button-trail mt-5">
+        <section data-scroll-section id="letsTalk-section">
+            <div data-scroll class="container text-center">
+                <h4 data-scroll data-scroll-speed="0.75">Rozwiń swój biznes!</h4>
+                <h3 data-scroll data-scroll-speed="0.75">Zatrudnij nas a my zajmiemy się resztą ✌</h3>
+                <div data-scroll data-scroll-speed="1" class="button-trail mt-5">
                     <form>
                         <a href="kontakt">
                             <span></span>
@@ -174,7 +174,8 @@
         </section>
 
         <x-footer/>
-        </div>
+    </div>
+    
 
         <script src="js/app.js"></script>
     </body>

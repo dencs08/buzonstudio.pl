@@ -1,8 +1,8 @@
 <!-- Footer -->
-<hr class="section-divider mt-250" />
 <footer>
-    <section id="footer">
-        <div class="container">
+<section data-scroll-section id="footer">
+        <hr class="section-divider mt-250" />
+        <div data-scroll class="container">
             <div class="row mb-5">
                 <div class="col-md-6">
                     <h3 class="mt-0 mb-4">Zostańmy w kontakcie</h3>
@@ -146,5 +146,11 @@
                 </div>
             </div>
         </div>
+        <div class="scroll-blocker">
+        <div class="scroll-blocker">
+            <span>blockthescroll!</span>
+        </div>
+        </div>
+
     </section>
-</footer>
+    </footer>
