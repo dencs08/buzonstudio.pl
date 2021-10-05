@@ -84,7 +84,6 @@ const materials = [], objects = [];
 const postprocessing = {};
 
 function init() {
-
     const container = document.createElement('div');
     document.body.appendChild(container);
 
@@ -292,8 +291,8 @@ function initPostprocessing() {
 
     composer.addPass(renderPass)
     composer.addPass(ubloomPass)
-    // composer.addPass(filmPass)
     composer.addPass(bokehPass)
+    // composer.addPass(filmPass)
 
     postprocessing.composer = composer;
     postprocessing.bokeh = bokehPass;
@@ -345,16 +344,16 @@ function fragmentShader() {
     #define PI 3.14159265359
     #define EXP 2.71828182846
 
-    float w1 = 3.0;
-    float w2 = 1.0;
-    float w3 = 5.0;
-    float A = -2.0;
-    float R = 7.0;
+    float w1 = 2.0;
+    float w2 = 1.5;
+    float w3 = 30.0;
+    float A = 0.1;
+    float R = 10.0;
 
     float timer = 30.0;
     
     uniform float time;
-    float resolution = 2.0;
+    float resolution = 4.0;
     varying vec2 vUv;
 
     float horizontal(in vec2 xy, float t)	{
@@ -389,22 +388,14 @@ function fragmentShader() {
         float v = horizontal(xy,t);
         v += diagonal(xy,t);
         v += radial(xy,t);
-        v /= 3.0;
-        float r = map(-1.0, 1.0,   0.05, 0.1, sin(PI*v));
-        float g = map(-1.0, 1.0,   0.2, 0.4, sin(PI*v));
-        g += log_map(-1.0, 1.0,   0.15, 0.3, cos(PI*v));
-        float b = map(-1.0, 1.0,   0.5, 0.65, sin(PI*v));
+        v /= 5.0;
+        float r = map(-1.0, 1.0,   0.2, 0.25, sin(PI*v));
+        float g = map(-1.0, 1.0,   0.32, 0.53, sin(PI*v));
+        g += log_map(-1.0, 1.0,   0.32, 0.4, cos(PI*v));
+        float b = map(-1.0, 1.0,   0.35, 0.55, sin(PI*v));
+        b += log_map(-1.0, 1.0,   0.35, 0.4, cos(PI*v));
         gl_FragColor = vec4(pow(r,R),pow(g,R),pow(b,R),1.0);
     }
-
-    // void main( void ) {
-    //     vec2 position = - 1.0 + 2.0 * vUv;
-
-    //     float red = abs( sin( position.x * position.y + time / 5.0 ) );
-    //     float green = abs( sin( position.x * position.y + time / 20.0 ) );
-    //     float blue = abs( sin( position.x * position.y + time / 15.0 ) );
-    //     gl_FragColor = vec4( red, green, blue, 1.0 );
-    // }
 `
 }
 
