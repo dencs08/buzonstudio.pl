@@ -193,8 +193,8 @@ function getScroll() {
 }
 
 function zIndexNavBar() {
-    navWrapper.style.zIndex = "-99";
-    navBg.style.zIndex = "-99";
+    navWrapper.style.zIndex = "-5";
+    navBg.style.zIndex = "-5";
 }
 
 function hide(elem) {

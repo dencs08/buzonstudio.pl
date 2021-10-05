@@ -204,8 +204,8 @@ function getScroll() {
 }
 
 function zIndexNavBar() {
-  navWrapper.style.zIndex = "-99";
-  navBg.style.zIndex = "-99";
+  navWrapper.style.zIndex = "-5";
+  navBg.style.zIndex = "-5";
 }
 
 function hide(elem) {
@@ -337,9 +337,9 @@ var bloomParams = {
   bloomRadius: 0.01
 };
 var filmParams = {
-  noiseIntensity: 0.15,
-  scanLinesIntensity: 0.015,
-  scanLinesCount: 300,
+  noiseIntensity: 0.2,
+  scanLinesIntensity: 0,
+  scanLinesCount: 0,
   greyScale: false
 };
 var bokehParams = {
@@ -382,7 +382,7 @@ function init() {
   document.body.appendChild(container); //!Base camera
 
   camera = new three__WEBPACK_IMPORTED_MODULE_10__.PerspectiveCamera(cameraParams.fov, width / height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax);
-  camera.position.set(0, 1.5, -2);
+  camera.position.set(0, 2, -4.5);
   camera.rotation.set(0, 0, 0);
   var cameraTargetGeo = new three__WEBPACK_IMPORTED_MODULE_10__.SphereGeometry(1, 32, 16);
   var cameraTargetMat = new three__WEBPACK_IMPORTED_MODULE_10__.MeshStandardMaterial();
@@ -402,8 +402,8 @@ function init() {
   }; //, envMap: textureCube 
 
   cubeMaterial = new three__WEBPACK_IMPORTED_MODULE_10__.MeshBasicMaterial(parameters); //! Controls
-
-  controls = new three_examples_jsm_controls_OrbitControls_js__WEBPACK_IMPORTED_MODULE_0__.OrbitControls(camera, renderer.domElement); //! Scene
+  // controls = new OrbitControls(camera, renderer.domElement)
+  //! Scene
 
   new three__WEBPACK_IMPORTED_MODULE_10__.CubeTextureLoader().load(['3d/textures/skybox/stars_ft.jpg', '3d/textures/skybox/stars_bk.jpg', '3d/textures/skybox/stars_up.jpg', '3d/textures/skybox/stars_dn.jpg', '3d/textures/skybox/stars_rt.jpg', '3d/textures/skybox/stars_lf.jpg'], function (cubeTexture) {
     cubeTexture.encoding = three__WEBPACK_IMPORTED_MODULE_10__.sRGBEncoding;
@@ -468,7 +468,10 @@ function init() {
 
   uniforms = {
     "time": {
-      value: 1.0
+      value: 1
+    },
+    "resolution": {
+      value: 1
     }
   };
   var wallGeo = new three__WEBPACK_IMPORTED_MODULE_10__.PlaneGeometry(2, 2);
@@ -526,8 +529,8 @@ function initPostprocessing() {
   var filmPass = new three_examples_jsm_postprocessing_FilmPass__WEBPACK_IMPORTED_MODULE_7__.FilmPass(filmParams.noiseIntensity, filmParams.scanLinesIntensity, filmParams.scanLinesCount, filmParams.greyScale);
   var composer = new three_examples_jsm_postprocessing_EffectComposer_js__WEBPACK_IMPORTED_MODULE_4__.EffectComposer(renderer);
   composer.addPass(renderPass);
-  composer.addPass(ubloomPass);
-  composer.addPass(filmPass);
+  composer.addPass(ubloomPass); // composer.addPass(filmPass)
+
   composer.addPass(bokehPass);
   postprocessing.composer = composer;
   postprocessing.bokeh = bokehPass;
@@ -560,7 +563,7 @@ function vertexShader() {
 }
 
 function fragmentShader() {
-  return "\n    uniform float time;\n\n    varying vec2 vUv;\n\n    void main( void ) {\n\n        vec2 position = - 1.0 + 2.0 * vUv;\n\n        float red = abs( sin( position.x * position.y + time / 5.0 ) );\n        float green = abs( sin( position.x * position.y + time / 4.0 ) );\n        float blue = abs( sin( position.x * position.y + time / 3.0 ) );\n        gl_FragColor = vec4( red, green, blue, 1.0 );\n\n    }\n";
+  return "\n\n    #define PI 3.14159265359\n    #define EXP 2.71828182846\n\n    float w1 = 3.0;\n    float w2 = 1.0;\n    float w3 = 5.0;\n    float A = -2.0;\n    float R = 7.0;\n\n    float timer = 30.0;\n    \n    uniform float time;\n    float resolution = 2.0;\n    varying vec2 vUv;\n\n    float horizontal(in vec2 xy, float t)\t{\n        float v = cos(w1*xy.x + A*t);\n        return v;\n    }\n        \n    float diagonal(in vec2 xy, float t)\t{\n        float v = cos(w2*(xy.x*cos(t) + 5.0*xy.y*sin(t)) + A*t);\n        return v;\n    }\n\n    float radial(in vec2 xy, float t)\t{\n        float x = 0.3*xy.x - 0.5 + cos(t);\n        float y = 0.3*xy.y - 0.5 + sin(t*0.5);\n        float v = sin(w3*sqrt(x*x+y*y+1.0)+A*t);\n        return v;\n    }\n    \n    float map(float a,float b,float c,float d,float x) {\n        return ((x-a)*(d-c)/(b-a))+c;\n    }\n    \n    float log_map(float a,float b,float c,float d,float x) {\n        float x1 = map(a,b,1.0,EXP,x);\n        return log(x1)*(d-c)+c;\n    }\n\n    void main( void )\t{\n        float t = time / timer;\n        vec2 xy = vUv * resolution;\n        float v = horizontal(xy,t);\n        v += diagonal(xy,t);\n        v += radial(xy,t);\n        v /= 3.0;\n        float r = map(-1.0, 1.0,   0.05, 0.1, sin(PI*v));\n        float g = map(-1.0, 1.0,   0.2, 0.4, sin(PI*v));\n        g += log_map(-1.0, 1.0,   0.15, 0.3, cos(PI*v));\n        float b = map(-1.0, 1.0,   0.5, 0.65, sin(PI*v));\n        gl_FragColor = vec4(pow(r,R),pow(g,R),pow(b,R),1.0);\n    }\n\n    // void main( void ) {\n    //     vec2 position = - 1.0 + 2.0 * vUv;\n\n    //     float red = abs( sin( position.x * position.y + time / 5.0 ) );\n    //     float green = abs( sin( position.x * position.y + time / 20.0 ) );\n    //     float blue = abs( sin( position.x * position.y + time / 15.0 ) );\n    //     gl_FragColor = vec4( red, green, blue, 1.0 );\n    // }\n";
 }
 
 init();
@@ -69524,9 +69527,9 @@ const LuminosityHighPassShader = {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact"], () => (__webpack_require__("./resources/js/three.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact"], () => (__webpack_require__("./resources/js/gsapAnims.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact"], () => (__webpack_require__("./resources/js/navbar.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact"], () => (__webpack_require__("./resources/js/three.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact"], () => (__webpack_require__("./resources/js/app.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact"], () => (__webpack_require__("./resources/sass/app.scss")))
 /******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact"], () => (__webpack_require__("./resources/sass/components/start.scss")))

@@ -1,9 +1,9 @@
 const mix = require('laravel-mix');
 
 mix.js([
-    'resources/js/three.js',
     'resources/js/gsapAnims.js',
     'resources/js/navbar.js',
+    'resources/js/three.js',
     'resources/js/app.js'
 ], 'public/js/app.js').version()
     .js([

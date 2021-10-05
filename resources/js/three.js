@@ -27,9 +27,9 @@ const bloomParams = {
 }
 
 const filmParams = {
-    noiseIntensity: 0.15,
-    scanLinesIntensity: 0.015,
-    scanLinesCount: 300,
+    noiseIntensity: 0.2,
+    scanLinesIntensity: 0,
+    scanLinesCount: 0,
     greyScale: false
 }
 
@@ -90,7 +90,7 @@ function init() {
 
     //!Base camera
     camera = new THREE.PerspectiveCamera(cameraParams.fov, width / height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax)
-    camera.position.set(0, 1.5, -2)
+    camera.position.set(0, 2, -4.5)
     camera.rotation.set(0, 0, 0)
 
     const cameraTargetGeo = new THREE.SphereGeometry(1, 32, 16)
@@ -116,7 +116,7 @@ function init() {
     cubeMaterial = new THREE.MeshBasicMaterial(parameters);
 
     //! Controls
-    controls = new OrbitControls(camera, renderer.domElement)
+    // controls = new OrbitControls(camera, renderer.domElement)
 
     //! Scene
     new THREE.CubeTextureLoader().load([
@@ -207,9 +207,9 @@ function init() {
     // ground.rotation.x = -1.571
     // ground.rotation.z = 3.141
 
-
     uniforms = {
-        "time": { value: 1.0 }
+        "time": { value: 1 },
+        "resolution": { value: 1 }
     };
 
     const wallGeo = new THREE.PlaneGeometry(2, 2)
@@ -290,10 +290,10 @@ function initPostprocessing() {
 
     const composer = new EffectComposer(renderer);
 
-    composer.addPass(renderPass);
+    composer.addPass(renderPass)
     composer.addPass(ubloomPass)
-    composer.addPass(filmPass)
-    composer.addPass(bokehPass);
+    // composer.addPass(filmPass)
+    composer.addPass(bokehPass)
 
     postprocessing.composer = composer;
     postprocessing.bokeh = bokehPass;
@@ -341,22 +341,73 @@ function vertexShader() {
 
 function fragmentShader() {
     return `
-    uniform float time;
 
+    #define PI 3.14159265359
+    #define EXP 2.71828182846
+
+    float w1 = 3.0;
+    float w2 = 1.0;
+    float w3 = 5.0;
+    float A = -2.0;
+    float R = 7.0;
+
+    float timer = 30.0;
+    
+    uniform float time;
+    float resolution = 2.0;
     varying vec2 vUv;
 
-    void main( void ) {
-
-        vec2 position = - 1.0 + 2.0 * vUv;
-
-        float red = abs( sin( position.x * position.y + time / 5.0 ) );
-        float green = abs( sin( position.x * position.y + time / 4.0 ) );
-        float blue = abs( sin( position.x * position.y + time / 3.0 ) );
-        gl_FragColor = vec4( red, green, blue, 1.0 );
-
+    float horizontal(in vec2 xy, float t)	{
+        float v = cos(w1*xy.x + A*t);
+        return v;
     }
+        
+    float diagonal(in vec2 xy, float t)	{
+        float v = cos(w2*(xy.x*cos(t) + 5.0*xy.y*sin(t)) + A*t);
+        return v;
+    }
+
+    float radial(in vec2 xy, float t)	{
+        float x = 0.3*xy.x - 0.5 + cos(t);
+        float y = 0.3*xy.y - 0.5 + sin(t*0.5);
+        float v = sin(w3*sqrt(x*x+y*y+1.0)+A*t);
+        return v;
+    }
+    
+    float map(float a,float b,float c,float d,float x) {
+        return ((x-a)*(d-c)/(b-a))+c;
+    }
+    
+    float log_map(float a,float b,float c,float d,float x) {
+        float x1 = map(a,b,1.0,EXP,x);
+        return log(x1)*(d-c)+c;
+    }
+
+    void main( void )	{
+        float t = time / timer;
+        vec2 xy = vUv * resolution;
+        float v = horizontal(xy,t);
+        v += diagonal(xy,t);
+        v += radial(xy,t);
+        v /= 3.0;
+        float r = map(-1.0, 1.0,   0.05, 0.1, sin(PI*v));
+        float g = map(-1.0, 1.0,   0.2, 0.4, sin(PI*v));
+        g += log_map(-1.0, 1.0,   0.15, 0.3, cos(PI*v));
+        float b = map(-1.0, 1.0,   0.5, 0.65, sin(PI*v));
+        gl_FragColor = vec4(pow(r,R),pow(g,R),pow(b,R),1.0);
+    }
+
+    // void main( void ) {
+    //     vec2 position = - 1.0 + 2.0 * vUv;
+
+    //     float red = abs( sin( position.x * position.y + time / 5.0 ) );
+    //     float green = abs( sin( position.x * position.y + time / 20.0 ) );
+    //     float blue = abs( sin( position.x * position.y + time / 15.0 ) );
+    //     gl_FragColor = vec4( red, green, blue, 1.0 );
+    // }
 `
 }
 
 init()
 animate()
+
