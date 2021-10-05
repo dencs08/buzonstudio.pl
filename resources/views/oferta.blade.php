@@ -16,7 +16,7 @@
 
         <div data-scroll-container id="web-content">
         <section data-scroll-section id="landing-page">
-            <div class="container landing-page-content">
+            <div data-scroll data-scroll-speed="3" class="container landing-page-content">
                 <h1>
                     Dla was budujemy <br> wspaniałe <span id="typed"></span>
                 </h1>
@@ -42,9 +42,9 @@
 
         <section data-scroll-section id="offer">
             <div class="container">
-                <h2 class="headerline">Działamy po to abyś się rozwijał</h2>
+                <h2 data-scroll data-scroll-speed="1" class="headerline">Działamy po to abyś się rozwijał</h2>
                 <div class="row">
-                    <div class="col-md-6 d-flex justify-content-center">
+                    <div data-scroll data-scroll-speed="1.5" class="col-md-6 d-flex justify-content-center">
                         <div class="col-content1">
                             <h3>Produkty cyfrowe</h3>
                             <p>Tworzymy i rozwijamy, strony internetowe, aplikacje, wizualizacje, grafiki, projekty UI i UX adekwatnie pod Twoje potrzeby, tak abyś otrzymał najlepiej dostosowany produkt który działa. </p>
@@ -60,7 +60,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-6 d-flex justify-content-center ">
+                    <div data-scroll data-scroll-speed="2" class="col-md-6 d-flex justify-content-center ">
                         <div class="col-content2">
                             <h3>Branding</h3>
                             <p>Dziś branding jest najważniejszym elementem każdego dobrze prosperującego biznesu, łatwe do zapamiętania logo, charakterystyczna identyfikacja wizualna czy dobrze obrana strategia marketingowa, to wszystko ma znaczenie w jaki sposób odbierze Ciebie przyszły klient.</p>
@@ -75,7 +75,7 @@
                     </div>
                 </div>
 
-                <div class="contact-us-container">
+                <div data-scroll data-scroll-speed="1" class="contact-us-container">
                     <a href="kontakt" class="contact-us underline">Napisz do nas i stwórzmy coś razem.</a>
                 </div>
             </div>
@@ -83,9 +83,9 @@
 
         <section data-scroll-section id="works">
             <div class="container">
-                <h3 class="headerline">Nasze prace</h3>
+                <h3 data-scroll data-scroll-speed="1" class="headerline">Nasze prace</h3>
 
-                <ul>
+                <ul data-scroll data-scroll-speed="1.25">
                     <li>zielone widoki</li>
                     <li>ats-konsulting</li>
                     <li>projekt reklamy KOMB</li>

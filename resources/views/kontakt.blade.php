@@ -18,7 +18,7 @@
 
         <div data-scroll-container id="web-content">
         <section data-scroll-section id="landing-page">
-            <div class="container landing-page-content">
+            <div data-scroll data-scroll-speed="3" class="container landing-page-content">
                 <h1>Zacznijmy owocną współpracę!</h1>
 
                 <h2 class="mb-5 w-50">
@@ -44,9 +44,9 @@
 
         <section data-scroll-section id="Contact">
             <div class="container text-center">
-                <h3>Co możemy dla ciebie zrobić?</h3>
+                <h3 data-scroll data-scroll-speed="1">Co możemy dla ciebie zrobić?</h3>
             </div>
-            <div class="contact-buttons">
+            <div data-scroll data-scroll-speed="1.25" class="contact-buttons">
                 <div class="control-group">
                     <input type="checkbox" id="talk" name="talk">
                     <label for="talk">
@@ -77,7 +77,7 @@
 
             <hr class="section-divider mt-5" />
 
-            <form name="contact-form" class="contact-form">
+            <form data-scroll data-scroll-speed="1" name="contact-form" class="contact-form">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-field">

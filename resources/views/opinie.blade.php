@@ -17,7 +17,7 @@
 
     <div data-scroll-container id="web-content">
     <section data-scroll-section id="landing-page">
-            <div class="container landing-page-content">
+            <div data-scroll data-scroll-speed="3" class="container landing-page-content">
                 <h1>
                     Wiemy, że czasami ciężko komuś zaufać
                 </h1>
@@ -42,7 +42,7 @@
 
         <section data-scroll-section id="testimonials">
             <div class="container">
-                <div class="row">
+                <div data-scroll data-scroll-speed="1.5" class="row">
                     <div class="col-md-6 d-flex justify-content-center place-items-center">
                         <div class="card">
                             <div class="card-body">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div data-scroll data-scroll-speed="2" class="row">
                     <div class="col-md-6 d-flex justify-content-center place-items-center">
                         <div class="card">
                             <div class="card-body">
