@@ -59,7 +59,7 @@
 
 .button-trail a:hover {
     background: $primary-color;
-    color: #fff;
+    color: $font-color-primary !important;
     border-radius: 50px;
     box-shadow: 0 0 5px $primary-color, 0 0 12.5px $primary-color,
         0 0 25px $primary-color, 0 0 50px $primary-color;
@@ -151,8 +151,8 @@
     }
 }
 
-@media (max-width: 425px) {
-    .btn-outline-primary {
-        width: 90% !important;
+@media (max-width: $sm-screen-size) {
+    .btn-primary {
+        width: 90%;
     }
 }

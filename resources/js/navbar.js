@@ -1,5 +1,3 @@
-import { selector } from "gsap/gsap-core";
-
 const navItems = document.querySelectorAll('.nav-item');
 
 navItems.forEach(element => {

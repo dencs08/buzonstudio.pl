@@ -1,0 +1,92 @@
+.landing-page-content {
+  position: relative;
+}
+
+.landing-page-content:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -30px;
+  height: 115%;
+  border-left: 1px solid #ffffff;
+  transform: scaleY(1);
+}
+
+#clients {
+  height: 50vh;
+}
+
+.client-logo {
+  position: relative;
+  display: inline-block;
+  width: clamp(100px, 12.5vw, 175px);
+  padding: 10px;
+  margin-right: clamp(2.5rem, 4.25vw, 6rem);
+  text-align: center;
+}
+
+.client-logo img {
+  vertical-align: middle;
+}
+
+.aboutus {
+  height: 50vh;
+}
+
+.aboutus h4 {
+  width: clamp(300px, 45vw, 100%);
+}
+.aboutus h3 {
+  width: clamp(300px, 45vw, 100%);
+}
+.aboutus p {
+  color: #bebebe;
+  width: clamp(250px, 30vw, 50%);
+}
+
+#remembered {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 100px;
+}
+
+#portfolio {
+  height: 75vh;
+}
+
+.slide-track {
+  display: flex;
+}
+
+.portfolio-container {
+  position: relative;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.portfolio-img {
+  height: 500px;
+  width: 650px;
+  background: #161616;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  perspective: 100px;
+}
+
+#letsTalk-section {
+  height: 50vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  margin-top: 150px;
+}
+
+@media (max-width: 576px) {
+  .portfolio-btn-container {
+    text-align: center;
+  }
+}

@@ -1,0 +1,26 @@
+.card {
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  width: clamp(325px, 40vw, 550px);
+  height: clamp(250px, 35vh, 400px);
+  background: #161616;
+  padding: 30px 50px;
+  margin-bottom: 100px;
+  border-radius: 15px;
+}
+
+.card-body {
+  width: 100%;
+}
+.card-body h3 {
+  font-weight: 600;
+}
+.card-body h4 {
+  font-weight: 500;
+  color: #bebebe;
+}
+.card-body p {
+  font-weight: 400;
+  color: #707070;
+}

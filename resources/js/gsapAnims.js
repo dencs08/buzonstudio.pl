@@ -4,11 +4,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CSSPlugin } from "gsap/CSSPlugin";
 import { CSSRulePlugin } from "gsap/CSSRulePlugin";
 
-
-
 gsap.registerPlugin(CSSPlugin, CSSRulePlugin);
 
-const line = CSSRulePlugin.getRule('.test:before')
+//! Landing page timeline
+const line = CSSRulePlugin.getRule('.landing-page-content:before')
 const h1 = document.querySelector('h1')
 const h2 = document.querySelector('h2')
 const button1 = document.getElementsByClassName("btn-landing1")
@@ -17,6 +16,7 @@ const topCover = document.getElementsByClassName("top-side")
 const bottomCover = document.getElementsByClassName("bottom-side")
 const tl = gsap.timeline()
 
+//!timeline 1
 tl.to(topCover, {
     delay: .5,
     duration: 1.5,
@@ -29,14 +29,14 @@ tl.to(bottomCover, {
     y: '50vh'
 },
     "-=1.5")
-// tl.from(line, {
-//     duration: 2,
-//     ease: "expo",
-//     cssRule: {
-//         scaleY: 0
-//     }
-// },
-//     "-=0.5")
+tl.from(line, {
+    duration: 2,
+    ease: "expo",
+    cssRule: {
+        scaleY: 0
+    }
+},
+    "-=0.5")
 tl.to(h1, {
     duration: 1.25,
     ease: "expo",
@@ -56,7 +56,7 @@ tl.to(h2, {
 tl.to(button1, {
     duration: 0.1,
     ease: "expo",
-    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+    // clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
     opacity: 1,
     x: '30px'
 },
@@ -64,20 +64,144 @@ tl.to(button1, {
 tl.to(button2, {
     duration: 0.1,
     ease: "expo",
-    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+    // clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
     opacity: 1,
     x: '30px'
 },
     "-=1.25")
-// tl.to(line, {
-//     duration: 1,
-//     ease: "expo",
-//     cssRule: {
-//         scaleY: 0
-//     }
-// },
-//     "-=0.35")
+tl.to(line, {
+    duration: 1,
+    ease: "expo",
+    cssRule: {
+        scaleY: 0
+    }
+},
+    "-=0.35")
 
+//!navbar
+const navBurger = document.getElementById("nav-burger")
+const navWrapper = document.getElementById("nav-wrapper")
+const navOutlinedContent = document.getElementById("nav-content-outlined")
+const navBg = document.getElementById("nav-bg")
+const scaledContent = document.getElementById("nav-ul")
+const scaledContent2 = document.getElementById("nav-info")
+const webContent = document.getElementById("web-content")
+const body = document.getElementsByTagName("body")[0]
+
+let i = 0;
+
+navBurger.addEventListener("click", navBarAnimation);
+
+navWrapper.style.zIndex = "-99";
+navBg.style.zIndex = "-99";
+
+function navBarAnimation() {
+    if (i % 2 == 0) {
+        //opened
+        let yScroll = (-getScroll() / 2) + (body.clientHeight / 5)
+
+        navWrapper.style.zIndex = "98";
+        navBg.style.zIndex = "97";
+
+        gsap.to(navBg, {
+            duration: 0.75,
+            ease: "expo",
+            opacity: 1,
+        })
+        gsap.to(navWrapper, {
+            duration: 0.75,
+            ease: "expo",
+            opacity: 1,
+            delay: 0.1,
+        })
+        gsap.to(scaledContent, {
+            duration: 1.25,
+            ease: "expo",
+            scale: 1,
+        })
+        gsap.to(scaledContent2, {
+            duration: 1.25,
+            ease: "expo",
+            scale: 1,
+        })
+        gsap.to(navOutlinedContent, {
+            duration: 1.5,
+            ease: "expo",
+            opacity: 1,
+            delay: 0.3,
+        })
+        gsap.to(webContent, {
+            duration: 1.5,
+            ease: "expo",
+            opacity: 0,
+            scale: 1.35,
+            y: yScroll + "px"
+        })
+    } else {
+        //closed
+        gsap.to(navBg, {
+            duration: 0.75,
+            ease: "expo",
+            opacity: 0,
+            delay: 0.15
+        })
+        gsap.to(navWrapper, {
+            duration: 0.75,
+            ease: "power.inOut",
+            opacity: 0,
+        })
+        gsap.to(scaledContent, {
+            duration: 1.25,
+            ease: "expo",
+            scale: 0.8,
+        })
+        gsap.to(scaledContent2, {
+            duration: 1.25,
+            ease: "expo",
+            scale: 0.8,
+        })
+        gsap.to(navOutlinedContent, {
+            duration: 1.5,
+            ease: "expo",
+            opacity: 0,
+            delay: 0.25
+        })
+        gsap.to(webContent, {
+            duration: 1.5,
+            ease: "expo",
+            opacity: 1,
+            scale: 1,
+            y: "0"
+        })
+
+        setInterval(zIndexNavBar(), 1250);
+    }
+    i++
+}
+
+function getScroll() {
+    if (window.pageYOffset != undefined) {
+        return pageYOffset;
+    } else {
+        var sx, sy, d = document,
+            r = d.documentElement,
+            b = d.body;
+        sx = r.scrollLeft || b.scrollLeft || 0;
+        sy = r.scrollTop || b.scrollTop || 0;
+        return [sx, sy];
+    }
+}
+
+function zIndexNavBar() {
+    navWrapper.style.zIndex = "-99";
+    navBg.style.zIndex = "-99";
+}
+
+function hide(elem) {
+    gsap.set(elem, { autoAlpha: 0 });
+}
+
+//!auto animations
 function animateFrom(elem, direction) {
     direction = direction || 1;
     var x = 0,
@@ -112,10 +236,7 @@ function animateFrom(elem, direction) {
     });
 }
 
-function hide(elem) {
-    gsap.set(elem, { autoAlpha: 0 });
-}
-
+//!On doc load hide .gs elements and create scroll trigger
 document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollTrigger);
 

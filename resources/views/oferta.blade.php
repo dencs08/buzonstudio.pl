@@ -5,11 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="shortcut icon" href="images/logo_white.svg" />
         <link rel="stylesheet" href="css/app.css" />
+        <link rel="stylesheet" href="css/offer.css" />
         <title>bisonstudio</title>
     </head>
     <body class="antialiased">
         <x-navbar/>
 
+
+        <div id="web-content">
         <section id="landing-page">
             <div class="container landing-page-content">
                 <h1>
@@ -39,7 +42,7 @@
             <div class="container">
                 <h2 class="headerline">Działamy po to abyś się rozwijał</h2>
                 <div class="row">
-                    <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div class="col-md-6 d-flex justify-content-center">
                         <div class="col-content1">
                             <h3>Produkty cyfrowe</h3>
                             <p>Tworzymy i rozwijamy, strony internetowe, aplikacje, wizualizacje, grafiki, projekty UI i UX adekwatnie pod Twoje potrzeby, tak abyś otrzymał najlepiej dostosowany produkt który działa. </p>
@@ -55,7 +58,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div class="col-md-6 d-flex justify-content-center ">
                         <div class="col-content2">
                             <h3>Branding</h3>
                             <p>Dziś branding jest najważniejszym elementem każdego dobrze prosperującego biznesu, łatwe do zapamiętania logo, charakterystyczna identyfikacja wizualna czy dobrze obrana strategia marketingowa, to wszystko ma znaczenie w jaki sposób odbierze Ciebie przyszły klient.</p>
@@ -89,7 +92,9 @@
         </section>
 
         <x-footer/>
-
+        </div>
         <script src="js/app.js"></script>
+        <script src="js/offer.js"></script>
+
     </body>
 </html>

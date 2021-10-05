@@ -1,10 +1,3 @@
-#active:checked ~ .wrapper {
-    z-index: 98;
-
-    right: 0;
-    opacity: 1;
-}
-
 .menu-btn {
     position: fixed;
     right: 20px;
@@ -16,9 +9,13 @@
     border-radius: 50%;
     font-size: 20px;
     cursor: pointer;
-    color: #fff;
+    color: $font-color-secondary;
     transition: all 0.3s ease-in-out;
     z-index: 99;
+}
+
+.menu-btn:hover {
+    transform: scale(1.1);
 }
 
 .menu-btn span,
@@ -29,7 +26,7 @@
     top: calc(50% - 1px);
     left: 0%;
     width: 70%;
-    border-bottom: 2px solid rgb(255, 255, 255);
+    border-bottom: 2px solid $font-color-secondary;
     transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
@@ -56,48 +53,37 @@
 
 #active:checked + .menu-btn:before {
     transform: rotate(45deg);
-    border-color: #fff;
+    border-color: $font-color-secondary;
 }
 
 #active:checked + .menu-btn:after {
     transform: rotate(-45deg);
-    border-color: #fff;
+    border-color: $font-color-secondary;
 }
 
 .wrapper {
-    z-index: -1;
-
     position: fixed;
     top: 0;
-    // right: -100%;
+    left: 0;
 
     height: 100%;
     width: 100%;
 
     opacity: 0;
-    background: rgba(10, 10, 10, 0.95);
-    transition: all 0.5s ease-in-out;
+    background: rgba(255, 255, 255, 0);
 }
 
 .wrapper ul {
-    position: absolute;
-    top: 67.5%;
-    left: 22.5%;
-    height: 90%;
-    transform: translate(-22.5%, -50%);
     list-style: none;
 }
 
-.wrapper ul li {
-    height: 10%;
-    margin: 0px 0;
-}
 .wrapper ul li a {
     text-decoration: none;
-    font-size: $font-size-base * 2;
+    font-size: $font-size-base * 2.5;
     font-weight: 500;
     color: $font-color-primary;
     transition: 0.5s;
+    line-height: 5rem;
 }
 
 .wrapper ul li a:hover {
@@ -105,13 +91,24 @@
     transition: 0.5s;
 }
 
-.nav-info {
-    position: absolute;
-    top: 85%;
-    left: 70.5%;
-    height: 90%;
-    transform: translate(-70.5%, -50%);
+.img-nav {
+    position: fixed;
+    top: 15px;
+    left: 30px;
+    width: clamp(6em, 5vw, 10em);
+}
 
+.nav-number {
+    font-size: 0.8rem;
+    margin-right: 15px;
+    margin-left: -30px;
+}
+
+.nav-main-content {
+    margin-top: 25vh;
+}
+
+.nav-info {
     .p1 {
         font-size: clamp(0.75rem, 2vw, 1rem);
         color: $font-color-tertiary;
@@ -121,41 +118,63 @@
         font-size: clamp(1rem, 2.5vw, 1.25rem);
     }
 }
+
+.nav-icons-container {
+    // margin-top: clamp(50px, 15vh, 400px);
+    height: clamp(150px, 16.5vh, 350px);
+    width: clamp(75%, 50vw, 100%);
+}
+
+.nav-icon-div {
+    display: inline-block !important;
+
+    width: clamp(2.25rem, 3.5vw, 2.5rem) !important;
+    height: clamp(2.25rem, 3.5vw, 2.5rem) !important;
+
+    margin-right: clamp(0.7rem, 2vw, 1rem) !important;
+    margin-top: clamp(0.5rem, 2vh, 1.5rem) !important;
+
+    cursor: pointer;
+
+    .nav-icon {
+        fill: $font-color-secondary;
+        transition: 0.5s all;
+    }
+}
+
+.nav-icon-div:hover {
+    .nav-icon {
+        fill: $primary-color !important;
+        color: $primary-color !important;
+    }
+}
+
 #navbar {
     input[type="checkbox"] {
         display: none;
     }
 }
 
-#active:checked ~ .wrapper ul li a {
-    opacity: 1;
+#nav-content-outlined {
+    opacity: 0;
 }
 
-.img-nav {
+#nav-ul {
+    transform: scale(0.5);
+}
+
+#nav-info {
+    transform: scale(0.5);
+}
+
+#nav-bg {
     position: fixed;
-    top: 15px;
-    left: 30px;
-    width: clamp(3em, 5vw, 5em);
-}
+    top: 0;
+    left: 0;
 
-.nav-number {
-    font-size: 0.8rem;
-    margin-right: 15px;
-}
+    height: 100%;
+    width: 100%;
 
-.copyright-container-nav {
-    position: absolute;
-    bottom: 1.5%;
-    left: 38%;
-    transform: translate(-1.5%, -38%);
-    text-align: center;
-    margin-top: -26px;
-}
-
-.privacy-container-nav {
-    position: absolute;
-    bottom: 2.5%;
-    left: 5%;
-    transform: translate(-2.5%, -5%);
-    width: fit-content;
+    opacity: 0;
+    background: rgba(10, 10, 10, 0.95);
 }

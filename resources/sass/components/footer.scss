@@ -1,24 +1,51 @@
 //!footer
-#footer h4 {
-    font-weight: 500;
-    font-size: 2rem;
-    line-height: 48px;
-    color: $font-color-tertiary;
+#footer {
+    h3 {
+        font-size: clamp(1.65rem, 2.25vw, 3.2rem);
+    }
+
+    h4 {
+        font-weight: 500;
+        font-size: clamp(1.3rem, 1.5vw, 3rem);
+        line-height: 48px;
+        color: $font-color-tertiary;
+
+        span {
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        span::after {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            border-bottom: 1px solid $primary-color;
+            content: "";
+        }
+    }
 }
 
-h4 span {
-    position: relative;
-    padding-bottom: 5px;
+.btn-primary {
+    span {
+        font-size: clamp(0.7rem, 1.5vw, 1rem);
+    }
+
+    svg {
+        path {
+            margin-left: 10px;
+            fill: $primary-color;
+        }
+    }
 }
 
-h4 span::after {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    border-bottom: 1px solid $primary-color;
-    content: "";
+.btn-primary:hover {
+    svg {
+        path {
+            fill: $body-bg;
+        }
+    }
 }
 
 .mail-href-div {
@@ -27,7 +54,7 @@ h4 span::after {
 
 .mail-href {
     font-weight: 500;
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 2.25vw, 3rem);
     line-height: 48px;
     color: $font-color-tertiary;
 }
@@ -35,14 +62,16 @@ h4 span::after {
 .underfooter-container {
     margin-top: 125px;
     margin-bottom: 25px;
-}
-
-.copyright-container {
-    margin-top: -26px;
+    font-size: clamp(0.8rem, 0.7vw, 0.9rem);
 }
 
 .privacy-container {
     width: fit-content;
+}
+
+.copyright-container {
+    margin-top: -20px;
+    text-align: center;
 }
 
 .privacy-policy {
@@ -55,13 +84,52 @@ h4 span::after {
     color: $font-color-fourth;
 }
 
-.arrow-right-icon {
-    margin-left: 10px;
-    fill: $primary-color;
+.footer-icon-div {
+    display: inline-block;
+
+    width: clamp(2.5rem, 3.5vw, 3rem) !important;
+    height: clamp(2.5rem, 3.5vw, 3rem) !important;
+
+    margin-right: clamp(0.7rem, 2vw, 1rem) !important;
+    margin-top: clamp(0.5rem, 2vh, 1.5rem) !important;
+
+    cursor: pointer;
+
+    .footer-icon {
+        fill: $font-color-secondary;
+        transition: 0.5s all;
+    }
 }
 
-.footer-icon {
-    margin-right: 30px;
-    margin-top: 25px;
-    width: 50px;
+.footer-icon-div:hover {
+    .footer-icon {
+        fill: $primary-color !important;
+        color: $primary-color !important;
+    }
+}
+
+@media (max-width: $md-screen-size) {
+    .copyright-container {
+        text-align: end;
+    }
+}
+
+@media (max-width: $sm-screen-size) {
+    #footer {
+        text-align: center;
+    }
+    .privacy-container {
+        text-align: center;
+        width: 100%;
+    }
+    .privacy-policy {
+        text-align: center;
+    }
+    .privacy-policy::after {
+        border: none !important;
+    }
+    .copyright-container {
+        text-align: center;
+        margin-top: 10px;
+    }
 }

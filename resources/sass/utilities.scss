@@ -59,20 +59,35 @@
     margin-top: 200px;
 }
 
-.underline::after {
-    display: block;
-    width: 100%;
-
-    border-bottom: 1px solid $primary-color;
-
-    content: "";
+.underline {
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    color: $font-color-tertiary;
 
     transition: all 0.5s;
 }
 
-.underline:hover::after {
-    border-bottom: 2px solid $primary-color;
+.underline:hover {
+    color: $primary-color;
+}
+
+.underline:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: -3px;
+    content: "";
+    display: block;
+    height: 1px;
+    left: 0%;
+    position: absolute;
+    background: $primary-color;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 100%;
+}
+
+.underline:hover:after {
     width: 90%;
+    left: 0;
 }
 
 .headerline::before {
@@ -85,4 +100,10 @@
     border-top: 3px solid $primary-color;
 
     padding-top: 0.5rem;
+}
+
+@media (max-width: $sm-screen-size) {
+    .container-text-sm-center {
+        text-align: center;
+    }
 }

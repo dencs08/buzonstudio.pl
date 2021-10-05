@@ -22,12 +22,8 @@
 //imports
 @import "components/navbar";
 @import "components/footer";
-@import "components/contact";
-@import "components/testimonials";
-@import "components/offer";
 @import "utilities";
 @import "buttons";
-@import "typed";
 @import "animations";
 
 //main rules
@@ -38,8 +34,8 @@
 }
 
 ::selection {
-    background-color: $font-color-primary;
-    color: $body-bg;
+    background-color: $primary-color-dark;
+    color: $font-color-secondary;
 }
 
 html {
@@ -53,7 +49,8 @@ body {
     color: $font-color-primary;
     font-family: $font-family-primary;
     overflow-x: hidden;
-    background-color: $body-bg;
+    background-color: transparent;
+    background: none;
 }
 
 h1 {
@@ -100,12 +97,6 @@ img {
 a {
     text-decoration: none;
     color: $font-color-primary;
-
-    transition: all 0.5s;
-}
-
-a:hover {
-    color: $primary-color !important;
 }
 
 .arrow-down-icon {
@@ -117,7 +108,7 @@ a:hover {
     top: 0;
     left: 0;
     // outline: none;
-    // z-index: 1;
+    z-index: 1;
     // mix-blend-mode: exclusion;
 }
 
@@ -131,84 +122,4 @@ a:hover {
 
 .landing-page-content {
     margin-bottom: clamp(5rem, 20vh, 9rem);
-}
-
-//!client logos
-#clients {
-    height: 50vh;
-}
-
-.client-logo {
-    position: relative;
-    display: inline-block;
-
-    width: clamp(100px, 12.5vw, 175px);
-
-    padding: 10px;
-    margin-right: clamp(2.5rem, 4.25vw, 6rem);
-
-    text-align: center;
-}
-
-.client-logo img {
-    vertical-align: middle;
-}
-
-//!aboutus
-.aboutus {
-    height: 50vh;
-}
-
-.aboutus p {
-    color: $font-color-tertiary;
-}
-
-#remembered {
-    display: flex;
-    justify-content: space-between;
-}
-
-//!portfolio
-#portfolio {
-    height: 75vh;
-}
-
-.slide-track {
-    display: flex;
-}
-
-.portfolio-container {
-    position: relative;
-    width: 100%;
-    display: grid;
-    place-items: center;
-    overflow: hidden;
-}
-
-.portfolio-img {
-    // display: inline-block;
-
-    height: 500px;
-    width: 650px;
-
-    background: $body-bg-color-lighter;
-
-    border-radius: 10px;
-
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    perspective: 100px;
-}
-
-//!lets talk section
-#letsTalk-section {
-    height: 50vh;
-
-    width: 100%;
-
-    display: grid;
-    place-items: center;
-
-    margin-top: 150px;
 }

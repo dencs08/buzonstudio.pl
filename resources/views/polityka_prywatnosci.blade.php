@@ -5,13 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="shortcut icon" href="images/logo_white.svg" />
         <link rel="stylesheet" href="css/app.css" />
+        <link rel="stylesheet" href="css/privacy.css" />
         <title>bisonstudio</title>
     </head>
     <body class="antialiased">
+
         <x-navbar/>
-
+        
+        <div id="web-content">
             
+            <x-footer/>
 
-        <x-footer/>
+        </div>
+        <script src="js/app.js"></script>
+        <script src="js/privacy.js"></script>
     </body>
 </html>

@@ -5,12 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="shortcut icon" href="images/logo_white.svg" />
         <link rel="stylesheet" href="css/app.css" />
+        <link rel="stylesheet" href="css/contact.css" />
+
         <title>bisonstudio</title>
     </head>
     <body class="antialiased">
 
         <x-navbar/>
 
+        <div id="web-content">
         <section id="landing-page">
             <div class="container landing-page-content">
                 <h1>Zacznijmy owocną współpracę!</h1>
@@ -98,7 +101,9 @@
         </section>
 
         <x-footer/>
+        </div>
 
         <script src="js/app.js"></script>
+        <script src="js/contact.js"></script>
     </body>
 </html>
