@@ -10,10 +10,13 @@
     </head>
     <body class="antialiased">
 
+    <!-- WEBGL -->
+    <canvas id="web_gl"></canvas>
+
     <x-navbar/>
 
-    <div id="web-content">
-    <section id="landing-page">
+    <div data-scroll-container id="web-content">
+    <section data-scroll-section id="landing-page">
             <div class="container landing-page-content">
                 <h1>
                     Wiemy, że czasami ciężko komuś zaufać
@@ -37,7 +40,7 @@
             </div>
         </section>
 
-        <section id="testimonials">
+        <section data-scroll-section id="testimonials">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 d-flex justify-content-center place-items-center">

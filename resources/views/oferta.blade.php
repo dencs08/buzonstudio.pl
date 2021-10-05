@@ -9,11 +9,13 @@
         <title>bisonstudio</title>
     </head>
     <body class="antialiased">
+        <!-- WEBGL -->
+        <canvas id="web_gl"></canvas>
+
         <x-navbar/>
 
-
-        <div id="web-content">
-        <section id="landing-page">
+        <div data-scroll-container id="web-content">
+        <section data-scroll-section id="landing-page">
             <div class="container landing-page-content">
                 <h1>
                     Dla was budujemy <br> wspaniałe <span id="typed"></span>
@@ -38,7 +40,7 @@
             </div>
         </section>
 
-        <section id="offer">
+        <section data-scroll-section id="offer">
             <div class="container">
                 <h2 class="headerline">Działamy po to abyś się rozwijał</h2>
                 <div class="row">
@@ -79,7 +81,7 @@
             </div>
         </section>
 
-        <section id="works">
+        <section data-scroll-section id="works">
             <div class="container">
                 <h3 class="headerline">Nasze prace</h3>
 

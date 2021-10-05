@@ -11,10 +11,13 @@
     </head>
     <body class="antialiased">
 
+            <!-- WEBGL -->
+            <canvas id="web_gl"></canvas>
+
         <x-navbar/>
 
-        <div id="web-content">
-        <section id="landing-page">
+        <div data-scroll-container id="web-content">
+        <section data-scroll-section id="landing-page">
             <div class="container landing-page-content">
                 <h1>Zacznijmy owocną współpracę!</h1>
 
@@ -39,7 +42,7 @@
 
         <!-- Contact -->
 
-        <section id="Contact">
+        <section data-scroll-section id="Contact">
             <div class="container text-center">
                 <h3>Co możemy dla ciebie zrobić?</h3>
             </div>

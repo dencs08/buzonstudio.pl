@@ -10,9 +10,12 @@
     </head>
     <body class="antialiased">
 
+        <!-- WEBGL -->
+        <canvas id="web_gl"></canvas>
+
         <x-navbar/>
         
-        <div id="web-content">
+        <div data-scroll-container id="web-content">
             
             <x-footer/>
 
