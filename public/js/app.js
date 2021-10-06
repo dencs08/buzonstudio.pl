@@ -5,17 +5,9 @@
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var locomotive_scroll__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! locomotive-scroll */ "./node_modules/locomotive-scroll/dist/locomotive-scroll.esm.js");
 
-var scroll = new locomotive_scroll__WEBPACK_IMPORTED_MODULE_0__.default({
-  el: document.querySelector('[data-scroll-container]'),
-  smooth: true,
-  lerp: .05
-});
 
 /***/ }),
 
@@ -27,25 +19,44 @@ var scroll = new locomotive_scroll__WEBPACK_IMPORTED_MODULE_0__.default({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
-/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
-/* harmony import */ var gsap_CSSPlugin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap/CSSPlugin */ "./node_modules/gsap/CSSPlugin.js");
-/* harmony import */ var gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! gsap/CSSRulePlugin */ "./node_modules/gsap/CSSRulePlugin.js");
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
+/* harmony import */ var gsap_CSSPlugin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! gsap/CSSPlugin */ "./node_modules/gsap/CSSPlugin.js");
+/* harmony import */ var gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! gsap/CSSRulePlugin */ "./node_modules/gsap/CSSRulePlugin.js");
+/* harmony import */ var locomotive_scroll__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! locomotive-scroll */ "./node_modules/locomotive-scroll/dist/locomotive-scroll.esm.js");
  // import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 
 
 
-gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_CSSPlugin__WEBPACK_IMPORTED_MODULE_1__.CSSPlugin, gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_2__.CSSRulePlugin); //! Landing page timeline
 
-var line = gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_2__.CSSRulePlugin.getRule('.landing-page-content:before');
+gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.registerPlugin(gsap_CSSPlugin__WEBPACK_IMPORTED_MODULE_2__.CSSPlugin, gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_3__.CSSRulePlugin); //! Landing page timeline
+
+var line = gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_3__.CSSRulePlugin.getRule('.landing-page-content:before');
 var h1 = document.querySelector('h1');
 var h2 = document.querySelector('h2');
 var button1 = document.getElementsByClassName("btn-landing1");
 var button2 = document.getElementsByClassName("btn-landing2");
 var topCover = document.getElementsByClassName("top-side");
 var bottomCover = document.getElementsByClassName("bottom-side");
-var tl = gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.timeline(); //!timeline 1
+var tl = gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline(); // Using Locomotive Scroll
+
+var locoScroll = new locomotive_scroll__WEBPACK_IMPORTED_MODULE_0__.default({
+  el: document.querySelector('[data-scroll-container]'),
+  smooth: true,
+  lerp: .05
+}); // // each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
+// locoScroll.on("scroll", ScrollTrigger.update);
+// // tell ScrollTrigger to use these proxy methods for the ".smooth-scroll" element since Locomotive Scroll is hijacking things
+// ScrollTrigger.scrollerProxy(".smooth-scroll", {
+//     scrollTop(value) {
+//         return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
+//     }, // we don't have to define a scrollLeft because we're only scrolling vertically.
+//     getBoundingClientRect() {
+//         return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+//     }
+// });
+//!timeline 1
 
 tl.to(topCover, {
   delay: .5,
@@ -120,35 +131,35 @@ function navBarAnimation() {
     var yScroll = -getScroll() / 2 + body.clientHeight / 5;
     navWrapper.style.zIndex = "98";
     navBg.style.zIndex = "97";
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(navBg, {
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(navBg, {
       duration: 0.75,
       ease: "expo",
       opacity: 1
     });
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(navWrapper, {
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(navWrapper, {
       duration: 0.75,
       ease: "expo",
       opacity: 1,
       delay: 0.1
     });
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(scaledContent, {
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(scaledContent, {
       duration: 1.25,
       ease: "expo",
       scale: 1
     });
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(scaledContent2, {
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(scaledContent2, {
       duration: 1.25,
       ease: "expo",
       scale: 1
     });
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(navOutlinedContent, {
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(navOutlinedContent, {
       duration: 1.5,
       ease: "expo",
       opacity: 1,
       delay: 0.3
     });
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(webContent, {
-      duration: 1.5,
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(webContent, {
+      duration: 1,
       ease: "expo",
       opacity: 0,
       scale: 1.35,
@@ -156,34 +167,34 @@ function navBarAnimation() {
     });
   } else {
     //closed
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(navBg, {
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(navBg, {
       duration: 0.75,
       ease: "expo",
       opacity: 0,
       delay: 0.15
     });
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(navWrapper, {
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(navWrapper, {
       duration: 0.75,
       ease: "power.inOut",
       opacity: 0
     });
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(scaledContent, {
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(scaledContent, {
       duration: 1.25,
       ease: "expo",
       scale: 0.8
     });
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(scaledContent2, {
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(scaledContent2, {
       duration: 1.25,
       ease: "expo",
       scale: 0.8
     });
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(navOutlinedContent, {
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(navOutlinedContent, {
       duration: 1.5,
       ease: "expo",
       opacity: 0,
       delay: 0.25
     });
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(webContent, {
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(webContent, {
       duration: 1.5,
       ease: "expo",
       opacity: 1,
@@ -217,7 +228,7 @@ function zIndexNavBar() {
 }
 
 function hide(elem) {
-  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.set(elem, {
+  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set(elem, {
     autoAlpha: 0
   });
 } //!auto animations
@@ -247,7 +258,7 @@ function animateFrom(elem, direction) {
 
   elem.style.transform = "translate(" + x + "px, " + y + "px)";
   elem.style.opacity = "0";
-  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.fromTo(elem, {
+  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.fromTo(elem, {
     x: x,
     y: y,
     autoAlpha: 0
@@ -265,11 +276,11 @@ function animateFrom(elem, direction) {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_3__.ScrollTrigger);
-  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.utils.toArray(".gs").forEach(function (elem) {
+  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_4__.ScrollTrigger);
+  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.utils.toArray(".gs").forEach(function (elem) {
     hide(elem); // assure that the element is hidden when scrolled into view
 
-    gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_3__.ScrollTrigger.create({
+    gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_4__.ScrollTrigger.create({
       trigger: elem,
       start: "-250 center",
       onEnter: function onEnter() {
@@ -280,7 +291,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
   });
-});
+}); // // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
+// ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
+// // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
+// ScrollTrigger.refresh();
 
 /***/ }),
 

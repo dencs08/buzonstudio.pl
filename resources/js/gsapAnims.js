@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CSSPlugin } from "gsap/CSSPlugin";
 import { CSSRulePlugin } from "gsap/CSSRulePlugin";
+import LocomotiveScroll from 'locomotive-scroll';
 
 gsap.registerPlugin(CSSPlugin, CSSRulePlugin);
 
@@ -15,6 +16,27 @@ const button2 = document.getElementsByClassName("btn-landing2")
 const topCover = document.getElementsByClassName("top-side")
 const bottomCover = document.getElementsByClassName("bottom-side")
 const tl = gsap.timeline()
+
+// Using Locomotive Scroll
+
+const locoScroll = new LocomotiveScroll({
+    el: document.querySelector('[data-scroll-container]'),
+    smooth: true,
+    lerp: .05,
+});
+
+// // each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
+// locoScroll.on("scroll", ScrollTrigger.update);
+
+// // tell ScrollTrigger to use these proxy methods for the ".smooth-scroll" element since Locomotive Scroll is hijacking things
+// ScrollTrigger.scrollerProxy(".smooth-scroll", {
+//     scrollTop(value) {
+//         return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
+//     }, // we don't have to define a scrollLeft because we're only scrolling vertically.
+//     getBoundingClientRect() {
+//         return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+//     }
+// });
 
 //!timeline 1
 tl.to(topCover, {
@@ -131,7 +153,7 @@ function navBarAnimation() {
             delay: 0.3,
         })
         gsap.to(webContent, {
-            duration: 1.5,
+            duration: 1,
             ease: "expo",
             opacity: 0,
             scale: 1.35,
@@ -253,3 +275,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+// // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
+// ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
+
+// // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
+// ScrollTrigger.refresh();
