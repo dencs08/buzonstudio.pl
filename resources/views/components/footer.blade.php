@@ -4,7 +4,7 @@
         <hr class="section-divider mt-250" />
         <div data-scroll class="container">
             <div class="row mb-5">
-                <div data-scroll data-scroll-speed="3.5" class="col-md-6">
+                <div data-scroll data-scroll-speed="2.5" class="col-md-6">
                     <h3 class="mt-0 mb-4">Zostańmy w kontakcie</h3>
 
                     <a
@@ -107,7 +107,7 @@
                         </svg>
                     </div>
                 </div>
-                <div data-scroll data-scroll-speed="3.5" class="col-md-6 mt-md-0 mt-5">
+                <div data-scroll data-scroll-speed="2.5" class="col-md-6 mt-md-0 mt-5">
                     <div class="float-md-end">
                         <h3 class="mt-0 mb-2">Nie przekonaliśmy Cię?</h3>
                         <h4 class="mt-0 mb-4">Zobacz co mowią o nas inni</h4>

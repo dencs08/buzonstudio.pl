@@ -6669,8 +6669,7 @@ body {
   color: #ffffff;
   font-family: "Poppins";
   overflow-x: hidden;
-  background-color: transparent;
-  background: none;
+  background-color: #111111;
 }
 
 h1 {

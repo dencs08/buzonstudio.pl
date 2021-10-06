@@ -50,8 +50,9 @@ body {
     color: $font-color-primary;
     font-family: $font-family-primary;
     overflow-x: hidden;
-    background-color: transparent;
-    background: none;
+    // background-color: transparent;
+    // background: none;
+    background-color: $body-bg;
 }
 
 h1 {
