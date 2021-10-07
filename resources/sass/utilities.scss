@@ -102,6 +102,28 @@
     padding-top: 0.5rem;
 }
 
+.display-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scroll-snap-start {
+    scroll-snap-align: start;
+}
+
+.scroll-snap-end {
+    scroll-snap-align: end;
+}
+
+.scroll-snap-center {
+    scroll-snap-align: center;
+}
+
+.vh-50 {
+    height: 50vh;
+}
+
 @media (max-width: $sm-screen-size) {
     .container-text-sm-center {
         text-align: center;

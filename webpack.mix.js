@@ -7,6 +7,9 @@ mix.js([
     'resources/js/app.js'
 ], 'public/js/app.js').version()
     .js([
+        'resources/js/components/start/start.js',
+    ], 'public/js/start.js').version()
+    .js([
         'resources/js/components/testimonials/testimonials.js',
     ], 'public/js/testimonials.js').version()
     .js([

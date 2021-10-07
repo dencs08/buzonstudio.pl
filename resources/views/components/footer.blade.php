@@ -1,6 +1,6 @@
 <!-- Footer -->
 <footer>
-<section data-scroll-section id="footer">
+<section data-scroll-section id="footer" class="scroll-snap-center">
         <hr class="section-divider mt-250" />
         <div data-scroll class="container">
             <div class="row mb-5">

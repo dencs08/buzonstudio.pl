@@ -21,11 +21,11 @@
         
         <x-navbar/>
 
-        <divid="web-content">
+        <div data-scroll-container id="web-content">
 
         <!-- Landing Page -->
-        <section id="landing-page">
-            <div class="container landing-page-content">
+        <section data-scroll-section id="landing-page" class="scroll-snap-start">
+            <div data-scroll class="container landing-page-content">
                 <h1>
                     Tworzymy dla marek <br />
                     Pracujemy dla ludzi
@@ -40,8 +40,8 @@
 
         <!-- Clients section -->
 
-        <section id="clients">
-            <div  class="container clients-content">
+        <section data-scroll-section id="clients" class="display-centered scroll-snap-start vh-100">
+            <div  data-scroll class="container clients-content">
                 <h4  class="lh-sm my-2">Oni juz nam zaufali:</h4>
                 <div style="text-align:center;"> <div></div>
                 <div class="client-logos">
@@ -86,8 +86,8 @@
 
         <!-- Attention -->
 
-        <section  id="attention">
-            <div  class="container aboutus">
+        <section data-scroll-section id="attention" class="display-centered scroll-snap-start vh-100">
+            <div data-scroll class="container aboutus">
                 <h4 class="my-0 headerline">Wyróżnij się od konkurencji</h4>
                 <h3 class="mt-2 mb-3">Przyciągaj uwagę</h3>
                 <p>
@@ -100,8 +100,8 @@
 
         <!-- Remembered -->
 
-        <section id="remembered">
-            <div  class="container aboutus row">
+        <section data-scroll-section id="remembered" class="display-centered scroll-snap-start vh-100">
+            <div data-scroll class="container aboutus row">
                 <div class="col-md-6 d-none d-md-block"></div>
                     <div class="col-md-6">
                         <h4 class="my-0 headerline">
@@ -118,8 +118,8 @@
 
         <!-- Sales -->
 
-        <section id="sales">
-            <div  class="container aboutus">
+        <section data-scroll-section id="sales" class="display-centered scroll-snap-start vh-100">
+            <div data-scroll class="container aboutus">
                 <h4 class="my-0 headerline">Pozwól swojemu biznesowi na rozwój</h4>
                 <h3 class="mt-2 mb-3">
                     Pomagamy w zwiększeniu <br> Twojej sprzedaży
@@ -134,8 +134,8 @@
 
         <!-- Portfolio -->
 
-        <section id="portfolio">
-            <div  class="container">
+        <section data-scroll-section id="portfolio" class="display-centered scroll-snap-start vh-100">
+            <div data-scroll class="container">
                 <h4 class="my-0 headerline">Nasze prace</h4>
                 <h3 class="mt-3 mb-5">
                     Kochamy rozmawiać, ale niech nasze potrfolio wypowie się za
@@ -155,8 +155,8 @@
 
         <!-- Lets talk -->
 
-        <section id="letsTalk-section">
-            <div  class="container text-center">
+        <section data-scroll-section id="letsTalk-section" class="scroll-snap-start vh-100">
+            <div data-scroll class="container text-center">
                 <h4>Rozwiń swój biznes!</h4>
                 <h3>Zatrudnij nas a my zajmiemy się resztą ✌</h3>
                 <div class="button-trail mt-5">

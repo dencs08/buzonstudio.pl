@@ -1,5 +1,11 @@
 @import "../variables";
 
+#web-content {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh !important;
+}
+
 .landing-page-content {
     position: relative;
 }
@@ -16,7 +22,7 @@
 
 //!client logos
 #clients {
-    height: 50vh;
+    height: 20vh;
 }
 
 .client-logo {
@@ -37,7 +43,9 @@
 
 //!aboutus
 .aboutus {
-    height: 50vh;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
 }
 
 .aboutus {
@@ -56,12 +64,13 @@
 #remembered {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-right: 100px;
 }
 
 //!portfolio
 #portfolio {
-    height: 75vh;
+    // height: 75vh;
 }
 
 .slide-track {
@@ -92,7 +101,7 @@
 
 //!lets talk section
 #letsTalk-section {
-    height: 50vh;
+    // height: 50vh;
 
     width: 100%;
 

@@ -1,3 +1,10 @@
+#web-content {
+  -ms-scroll-snap-type: y mandatory;
+      scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh !important;
+}
+
 .landing-page-content {
   position: relative;
 }
@@ -13,7 +20,7 @@
 }
 
 #clients {
-  height: 50vh;
+  height: 20vh;
 }
 
 .client-logo {
@@ -27,10 +34,6 @@
 
 .client-logo img {
   vertical-align: middle;
-}
-
-.aboutus {
-  height: 50vh;
 }
 
 .aboutus h4 {
@@ -47,11 +50,8 @@
 #remembered {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-right: 100px;
-}
-
-#portfolio {
-  height: 75vh;
 }
 
 .slide-track {
@@ -78,7 +78,6 @@
 }
 
 #letsTalk-section {
-  height: 50vh;
   width: 100%;
   display: grid;
   place-items: center;

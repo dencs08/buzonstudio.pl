@@ -19,11 +19,11 @@ const tl = gsap.timeline()
 
 // Using Locomotive Scroll
 
-// const locoScroll = new LocomotiveScroll({
-//     el: document.querySelector('[data-scroll-container]'),
-//     smooth: true,
-//     lerp: .05,
-// });
+const locoScroll = new LocomotiveScroll({
+    el: document.querySelector('[data-scroll-container]'),
+    // smooth: true,
+    // lerp: .05,
+});
 
 // // each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
 // locoScroll.on("scroll", ScrollTrigger.update);
