@@ -89,35 +89,32 @@
 
         <!-- Portfolio -->
 
-        <section data-scroll-section id="portfolio" class="display-centered scroll-snap-start vh-100">
-            <div data-scroll id="portfolio-content" class="container">
-                <h4 class="my-0 headerline">Nasze prace</h4>
-                <h3 class="mt-3 mb-5">
-                    Kochamy rozmawiać, ale niech nasze portfolio wypowie się za
-                    nas.
-                </h3>
-                <div class="portfolio-container">
-                    <div class="grid-container">
-                            <main class="grid-item">
-                                <div class="slide-track">
-                                    <div class="portfolio-item item1"></div>
-                                    <div class="portfolio-item item2"></div>
-                                    <div class="portfolio-item item3"></div>
-                                    <div class="portfolio-item item4"></div>
-                                    <div class="portfolio-item item5"></div>
-                                </div>
-                            </main>
-                        </div>
+        <section data-scroll-section id="portfolio" class="scroll-snap-start">
+                <div data-scroll id="portfolio-content" class="container">
+                    <h4 class="my-0 headerline">Nasze prace</h4>
+                    <h3 class="mt-3 mb-5">
+                        Kochamy rozmawiać, ale niech nasze portfolio wypowie się za
+                        nas.
+                    </h3>
+                </div>
+                <div class="grid-item main">
+                    <div class="slide-track">
+                        <div class="portfolio-item mx-auto mx-lg-5 item1"></div>
+                        <div class="portfolio-item mx-auto mx-lg-5 item2"></div>
+                        <div class="portfolio-item mx-auto mx-lg-5 item3"></div>
+                        <div class="portfolio-item mx-auto mx-lg-5 item4"></div>
+                        <div class="portfolio-item mx-auto mx-lg-5 item5"></div>
                     </div>
-                    <div class="portfolio-btn-container">
-                        <button class="btn btn-primary my-5">WIĘCEJ PRAC</button>
-                    </div>
+                </div>  
+                <div class="portfolio-btn-container container">
+                    <button class="btn btn-primary my-5">WIĘCEJ PRAC</button>
                 </div>
         </section>
 
+
         <!-- Lets talk -->
 
-        <section data-scroll-section id="letsTalk-section" class="scroll-snap-end vh-100">
+        <section data-scroll-section id="letsTalk-section" class="scroll-snap-start vh-100">
             <div data-scroll id="letsTalk-content" class="container text-center">
                 <h4>Rozwiń swój biznes!</h4>
                 <h3>Zatrudnij nas a my zajmiemy się resztą ✌</h3>

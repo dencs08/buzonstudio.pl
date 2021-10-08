@@ -6029,7 +6029,7 @@ html.has-scroll-dragging {
 
 .menu-btn {
   position: fixed;
-  right: 20px;
+  right: 30px;
   top: 20px;
   height: 50px;
   width: 50px;
@@ -6106,11 +6106,11 @@ html.has-scroll-dragging {
 
 .wrapper ul li a {
   text-decoration: none;
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
   font-weight: 500;
   color: #ffffff;
   transition: 0.5s;
-  line-height: clamp(3rem, 4vh, 5rem);
+  line-height: clamp(3rem, 8vh, 6rem);
 }
 
 .wrapper ul li a:hover {
@@ -6144,7 +6144,7 @@ html.has-scroll-dragging {
 }
 
 .nav-icons-container {
-  height: clamp(150px, 30vh, 550px);
+  height: clamp(150px, 20vh, 300px);
   width: clamp(75%, 50vw, 100%);
 }
 
@@ -6395,7 +6395,7 @@ html.has-scroll-dragging {
   display: block;
   width: 90%;
   float: none;
-  margin-top: 250px;
+  margin-top: 150px;
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 100px;
@@ -6451,14 +6451,6 @@ html.has-scroll-dragging {
   scroll-snap-align: start;
 }
 
-.scroll-snap-end {
-  scroll-snap-align: end;
-}
-
-.scroll-snap-center {
-  scroll-snap-align: center;
-}
-
 .vh-50 {
   height: 50vh;
 }
@@ -6490,7 +6482,7 @@ html.has-scroll-dragging {
   border: 0.5px solid rgba(216, 216, 216, 0.5);
   background: rgba(255, 255, 255, 0.05);
   color: #ffffff;
-  transition: 0.5s all;
+  transition: 0.5s background-color;
 }
 
 .btn-primary:hover {
@@ -6722,10 +6714,27 @@ html.has-scroll-dragging {
   color: #ececec;
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #00ff80 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #00ff80;
+  border-radius: 5px;
+}
+
 html {
   font-size: 16px;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
+  height: 100%;
 }
 
 body {
@@ -6733,8 +6742,9 @@ body {
   padding: 0;
   color: #ffffff;
   font-family: "Poppins";
-  overflow-x: hidden;
   background-color: #111111;
+  overflow-x: hidden;
+  height: 100%;
 }
 
 h1 {

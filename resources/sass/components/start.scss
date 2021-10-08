@@ -67,47 +67,29 @@
 }
 
 //!portfolio
+#portfolio {
+    padding-top: 100px;
+    height: 100vh;
+}
+
 .portfolio-container {
-    position: relative;
     width: 100%;
-    display: grid;
-    place-items: center;
-    overflow-x: hidden;
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto 1fr auto;
-    grid-template-areas: "main main main";
-}
-
-.grid-item {
-    color: $font-color-secondary;
-    background: $body-bg-color-lighter;
 }
 
 .main {
+    margin-left: 100px;
     color: $font-color-secondary;
-    background-color: $body-bg;
-    grid-area: main;
+    background: transparent;
     padding: 0;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 .slide-track {
-    position: relative;
-    width: 50%;
+    width: 100%;
     overflow-x: hidden;
-    overflow-y: hidden;
     white-space: nowrap;
     cursor: grab;
-    background: $body-bg;
-}
-
-.slide-track.active {
-    background: $body-bg;
+    background: transparent;
 }
 
 .portfolio-item {
@@ -116,16 +98,16 @@
     background: $body-bg-color-lighter;
 
     min-height: 250px;
-    max-height: 550px;
-    height: 65vh;
+    max-height: 500px;
+    height: 45vh;
 
-    min-width: 600px;
-    max-width: 800px;
-    width: 45vw;
+    min-width: 500px;
+    max-width: 550px;
+    width: 40vw;
 
     border-radius: 10px;
 
-    margin: 0.5em 20em 0.5em 0em;
+    margin: 0.5em 8em 0.5em 0em;
 }
 
 //!lets talk section
@@ -134,73 +116,88 @@
 
     display: grid;
     place-items: center;
-
-    margin-top: 150px;
 }
 
 @media (max-width: $xxl-screen-size) {
     .portfolio-item {
         min-height: 250px;
         max-height: 500px;
-        height: 50vh;
+        height: 40vh;
 
-        min-width: 500px;
-        max-width: 700px;
-        width: 45vw;
+        min-width: 400px;
+        max-width: 500px;
+        width: 40vw;
 
-        margin: 0.5em 17em 0.5em 0em;
+        margin: 0.5em 6em 0.5em 0em;
     }
 }
 
 @media (max-width: $xl-screen-size) {
     .portfolio-item {
         min-height: 250px;
-        max-height: 500px;
-        height: 45vh;
+        max-height: 400px;
+        height: 35vh;
 
-        min-width: 450px;
-        max-width: 650px;
-        width: 45vw;
+        min-width: 400px;
+        max-width: 450px;
+        width: 40vw;
 
-        margin: 0.5em 12em 0.5em 0em;
+        margin: 0.5em 4em 0.5em 0em;
     }
 }
 
 @media (max-width: $lg-screen-size) {
+    #portfolio {
+        height: unset !important;
+    }
+    .main {
+        margin-left: 0px;
+        text-align: center;
+    }
+
+    .slide-track {
+        white-space: normal;
+    }
     .portfolio-item {
+        display: block;
+
         min-height: 150px;
-        max-height: 350px;
-        height: 45vh;
+        max-height: 600px;
+        height: 60vh;
 
-        min-width: 250px;
-        max-width: 600px;
-        width: 55vw;
+        min-width: 400px;
+        max-width: 1200px;
+        width: 80%;
 
-        margin: 0.5em 8em 0.5em 0em;
+        margin: 2em auto !important;
     }
 }
 
 @media (max-width: $md-screen-size) {
+    #web-content {
+        scroll-snap-type: none;
+        overflow-y: scroll;
+        height: 100vh !important;
+    }
+
     #clients {
         display: none;
+    }
+
+    #portfolio {
+        padding-top: 75px;
+    }
+
+    .portfolio-item {
+        min-height: 150px;
+        max-height: 500px;
+        height: 40vh;
     }
 
     .btn-landing1 {
         margin-top: 25px;
         margin-bottom: 25px;
         margin-right: 0px;
-    }
-
-    .portfolio-item {
-        min-height: 250px;
-        max-height: 300px;
-        height: 40vh;
-
-        min-width: 250px;
-        max-width: 550px;
-        width: 55vw;
-
-        margin: 0.5em 5em 0.5em 0em;
     }
 }
 
@@ -209,16 +206,14 @@
         margin-top: 125px;
     }
 
+    #portfolio {
+        padding-top: 40px;
+    }
+
     .portfolio-item {
         min-height: 150px;
-        max-height: 300px;
-        height: 40vh;
-
-        min-width: 250px;
-        max-width: 500px;
-        width: 60vw;
-
-        margin: 0.5em 1em 0.5em 0em;
+        max-height: 400px;
+        height: 35vh;
     }
 
     .portfolio-btn-container {

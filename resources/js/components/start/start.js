@@ -11,19 +11,16 @@ slider.addEventListener('mousedown', (e) => {
     cancelMomentumTracking();
 });
 
-
 slider.addEventListener('mouseleave', () => {
     isDown = false;
     slider.classList.remove('active');
 });
-
 
 slider.addEventListener('mouseup', () => {
     isDown = false;
     slider.classList.remove('active');
     beginMomentumTracking();
 });
-
 
 slider.addEventListener('mousemove', (e) => {
     if (!isDown) return;
@@ -36,7 +33,6 @@ slider.addEventListener('mousemove', (e) => {
 });
 
 // Momentum 
-
 var velX = 0;
 var momentumID;
 

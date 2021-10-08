@@ -82,12 +82,34 @@
         <section data-scroll-section id="works">
             <div class="container">
                 <h3 data-scroll data-scroll-speed="1" class="headerline">Nasze prace</h3>
-
-                <ul data-scroll data-scroll-speed="1.25">
-                    <li>zielone widoki</li>
-                    <li>ats-konsulting</li>
-                    <li>projekt reklamy KOMB</li>
-                </ul>
+                <div class="navigation-wrapper">
+      <div class="project-preview-wrapper">
+        <div class="project-preview"></div>
+      </div>
+      <ul class="navigation-list">
+        <li class="navigation-item">
+          <a class="navigation-link navigation-link-1" href="#">
+            <span data-text="ZIELONEWIDOKI">ZIELONEWIDOKI</span>
+          </a>
+        </li>
+        <div class="project-overlay"></div>
+        <li class="navigation-item">
+          <a class="navigation-link navigation-link-2" href="#">
+            <span data-text="ATSKONSULTING">ATSKONSULTING</span>
+          </a>
+        </li>
+        <li class="navigation-item">
+            <a class="navigation-link navigation-link-4" href="#">
+                <span data-text="DANFIT">DANFIT</span>
+            </a>
+        </li>
+        <li class="navigation-item">
+          <a class="navigation-link navigation-link-3" href="#">
+            <span data-text="KOMB">KOMB</span>
+          </a>
+        </li>
+      </ul>
+    </div>
             </div>
         </section>
 

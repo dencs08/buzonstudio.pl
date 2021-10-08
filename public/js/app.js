@@ -76,34 +76,47 @@ tl.from(line, {
     scaleY: 0
   }
 }, "-=0.5");
-tl.to(h1, {
+tl.fromTo(h1, {
+  opacity: 0,
+  x: '-30px',
+  clipPath: 'clip-path: polygon(0 0, 0 0, 0 100%, 0 100%)'
+}, {
+  opacity: 1,
+  x: '0px',
+  clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+  ease: "expo",
+  duration: 1.25
+}, "-=1.125");
+tl.fromTo(h2, {
+  clipPath: 'clip-path: polygon(0 0, 0 0, 0 100%, 0 100%)',
+  opacity: 1,
+  x: '-30px'
+}, {
+  opacity: 1,
+  x: '0px',
+  clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+  ease: "expo",
+  duration: 1.75
+}, "-=0.75");
+tl.fromTo(button1, {
+  ease: "expo",
+  opacity: 0,
+  y: '30px'
+}, {
+  opacity: 1,
+  y: '0px',
+  ease: "expo",
+  duration: 1.25
+}, "-=1.25");
+tl.fromTo(button2, {
+  opacity: 0,
+  y: '30px'
+}, {
   duration: 1.25,
   ease: "expo",
-  clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-  opacity: 1 // x: '30px'
-
-}, "-=1.125");
-tl.to(h2, {
-  duration: 1.75,
-  ease: "expo",
-  clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-  opacity: 1 // x: '30px'
-
-}, "-=0.75");
-tl.to(button1, {
-  duration: 0.1,
-  ease: "expo",
-  // clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-  opacity: 1 // x: '30px'
-
-}, "-=1.25");
-tl.to(button2, {
-  duration: 0.1,
-  ease: "expo",
-  // clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-  opacity: 1 // x: '30px'
-
-}, "-=1.25");
+  opacity: 1,
+  y: '0px'
+}, "-=0.8");
 tl.to(line, {
   duration: 1,
   ease: "expo",

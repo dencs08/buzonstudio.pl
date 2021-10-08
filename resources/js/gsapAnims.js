@@ -5,7 +5,6 @@ import { CSSPlugin } from "gsap/CSSPlugin";
 import { CSSRulePlugin } from "gsap/CSSRulePlugin";
 import LocomotiveScroll from 'locomotive-scroll';
 
-
 // Using Locomotive Scroll
 const locoScroll = new LocomotiveScroll({
     el: document.querySelector('[data-scroll-container]'),
@@ -15,7 +14,6 @@ const locoScroll = new LocomotiveScroll({
 
 // // each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
 // locoScroll.on("scroll", ScrollTrigger.update);
-
 // // tell ScrollTrigger to use these proxy methods for the ".smooth-scroll" element since Locomotive Scroll is hijacking things
 // ScrollTrigger.scrollerProxy(".smooth-scroll", {
 //     scrollTop(value) {
@@ -25,7 +23,6 @@ const locoScroll = new LocomotiveScroll({
 //         return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
 //     }
 // });
-
 
 gsap.registerPlugin(CSSPlugin, CSSRulePlugin);
 
@@ -60,38 +57,52 @@ tl.from(line, {
     }
 },
     "-=0.5")
-tl.to(h1, {
-    duration: 1.25,
-    ease: "expo",
-    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+tl.fromTo(h1, {
+    opacity: 0,
+    x: '-30px',
+    clipPath: 'clip-path: polygon(0 0, 0 0, 0 100%, 0 100%)',
+
+}, {
     opacity: 1,
-    // x: '30px'
+    x: '0px',
+    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+    ease: "expo",
+    duration: 1.25,
 },
     "-=1.125")
-tl.to(h2, {
-    duration: 1.75,
-    ease: "expo",
-    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+tl.fromTo(h2, {
+    clipPath: 'clip-path: polygon(0 0, 0 0, 0 100%, 0 100%)',
     opacity: 1,
-    // x: '30px'
+    x: '-30px'
+}, {
+    opacity: 1,
+    x: '0px',
+    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+    ease: "expo",
+    duration: 1.75,
 },
     "-=0.75")
-tl.to(button1, {
-    duration: 0.1,
+tl.fromTo(button1, {
     ease: "expo",
-    // clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+    opacity: 0,
+    y: '30px',
+}, {
     opacity: 1,
-    // x: '30px'
+    y: '0px',
+    ease: "expo",
+    duration: 1.25,
 },
     "-=1.25")
-tl.to(button2, {
-    duration: 0.1,
+tl.fromTo(button2, {
+    opacity: 0,
+    y: '30px'
+}, {
+    duration: 1.25,
     ease: "expo",
-    // clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
     opacity: 1,
-    // x: '30px'
+    y: '0px'
 },
-    "-=1.25")
+    "-=0.8")
 tl.to(line, {
     duration: 1,
     ease: "expo",
