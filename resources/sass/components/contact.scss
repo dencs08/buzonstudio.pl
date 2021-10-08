@@ -55,13 +55,6 @@
         -webkit-transition-duration: 1s;
     }
 
-    input[type="checkbox"]:checked + label span.label-name {
-        // position: absolute;
-        // left: 45%;
-        // top: 50%;
-        // transform: translate(-50%, -50%);
-    }
-
     input[type="checkbox"]:checked + label div.checkmark {
         display: block;
         fill: #f0f0f0;
@@ -122,6 +115,7 @@
     textarea {
         max-width: 100%;
         border-radius: 35px !important;
+        font-family: $font-family-primary;
     }
 }
 
@@ -134,5 +128,63 @@
     }
     100% {
         transform: none;
+    }
+}
+
+.submit-container {
+    padding-top: clamp(2em, 5vh, 5em);
+}
+
+@media (max-width: $lg-screen-size) {
+}
+
+@media (max-width: $md-screen-size) {
+    #Contact {
+        input[type="checkbox"] + label {
+            width: 20em;
+
+            font-size: 12px;
+        }
+    }
+
+    .contact-form {
+        .form-field {
+            position: relative;
+            margin: 18px 0;
+        }
+        .input-text {
+            border-radius: 30px;
+
+            padding: 1.25em 1.75em;
+
+            &:focus,
+            &.not-empty {
+                + .label {
+                    transform: translate(-5px, -35px);
+                    font-size: $font-size-base * 0.85;
+                }
+            }
+        }
+        .label {
+            top: 18px;
+
+            font-size: $font-size-base * 0.8;
+            line-height: 16px;
+        }
+
+        textarea {
+            max-width: 100%;
+            border-radius: 35px !important;
+        }
+    }
+}
+
+@media (max-width: $sm-screen-size) {
+    #Contact {
+        input[type="checkbox"] + label {
+            width: 20em;
+
+            font-size: 10px;
+        }
     }
 }

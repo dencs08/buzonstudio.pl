@@ -96,8 +96,8 @@
                     <textarea id="message" name="message" class="input-text js-input" cols="30" rows="10" required></textarea>
                    <label class="label" for="message">Wiadomość</label>
                 </div>
-                <div class="form-field text-center mt-5">
-                   <input type="submit" value="WYŚLIJ" class="btn btn-submit mt-5 w-25 color"></input>
+                <div class="form-field text-center submit-container">
+                   <input type="submit" value="WYŚLIJ" class="btn btn-submit color"></input>
                 </div>
              </form>
 

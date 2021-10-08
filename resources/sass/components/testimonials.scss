@@ -10,7 +10,7 @@
 
     background: $body-bg-color-lighter;
 
-    padding: 30px 50px;
+    padding: 2em 3em;
     margin-bottom: 100px;
 
     border-radius: 15px;
@@ -31,5 +31,23 @@
     p {
         font-weight: 400;
         color: $font-color-fourth;
+    }
+}
+
+@media (max-width: $xl-screen-size) {
+    .card {
+        height: clamp(250px, 40vh, 400px);
+    }
+}
+
+@media (max-width: $md-screen-size) {
+    .card {
+        height: clamp(250px, 32.5vh, 400px);
+    }
+}
+
+@media (max-width: $sm-screen-size) {
+    .card {
+        height: clamp(300px, 35vh, 500px);
     }
 }

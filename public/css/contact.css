@@ -86,6 +86,7 @@
 .contact-form textarea {
   max-width: 100%;
   border-radius: 35px !important;
+  font-family: "Poppins";
 }
 
 @-webkit-keyframes scale {
@@ -109,5 +110,43 @@
   }
   100% {
     transform: none;
+  }
+}
+.submit-container {
+  padding-top: clamp(2em, 5vh, 5em);
+}
+
+@media (max-width: 768px) {
+  #Contact input[type=checkbox] + label {
+    width: 20em;
+    font-size: 12px;
+  }
+
+  .contact-form .form-field {
+    position: relative;
+    margin: 18px 0;
+  }
+  .contact-form .input-text {
+    border-radius: 30px;
+    padding: 1.25em 1.75em;
+  }
+  .contact-form .input-text:focus + .label, .contact-form .input-text.not-empty + .label {
+    transform: translate(-5px, -35px);
+    font-size: 0.85rem;
+  }
+  .contact-form .label {
+    top: 18px;
+    font-size: 0.8rem;
+    line-height: 16px;
+  }
+  .contact-form textarea {
+    max-width: 100%;
+    border-radius: 35px !important;
+  }
+}
+@media (max-width: 576px) {
+  #Contact input[type=checkbox] + label {
+    width: 20em;
+    font-size: 10px;
   }
 }

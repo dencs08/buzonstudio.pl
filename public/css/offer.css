@@ -35,37 +35,32 @@
   margin-bottom: 150px;
 }
 #offer h2 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 3.5vw, 3rem);
   font-weight: 600;
   color: #ffffff;
 }
 #offer h3 {
-  font-size: 2rem;
+  font-size: clamp(1.75rem, 2.25vw, 2rem);
   font-weight: 500;
   color: #ececec;
   margin-bottom: 15px;
 }
 #offer p {
-  font-size: 1rem;
+  font-size: clamp(0.85rem, 1.3vw, 1.2rem);
   font-weight: 400;
   color: #bebebe;
   margin-bottom: 35px;
   margin-top: 0;
 }
 #offer ul li {
-  font-size: 1rem;
+  font-size: clamp(0.85rem, 1.3vw, 1.2rem);
   font-weight: 400;
   color: #707070;
   margin-bottom: 10px;
 }
-#offer .contact-us-container {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin-top: 100px;
-}
 #offer .contact-us {
-  font-size: 2rem;
+  margin-top: clamp(1.75em, 3vh, 2.5em);
+  font-size: clamp(1rem, 3vw, 2.5rem);
   color: #ffffff;
 }
 
@@ -90,4 +85,17 @@
 }
 #works ul li:hover {
   color: #00ff80 !important;
+}
+
+@media (max-width: 992px) {
+  .col-content1 {
+    width: 90%;
+    margin-right: 0px;
+    margin-bottom: 50px;
+  }
+
+  .col-content2 {
+    width: 90%;
+    margin-left: 0px;
+  }
 }

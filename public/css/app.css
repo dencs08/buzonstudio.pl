@@ -6106,11 +6106,11 @@ html.has-scroll-dragging {
 
 .wrapper ul li a {
   text-decoration: none;
-  font-size: 2.5rem;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 500;
   color: #ffffff;
   transition: 0.5s;
-  line-height: 5rem;
+  line-height: clamp(3rem, 4vh, 5rem);
 }
 
 .wrapper ul li a:hover {
@@ -6144,7 +6144,7 @@ html.has-scroll-dragging {
 }
 
 .nav-icons-container {
-  height: clamp(150px, 16.5vh, 350px);
+  height: clamp(150px, 30vh, 550px);
   width: clamp(75%, 50vw, 100%);
 }
 
@@ -6192,6 +6192,16 @@ html.has-scroll-dragging {
   background: rgba(10, 10, 10, 0.8);
 }
 
+@media (max-width: 992px) {
+  .nav-icons-container {
+    height: clamp(150px, 10vh, 200px);
+  }
+}
+@media (max-width: 768px) {
+  .nav-icons-container {
+    height: clamp(75px, 10vh, 175px);
+  }
+}
 #footer h3 {
   font-size: clamp(1.65rem, 2.25vw, 3.2rem);
 }
@@ -6225,12 +6235,6 @@ html.has-scroll-dragging {
 
 .btn-primary:hover svg path {
   fill: #111111;
-}
-
-.mail-href-div {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
 }
 
 .mail-href {
@@ -6267,8 +6271,8 @@ html.has-scroll-dragging {
 
 .footer-icon-div {
   display: inline-block;
-  width: clamp(2.5rem, 3.5vw, 3rem) !important;
-  height: clamp(2.5rem, 3.5vw, 3rem) !important;
+  width: clamp(2rem, 3.5vw, 3rem) !important;
+  height: clamp(2rem, 3.5vw, 3rem) !important;
   margin-right: clamp(0.7rem, 2vw, 1rem) !important;
   margin-top: clamp(0.5rem, 2vh, 1.5rem) !important;
   cursor: pointer;
@@ -6289,8 +6293,33 @@ html.has-scroll-dragging {
 }
 
 @media (max-width: 768px) {
+  #footer h4 {
+    font-size: clamp(0.9rem, 6vw, 1.25rem);
+    line-height: 1rem;
+  }
+  #footer h3 {
+    font-size: clamp(1rem, 7vw, 1.3rem);
+  }
+
   .copyright-container {
     text-align: end;
+  }
+
+  .underfooter-container {
+    margin-top: 50px;
+  }
+
+  .privacy-policy {
+    margin-bottom: 20px;
+  }
+
+  .mail-href {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    line-height: 28px;
+  }
+
+  .second-col-footer {
+    margin-top: 35px;
   }
 }
 @media (max-width: 576px) {
@@ -6314,6 +6343,10 @@ html.has-scroll-dragging {
   .copyright-container {
     text-align: center;
     margin-top: 10px;
+  }
+
+  .second-col-footer {
+    margin-top: 20px;
   }
 }
 .container {
@@ -6362,15 +6395,12 @@ html.has-scroll-dragging {
   display: block;
   width: 90%;
   float: none;
+  margin-top: 250px;
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 100px;
   border: 0.5px solid rgba(126, 126, 126, 0.25);
   overflow: hidden;
-}
-
-.mt-250 {
-  margin-top: 200px;
 }
 
 .underline {
@@ -6433,6 +6463,12 @@ html.has-scroll-dragging {
   height: 50vh;
 }
 
+@media (max-width: 768px) {
+  .section-divider {
+    margin-top: 75px;
+    margin-bottom: 50px;
+  }
+}
 @media (max-width: 576px) {
   .container-text-sm-center {
     text-align: center;
@@ -6467,6 +6503,7 @@ html.has-scroll-dragging {
 }
 
 .btn-submit {
+  width: 40%;
   border: none;
   background: #00ff80;
   transition: 0.5s all;
@@ -6620,9 +6657,14 @@ html.has-scroll-dragging {
     bottom: 100%;
   }
 }
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .btn-primary {
-    width: 90%;
+    width: 100%;
+    padding: 1em 3em;
+  }
+
+  .btn-submit {
+    width: 100%;
   }
 }
 .courtain {
@@ -6683,6 +6725,7 @@ html.has-scroll-dragging {
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -6696,11 +6739,12 @@ body {
 
 h1 {
   font-weight: 600;
-  font-size: clamp(2rem, 6vw, 4.5rem);
+  font-size: clamp(1.75rem, 6vw, 4.5rem);
 }
 
 h2 {
   font-weight: 500;
+  font-size: clamp(1rem, 3vw, 3rem);
   color: #bebebe;
 }
 

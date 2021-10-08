@@ -5,7 +5,7 @@
   width: clamp(325px, 40vw, 550px);
   height: clamp(250px, 35vh, 400px);
   background: #161616;
-  padding: 30px 50px;
+  padding: 2em 3em;
   margin-bottom: 100px;
   border-radius: 15px;
 }
@@ -23,4 +23,20 @@
 .card-body p {
   font-weight: 400;
   color: #707070;
+}
+
+@media (max-width: 1200px) {
+  .card {
+    height: clamp(250px, 40vh, 400px);
+  }
+}
+@media (max-width: 768px) {
+  .card {
+    height: clamp(250px, 32.5vh, 400px);
+  }
+}
+@media (max-width: 576px) {
+  .card {
+    height: clamp(300px, 35vh, 500px);
+  }
 }

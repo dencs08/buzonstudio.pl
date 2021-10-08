@@ -4,14 +4,14 @@
 #offer {
     margin-bottom: 150px;
     h2 {
-        font-size: 3rem;
+        font-size: clamp(2rem, 3.5vw, 3rem);
         font-weight: 600;
 
         color: $font-color-primary;
     }
 
     h3 {
-        font-size: 2rem;
+        font-size: clamp(1.75rem, 2.25vw, 2rem);
         font-weight: 500;
 
         color: $font-color-secondary;
@@ -20,7 +20,7 @@
     }
 
     p {
-        font-size: 1rem;
+        font-size: clamp(0.85rem, 1.3vw, 1.2rem);
         font-weight: 400;
 
         color: $font-color-tertiary;
@@ -31,21 +31,16 @@
 
     ul {
         li {
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 1.3vw, 1.2rem);
             font-weight: 400;
 
             color: $font-color-fourth;
             margin-bottom: 10px;
         }
     }
-
-    .contact-us-container {
-        width: fit-content;
-        margin-top: 100px;
-    }
-
     .contact-us {
-        font-size: 2rem;
+        margin-top: clamp(1.75em, 3vh, 2.5em);
+        font-size: clamp(1rem, 3vw, 2.5rem);
         color: $font-color-primary;
     }
 }
@@ -81,5 +76,20 @@
         li:hover {
             color: $primary-color !important;
         }
+    }
+}
+
+@media (max-width: $lg-screen-size) {
+    .col-content1 {
+        width: 90%;
+
+        margin-right: 0px;
+        margin-bottom: 50px;
+    }
+
+    .col-content2 {
+        width: 90%;
+
+        margin-left: 0px;
     }
 }

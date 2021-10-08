@@ -24,70 +24,25 @@
         <div data-scroll-container id="web-content">
 
         <!-- Landing Page -->
-        <section data-scroll-section id="landing-page" class="scroll-snap-start">
-            <div data-scroll class="container landing-page-content">
+        <section id="landing-page" class="scroll-snap-start">
+            <div data-scroll id="landing-content" class="container landing-page-content">
                 <h1>
                     Tworzymy dla marek <br />
                     Pracujemy dla ludzi
                 </h1>
 
-                <h2 class="mb-5">digital products, branding & marketing</h2>
+                <h2>digital products, branding & marketing</h2>
 
-                <button class="btn btn-primary mr-5 btn-landing1">PORTFOLIO</button>
-                <a href="oferta"><button class="btn btn-primary btn-landing2  mt-md-0 mt-3">CO ROBIMY?</button></a>
+                <button class="btn btn-primary btn-landing1">PORTFOLIO</button>
+                <a href="oferta"><button class="btn btn-primary btn-landing2">CO ROBIMY?</button></a>
             </div>
         </section>
 
-        <!-- Clients section -->
-
-        <section data-scroll-section id="clients" class="display-centered scroll-snap-start vh-100">
-            <div  data-scroll class="container clients-content">
-                <h4  class="lh-sm my-2">Oni juz nam zaufali:</h4>
-                <div style="text-align:center;"> <div></div>
-                <div class="client-logos">
-                    <div align="center" class="client-logo">
-                        <img
-                            src="images/logos/danfit.svg"
-                            alt=""
-                            class="client-logo-svg"
-                        />
-                    </div>
-                    <div align="center" class="client-logo">
-                        <img
-                            src="images/logos/komb.svg"
-                            alt=""
-                            class="client-logo-svg"
-                        />
-                    </div>
-                    <div align="center" class="client-logo">
-                        <img
-                            src="images/logos/logo_white-cropped.svg"
-                            alt=""
-                            class="client-logo-svg"
-                        />
-                    </div>
-                    <div align="center" class="client-logo">
-                        <img
-                            src="images/logos/zielonewidoki.svg"
-                            alt=""
-                            class="client-logo-svg"
-                        />
-                    </div>
-                    <div align="center" class="client-logo">
-                        <img
-                            src="images/logos/ats.svg"
-                            alt=""
-                            class="client-logo-svg"
-                        />
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        
         <!-- Attention -->
 
         <section data-scroll-section id="attention" class="display-centered scroll-snap-start vh-100">
-            <div data-scroll class="container aboutus">
+            <div data-scroll id="attention-content" class="container aboutus">
                 <h4 class="my-0 headerline">Wyróżnij się od konkurencji</h4>
                 <h3 class="mt-2 mb-3">Przyciągaj uwagę</h3>
                 <p>
@@ -101,7 +56,7 @@
         <!-- Remembered -->
 
         <section data-scroll-section id="remembered" class="display-centered scroll-snap-start vh-100">
-            <div data-scroll class="container aboutus row">
+            <div data-scroll id="remembered-content" class="container aboutus row">
                 <div class="col-md-6 d-none d-md-block"></div>
                     <div class="col-md-6">
                         <h4 class="my-0 headerline">
@@ -119,7 +74,7 @@
         <!-- Sales -->
 
         <section data-scroll-section id="sales" class="display-centered scroll-snap-start vh-100">
-            <div data-scroll class="container aboutus">
+            <div data-scroll id="sales-content" class="container aboutus">
                 <h4 class="my-0 headerline">Pozwól swojemu biznesowi na rozwój</h4>
                 <h3 class="mt-2 mb-3">
                     Pomagamy w zwiększeniu <br> Twojej sprzedaży
@@ -135,28 +90,35 @@
         <!-- Portfolio -->
 
         <section data-scroll-section id="portfolio" class="display-centered scroll-snap-start vh-100">
-            <div data-scroll class="container">
+            <div data-scroll id="portfolio-content" class="container">
                 <h4 class="my-0 headerline">Nasze prace</h4>
                 <h3 class="mt-3 mb-5">
-                    Kochamy rozmawiać, ale niech nasze potrfolio wypowie się za
+                    Kochamy rozmawiać, ale niech nasze portfolio wypowie się za
                     nas.
                 </h3>
-                <div class="container porfolio-container">
-                    <div class="slide-track">
-                        <div class="container portfolio-img"></div>
-                        <div class="container portfolio-img"></div>
+                <div class="portfolio-container">
+                    <div class="grid-container">
+                            <main class="grid-item">
+                                <div class="slide-track">
+                                    <div class="portfolio-item item1"></div>
+                                    <div class="portfolio-item item2"></div>
+                                    <div class="portfolio-item item3"></div>
+                                    <div class="portfolio-item item4"></div>
+                                    <div class="portfolio-item item5"></div>
+                                </div>
+                            </main>
+                        </div>
+                    </div>
+                    <div class="portfolio-btn-container">
+                        <button class="btn btn-primary my-5">WIĘCEJ PRAC</button>
                     </div>
                 </div>
-                <div class="portfolio-btn-container">
-                    <button class="btn btn-primary my-5">WIĘCEJ PRAC</button>
-                </div>
-            </div>
         </section>
 
         <!-- Lets talk -->
 
-        <section data-scroll-section id="letsTalk-section" class="scroll-snap-start vh-100">
-            <div data-scroll class="container text-center">
+        <section data-scroll-section id="letsTalk-section" class="scroll-snap-end vh-100">
+            <div data-scroll id="letsTalk-content" class="container text-center">
                 <h4>Rozwiń swój biznes!</h4>
                 <h3>Zatrudnij nas a my zajmiemy się resztą ✌</h3>
                 <div class="button-trail mt-5">
@@ -169,14 +131,61 @@
                             Porozmawiajmy!
                         </a>
                     </form>
-                </div>
+                </div>                
             </div>
         </section>
+         <!-- Clients section -->
+
+            <section id="clients">
+                <div class="container clients-content">
+                    <h4  class="lh-sm my-2">Oni juz nam zaufali:</h4>
+                    <div style="text-align:center;"> <div></div>
+                    <div class="client-logos">
+                        <div align="center" class="client-logo">
+                            <img
+                                src="images/logos/danfit.svg"
+                                alt=""
+                                class="client-logo-svg"
+                            />
+                        </div>
+                        <div align="center" class="client-logo">
+                            <img
+                                src="images/logos/komb.svg"
+                                alt=""
+                                class="client-logo-svg"
+                            />
+                        </div>
+                        <div align="center" class="client-logo">
+                            <img
+                                src="images/logos/logo_white-cropped.svg"
+                                alt=""
+                                class="client-logo-svg"
+                            />
+                        </div>
+                        <div align="center" class="client-logo">
+                            <img
+                                src="images/logos/zielonewidoki.svg"
+                                alt=""
+                                class="client-logo-svg"
+                            />
+                        </div>
+                        <div align="center" class="client-logo">
+                            <img
+                                src="images/logos/ats.svg"
+                                alt=""
+                                class="client-logo-svg"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
 
         <x-footer/>
     </div>
     
 
         <script src="js/app.js"></script>
+        <script src="js/start.js"></script>
+
     </body>
 </html>

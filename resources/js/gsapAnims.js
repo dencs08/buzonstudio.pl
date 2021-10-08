@@ -5,20 +5,8 @@ import { CSSPlugin } from "gsap/CSSPlugin";
 import { CSSRulePlugin } from "gsap/CSSRulePlugin";
 import LocomotiveScroll from 'locomotive-scroll';
 
-gsap.registerPlugin(CSSPlugin, CSSRulePlugin);
-
-//! Landing page timeline
-const line = CSSRulePlugin.getRule('.landing-page-content:before')
-const h1 = document.querySelector('h1')
-const h2 = document.querySelector('h2')
-const button1 = document.getElementsByClassName("btn-landing1")
-const button2 = document.getElementsByClassName("btn-landing2")
-const topCover = document.getElementsByClassName("top-side")
-const bottomCover = document.getElementsByClassName("bottom-side")
-const tl = gsap.timeline()
 
 // Using Locomotive Scroll
-
 const locoScroll = new LocomotiveScroll({
     el: document.querySelector('[data-scroll-container]'),
     // smooth: true,
@@ -37,6 +25,19 @@ const locoScroll = new LocomotiveScroll({
 //         return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
 //     }
 // });
+
+
+gsap.registerPlugin(CSSPlugin, CSSRulePlugin);
+
+//! Landing page timeline
+const line = CSSRulePlugin.getRule('.landing-page-content:before')
+const h1 = document.querySelector('h1')
+const h2 = document.querySelector('h2')
+const button1 = document.getElementsByClassName("btn-landing1")
+const button2 = document.getElementsByClassName("btn-landing2")
+const topCover = document.getElementsByClassName("top-side")
+const bottomCover = document.getElementsByClassName("bottom-side")
+const tl = gsap.timeline()
 
 //!timeline 1
 tl.to(topCover, {
@@ -64,7 +65,7 @@ tl.to(h1, {
     ease: "expo",
     clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
     opacity: 1,
-    x: '30px'
+    // x: '30px'
 },
     "-=1.125")
 tl.to(h2, {
@@ -72,7 +73,7 @@ tl.to(h2, {
     ease: "expo",
     clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
     opacity: 1,
-    x: '30px'
+    // x: '30px'
 },
     "-=0.75")
 tl.to(button1, {
@@ -80,7 +81,7 @@ tl.to(button1, {
     ease: "expo",
     // clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
     opacity: 1,
-    x: '30px'
+    // x: '30px'
 },
     "-=1.25")
 tl.to(button2, {
@@ -88,7 +89,7 @@ tl.to(button2, {
     ease: "expo",
     // clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
     opacity: 1,
-    x: '30px'
+    // x: '30px'
 },
     "-=1.25")
 tl.to(line, {
@@ -129,38 +130,43 @@ function navBarAnimation() {
             duration: 0.75,
             ease: "expo",
             opacity: 1,
+            delay: 0.3,
         })
         gsap.to(navWrapper, {
             duration: 0.75,
             ease: "expo",
             opacity: 1,
-            delay: 0.1,
+            delay: 0.4,
         })
         gsap.to(scaledContent, {
             duration: 1.25,
             ease: "expo",
             scale: 1,
+            delay: 0.3,
         })
         gsap.to(scaledContent2, {
             duration: 1.25,
             ease: "expo",
             scale: 1,
+            delay: 0.3,
         })
         gsap.to(navOutlinedContent, {
             duration: 1.5,
             ease: "expo",
             opacity: 1,
-            delay: 0.3,
+            delay: 0.5,
         })
         gsap.to(webContent, {
             duration: 1,
             ease: "expo",
             opacity: 0,
             scale: 1.35,
-            y: yScroll + "px"
+            y: yScroll + "px",
+            onComplete: function () { dNoneContent() },
         })
     } else {
         //closed
+        dBlockContent()
         gsap.to(navBg, {
             duration: 0.75,
             ease: "expo",
@@ -193,13 +199,22 @@ function navBarAnimation() {
             ease: "expo",
             opacity: 1,
             scale: 1,
-            y: "0"
+            y: "0",
         })
 
         setInterval(zIndexNavBar(), 1250);
     }
     i++
 }
+
+function dNoneContent() {
+    webContent.style.display = "none"
+}
+
+function dBlockContent() {
+    webContent.style.display = "block"
+}
+
 
 function getScroll() {
     if (window.pageYOffset != undefined) {

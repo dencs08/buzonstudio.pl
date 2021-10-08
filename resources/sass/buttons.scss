@@ -31,6 +31,7 @@
 }
 
 .btn-submit {
+    width: 40%;
     border: none;
     background: $primary-color;
 
@@ -151,8 +152,13 @@
     }
 }
 
-@media (max-width: $sm-screen-size) {
+@media (max-width: $md-screen-size) {
     .btn-primary {
-        width: 90%;
+        width: 100%;
+        padding: 1em 3em;
+    }
+
+    .btn-submit {
+        width: 100%;
     }
 }

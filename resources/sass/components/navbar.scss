@@ -79,11 +79,11 @@
 
 .wrapper ul li a {
     text-decoration: none;
-    font-size: $font-size-base * 2.5;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
     font-weight: 500;
     color: $font-color-primary;
     transition: 0.5s;
-    line-height: 5rem;
+    line-height: clamp(3rem, 4vh, 5rem);
 }
 
 .wrapper ul li a:hover {
@@ -121,7 +121,7 @@
 
 .nav-icons-container {
     // margin-top: clamp(50px, 15vh, 400px);
-    height: clamp(150px, 16.5vh, 350px);
+    height: clamp(150px, 30vh, 550px);
     width: clamp(75%, 50vw, 100%);
 }
 
@@ -177,4 +177,18 @@
 
     opacity: 0;
     background: rgba(10, 10, 10, 0.8);
+}
+
+@media (max-width: $lg-screen-size) {
+    .nav-icons-container {
+        // margin-top: clamp(50px, 15vh, 400px);
+        height: clamp(150px, 10vh, 200px);
+    }
+}
+
+@media (max-width: $md-screen-size) {
+    .nav-icons-container {
+        // margin-top: clamp(50px, 15vh, 400px);
+        height: clamp(75px, 10vh, 175px);
+    }
 }

@@ -48,10 +48,6 @@
     }
 }
 
-.mail-href-div {
-    width: fit-content;
-}
-
 .mail-href {
     font-weight: 500;
     font-size: clamp(1.5rem, 2.25vw, 3rem);
@@ -87,8 +83,8 @@
 .footer-icon-div {
     display: inline-block;
 
-    width: clamp(2.5rem, 3.5vw, 3rem) !important;
-    height: clamp(2.5rem, 3.5vw, 3rem) !important;
+    width: clamp(2rem, 3.5vw, 3rem) !important;
+    height: clamp(2rem, 3.5vw, 3rem) !important;
 
     margin-right: clamp(0.7rem, 2vw, 1rem) !important;
     margin-top: clamp(0.5rem, 2vh, 1.5rem) !important;
@@ -114,8 +110,31 @@
 }
 
 @media (max-width: $md-screen-size) {
+    #footer {
+        h4 {
+            font-size: clamp(0.9rem, 6vw, 1.25rem);
+            line-height: 1rem;
+        }
+        h3 {
+            font-size: clamp(1rem, 7vw, 1.3rem);
+        }
+    }
     .copyright-container {
         text-align: end;
+    }
+    .underfooter-container {
+        margin-top: 50px;
+    }
+    .privacy-policy {
+        margin-bottom: 20px;
+    }
+    .mail-href {
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
+        line-height: 28px;
+    }
+
+    .second-col-footer {
+        margin-top: 35px;
     }
 }
 
@@ -136,5 +155,9 @@
     .copyright-container {
         text-align: center;
         margin-top: 10px;
+    }
+
+    .second-col-footer {
+        margin-top: 20px;
     }
 }

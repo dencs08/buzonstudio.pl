@@ -1,8 +1,8 @@
 <!-- Footer -->
 <footer>
-<section data-scroll-section id="footer" class="scroll-snap-center">
-        <hr class="section-divider mt-250" />
-        <div data-scroll class="container">
+<section data-scroll-section data-scroll data-scroll-repeat data-scroll-class="section-active" id="footer" class="scroll-snap-center">
+        <hr class="section-divider" />
+        <div id="footer-content" class="container">
             <div class="row mb-5">
                 <div data-scroll data-scroll-speed="2.5" class="col-md-6">
                     <h3 class="mt-0 mb-4">Zostańmy w kontakcie</h3>
@@ -13,7 +13,7 @@
                         >biuro@bisonstudio.pl</a
                     >
 
-                    <h4 class="my-0 mt-2">+48 882 031 130</h4>
+                    <h4 class="my-0 mt-3 mb-2">+48 882 031 130</h4>
 
                     <div class="footer-icon-div">
                         <svg
@@ -107,7 +107,7 @@
                         </svg>
                     </div>
                 </div>
-                <div data-scroll data-scroll-speed="2.5" class="col-md-6 mt-md-0 mt-5">
+                <div data-scroll data-scroll-speed="2.5" class="col-md-6 second-col-footer">
                     <div class="float-md-end">
                         <h3 class="mt-0 mb-2">Nie przekonaliśmy Cię?</h3>
                         <h4 class="mt-0 mb-4">Zobacz co mowią o nas inni</h4>

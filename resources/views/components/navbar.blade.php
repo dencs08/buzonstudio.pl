@@ -1,5 +1,6 @@
 <!-- Navbar -->
 <nav id="navbar">
+    <div class="">
     <input type="checkbox" id="active" />
     <label id="nav-burger" for="active" class="menu-btn"
         ><span id="nav-closer"></span
@@ -166,5 +167,7 @@
                 </div>
             </div>
         </div>
+    </div>    
     </div>
+
 </nav>

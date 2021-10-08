@@ -10,6 +10,10 @@
     position: relative;
 }
 
+.btn-landing1 {
+    margin-right: 25px;
+}
+
 .landing-page-content:before {
     content: "";
     position: absolute;
@@ -22,17 +26,17 @@
 
 //!client logos
 #clients {
-    height: 20vh;
+    height: 1vh;
 }
 
 .client-logo {
     position: relative;
     display: inline-block;
 
-    width: clamp(100px, 12.5vw, 175px);
+    width: clamp(100px, 12vw, 150px);
 
     padding: 10px;
-    margin-right: clamp(2.5rem, 4.25vw, 6rem);
+    margin-right: clamp(2.5em, 4.25vw, 5em);
 
     text-align: center;
 }
@@ -42,12 +46,6 @@
 }
 
 //!aboutus
-.aboutus {
-    // display: flex;
-    // justify-content: space-between;
-    // align-items: center;
-}
-
 .aboutus {
     h4 {
         width: clamp(300px, 45vw, 100%);
@@ -69,40 +67,69 @@
 }
 
 //!portfolio
-#portfolio {
-    // height: 75vh;
-}
-
-.slide-track {
-    display: flex;
-}
-
 .portfolio-container {
     position: relative;
     width: 100%;
     display: grid;
     place-items: center;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
-.portfolio-img {
-    height: 500px;
-    width: 650px;
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: "main main main";
+}
+
+.grid-item {
+    color: $font-color-secondary;
+    background: $body-bg-color-lighter;
+}
+
+.main {
+    color: $font-color-secondary;
+    background-color: $body-bg;
+    grid-area: main;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.slide-track {
+    position: relative;
+    width: 50%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    white-space: nowrap;
+    cursor: grab;
+    background: $body-bg;
+}
+
+.slide-track.active {
+    background: $body-bg;
+}
+
+.portfolio-item {
+    display: inline-block;
 
     background: $body-bg-color-lighter;
 
+    min-height: 250px;
+    max-height: 550px;
+    height: 65vh;
+
+    min-width: 600px;
+    max-width: 800px;
+    width: 45vw;
+
     border-radius: 10px;
 
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    perspective: 100px;
+    margin: 0.5em 20em 0.5em 0em;
 }
 
 //!lets talk section
 #letsTalk-section {
-    // height: 50vh;
-
     width: 100%;
 
     display: grid;
@@ -111,7 +138,89 @@
     margin-top: 150px;
 }
 
+@media (max-width: $xxl-screen-size) {
+    .portfolio-item {
+        min-height: 250px;
+        max-height: 500px;
+        height: 50vh;
+
+        min-width: 500px;
+        max-width: 700px;
+        width: 45vw;
+
+        margin: 0.5em 17em 0.5em 0em;
+    }
+}
+
+@media (max-width: $xl-screen-size) {
+    .portfolio-item {
+        min-height: 250px;
+        max-height: 500px;
+        height: 45vh;
+
+        min-width: 450px;
+        max-width: 650px;
+        width: 45vw;
+
+        margin: 0.5em 12em 0.5em 0em;
+    }
+}
+
+@media (max-width: $lg-screen-size) {
+    .portfolio-item {
+        min-height: 150px;
+        max-height: 350px;
+        height: 45vh;
+
+        min-width: 250px;
+        max-width: 600px;
+        width: 55vw;
+
+        margin: 0.5em 8em 0.5em 0em;
+    }
+}
+
+@media (max-width: $md-screen-size) {
+    #clients {
+        display: none;
+    }
+
+    .btn-landing1 {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        margin-right: 0px;
+    }
+
+    .portfolio-item {
+        min-height: 250px;
+        max-height: 300px;
+        height: 40vh;
+
+        min-width: 250px;
+        max-width: 550px;
+        width: 55vw;
+
+        margin: 0.5em 5em 0.5em 0em;
+    }
+}
+
 @media (max-width: $sm-screen-size) {
+    .landing-page-content {
+        margin-top: 125px;
+    }
+
+    .portfolio-item {
+        min-height: 150px;
+        max-height: 300px;
+        height: 40vh;
+
+        min-width: 250px;
+        max-width: 500px;
+        width: 60vw;
+
+        margin: 0.5em 1em 0.5em 0em;
+    }
+
     .portfolio-btn-container {
         text-align: center;
     }

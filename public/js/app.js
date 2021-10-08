@@ -29,17 +29,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.registerPlugin(gsap_CSSPlugin__WEBPACK_IMPORTED_MODULE_2__.CSSPlugin, gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_3__.CSSRulePlugin); //! Landing page timeline
-
-var line = gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_3__.CSSRulePlugin.getRule('.landing-page-content:before');
-var h1 = document.querySelector('h1');
-var h2 = document.querySelector('h2');
-var button1 = document.getElementsByClassName("btn-landing1");
-var button2 = document.getElementsByClassName("btn-landing2");
-var topCover = document.getElementsByClassName("top-side");
-var bottomCover = document.getElementsByClassName("bottom-side");
-var tl = gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline(); // Using Locomotive Scroll
+ // Using Locomotive Scroll
 
 var locoScroll = new locomotive_scroll__WEBPACK_IMPORTED_MODULE_0__.default({
   el: document.querySelector('[data-scroll-container]') // smooth: true,
@@ -56,7 +46,17 @@ var locoScroll = new locomotive_scroll__WEBPACK_IMPORTED_MODULE_0__.default({
 //         return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
 //     }
 // });
-//!timeline 1
+
+gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.registerPlugin(gsap_CSSPlugin__WEBPACK_IMPORTED_MODULE_2__.CSSPlugin, gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_3__.CSSRulePlugin); //! Landing page timeline
+
+var line = gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_3__.CSSRulePlugin.getRule('.landing-page-content:before');
+var h1 = document.querySelector('h1');
+var h2 = document.querySelector('h2');
+var button1 = document.getElementsByClassName("btn-landing1");
+var button2 = document.getElementsByClassName("btn-landing2");
+var topCover = document.getElementsByClassName("top-side");
+var bottomCover = document.getElementsByClassName("bottom-side");
+var tl = gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline(); //!timeline 1
 
 tl.to(topCover, {
   delay: .5,
@@ -80,29 +80,29 @@ tl.to(h1, {
   duration: 1.25,
   ease: "expo",
   clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-  opacity: 1,
-  x: '30px'
+  opacity: 1 // x: '30px'
+
 }, "-=1.125");
 tl.to(h2, {
   duration: 1.75,
   ease: "expo",
   clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-  opacity: 1,
-  x: '30px'
+  opacity: 1 // x: '30px'
+
 }, "-=0.75");
 tl.to(button1, {
   duration: 0.1,
   ease: "expo",
   // clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-  opacity: 1,
-  x: '30px'
+  opacity: 1 // x: '30px'
+
 }, "-=1.25");
 tl.to(button2, {
   duration: 0.1,
   ease: "expo",
   // clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-  opacity: 1,
-  x: '30px'
+  opacity: 1 // x: '30px'
+
 }, "-=1.25");
 tl.to(line, {
   duration: 1,
@@ -134,39 +134,46 @@ function navBarAnimation() {
     gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(navBg, {
       duration: 0.75,
       ease: "expo",
-      opacity: 1
+      opacity: 1,
+      delay: 0.3
     });
     gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(navWrapper, {
       duration: 0.75,
       ease: "expo",
       opacity: 1,
-      delay: 0.1
+      delay: 0.4
     });
     gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(scaledContent, {
       duration: 1.25,
       ease: "expo",
-      scale: 1
+      scale: 1,
+      delay: 0.3
     });
     gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(scaledContent2, {
       duration: 1.25,
       ease: "expo",
-      scale: 1
+      scale: 1,
+      delay: 0.3
     });
     gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(navOutlinedContent, {
       duration: 1.5,
       ease: "expo",
       opacity: 1,
-      delay: 0.3
+      delay: 0.5
     });
     gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(webContent, {
       duration: 1,
       ease: "expo",
       opacity: 0,
       scale: 1.35,
-      y: yScroll + "px"
+      y: yScroll + "px",
+      onComplete: function onComplete() {
+        dNoneContent();
+      }
     });
   } else {
     //closed
+    dBlockContent();
     gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(navBg, {
       duration: 0.75,
       ease: "expo",
@@ -205,6 +212,14 @@ function navBarAnimation() {
   }
 
   i++;
+}
+
+function dNoneContent() {
+  webContent.style.display = "none";
+}
+
+function dBlockContent() {
+  webContent.style.display = "block";
 }
 
 function getScroll() {
