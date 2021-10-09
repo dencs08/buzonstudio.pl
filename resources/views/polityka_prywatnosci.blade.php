@@ -15,7 +15,7 @@
 
         <x-navbar/>
         
-        <div data-scroll-container id="web-content">
+        <div id="web-content" class="smooth-locomotive-scroll">
             
             <div id="privacy-policy-content">
                 <div id="privacy-policy-content" class="container">

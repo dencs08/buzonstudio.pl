@@ -1,116 +1,6 @@
 import { gsap } from "gsap";
-// import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CSSPlugin } from "gsap/CSSPlugin";
-import { CSSRulePlugin } from "gsap/CSSRulePlugin";
-import LocomotiveScroll from 'locomotive-scroll';
-
-// Using Locomotive Scroll
-const locoScroll = new LocomotiveScroll({
-    el: document.querySelector('[data-scroll-container]'),
-    // smooth: true,
-    // lerp: .05,
-});
-
-// // each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
-// locoScroll.on("scroll", ScrollTrigger.update);
-// // tell ScrollTrigger to use these proxy methods for the ".smooth-scroll" element since Locomotive Scroll is hijacking things
-// ScrollTrigger.scrollerProxy(".smooth-scroll", {
-//     scrollTop(value) {
-//         return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
-//     }, // we don't have to define a scrollLeft because we're only scrolling vertically.
-//     getBoundingClientRect() {
-//         return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-//     }
-// });
-
-gsap.registerPlugin(CSSPlugin, CSSRulePlugin);
-
-//! Landing page timeline
-const line = CSSRulePlugin.getRule('.landing-page-content:before')
-const h1 = document.querySelector('h1')
-const h2 = document.querySelector('h2')
-const button1 = document.getElementsByClassName("btn-landing1")
-const button2 = document.getElementsByClassName("btn-landing2")
-const topCover = document.getElementsByClassName("top-side")
-const bottomCover = document.getElementsByClassName("bottom-side")
-const tl = gsap.timeline()
-
-//!timeline 1
-tl.to(topCover, {
-    delay: .5,
-    duration: 1.5,
-    ease: 'expo.out',
-    y: '-50vh'
-})
-tl.to(bottomCover, {
-    duration: 1.5,
-    ease: 'expo.out',
-    y: '50vh'
-},
-    "-=1.5")
-tl.from(line, {
-    duration: 2,
-    ease: "expo",
-    cssRule: {
-        scaleY: 0
-    }
-},
-    "-=0.5")
-tl.fromTo(h1, {
-    opacity: 0,
-    x: '-30px',
-    clipPath: 'clip-path: polygon(0 0, 0 0, 0 100%, 0 100%)',
-
-}, {
-    opacity: 1,
-    x: '0px',
-    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-    ease: "expo",
-    duration: 1.25,
-},
-    "-=1.125")
-tl.fromTo(h2, {
-    clipPath: 'clip-path: polygon(0 0, 0 0, 0 100%, 0 100%)',
-    opacity: 1,
-    x: '-30px'
-}, {
-    opacity: 1,
-    x: '0px',
-    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-    ease: "expo",
-    duration: 1.75,
-},
-    "-=0.75")
-tl.fromTo(button1, {
-    ease: "expo",
-    opacity: 0,
-    y: '30px',
-}, {
-    opacity: 1,
-    y: '0px',
-    ease: "expo",
-    duration: 1.25,
-},
-    "-=1.25")
-tl.fromTo(button2, {
-    opacity: 0,
-    y: '30px'
-}, {
-    duration: 1.25,
-    ease: "expo",
-    opacity: 1,
-    y: '0px'
-},
-    "-=0.8")
-tl.to(line, {
-    duration: 1,
-    ease: "expo",
-    cssRule: {
-        scaleY: 0
-    }
-},
-    "-=0.35")
+// import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 //!navbar
 const navBurger = document.getElementById("nav-burger")
@@ -245,10 +135,6 @@ function zIndexNavBar() {
     navBg.style.zIndex = "-5";
 }
 
-function hide(elem) {
-    gsap.set(elem, { autoAlpha: 0 });
-}
-
 //!auto animations
 function animateFrom(elem, direction) {
     direction = direction || 1;
@@ -279,12 +165,18 @@ function animateFrom(elem, direction) {
         autoAlpha: 1,
         ease: "expo",
         lazy: false,
-        delay: 0.25
+        delay: 1
         // overwrite: "auto"
     });
 }
 
-//!On doc load hide .gs elements and create scroll trigger
+function hide(elem) {
+    gsap.set(elem, { autoAlpha: 0 });
+    console.log("hidden")
+}
+
+
+// //!On doc load hide .gs elements and create scroll trigger
 document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -293,18 +185,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         ScrollTrigger.create({
             trigger: elem,
-            start: "-250 center",
+            start: "center center",
+            end: "center center",
             onEnter: function () { animateFrom(elem) },
             once: true,
+            // markers: true,
+            // scroller: ".smooth-locomotive-scroll",
             // onEnterBack: function () { animateFrom(elem, -1) },
             // onLeave: function () { hide(elem) } // assure that the element is hidden when scrolled into view
+
         });
     });
 });
-
-
-// // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
-// ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
-
-// // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
-// ScrollTrigger.refresh();

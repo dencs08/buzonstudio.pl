@@ -1,3 +1,8 @@
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CSSPlugin } from "gsap/CSSPlugin";
+import { CSSRulePlugin } from "gsap/CSSRulePlugin";
+
 const slider = document.querySelector('.slide-track');
 let isDown = false;
 let startX;
@@ -55,35 +60,109 @@ function momentumLoop() {
     }
 }
 
-// var attention = document.getElementById('attention-content')
-// const webContent = document.getElementById('web-content')
+gsap.registerPlugin(CSSPlugin, CSSRulePlugin);
+//! Landing page timeline
+const line = CSSRulePlugin.getRule('.landing-page-content:before')
+const h1 = document.querySelector('h1')
+const h2 = document.querySelector('h2')
+const button1 = document.getElementsByClassName("btn-landing1")
+const button2 = document.getElementsByClassName("btn-landing2")
+const topCover = document.getElementsByClassName("top-side")
+const bottomCover = document.getElementsByClassName("bottom-side")
+const tl = gsap.timeline()
 
-// webContent.onscroll = function () {
-//     if (checkVisible(attention)) {
-//         // disableScroll()
-//     } else {
+//!timeline 1
+tl.to(topCover, {
+    delay: .5,
+    duration: 1.5,
+    ease: 'expo.out',
+    y: '-50vh'
+})
+tl.to(bottomCover, {
+    duration: 1.5,
+    ease: 'expo.out',
+    y: '50vh'
+},
+    "-=1.5")
+tl.from(line, {
+    duration: 2,
+    ease: "expo",
+    cssRule: {
+        scaleY: 0
+    }
+},
+    "-=0.5")
+tl.fromTo(h1, {
+    opacity: 0,
+    x: '-30px',
+    clipPath: 'clip-path: polygon(0 0, 0 0, 0 100%, 0 100%)',
 
-//     }
-// };
+}, {
+    opacity: 1,
+    x: '0px',
+    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+    ease: "expo",
+    duration: 1.25,
+},
+    "-=1.125")
+tl.fromTo(h2, {
+    clipPath: 'clip-path: polygon(0 0, 0 0, 0 100%, 0 100%)',
+    opacity: 1,
+    x: '-30px'
+}, {
+    opacity: 1,
+    x: '0px',
+    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+    ease: "expo",
+    duration: 1.75,
+},
+    "-=0.75")
+tl.fromTo(button1, {
+    ease: "expo",
+    opacity: 0,
+    y: '30px',
+}, {
+    opacity: 1,
+    y: '0px',
+    ease: "expo",
+    duration: 1.25,
+},
+    "-=1.25")
+tl.fromTo(button2, {
+    opacity: 0,
+    y: '30px'
+}, {
+    duration: 1.25,
+    ease: "expo",
+    opacity: 1,
+    y: '0px'
+},
+    "-=0.8")
+tl.to(line, {
+    duration: 1,
+    ease: "expo",
+    cssRule: {
+        scaleY: 0
+    }
+},
+    "-=0.35")
 
-// function checkVisible(elm) {
-//     var rect = elm.getBoundingClientRect();
-//     var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
-//     return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
-// }
+gsap.registerPlugin(ScrollTrigger);
 
+let sections = gsap.utils.toArray(".panel");
 
-// function disableScroll() {
-//     setTimeout(function () {
-//         console.log("disabled")
-//         webContent.style.overflow = "hidden"
-//         enableScroll()
-//     }, 150)
-// }
+gsap.to(sections, {
+    yPercent: -100 * (sections.length - 1),
+    ease: "none",
+    scrollTrigger: {
+        trigger: ".panel-scroller",
+        pin: true,
+        scrub: 1,
+        snap: {
+            snapTo: 1 / (sections.length - 1),
+            duration: 0.2
+        },
+        end: () => "+=" + document.querySelector(".panel-scroller").offsetHeight
+    }
+});
 
-// function enableScroll() {
-//     setTimeout(function () {
-//         console.log("enabled")
-//         webContent.style.overflow = "initial"
-//     }, 1000)
-// }

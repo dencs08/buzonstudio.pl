@@ -6714,27 +6714,8 @@ html.has-scroll-dragging {
   color: #ececec;
 }
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #00ff80 transparent;
-}
-
-*::-webkit-scrollbar {
-  width: 5px;
-}
-
-*::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: #00ff80;
-  border-radius: 5px;
-}
-
 html {
   font-size: 16px;
-  height: 100%;
 }
 
 body {
@@ -6744,7 +6725,7 @@ body {
   font-family: "Poppins";
   background-color: #111111;
   overflow-x: hidden;
-  height: 100%;
+  overflow-y: auto;
 }
 
 h1 {

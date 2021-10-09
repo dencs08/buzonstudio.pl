@@ -37,6 +37,10 @@ Route::get('polityka_prywatnosci', function () {
     return view('polityka_prywatnosci');
 });
 
+Route::get('test', function () {
+    return view('test');
+});
+
 
 
 

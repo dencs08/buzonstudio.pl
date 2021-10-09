@@ -1,10 +1,3 @@
-#web-content {
-  -ms-scroll-snap-type: y mandatory;
-      scroll-snap-type: y mandatory;
-  overflow-y: scroll;
-  height: 100vh !important;
-}
-
 .landing-page-content {
   position: relative;
 }

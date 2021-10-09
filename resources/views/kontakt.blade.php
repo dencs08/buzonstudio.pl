@@ -16,7 +16,7 @@
 
         <x-navbar/>
 
-        <div data-scroll-container id="web-content">
+        <div id="web-content" class="smooth-locomotive-scroll">
         <section data-scroll-section id="landing-page">
             <div data-scroll data-scroll-speed="3" class="container landing-page-content">
                 <h1>Zacznijmy owocną współpracę!</h1>
