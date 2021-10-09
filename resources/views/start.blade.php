@@ -21,8 +21,8 @@
         
         <x-navbar/>
 
-        <div id="web-content" class="smooth-locomotive-scroll">
-            <div class="panel-scroller">
+<div id="web-content" class="smooth-locomotive-scroll">
+    <div class="panel-scroller">
 
 
         <section data-scroll-section id="landing-page" class="scroll-snap-start panel">
@@ -131,10 +131,10 @@
                     </form>
                 </div>                
             </div>
-        </section>
+
          <!-- Clients section -->
 
-            <section id="clients">
+         <section data-scroll-section id="clients" class="scroll-snap-start">
                 <div class="container clients-content">
                     <h4  class="gs gs_fromLeft lh-sm my-2">Oni juz nam zaufali:</h4>
                     <div style="text-align:center;"> <div></div>
@@ -177,13 +177,14 @@
                     </div>
                 </div>
             </section>
-
-        <x-footer/>
+        </section>
     </div>
 </div>
 
-    <script src="js/app.js"></script>
-    <script src="js/start.js"></script>
+        <x-footer/>
+        
+        <script src="js/app.js"></script>
+        <script src="js/start.js"></script>
 
     </body>
 </html>

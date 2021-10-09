@@ -7444,6 +7444,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var slider = document.querySelector('.slide-track');
 var isDown = false;
 var startX;
@@ -7584,14 +7585,15 @@ gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(sections, {
   scrollTrigger: {
     trigger: ".panel-scroller",
     pin: true,
-    scrub: 1,
+    scrub: 0.01,
+    markers: true,
+    // start: "center top",
+    end: "center +=200px",
     snap: {
       snapTo: 1 / (sections.length - 1),
       duration: 0.2
-    },
-    end: function end() {
-      return "+=" + document.querySelector(".panel-scroller").offsetHeight;
-    }
+    } // end: () => "+=" + document.querySelector(".panel-scroller").offsetHeight
+
   }
 });
 })();

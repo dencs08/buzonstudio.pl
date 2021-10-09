@@ -6447,10 +6447,6 @@ html.has-scroll-dragging {
   align-items: center;
 }
 
-.scroll-snap-start {
-  scroll-snap-align: start;
-}
-
 .vh-50 {
   height: 50vh;
 }

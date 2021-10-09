@@ -2,6 +2,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CSSPlugin } from "gsap/CSSPlugin";
 import { CSSRulePlugin } from "gsap/CSSRulePlugin";
+import { end } from "@popperjs/core";
 
 const slider = document.querySelector('.slide-track');
 let isDown = false;
@@ -157,12 +158,15 @@ gsap.to(sections, {
     scrollTrigger: {
         trigger: ".panel-scroller",
         pin: true,
-        scrub: 1,
+        scrub: 0.01,
+        markers: true,
+        // start: "center top",
+        end: "center +=200px",
         snap: {
             snapTo: 1 / (sections.length - 1),
             duration: 0.2
         },
-        end: () => "+=" + document.querySelector(".panel-scroller").offsetHeight
+        // end: () => "+=" + document.querySelector(".panel-scroller").offsetHeight
     }
 });
 

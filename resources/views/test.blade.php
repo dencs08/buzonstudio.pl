@@ -58,7 +58,6 @@
             <div class="asd">
                 <section class="a panel">
                     <h1>GSAP ScrollTrigger Demo</h1>
-                    <h3>Scroll to see the ScrollTrigger in action!</h3>
                 </section>
                 <section class="b panel">
                     <h3>Pretty cool right?</h3>
@@ -68,6 +67,6 @@
                 </section>
             </div>
         </div>
-        <script src="js/app.js"></script>
+        <script src="js/start.js"></script>
     </body>
 </html>

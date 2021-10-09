@@ -1,6 +1,6 @@
 <!-- Footer -->
 <footer>
-<section data-scroll-section data-scroll data-scroll-repeat data-scroll-class="section-active" id="footer" class="scroll-snap-start">
+<section data-scroll-section data-scroll data-scroll-repeat data-scroll-class="section-active" id="footer" class="scroll-snap-start panel vh-100">
         <hr class="section-divider" />
         <div id="footer-content" class="container">
             <div class="row mb-5">

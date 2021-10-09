@@ -191,7 +191,7 @@ function animateFrom(elem, direction) {
     autoAlpha: 1,
     ease: "expo",
     lazy: false,
-    delay: 1 // overwrite: "auto"
+    delay: 0.25 // overwrite: "auto"
 
   });
 }
