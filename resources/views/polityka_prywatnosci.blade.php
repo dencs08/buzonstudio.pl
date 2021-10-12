@@ -10,15 +10,20 @@
     </head>
     <body class="antialiased">
 
-        <!-- WEBGL -->
-        <canvas id="web_gl"></canvas>
+        <div class="courtain">
+            <div class="top-side"></div>
+            <div class="bottom-side"></div>
+        </div>
 
         <x-navbar/>
+
+        <div id="nav-floater">
+        </div>
         
         <div id="web-content" class="smooth-locomotive-scroll">
             
             <div id="privacy-policy-content">
-                <div id="privacy-policy-content" class="container">
+                <div data-scroll-section class="container">
                 <h1>Polityka prywatności bisonstudio</h1>
                 <p>
                     Ta polityka prywatności (“<strong>Polityka</strong>”) zawarta na tej Stronie zarządza prywatnością informacji naszych uzytkownikow i odwiedzających, które zbieramy, uzywmy, ujawniamy i zarządzamy poprzez uzywanie Strony bisonstudio (“<strong>Strony</strong>”).<br />
@@ -73,9 +78,8 @@
                     <strong>9. Modyfikacja polityki prywatności</strong><br />
                     Przyjmujesz do wiadomości, ze ta polityka prywatności jest obiektem modyfikacji, alternacji i poprawek przez bisonstudio przez cały czas, bez lub z powiadomieniem Ciebie o nich. Zgadzasz się równiez z tym, ze jakiekolwiek modyfikacje są w wazne i mają wpływ po ich zamieszczeniu w tej Witrynie.
                 </p>
-        </div>
-    <x-footer/>
-
+            </div>
+            <x-footer/>
         </div>
         <script src="js/app.js"></script>
         <script src="js/privacy.js"></script>

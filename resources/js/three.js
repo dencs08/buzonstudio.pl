@@ -115,7 +115,7 @@
 //     cubeMaterial = new THREE.MeshBasicMaterial(parameters);
 
 //     //! Controls
-//     // controls = new OrbitControls(camera, renderer.domElement)
+//     controls = new OrbitControls(camera, renderer.domElement)
 
 //     //! Scene
 //     new THREE.CubeTextureLoader().load([

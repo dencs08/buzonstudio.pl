@@ -1,9 +1,8 @@
 // import { gsap } from "gsap";
-// // import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+// import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 // import { ScrollTrigger } from "gsap/ScrollTrigger";
 // import { CSSPlugin } from "gsap/CSSPlugin";
 // import { CSSRulePlugin } from "gsap/CSSRulePlugin";
-
 import LocomotiveScroll from 'locomotive-scroll';
 
 const locoScroll = new LocomotiveScroll({

@@ -25,23 +25,23 @@
                         <ul id="nav-ul">
                             <li class="nav-li">
                                 <span class="nav-number">01</span
-                                ><a href="start" class="nav-item">Start</a>
+                                ><a href="start" class="nav-item web_link web_link_active">Start</a>
                             </li>
                             <li class="nav-li">
                                 <span class="nav-number">02</span
-                                ><a href="oferta" class="nav-item">Oferta</a>
+                                ><a href="oferta" class="nav-item web_link web_link_active">Oferta</a>
                             </li>
                             <li class="nav-li">
                                 <span class="nav-number">03</span
-                                ><a href="start" class="nav-item">Portfolio</a>
+                                ><a href="start#section5" class="nav-item web_link">Portfolio</a>
                             </li>
                             <li class="nav-li">
                                 <span class="nav-number">04</span
-                                ><a href="kontakt" class="nav-item">Kontakt</a>
+                                ><a href="kontakt" class="nav-item web_link web_link_active">Kontakt</a>
                             </li>
                             <li class="nav-li">
                                 <span class="nav-number">05</span
-                                ><a href="opinie" class="nav-item">Opinie</a>
+                                ><a href="opinie" class="nav-item web_link web_link_active">Opinie</a>
                             </li>
                         </ul>
                     </div>
@@ -171,3 +171,6 @@
     </div>
 
 </nav>
+
+<div id="nav-floater">
+</div>

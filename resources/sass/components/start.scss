@@ -1,9 +1,14 @@
 @import "../variables";
+@import "~fullpage.js/dist/fullpage";
 
-#web-content {
-    // scroll-snap-type: y mandatory;
-    // overflow-y: scroll;
-    // height: 100vh !important;
+#fp-nav {
+    span {
+        background: $font-color-primary !important;
+    }
+}
+
+.landing-page-content {
+    margin-bottom: clamp(5rem, 20vh, 9rem);
 }
 
 .landing-page-content {
@@ -24,27 +29,6 @@
     transform: scaleY(1);
 }
 
-//!client logos
-#clients {
-    height: 1vh;
-}
-
-.client-logo {
-    position: relative;
-    display: inline-block;
-
-    width: clamp(100px, 12vw, 150px);
-
-    padding: 10px;
-    margin-right: clamp(2.5em, 4.25vw, 5em);
-
-    text-align: center;
-}
-
-.client-logo img {
-    vertical-align: middle;
-}
-
 //!aboutus
 .aboutus {
     h4 {
@@ -59,19 +43,7 @@
     }
 }
 
-#remembered {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 100px;
-}
-
 //!portfolio
-#portfolio {
-    padding-top: 100px;
-    height: 100vh;
-}
-
 .portfolio-container {
     width: 100%;
 }
@@ -110,12 +82,48 @@
     margin: 0.5em 8em 0.5em 0em;
 }
 
-//!lets talk section
-#letsTalk-section {
-    width: 100%;
+//!client logos
+#clients {
+    display: block !important;
+    h4 {
+        font-size: clamp(0.75rem, 3vw, 0.9rem);
+    }
+}
 
-    display: grid;
-    place-items: center;
+.client-logo {
+    position: relative;
+    display: inline-block;
+
+    width: clamp(100px, 12vw, 150px);
+
+    padding: 10px;
+    margin: clamp(10px, 1vh, 25px) clamp(10px, 2.5vw, 50px);
+
+    text-align: center;
+}
+
+.client-logo img {
+    vertical-align: middle;
+}
+
+//!footer
+
+.privacy-container {
+    position: absolute;
+    bottom: 15px;
+}
+
+.copyright-container {
+    position: absolute;
+    bottom: 15px;
+    left: 0%;
+    right: 0%;
+
+    margin-top: -20px;
+}
+
+.section-divider {
+    margin-top: 25px !important;
 }
 
 @media (max-width: $xxl-screen-size) {
@@ -174,18 +182,8 @@
 }
 
 @media (max-width: $md-screen-size) {
-    #web-content {
-        scroll-snap-type: none;
-        overflow-y: scroll;
-        height: 100vh !important;
-    }
-
     #clients {
         display: none;
-    }
-
-    #portfolio {
-        padding-top: 75px;
     }
 
     .portfolio-item {
@@ -204,10 +202,6 @@
 @media (max-width: $sm-screen-size) {
     .landing-page-content {
         margin-top: 125px;
-    }
-
-    #portfolio {
-        padding-top: 40px;
     }
 
     .portfolio-item {

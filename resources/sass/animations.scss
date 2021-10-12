@@ -28,22 +28,3 @@
 
     z-index: 999;
 }
-
-//!landingpage
-
-#landing-page {
-    h1 {
-        clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-    }
-    h2 {
-        clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-    }
-    .btn-landing1 {
-        // clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-        opacity: 0;
-    }
-    .btn-landing2 {
-        // clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-        opacity: 0;
-    }
-}

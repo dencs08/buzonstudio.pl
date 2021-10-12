@@ -41,9 +41,5 @@ Route::get('test', function () {
     return view('test');
 });
 
-
-
-
-// Route::get('/', function () {
-//     return view('start');
-// });
+Route::get('/email', [App\Http\Controllers\EmailController::class, 'create']);
+Route::post('/email', [App\Http\Controllers\EmailController::class, 'sendEmail'])->name('send.email');

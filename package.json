@@ -28,6 +28,8 @@
     },
     "dependencies": {
         "@popperjs/core": "^2.9.3",
+        "barba.js": "^1.0.0",
+        "fullpage.js": "^3.1.2",
         "gsap": "^3.7.1",
         "locomotive-scroll": "^4.1.2",
         "smooth-scrollbar": "^8.6.3",

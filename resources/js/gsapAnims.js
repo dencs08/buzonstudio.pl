@@ -12,6 +12,9 @@ const scaledContent2 = document.getElementById("nav-info")
 const webContent = document.getElementById("web-content")
 const body = document.getElementsByTagName("body")[0]
 
+const navFloater = document.getElementById("nav-floater")
+var position = getPosition(navFloater);
+
 let i = 0;
 
 navBurger.addEventListener("click", navBarAnimation);
@@ -22,7 +25,7 @@ navBg.style.zIndex = "-99";
 function navBarAnimation() {
     if (i % 2 == 0) {
         //opened
-        let yScroll = (-getScroll() / 2) + (body.clientHeight / 5)
+        let yScroll = position.x;
 
         navWrapper.style.zIndex = "98";
         navBg.style.zIndex = "97";
@@ -63,11 +66,11 @@ function navBarAnimation() {
             opacity: 0,
             scale: 1.35,
             y: yScroll + "px",
-            onComplete: function () { dNoneContent() },
+            // onComplete: function () { dNoneContent() },
         })
     } else {
         //closed
-        dBlockContent()
+        // dBlockContent()
         gsap.to(navBg, {
             duration: 0.75,
             ease: "expo",
@@ -116,18 +119,31 @@ function dBlockContent() {
     webContent.style.display = "block"
 }
 
+function getPosition(el) {
+    var xPos = 0;
+    var yPos = 0;
 
-function getScroll() {
-    if (window.pageYOffset != undefined) {
-        return pageYOffset;
-    } else {
-        var sx, sy, d = document,
-            r = d.documentElement,
-            b = d.body;
-        sx = r.scrollLeft || b.scrollLeft || 0;
-        sy = r.scrollTop || b.scrollTop || 0;
-        return [sx, sy];
+    while (el) {
+        if (el.tagName == "BODY") {
+            // deal with browser quirks with body/window/document and page scroll
+            var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
+            var yScroll = el.scrollTop || document.documentElement.scrollTop;
+
+            xPos += (el.offsetLeft - xScroll + el.clientLeft);
+            yPos += (el.offsetTop - yScroll + el.clientTop);
+        } else {
+            // for all other non-BODY elements
+            xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+            yPos += (el.offsetTop - el.scrollTop + el.clientTop);
+        }
+
+        el = el.offsetParent;
     }
+    return {
+        x: xPos,
+        y: yPos
+    };
+
 }
 
 function zIndexNavBar() {
@@ -159,13 +175,13 @@ function animateFrom(elem, direction) {
     elem.style.transform = "translate(" + x + "px, " + y + "px)";
     elem.style.opacity = "0";
     gsap.fromTo(elem, { x: x, y: y, autoAlpha: 0 }, {
-        duration: 1.25,
+        duration: 1,
         x: 0,
         y: 0,
         autoAlpha: 1,
         ease: "expo",
         lazy: false,
-        delay: 0.25
+        delay: 0
         // overwrite: "auto"
     });
 }
@@ -174,7 +190,6 @@ function hide(elem) {
     gsap.set(elem, { autoAlpha: 0 });
     console.log("hidden")
 }
-
 
 // //!On doc load hide .gs elements and create scroll trigger
 document.addEventListener("DOMContentLoaded", function () {
@@ -185,15 +200,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         ScrollTrigger.create({
             trigger: elem,
-            start: "center center",
-            end: "center center",
-            onEnter: function () { animateFrom(elem) },
+            start: "top center",
+            end: "bottom top",
             once: true,
-            // markers: true,
+            markers: true,
             // scroller: ".smooth-locomotive-scroll",
-            // onEnterBack: function () { animateFrom(elem, -1) },
-            // onLeave: function () { hide(elem) } // assure that the element is hidden when scrolled into view
-
+            onEnter: function () { animateFrom(elem) },
+            onEnterBack: function () { animateFrom(elem) },
+            onLeave: function () { hide(elem) } // assure that the element is hidden when scrolled into view
         });
     });
 });

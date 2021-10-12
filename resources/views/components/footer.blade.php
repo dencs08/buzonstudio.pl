@@ -1,10 +1,56 @@
+
 <!-- Footer -->
-<footer>
-<section data-scroll-section data-scroll data-scroll-repeat data-scroll-class="section-active" id="footer" class="scroll-snap-start panel vh-100">
+<section data-scroll-section id="footer" class="section">
+    
+         <!-- Clients section -->
+
+         <section id="clients">
+            <div class="container clients-content">
+                <h4  class="lh-sm mb-2">Oni juz nam zaufali:</h4>
+                <div style="text-align:center;"> <div></div>
+                <div class="client-logos">
+                    <div align="center" class="client-logo">
+                        <img
+                            src="images/logos/danfit.svg"
+                            alt=""
+                            class="client-logo-svg"
+                        />
+                    </div>
+                    <div align="center" class="client-logo">
+                        <img
+                            src="images/logos/komb.svg"
+                            alt=""
+                            class="client-logo-svg"
+                        />
+                    </div>
+                    <div align="center" class="client-logo">
+                        <img
+                            src="images/logos/logo_white-cropped.svg"
+                            alt=""
+                            class="client-logo-svg"
+                        />
+                    </div>
+                    <div align="center" class="client-logo">
+                        <img
+                            src="images/logos/zielonewidoki.svg"
+                            alt=""
+                            class="client-logo-svg"
+                        />
+                    </div>
+                    <div align="center" class="client-logo">
+                        <img
+                            src="images/logos/ats.svg"
+                            alt=""
+                            class="client-logo-svg"
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
         <hr class="section-divider" />
         <div id="footer-content" class="container">
-            <div class="row mb-5">
-                <div data-scroll data-scroll-speed="2.5" class="col-md-6">
+            <div class="row footer_row">
+                <div data-scroll  class="col-md-6">
                     <h3 class="mt-0 mb-4">Zostańmy w kontakcie</h3>
 
                     <a
@@ -13,7 +59,7 @@
                         >biuro@bisonstudio.pl</a
                     >
 
-                    <h4 class="my-0 mt-3 mb-2">+48 882 031 130</h4>
+                    <h4 class="my-0 mt-3 mb-4">+48 882 031 130</h4>
 
                     <div class="footer-icon-div">
                         <svg
@@ -107,7 +153,7 @@
                         </svg>
                     </div>
                 </div>
-                <div data-scroll data-scroll-speed="2.5" class="col-md-6 second-col-footer">
+                <div data-scroll class="col-md-6 second-col-footer">
                     <div class="float-md-end">
                         <h3 class="mt-0 mb-2">Nie przekonaliśmy Cię?</h3>
                         <h4 class="mt-0 mb-4">Zobacz co mowią o nas inni</h4>
@@ -146,11 +192,5 @@
                 </div>
             </div>
         </div>
-        <div class="scroll-blocker">
-        <div class="scroll-blocker">
-            <span>blockthescroll!</span>
-        </div>
-        </div>
-
+        <div class="scroll-blocker"></div>
     </section>
-    </footer>

@@ -99,18 +99,27 @@
     padding-top: 0.5rem;
 }
 
-.display-centered {
+.display-flex-center {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.display-grid-center {
+    display: grid;
+    place-items: center;
+}
+
 .scroll-snap-start {
-    // scroll-snap-align: start;
+    scroll-snap-align: start;
 }
 
 .vh-50 {
     height: 50vh;
+}
+
+.scroll-blocker {
+    height: 30px;
 }
 
 @media (max-width: $md-screen-size) {

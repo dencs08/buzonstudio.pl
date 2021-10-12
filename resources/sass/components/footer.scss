@@ -1,5 +1,6 @@
 //!footer
 #footer {
+    // position: relative;
     h3 {
         font-size: clamp(1.65rem, 2.25vw, 3.2rem);
     }
@@ -25,6 +26,10 @@
             content: "";
         }
     }
+}
+
+.footer_row {
+    margin-bottom: 100px;
 }
 
 .btn-primary {
@@ -56,13 +61,9 @@
 }
 
 .underfooter-container {
-    margin-top: 125px;
-    // margin-bottom: 25px;
-    font-size: clamp(0.8rem, 0.7vw, 0.9rem);
-}
+    margin-top: -20px;
 
-.privacy-container {
-    width: fit-content;
+    font-size: clamp(0.8rem, 0.7vw, 0.9rem);
 }
 
 .copyright-container {
@@ -88,6 +89,7 @@
 
     margin-right: clamp(0.7rem, 2vw, 1rem) !important;
     margin-top: clamp(0.5rem, 2vh, 1.5rem) !important;
+    margin-bottom: clamp(0.5rem, 3.5vh, 3rem) !important;
 
     cursor: pointer;
 
@@ -102,11 +104,6 @@
         fill: $primary-color !important;
         color: $primary-color !important;
     }
-}
-
-.scroll-blocker {
-    opacity: 0;
-    cursor: default;
 }
 
 @media (max-width: $md-screen-size) {
@@ -125,9 +122,6 @@
     .underfooter-container {
         margin-top: 50px;
     }
-    .privacy-policy {
-        margin-bottom: 20px;
-    }
     .mail-href {
         font-size: clamp(1rem, 2.5vw, 1.5rem);
         line-height: 28px;
@@ -144,7 +138,9 @@
     }
     .privacy-container {
         text-align: center;
-        width: 100%;
+        margin-bottom: 30px;
+        left: 0%;
+        right: 0%;
     }
     .privacy-policy {
         text-align: center;

@@ -31,16 +31,26 @@
   color: #00ff80;
 }
 
+#landing-page {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.landing-page-content {
+  margin-bottom: clamp(5rem, 20vh, 9rem);
+}
+
 #offer {
   margin-bottom: 150px;
 }
 #offer h2 {
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 600;
+  font-size: clamp(1.75rem, 2.25vw, 2rem);
+  font-weight: 300 !important;
   color: #ffffff;
 }
 #offer h3 {
-  font-size: clamp(1.75rem, 2.25vw, 2rem);
+  font-size: clamp(2rem, 3.5vw, 3rem);
   font-weight: 500;
   color: #ececec;
   margin-bottom: 15px;
@@ -82,13 +92,14 @@
   list-style: none;
   position: relative;
 }
-#works .navigation-wrapper ul li {
+#works .navigation-wrapper ul .li-separate {
   margin-bottom: 30px;
 }
 #works .navigation-wrapper a {
-  font-family: serif;
+  font-family: "Scheherazade New", serif;
   font-size: clamp(2.5rem, 7vw, 3.5rem);
   line-height: 3rem;
+  font-weight: 300;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.3);
 }
@@ -109,6 +120,9 @@
   width: -moz-fit-content;
   width: fit-content;
 }
+#works .navigation-item:hover {
+  mix-blend-mode: difference;
+}
 #works .navigation-item span:before {
   width: 0;
   color: #ffffff;
@@ -127,16 +141,16 @@
   display: flex;
   justify-content: center;
 }
-#works .project-preview {
-  position: fixed;
-  top: 20%;
-  left: 35%;
-  width: clamp(400px, 60vw, 1000px);
-  height: clamp(200px, 25vw, 800px);
-  background: url(/images/portfolio1.png) no-repeat 50% 50%;
-  border-radius: 2px;
+
+.project-preview {
+  position: absolute;
+  width: 600px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -100px;
+  background: no-repeat 50% 50%;
   background-size: cover;
-  overflow: hidden;
 }
 
 @media (max-width: 992px) {

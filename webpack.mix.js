@@ -8,6 +8,7 @@ mix.js([
 ], 'public/js/app.js').version()
     .js([
         'resources/js/components/start/start.js',
+        'resources/js/momentum-slider.js',
     ], 'public/js/start.js').version()
     .js([
         'resources/js/components/testimonials/testimonials.js',
@@ -39,3 +40,4 @@ mix.js([
     .sass('resources/sass/components/contact.scss', 'public/css');
 
 mix.browserSync('127.0.0.1:8000');
+

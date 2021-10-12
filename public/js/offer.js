@@ -20918,23 +20918,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
 
 
+var preview = document.querySelectorAll('.project-preview');
+var timer = 0;
 jquery__WEBPACK_IMPORTED_MODULE_0__(document).ready(function () {
-  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set(".project-preview", {
+  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set(preview, {
     width: 0
   });
-  var tl = gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline();
   jquery__WEBPACK_IMPORTED_MODULE_0__(document).on("mouseover", ".navigation-item", function (evt) {
-    tl.to(jquery__WEBPACK_IMPORTED_MODULE_0__(".project-preview"), {
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.fromTo(preview, {
+      width: "0px",
+      opacity: 0.5
+    }, {
       duration: 1,
+      opacity: 1,
       width: "600px",
       ease: "expo.inOut"
     });
   }).on("mouseout", ".navigation-item", function (evt) {
-    tl.to(jquery__WEBPACK_IMPORTED_MODULE_0__(".project-preview"), {
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.fromTo(preview, {
+      opacity: 1,
+      width: "600px"
+    }, {
       duration: 0.5,
-      width: 0,
+      opacity: 0,
+      width: "0px",
       ease: "expo.inOut"
     });
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set(preview, {
+      width: 0,
+      delay: 1
+    });
+  });
+});
+jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mousemove', function (e) {
+  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(".project-preview", {
+    duration: 0.5,
+    css: {
+      left: e.pageX,
+      top: e.pageY / 2
+    },
+    delay: 0.03
   });
 });
 jquery__WEBPACK_IMPORTED_MODULE_0__(".navigation-link-1").hover(function () {
@@ -20957,15 +20980,6 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(".navigation-link-4").hover(function () {
     "background-image": "url(images/portfolio1.png)"
   });
 });
-var offsets = jquery__WEBPACK_IMPORTED_MODULE_0__('.project-preview').offset();
-var top = offsets.top;
-var left = offsets.left;
-jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mousemove', function (e) {
-  jquery__WEBPACK_IMPORTED_MODULE_0__('.project-preview').css({
-    left: e.pageX / 1,
-    top: top + e.pageY / 10
-  });
-});
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
@@ -20978,7 +20992,7 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var locomotive_scroll__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! locomotive-scroll */ "./node_modules/locomotive-scroll/dist/locomotive-scroll.esm.js");
 // import { gsap } from "gsap";
-// // import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+// import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 // import { ScrollTrigger } from "gsap/ScrollTrigger";
 // import { CSSPlugin } from "gsap/CSSPlugin";
 // import { CSSRulePlugin } from "gsap/CSSRulePlugin";
@@ -21018,35 +21032,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! gsap/CSSRulePlugin */ "./node_modules/gsap/CSSRulePlugin.js");
 
 
+ // Splitting();
 
 gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_CSSPlugin__WEBPACK_IMPORTED_MODULE_1__.CSSPlugin, gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_2__.CSSRulePlugin); //! Landing page timeline
 
 var h1 = document.querySelector('h1');
 var h2 = document.querySelector('h2');
+var arrow = document.getElementsByClassName('arrow-down-icon');
 var tl = gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.timeline(); //!timeline 1
 
-tl.fromTo(h1, {
-  opacity: 0,
-  x: '-30px',
-  clipPath: 'clip-path: polygon(0 0, 0 0, 0 100%, 0 100%)'
-}, {
-  opacity: 1,
-  x: '0px',
-  clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-  ease: "expo",
-  duration: 1.25
-}, "+=0.5");
 tl.fromTo(h2, {
-  clipPath: 'clip-path: polygon(0 0, 0 0, 0 100%, 0 100%)',
-  opacity: 1,
+  clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
+  opacity: 0,
   x: '-30px'
 }, {
+  delay: 0.5,
   opacity: 1,
   x: '0px',
   clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
   ease: "expo",
-  duration: 1.75
-}, "-=0.75");
+  duration: 1.5,
+  stagger: 0.5
+}, "+=0.5");
+tl.fromTo(h1, {
+  opacity: 0,
+  y: '60px' // clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
+
+}, {
+  opacity: 1,
+  y: '0px',
+  // clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+  ease: "expo",
+  duration: 1.5,
+  stagger: 0.5
+}, "-=1");
+tl.fromTo(arrow, {
+  opacity: 0,
+  y: '-60px'
+}, {
+  opacity: 1,
+  y: '0px',
+  duration: 0.5
+}, "-=1.25");
 })();
 
 /******/ })()

@@ -1,5 +1,17 @@
 @import "../variables";
 
+//!landing page
+#landing-page {
+    height: 100vh;
+    display: grid;
+
+    place-items: center;
+}
+
+.landing-page-content {
+    margin-bottom: clamp(5rem, 20vh, 9rem);
+}
+
 .card {
     display: flex;
     justify-content: center;

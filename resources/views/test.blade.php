@@ -54,6 +54,7 @@
 
     <body class="antialiased">
         <x-navbar/>
+        <div class="panel-scroller">
         <div class="smooth-locomotive-scroll">
             <div class="asd">
                 <section class="a panel">
@@ -67,6 +68,8 @@
                 </section>
             </div>
         </div>
+        </div>
+
         <script src="js/start.js"></script>
     </body>
 </html>

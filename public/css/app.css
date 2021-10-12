@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&);
-@import url(https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;500&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap);
 .row {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
@@ -6029,8 +6030,8 @@ html.has-scroll-dragging {
 
 .menu-btn {
   position: fixed;
-  right: 30px;
-  top: 20px;
+  right: clamp(10px, 2vw, 30px);
+  top: clamp(10px, 2vh, 20px);
   height: 50px;
   width: 50px;
   text-align: center;
@@ -6166,6 +6167,10 @@ html.has-scroll-dragging {
   color: #00ff80 !important;
 }
 
+.nav-item.active {
+  color: #00ff80;
+}
+
 #navbar input[type=checkbox] {
   display: none;
 }
@@ -6225,6 +6230,10 @@ html.has-scroll-dragging {
   content: "";
 }
 
+.footer_row {
+  margin-bottom: 100px;
+}
+
 .btn-primary span {
   font-size: clamp(0.7rem, 1.5vw, 1rem);
 }
@@ -6245,14 +6254,8 @@ html.has-scroll-dragging {
 }
 
 .underfooter-container {
-  margin-top: 125px;
+  margin-top: -20px;
   font-size: clamp(0.8rem, 0.7vw, 0.9rem);
-}
-
-.privacy-container {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
 }
 
 .copyright-container {
@@ -6275,6 +6278,7 @@ html.has-scroll-dragging {
   height: clamp(2rem, 3.5vw, 3rem) !important;
   margin-right: clamp(0.7rem, 2vw, 1rem) !important;
   margin-top: clamp(0.5rem, 2vh, 1.5rem) !important;
+  margin-bottom: clamp(0.5rem, 3.5vh, 3rem) !important;
   cursor: pointer;
 }
 .footer-icon-div .footer-icon {
@@ -6285,11 +6289,6 @@ html.has-scroll-dragging {
 .footer-icon-div:hover .footer-icon {
   fill: #00ff80 !important;
   color: #00ff80 !important;
-}
-
-.scroll-blocker {
-  opacity: 0;
-  cursor: default;
 }
 
 @media (max-width: 768px) {
@@ -6309,10 +6308,6 @@ html.has-scroll-dragging {
     margin-top: 50px;
   }
 
-  .privacy-policy {
-    margin-bottom: 20px;
-  }
-
   .mail-href {
     font-size: clamp(1rem, 2.5vw, 1.5rem);
     line-height: 28px;
@@ -6329,7 +6324,9 @@ html.has-scroll-dragging {
 
   .privacy-container {
     text-align: center;
-    width: 100%;
+    margin-bottom: 30px;
+    left: 0%;
+    right: 0%;
   }
 
   .privacy-policy {
@@ -6441,14 +6438,27 @@ html.has-scroll-dragging {
   padding-top: 0.5rem;
 }
 
-.display-centered {
+.display-flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.display-grid-center {
+  display: grid;
+  place-items: center;
+}
+
+.scroll-snap-start {
+  scroll-snap-align: start;
+}
+
 .vh-50 {
   height: 50vh;
+}
+
+.scroll-blocker {
+  height: 30px;
 }
 
 @media (max-width: 768px) {
@@ -6679,21 +6689,6 @@ html.has-scroll-dragging {
   z-index: 999;
 }
 
-#landing-page h1 {
-  -webkit-clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-          clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-}
-#landing-page h2 {
-  -webkit-clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-          clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-}
-#landing-page .btn-landing1 {
-  opacity: 0;
-}
-#landing-page .btn-landing2 {
-  opacity: 0;
-}
-
 *,
 *::before,
 *::after {
@@ -6719,19 +6714,19 @@ body {
   padding: 0;
   color: #ffffff;
   font-family: "Poppins";
+  overflow: hidden;
   background-color: #111111;
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 
 h1 {
   font-weight: 600;
-  font-size: clamp(1.75rem, 6vw, 4.5rem);
+  font-size: clamp(1.75rem, 4.15vw, 4.5rem);
 }
 
 h2 {
   font-weight: 500;
-  font-size: clamp(1rem, 3vw, 3rem);
+  font-size: clamp(1rem, 1.8vw, 3rem);
+  font-family: "Source Sans Pro", sans-serif;
   color: #bebebe;
 }
 
@@ -6769,7 +6764,10 @@ a {
 }
 
 .arrow-down-icon {
+  margin-top: clamp(10px, 5vh, 100px);
   fill: #00ff80;
+  height: 100px !important;
+  width: 100px !important;
 }
 
 #web_gl {
@@ -6779,12 +6777,12 @@ a {
   z-index: -10;
 }
 
-#landing-page {
-  height: 92.5vh;
-  display: grid;
-  place-items: center;
+#nav-floater {
+  position: fixed;
+  top: 50%;
+  left: 50%;
 }
 
-.landing-page-content {
-  margin-bottom: clamp(5rem, 20vh, 9rem);
+#clients {
+  display: none;
 }

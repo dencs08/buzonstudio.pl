@@ -19854,35 +19854,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! gsap/CSSRulePlugin */ "./node_modules/gsap/CSSRulePlugin.js");
 
 
+ // Splitting();
 
 gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_CSSPlugin__WEBPACK_IMPORTED_MODULE_1__.CSSPlugin, gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_2__.CSSRulePlugin); //! Landing page timeline
 
 var h1 = document.querySelector('h1');
 var h2 = document.querySelector('h2');
+var arrow = document.getElementsByClassName('arrow-down-icon');
 var tl = gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.timeline(); //!timeline 1
 
-tl.fromTo(h1, {
-  opacity: 0,
-  x: '-30px',
-  clipPath: 'clip-path: polygon(0 0, 0 0, 0 100%, 0 100%)'
-}, {
-  opacity: 1,
-  x: '0px',
-  clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-  ease: "expo",
-  duration: 1.25
-}, "+=0.5");
 tl.fromTo(h2, {
-  clipPath: 'clip-path: polygon(0 0, 0 0, 0 100%, 0 100%)',
-  opacity: 1,
+  clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
+  opacity: 0,
   x: '-30px'
 }, {
+  delay: 0.5,
   opacity: 1,
   x: '0px',
   clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
   ease: "expo",
-  duration: 1.75
-}, "-=0.75");
+  duration: 1.5,
+  stagger: 0.5
+}, "+=0.5");
+tl.fromTo(h1, {
+  opacity: 0,
+  y: '60px' // clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
+
+}, {
+  opacity: 1,
+  y: '0px',
+  // clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+  ease: "expo",
+  duration: 1.5,
+  stagger: 0.5
+}, "-=1");
+tl.fromTo(arrow, {
+  opacity: 0,
+  y: '-60px'
+}, {
+  opacity: 1,
+  y: '0px',
+  duration: 0.5
+}, "-=1.25");
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
@@ -19894,7 +19907,7 @@ tl.fromTo(h2, {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var locomotive_scroll__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! locomotive-scroll */ "./node_modules/locomotive-scroll/dist/locomotive-scroll.esm.js");
 // import { gsap } from "gsap";
-// // import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+// import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 // import { ScrollTrigger } from "gsap/ScrollTrigger";
 // import { CSSPlugin } from "gsap/CSSPlugin";
 // import { CSSRulePlugin } from "gsap/CSSRulePlugin";
