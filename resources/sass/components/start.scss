@@ -58,16 +58,20 @@
 
 .slide-track {
     width: 100%;
+
     overflow: hidden;
     white-space: nowrap;
-    cursor: grab;
     background: transparent;
+
+    cursor: grab;
 }
 
 .portfolio-item {
     display: inline-block;
 
-    background: $body-bg-color-lighter;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 
     min-height: 250px;
     max-height: 500px;
@@ -80,6 +84,26 @@
     border-radius: 10px;
 
     margin: 0.5em 8em 0.5em 0em;
+}
+
+.portfolio-item1 {
+    background-image: url("/images/portfolio1.png");
+}
+
+.portfolio-item2 {
+    background-image: url("/images/portfolio1.png");
+}
+
+.portfolio-item3 {
+    background-image: url("/images/portfolio1.png");
+}
+
+.portfolio-item4 {
+    background-image: url("/images/portfolio1.png");
+}
+
+.portfolio-item5 {
+    background-image: url("/images/portfolio1.png");
 }
 
 //!client logos

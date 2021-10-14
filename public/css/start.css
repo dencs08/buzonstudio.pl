@@ -315,14 +315,16 @@ html.fp-enabled,
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
+  background: transparent;
   cursor: -webkit-grab;
   cursor: grab;
-  background: transparent;
 }
 
 .portfolio-item {
   display: inline-block;
-  background: #161616;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   min-height: 250px;
   max-height: 500px;
   height: 45vh;
@@ -331,6 +333,26 @@ html.fp-enabled,
   width: 40vw;
   border-radius: 10px;
   margin: 0.5em 8em 0.5em 0em;
+}
+
+.portfolio-item1 {
+  background-image: url("/images/portfolio1.png");
+}
+
+.portfolio-item2 {
+  background-image: url("/images/portfolio1.png");
+}
+
+.portfolio-item3 {
+  background-image: url("/images/portfolio1.png");
+}
+
+.portfolio-item4 {
+  background-image: url("/images/portfolio1.png");
+}
+
+.portfolio-item5 {
+  background-image: url("/images/portfolio1.png");
 }
 
 #clients {
