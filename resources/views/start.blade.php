@@ -33,7 +33,7 @@
 
                 <h2 class="anim-stagger0">digital products, branding & marketing</h2>
 
-                <button class="btn btn-primary btn-landing1 anim-stagger0">PORTFOLIO</button>
+                <a href="#section5"><button class="btn btn-primary btn-landing1 anim-stagger0">PORTFOLIO</button></a>
                 <a class="web_link_transitions a_btn btn-landing2 anim-stagger0" href="oferta">CO ROBIMY?</a>
             </div>
         </section>
@@ -99,15 +99,15 @@
                 </div>
                 <div class="grid-item main">
                     <div class="slide-track">
-                        <div class="portfolio-item portfolio-item1 mx-auto mx-lg-5 item1 anim-stagger4"></div>
-                        <div class="portfolio-item portfolio-item2 mx-auto mx-lg-5 item2 d-none d-lg-inline-block anim-stagger4"></div>
-                        <div class="portfolio-item portfolio-item3 mx-auto mx-lg-5 item3 d-none d-lg-inline-block anim-stagger4"></div>
-                        <div class="portfolio-item portfolio-item4 mx-auto mx-lg-5 item4 d-none d-lg-inline-block anim-stagger4"></div>
-                        <div class="portfolio-item portfolio-item5 mx-auto mx-lg-5 item5 d-none d-lg-inline-block anim-stagger4"></div>
+                        <a href="oferta" class="web_link_transitions"><div class="portfolio-item portfolio-item1 mx-auto mx-lg-5 item1 anim-stagger4"></div></a>
+                        <a href="oferta" class="web_link_transitions"><div class="portfolio-item portfolio-item2 mx-auto mx-lg-5 item2 d-none d-lg-inline-block anim-stagger4"></div></a>
+                        <a href="oferta" class="web_link_transitions"><div class="portfolio-item portfolio-item3 mx-auto mx-lg-5 item3 d-none d-lg-inline-block anim-stagger4"></div></a>
+                        <a href="oferta" class="web_link_transitions"><div class="portfolio-item portfolio-item4 mx-auto mx-lg-5 item4 d-none d-lg-inline-block anim-stagger4"></div></a>
+                        <a href="oferta" class="web_link_transitions"><div class="portfolio-item portfolio-item5 mx-auto mx-lg-5 item5 d-none d-lg-inline-block anim-stagger4"></div></a>
                     </div>
                 </div>  
                 <div class="portfolio-btn-container container">
-                    <button class="btn btn-primary my-5 anim-stagger4">WIĘCEJ PRAC</button>
+                    <a href="oferta" class="web_link_transitions a_btn  my-5 anim-stagger4">WIĘCEJ PRAC</a>
                 </div>
         </section>
 

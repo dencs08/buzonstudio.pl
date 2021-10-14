@@ -14,7 +14,6 @@ __webpack_require__.r(__webpack_exports__);
 
 window.onload = function () {
   var anchors = document.querySelectorAll('.web_link_transitions');
-  var anchors_start = document.querySelectorAll('.web_link_active');
   var topCover = document.getElementsByClassName("top-side");
   var bottomCover = document.getElementsByClassName("bottom-side");
   var tl = gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.timeline();
@@ -32,27 +31,33 @@ window.onload = function () {
   }, 250);
   var path = location.pathname; //only on start to prevent #portfolio section page transition
 
-  if (path == "/start") {
-    for (var i = 0; i < anchors_start.length; i++) {
-      var anchor_start = anchors_start[i];
-      anchor_start.addEventListener('click', function (e) {
-        var target = e.target.href;
-        e.preventDefault();
-        console.log("prevented on start");
-        tl.to(topCover, {
-          duration: 0.5,
-          ease: 'expo.out',
-          y: '0vh'
-        });
-        tl.to(bottomCover, {
-          duration: 0.5,
-          ease: 'expo.out',
-          y: '0vh'
-        }, "-=0.5");
-        setTimeout(function () {
-          window.location.href = target;
-        }, 500);
+  if (path == "/start" || path == "/") {
+    var _loop = function _loop(i) {
+      var anchor = anchors[i];
+      anchor.addEventListener('click', function (e) {
+        if (anchor.innerHTML == "Portfolio") {} else {
+          var target = e.target.href;
+          e.preventDefault();
+          console.log("prevented on start");
+          tl.to(topCover, {
+            duration: 0.5,
+            ease: 'expo.out',
+            y: '0vh'
+          });
+          tl.to(bottomCover, {
+            duration: 0.5,
+            ease: 'expo.out',
+            y: '0vh'
+          }, "-=0.5");
+          setTimeout(function () {
+            window.location.href = target;
+          }, 500);
+        }
       });
+    };
+
+    for (var i = 0; i < anchors.length; i++) {
+      _loop(i);
     }
   } else {
     for (var _i = 0; _i < anchors.length; _i++) {

@@ -3,7 +3,6 @@ import { gsap } from 'gsap'
 //! page transitions
 window.onload = () => {
     const anchors = document.querySelectorAll('.web_link_transitions');
-    const anchors_start = document.querySelectorAll('.web_link_active');
     const topCover = document.getElementsByClassName("top-side")
     const bottomCover = document.getElementsByClassName("bottom-side")
     const tl = gsap.timeline()
@@ -25,30 +24,34 @@ window.onload = () => {
 
     var path = location.pathname;
     //only on start to prevent #portfolio section page transition
-    if (path == "/start") {
-        for (let i = 0; i < anchors_start.length; i++) {
-            const anchor_start = anchors_start[i];
+    if (path == "/start" || path == "/") {
+        for (let i = 0; i < anchors.length; i++) {
+            const anchor = anchors[i];
 
-            anchor_start.addEventListener('click', e => {
-                let target = e.target.href;
+            anchor.addEventListener('click', e => {
+                if (anchor.innerHTML == "Portfolio") {
 
-                e.preventDefault();
-                console.log("prevented on start")
-                tl.to(topCover, {
-                    duration: 0.5,
-                    ease: 'expo.out',
-                    y: '0vh'
-                })
-                tl.to(bottomCover, {
-                    duration: 0.5,
-                    ease: 'expo.out',
-                    y: '0vh'
-                },
-                    "-=0.5")
+                } else {
+                    let target = e.target.href;
 
-                setTimeout(() => {
-                    window.location.href = target;
-                }, 500);
+                    e.preventDefault();
+                    console.log("prevented on start")
+                    tl.to(topCover, {
+                        duration: 0.5,
+                        ease: 'expo.out',
+                        y: '0vh'
+                    })
+                    tl.to(bottomCover, {
+                        duration: 0.5,
+                        ease: 'expo.out',
+                        y: '0vh'
+                    },
+                        "-=0.5")
+
+                    setTimeout(() => {
+                        window.location.href = target;
+                    }, 500);
+                }
             })
         }
     } else {
