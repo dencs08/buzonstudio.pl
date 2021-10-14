@@ -6461,6 +6461,10 @@ html.has-scroll-dragging {
   height: 30px;
 }
 
+.arrow-right-icon {
+  fill: #00ff80;
+}
+
 @media (max-width: 768px) {
   .section-divider {
     margin-top: 75px;
@@ -6496,6 +6500,30 @@ html.has-scroll-dragging {
   color: #111111;
 }
 .btn-primary:hover .arrow-right-icon {
+  fill: #111111 !important;
+  transition: 0.25s all;
+}
+
+.a_btn {
+  outline: none;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Poppins";
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  border-radius: 5em;
+  padding: 1.15em 4em;
+  border: 0.5px solid rgba(216, 216, 216, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  transition: 0.5s background-color;
+}
+.a_btn:hover {
+  background: #ececec;
+  color: #111111;
+}
+.a_btn:hover .arrow-right-icon {
   fill: #111111 !important;
   transition: 0.25s all;
 }
@@ -6657,6 +6685,11 @@ html.has-scroll-dragging {
 }
 @media (max-width: 768px) {
   .btn-primary {
+    width: 100%;
+    padding: 1em 3em;
+  }
+
+  .a_btn {
     width: 100%;
     padding: 1em 3em;
   }

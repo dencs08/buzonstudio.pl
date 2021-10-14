@@ -313,7 +313,7 @@ html.fp-enabled,
 
 .slide-track {
   width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   white-space: nowrap;
   cursor: -webkit-grab;
   cursor: grab;

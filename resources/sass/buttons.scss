@@ -30,6 +30,34 @@
     }
 }
 
+.a_btn {
+    outline: none;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    font-family: $font-family-primary;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    border-radius: 5em;
+    padding: 1.15em 4em;
+    border: 0.5px solid rgba(216, 216, 216, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+
+    color: $font-color-primary;
+
+    transition: 0.5s background-color;
+    &:hover {
+        background: $font-color-secondary;
+
+        color: $body-bg;
+
+        .arrow-right-icon {
+            fill: $body-bg !important;
+            transition: 0.25s all;
+        }
+    }
+}
+
 .btn-submit {
     width: 40%;
     border: none;
@@ -154,6 +182,11 @@
 
 @media (max-width: $md-screen-size) {
     .btn-primary {
+        width: 100%;
+        padding: 1em 3em;
+    }
+
+    .a_btn {
         width: 100%;
         padding: 1em 3em;
     }

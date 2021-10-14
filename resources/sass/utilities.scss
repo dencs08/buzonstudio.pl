@@ -122,6 +122,10 @@
     height: 30px;
 }
 
+.arrow-right-icon {
+    fill: $primary-color;
+}
+
 @media (max-width: $md-screen-size) {
     .section-divider {
         margin-top: 75px;

@@ -1,14 +1,14 @@
 
 <!-- Footer -->
-<section data-scroll-section id="footer" class="section">
+<section data-scroll-section id="footer" class="section seventh">
     
          <!-- Clients section -->
 
          <section id="clients">
             <div class="container clients-content">
-                <h4  class="lh-sm mb-2">Oni juz nam zaufali:</h4>
+                <h4  class="lh-sm mb-2 anim-stagger6">Oni juz nam zaufali:</h4>
                 <div style="text-align:center;"> <div></div>
-                <div class="client-logos">
+                <div class="client-logos anim-stagger6">
                     <div align="center" class="client-logo">
                         <img
                             src="images/logos/danfit.svg"
@@ -47,9 +47,9 @@
                 </div>
             </div>
         </section>
-        <hr class="section-divider" />
+        <hr class="section-divider anim-stagger6" />
         <div id="footer-content" class="container">
-            <div class="row footer_row">
+            <div class="row footer_row anim-stagger6">
                 <div data-scroll  class="col-md-6">
                     <h3 class="mt-0 mb-4">Zostańmy w kontakcie</h3>
 
@@ -157,8 +157,7 @@
                     <div class="float-md-end">
                         <h3 class="mt-0 mb-2">Nie przekonaliśmy Cię?</h3>
                         <h4 class="mt-0 mb-4">Zobacz co mowią o nas inni</h4>
-                        <a href="opinie"
-                            ><button class="btn btn-primary">
+                        <a class="web_link_transitions a_btn" href="opinie">
                                 <span class="font-color-dark"
                                     >Opinie naszych klientów
                                     <svg
@@ -166,22 +165,21 @@
                                         height="8"
                                         viewBox="0 0 55 8"
                                         fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
+                                        xmlns="http://www.w3.org/2000/svg" class="arrow-right-icon">
+                                        <path class="arrow-right-icon"
                                             d="M54.3536 4.35355C54.5488 4.15829 54.5488 3.84171 54.3536 3.64645L51.1716 0.464466C50.9763 0.269204 50.6597 0.269204 50.4645 0.464466C50.2692 0.659728 50.2692 0.976311 50.4645 1.17157L53.2929 4L50.4645 6.82843C50.2692 7.02369 50.2692 7.34027 50.4645 7.53553C50.6597 7.7308 50.9763 7.7308 51.1716 7.53553L54.3536 4.35355ZM0 4.5H54V3.5H0V4.5Z"
                                         />
                                     </svg>
-                                </span></button
-                        ></a>
+                                </span>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="underfooter-container">
+            <div class="underfooter-container anim-stagger6">
                 <div class="privacy-container">
                     <a
                         href="polityka_prywatnosci"
-                        class="privacy-policy underline"
+                        class="privacy-policy underline web_link_transitions"
                         >Polityka prywatności</a
                     >
                 </div>

@@ -11712,14 +11712,127 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-new fullpage_js__WEBPACK_IMPORTED_MODULE_0__('#fullpage', {
-  licenseKey: 'YOUR_KEY_HERE',
-  navigation: true,
-  anchors: ['section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7'],
-  navigationTooltips: ['Start', 'Przyciągnij uwagę', 'Zapadnij w pamięć', 'Większa sprzedaż', 'Portfolio', 'Kontakt', 'Stopka'],
-  scrollingSpeed: 1000
-});
-gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.registerPlugin(gsap_CSSPlugin__WEBPACK_IMPORTED_MODULE_2__.CSSPlugin, gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_3__.CSSRulePlugin); //! Landing page timeline
+gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.registerPlugin(gsap_CSSPlugin__WEBPACK_IMPORTED_MODULE_2__.CSSPlugin, gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_3__.CSSRulePlugin);
+var sections = document.getElementsByClassName("section");
+var isLandingAnimDone = false;
+var staggerParamFrom = {
+  y: 25,
+  opacity: 0
+};
+var staggerParamTo = {
+  y: 0,
+  opacity: 1,
+  duration: 1,
+  stagger: 0.2
+};
+var staggerParamToDelay = "-=0";
+var animateInParam = {
+  autoAlpha: 1,
+  opacity: 0.75,
+  duration: 0,
+  ease: "power2"
+};
+var animateOutDownParam = {
+  autoAlpha: 0,
+  opacity: 0,
+  duration: 0.5,
+  ease: "power1"
+};
+var animateOutOtherParam = {
+  autoAlpha: 0,
+  opacity: 0,
+  duration: 0.5,
+  ease: "power1"
+};
+
+function hideElements() {
+  for (var i = 1; i < sections.length; i++) {
+    var section = sections[i];
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(section, {
+      opacity: 0
+    });
+  }
+}
+
+function gsapStaggerAnim(i) {
+  tlIn.fromTo(".anim-stagger" + i, staggerParamFrom, staggerParamTo, staggerParamToDelay);
+}
+
+var tlIn = new gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline();
+
+(function () {
+  var animateIn = function animateIn(_ref) {
+    var currentIndex = _ref.currentIndex;
+
+    for (var i = 0; i < sections.length; i++) {
+      var section = sections[i];
+
+      if (currentIndex === i) {
+        if (currentIndex === 0) {
+          if (isLandingAnimDone == true) {
+            tlIn.to(section, animateInParam);
+            gsapStaggerAnim(0);
+          }
+        } else {
+          gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(section, animateInParam);
+          gsapStaggerAnim(i);
+        }
+      }
+    }
+  };
+
+  var animateOut = function animateOut(_ref2) {
+    var currentIndex = _ref2.currentIndex,
+        direction = _ref2.direction;
+
+    if (direction === "down") {
+      for (var i = 0; i < sections.length; i++) {
+        var section = sections[i];
+
+        if (currentIndex === i) {
+          tlIn.to(section, animateOutDownParam);
+        }
+      }
+    } else {
+      for (var _i = 0; _i < sections.length; _i++) {
+        var _section = sections[_i];
+
+        if (currentIndex === _i) {
+          tlIn.to(_section, animateOutDownParam);
+        }
+      }
+    }
+  };
+
+  var fullPage = new fullpage_js__WEBPACK_IMPORTED_MODULE_0__("#fullpage", {
+    licenseKey: 'YOUR_KEY_HERE',
+    navigation: true,
+    anchors: ['section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7'],
+    navigationTooltips: ['Start', 'Przyciągnij uwagę', 'Zapadnij w pamięć', 'Większa sprzedaż', 'Portfolio', 'Kontakt', 'Stopka'],
+    scrollingSpeed: 1000,
+    css3: true,
+    afterLoad: function afterLoad(origin, destination, direction) {
+      animateIn({
+        currentIndex: destination.index
+      });
+    },
+    onLeave: function onLeave(origin, nextIndex, direction) {
+      animateOut({
+        currentIndex: origin.index,
+        direction: direction
+      });
+    }
+  });
+
+  var switchIndex = function switchIndex() {
+    var _fullPage$getActiveSe = fullPage.getActiveSection(),
+        index = _fullPage$getActiveSe.index;
+  };
+
+  switchIndex();
+  hideElements();
+})(); //! Landing page timeline
+
 
 var line = gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_3__.CSSRulePlugin.getRule('.landing-page-content:before');
 var h1 = document.querySelector('h1');
@@ -11729,11 +11842,14 @@ var button2 = document.getElementsByClassName("btn-landing2");
 var tl = gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline(); //!timeline
 
 tl.from(line, {
-  delay: 1,
+  delay: 1.25,
   duration: 2,
   ease: "expo",
   cssRule: {
     scaleY: 0
+  },
+  onComplete: function onComplete() {
+    isLandingAnimDone = true;
   }
 }, "-=0.5");
 tl.fromTo(h2, {

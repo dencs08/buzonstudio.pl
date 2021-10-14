@@ -66,7 +66,6 @@ function navBarAnimation() {
             opacity: 0,
             scale: 1.35,
             y: yScroll + "px",
-            // onComplete: function () { dNoneContent() },
         })
     } else {
         //closed

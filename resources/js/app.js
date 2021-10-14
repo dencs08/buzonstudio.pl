@@ -2,7 +2,7 @@ import { gsap } from 'gsap'
 
 //! page transitions
 window.onload = () => {
-    const anchors = document.querySelectorAll('.web_link');
+    const anchors = document.querySelectorAll('.web_link_transitions');
     const anchors_start = document.querySelectorAll('.web_link_active');
     const topCover = document.getElementsByClassName("top-side")
     const bottomCover = document.getElementsByClassName("bottom-side")
@@ -24,6 +24,7 @@ window.onload = () => {
 
 
     var path = location.pathname;
+    //only on start to prevent #portfolio section page transition
     if (path == "/start") {
         for (let i = 0; i < anchors_start.length; i++) {
             const anchor_start = anchors_start[i];
@@ -34,20 +35,20 @@ window.onload = () => {
                 e.preventDefault();
                 console.log("prevented on start")
                 tl.to(topCover, {
-                    duration: 1.25,
+                    duration: 0.5,
                     ease: 'expo.out',
                     y: '0vh'
                 })
                 tl.to(bottomCover, {
-                    duration: 1.25,
+                    duration: 0.5,
                     ease: 'expo.out',
                     y: '0vh'
                 },
-                    "-=1.25")
+                    "-=0.5")
 
                 setTimeout(() => {
                     window.location.href = target;
-                }, 1250);
+                }, 500);
             })
         }
     } else {
@@ -61,21 +62,21 @@ window.onload = () => {
                 e.preventDefault();
 
                 tl.to(topCover, {
-                    duration: 1.25,
+                    duration: 0.5,
                     ease: 'expo.out',
                     y: '0vh'
                 })
                 tl.to(bottomCover, {
-                    duration: 1.25,
+                    duration: 0.5,
                     ease: 'expo.out',
                     y: '0vh'
                 },
-                    "-=1.25")
+                    "-=0.5")
 
 
                 setTimeout(() => {
                     window.location.href = target;
-                }, 1250);
+                }, 500);
             })
         }
     }
