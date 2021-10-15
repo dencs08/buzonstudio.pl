@@ -29,7 +29,6 @@ mix.js([
     ], 'public/js/contact.js').version()
     .js([
         'resources/js/components/privacy/privacy.js',
-        'resources/js/landingpage-animation.js',
         'resources/js/locomotive-scroll.js',
     ], 'public/js/privacy.js').version()
     .sass('resources/sass/app.scss', 'public/css')

@@ -6,9 +6,9 @@
 
          <section id="clients">
             <div class="container clients-content">
-                <h4  class="lh-sm mb-2 anim-stagger6">Oni juz nam zaufali:</h4>
+                <h4  class="lh-sm mb-2 anim-stagger6 gs gs_fromTop">Oni juz nam zaufali:</h4>
                 <div style="text-align:center;"> <div></div>
-                <div class="client-logos anim-stagger6">
+                <div class="client-logos anim-stagger6 gs gs_fromBotom">
                     <div align="center" class="client-logo">
                         <img
                             src="images/logos/danfit.svg"
@@ -50,7 +50,7 @@
         <hr class="section-divider anim-stagger6" />
         <div id="footer-content" class="container">
             <div class="row footer_row anim-stagger6">
-                <div data-scroll  class="col-md-6">
+                <div data-scroll  class="col-md-6 gs gs_fromLeft">
                     <h3 class="mt-0 mb-4">Zostańmy w kontakcie</h3>
 
                     <a
@@ -153,7 +153,7 @@
                         </svg>
                     </div>
                 </div>
-                <div data-scroll class="col-md-6 second-col-footer">
+                <div data-scroll class="col-md-6 gs gs_fromRight second-col-footer">
                     <div class="float-md-end">
                         <h3 class="mt-0 mb-2">Nie przekonaliśmy Cię?</h3>
                         <h4 class="mt-0 mb-4">Zobacz co mowią o nas inni</h4>
@@ -175,7 +175,7 @@
                     </div>
                 </div>
             </div>
-            <div class="underfooter-container anim-stagger6">
+            <div class="underfooter-container">
                 <div class="privacy-container">
                     <a
                         href="polityka_prywatnosci"

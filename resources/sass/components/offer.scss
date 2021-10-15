@@ -86,8 +86,8 @@
 
         a {
             font-family: $font-family-tertiary;
-            font-size: clamp(2.5rem, 7vw, 3.5rem);
-            line-height: 3rem;
+            font-size: clamp(1.5rem, 7vw, 3.5rem);
+            line-height: clamp(1.5rem, 7vw, 3.5rem);
             font-weight: 300;
             text-decoration: none;
             color: rgba(255, 255, 255, 0.3);
@@ -134,8 +134,8 @@
 
 .project-preview {
     position: absolute;
-    width: 600px;
-    height: 400px;
+    width: clamp(400px, 50vh, 650px);
+    height: clamp(300px, 25vh, 450px);
     top: 50%;
     left: 50%;
     margin: -100px 0 0 -100px;
@@ -159,5 +159,11 @@
 
     .project-preview-wrapper {
         display: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    body {
+        overflow-y: scroll !important;
     }
 }

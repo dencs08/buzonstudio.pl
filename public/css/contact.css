@@ -160,3 +160,8 @@
     font-size: 10px;
   }
 }
+@media (max-width: 1024px) {
+  body {
+    overflow-y: scroll !important;
+  }
+}

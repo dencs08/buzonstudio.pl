@@ -10,10 +10,7 @@
     </head>
     <body class="antialiased">
 
-        <div class="courtain">
-            <div class="top-side"></div>
-            <div class="bottom-side"></div>
-        </div>
+        <x-loader/>
 
         <x-navbar/>
 
@@ -25,11 +22,11 @@
             <div id="privacy-policy-content">
                 <div data-scroll-section class="container">
                 <h1>Polityka prywatności bisonstudio</h1>
-                <p>
+                <p class="gs gs_fromLeft">
                     Ta polityka prywatności (“<strong>Polityka</strong>”) zawarta na tej Stronie zarządza prywatnością informacji naszych uzytkownikow i odwiedzających, które zbieramy, uzywmy, ujawniamy i zarządzamy poprzez uzywanie Strony bisonstudio (“<strong>Strony</strong>”).<br />
                     Poprzez uzywanie Strony, zgadzasz sie w pełni na warunki polityki zawartej w ninejszym dokumencie i oświadzasz, ze Twoja odpowiedzialnością jest zapoznanies się z nią i z prowadzanymi do niej poprawkami. Jeśli nie akceptujesz takiej polityki prywatności, proszę nie korzystaj ze Strony.
                 </p>
-                <p>
+                <p class="gs gs_fromLeft">
                     <strong>1. Uzywanie informacji</strong><br />
 
                     Poprzez wejście na stronę oświadzasz, ze mozemy uzyc Twoich informacji do ktorychkolwiek z podanych ponizej powodów, kiedykolwiek będzie to potrzebne bez zadnych ograniczeń: <br>
@@ -42,42 +39,65 @@
                     Prosić o opinię i monitorować uzytkowanie Strony w celu usprawnienia Twojego doświadczenia.<br>
                     Odpowadać na zapytania klientów.
                 </p>
-                <p>
+                <p class="gs gs_fromLeft">
                     <strong>2. Zbieranie informacji</strong><br />
                     Mozemy zbierac informacje o Tobie między innymi takich jak np.: Dane personalne, dane pochodne, dane z social mediów lub dane sieciowe, dane finansowe, włącznie i bez zadnych limitów: Twoje imie, narodowość, data urodzenia, miejsce zamieszkania, informacje kontaktowe, wiek, płeć, lub jakichkolwiek innych informacji które nasza Strona zbiera automatycznie kiedy wejdziesz na stronę. (np. rodzaj przeglądarki, system operacyjny, czas uzytkowania, Strony ktore odwiedziles przed odwiedzeniem naszej Strony.) 
                 </p>
-                <p>
+                <p class="gs gs_fromLeft">
                     <strong>3. Ujawnianie informacji</strong><br />
                     3.1 Oświadzasz, ze mozemy udostepniac Twoje informacji z naszymi partnerami bieznesowymi, inwestorami, reklamodawcami, dostawcami usług marketingówych czy osobami współpracującymi, w celach usprawnienia Strony i doświadczenia które dostarczamy klientom online.
 
                     3.2 Oświadczasz, ze mozemy współpracować z zewnętrznymi dostawcami / sprzedawcami lub zewnętrznym oprogramowaniem aby reklamować lub tworzyć i uzywac kampanii marketingowych na tej Stronie i poza nią. Jednocześnie oświadczając zgodę na to, Ci zewnętrzni dostawcy równiez mogą zbierać Twoje dane i je wykorzystywać w celu usprawnienia tej Strony. A tym samym jesteś odpowiedzialny za zapoznanie się z ich polityką prywatności i skontaktowanie się z nimi jeśli masz jakiekolwiek wątpliwości.
                 </p>
-                <p>
+                <p class="gs gs_fromLeft">
                     <strong>4. Bezpieczeństwo informacji</strong><br />
                     Uzyjemy rozsądynch środków i kroków aby zabezpieczyć i zarządzać Twoimi danymi które zebraliśmy i otrzymaliśmy od Ciebie. Pomimo naszych starań nie mozemy zagwarantowac bezpieczeństwa i prywatności Twoich danych, zadne środki bezpieczeństwa nie są nieprzenikalny przed jakimkolwiek przechwyceniem lub innym rodzajem niewłaściwego użytkowania.
 
                 </p>
-                <p>
+                <p class="gs gs_fromLeft">
                     <strong>5. Polityka ciasteczek</strong><br />
                     Mozemy uzywac ciasteczek, web beacon'ów i innych technologii śledzących na tej Stronie, które domyślnie są ustawione na akceptacje ich ciasteczek, w celu polepszenia doświadczenia online dla naszych klientów. Musisz być świadomym tego, ze blokowanie ciasteczek lub web beacon'ów moze wpłynąć na funkcjonalność tej Strony.
                 </p>
-                <p>
+                <p class="gs gs_fromLeft">
                     <strong>6. Treść stron trzecich</strong><br />
                     Jakakolwiek informacje, które dostarczysz stronom trzecim - nie związanych z nami - nie są pokryte w tej Polityce. Nie jesteśmy odpowiedzialni za zawartość, prywatność i bezpieczeństwo polityki jakiejkolwiek ze stron trzecich, włączajac w to inne Strony internetowe, reklamy, zewnętrzne seerwisy lub aplikacje, które mogą być powiazane do tej Strony. 
                 </p>
-                <p>
+                <p class="gs gs_fromLeft">
                     <strong>7. Ograniczenie odpowiedzialności</strong><br />
 
                     Nie jesteśmy odpowiedzialni za działalność stron trzecich z, którym udostępnileś lub wymieniłeś swoje dane w jakiej kolwiek formie i nie mamy mozliwosci zarządzania lub kontrolowania ich.
                 </p>
-                <p>
+                <p class="gs gs_fromLeft">
                     <strong>8. Komunikacja</strong><br />
                     Jeśli nie zyczysz sobie otrzymywania jakichkolwiek informacji od nas, mozesz zrezygnować poprzez skontaktowanie się z nami poprzez email lub jakąkolwiek inną formę kontaktu która jest zawarta na tej Stronie.  
                 </p>
-                <p>
+                <p class="gs gs_fromLeft">
                     <strong>9. Modyfikacja polityki prywatności</strong><br />
                     Przyjmujesz do wiadomości, ze ta polityka prywatności jest obiektem modyfikacji, alternacji i poprawek przez bisonstudio przez cały czas, bez lub z powiadomieniem Ciebie o nich. Zgadzasz się równiez z tym, ze jakiekolwiek modyfikacje są w wazne i mają wpływ po ich zamieszczeniu w tej Witrynie.
                 </p>
+
+                
+                <img src="https://source.unsplash.com/random/3000×3000/?fruit" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?neon" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?city" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?what" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?lorem" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?pc" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?cup" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?box" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?key" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?water" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?tv" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?table" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?hair" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?chair" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?pillow" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?couch" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?iron" alt="">
+                <img src="https://source.unsplash.com/random/3000×3000/?kitchen" alt="">
+
+
+
             </div>
             <x-footer/>
         </div>

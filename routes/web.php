@@ -21,9 +21,9 @@ Route::get('start', function () {
     return view('start');
 });
 
-Route::get('kontakt', function () {
-    return view('kontakt');
-});
+// Route::get('kontakt', function () {
+//     return view('kontakt');
+// });
 
 Route::get('oferta', function () {
     return view('oferta');
@@ -41,5 +41,8 @@ Route::get('test', function () {
     return view('test');
 });
 
-Route::get('/email', [App\Http\Controllers\EmailController::class, 'create']);
-Route::post('/email', [App\Http\Controllers\EmailController::class, 'sendEmail'])->name('send.email');
+// Route::get('/email', [App\Http\Controllers\EmailController::class, 'create']);
+// Route::post('/email', [App\Http\Controllers\EmailController::class, 'sendEmail'])->name('send.email');
+
+Route::get('/kontakt', [App\Http\Controllers\EmailController::class, 'create']);
+Route::post('/kontakt', [App\Http\Controllers\EmailController::class, 'sendEmail'])->name('send.email');

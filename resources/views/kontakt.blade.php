@@ -14,10 +14,7 @@
         <!-- WEBGL -->
         <canvas id="web_gl"></canvas>
             
-        <div class="courtain">
-            <div class="top-side"></div>
-            <div class="bottom-side"></div>
-        </div>
+        <x-loader/>
 
         <x-navbar/>
 
@@ -38,31 +35,38 @@
 
         <section data-scroll-section id="Contact">
             <div class="container text-center">
-                <h3 data-scroll data-scroll-speed="1">Co możemy dla ciebie zrobić?</h3>
+                <h3 data-scroll data-scroll-speed="1.25" class="gs gs_fromLeft">Co możemy dla ciebie zrobić?</h3>
             </div>
-            <div data-scroll data-scroll-speed="1.25" class="contact-buttons">
+            <form data-scroll data-scroll-speed="1.5" name="contact-form" class="contact-form validate-form" action="{{ route('send.email') }}" method="post">
+            @csrf
+            @if(session()->has('message'))
+                <div class="alert alert-success">
+            {{ session()->get('message') }}
+                </div>
+            @endif
+            <div data-scroll data-scroll-speed="1.5" class="contact-buttons">
                 <div class="control-group">
-                    <input type="checkbox" id="talk" name="talk">
+                    <input class="gs gs_fromBottom" type="checkbox" id="talk" name="talk">
                     <label for="talk">
                       <span class="label-name">Chcę porozmawiać</span>
                     </label>
 
-                    <input type="checkbox" id="website" name="website">
+                    <input class="gs gs_fromBottom" type="checkbox" id="website" name="website">
                     <label for="website">
                       <span class="label-name">Strona Internetowa</span>
                     </label>
 
-                    <input type="checkbox" id="app" name="app">
+                    <input class="gs gs_fromBottom" type="checkbox" id="app" name="app">
                     <label for="app">
                       <span class="label-name">Aplikacja</span>
                     </label>
 
-                    <input type="checkbox" id="branding" name="branding">
+                    <input class="gs gs_fromBottom" type="checkbox" id="branding" name="branding">
                     <label for="branding">
                       <span class="label-name">Branding</span>
                     </label>
 
-                    <input type="checkbox" id="other" name="other">
+                    <input class="gs gs_fromBottom" type="checkbox" id="other" name="other">
                     <label for="other">
                       <span class="label-name">Coś Innego</span>
                     </label>
@@ -71,26 +75,25 @@
 
             <hr class="section-divider mt-5" />
 
-            <form data-scroll data-scroll-speed="1" name="contact-form" class="contact-form">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-field">
+                    <div class="col-md-6 gs gs_fromLeft">
+                        <div class="form-field validate-input" data-validate = "Imie jest wymagane">
                             <input id="name" name="name" class="input-text js-input" type="text" required>
                             <label class="label" for="name">Imię</label>
                          </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 gs gs_fromRight">
                         <div class="form-field">
                             <input id="email" name="email" class="input-text js-input" type="email" required>
                             <label class="label" for="email">E-mail</label>
                          </div>
                     </div>
                 </div>
-                <div class="form-field">
+                <div class="form-field gs gs_fromBottom">
                     <textarea id="message" name="message" class="input-text js-input" cols="30" rows="10" required></textarea>
                    <label class="label" for="message">Wiadomość</label>
                 </div>
-                <div class="form-field text-center submit-container">
+                <div class="form-field text-center submit-container gs gs_fromBottom">
                    <input type="submit" value="WYŚLIJ" class="btn btn-submit color"></input>
                 </div>
              </form>

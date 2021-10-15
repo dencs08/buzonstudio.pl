@@ -9,7 +9,7 @@ class EmailController extends Controller
 {
     public function create()
     {
-        return view('email');
+        return view('kontakt');
     }
 
     public function sendEmail(Request $request)
@@ -33,6 +33,6 @@ class EmailController extends Controller
           ->subject($data['subject']);
         });
 
-        return back()->with(['message' => 'Email successfully sent!']);
+        return back()->with(['message' => 'Email został wysłany!']);
     }
 }

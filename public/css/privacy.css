@@ -7,3 +7,9 @@
 .landing-page-content {
   margin-bottom: clamp(5rem, 20vh, 9rem);
 }
+
+@media (max-width: 1024px) {
+  body {
+    overflow-y: scroll !important;
+  }
+}

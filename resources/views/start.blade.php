@@ -9,19 +9,16 @@
 
         <title>bisonstudio</title>
     </head>
-    <body data-barba="wrapper" class="antialiased">
+    <body class="antialiased">
 
         <!-- WEBGL -->
         <canvas id="web_gl"></canvas>
 
-        <div class="courtain">
-            <div class="top-side"></div>
-            <div class="bottom-side"></div>
-        </div>
-        
+        <x-loader/>
+
         <x-navbar/>
 
-<main data-barba="container" data-barba-namespace="home-section" id="web-content">
+<div id="web-content">
     <div id="fullpage">
 
         <section data-scroll-section id="landing-page" class="scroll-snap-start section first">
@@ -99,11 +96,11 @@
                 </div>
                 <div class="grid-item main">
                     <div class="slide-track">
-                        <a href="oferta" class="web_link_transitions"><div class="portfolio-item portfolio-item1 mx-auto mx-lg-5 item1 anim-stagger4"></div></a>
-                        <a href="oferta" class="web_link_transitions"><div class="portfolio-item portfolio-item2 mx-auto mx-lg-5 item2 d-none d-lg-inline-block anim-stagger4"></div></a>
-                        <a href="oferta" class="web_link_transitions"><div class="portfolio-item portfolio-item3 mx-auto mx-lg-5 item3 d-none d-lg-inline-block anim-stagger4"></div></a>
-                        <a href="oferta" class="web_link_transitions"><div class="portfolio-item portfolio-item4 mx-auto mx-lg-5 item4 d-none d-lg-inline-block anim-stagger4"></div></a>
-                        <a href="oferta" class="web_link_transitions"><div class="portfolio-item portfolio-item5 mx-auto mx-lg-5 item5 d-none d-lg-inline-block anim-stagger4"></div></a>
+                        <a href="oferta" class="web_link_transitions portfolio-item portfolio-item1 mx-auto mx-lg-5 item1 anim-stagger4"></a>
+                        <a href="oferta" class="web_link_transitions portfolio-item portfolio-item2 mx-auto mx-lg-5 item2 d-none d-lg-inline-block anim-stagger4"></a>
+                        <a href="oferta" class="web_link_transitions portfolio-item portfolio-item3 mx-auto mx-lg-5 item3 d-none d-lg-inline-block anim-stagger4"></a>
+                        <a href="oferta" class="web_link_transitions portfolio-item portfolio-item4 mx-auto mx-lg-5 item4 d-none d-lg-inline-block anim-stagger4"></a>
+                        <a href="oferta" class="web_link_transitions portfolio-item portfolio-item5 mx-auto mx-lg-5 item5 d-none d-lg-inline-block anim-stagger4"></a>
                     </div>
                 </div>  
                 <div class="portfolio-btn-container container">
@@ -133,7 +130,7 @@
         </section>
         <x-footer/>
     </div>
-</main>
+</div>
 
         <script src="js/page-transition.js"></script>
         <script src="js/app.js"></script>

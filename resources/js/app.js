@@ -1,4 +1,5 @@
 import { gsap } from 'gsap'
+import * as $ from 'jquery'
 
 //! page transitions
 window.onload = () => {
@@ -34,8 +35,9 @@ window.onload = () => {
                 } else {
                     let target = e.target.href;
 
+                    console.log(target)
+
                     e.preventDefault();
-                    console.log("prevented on start")
                     tl.to(topCover, {
                         duration: 0.5,
                         ease: 'expo.out',
@@ -59,9 +61,6 @@ window.onload = () => {
             const anchor = anchors[i];
             anchor.addEventListener('click', e => {
                 let target = e.target.href;
-
-                console.log("not prevented on start")
-
                 e.preventDefault();
 
                 tl.to(topCover, {
@@ -84,3 +83,50 @@ window.onload = () => {
         }
     }
 }
+
+const progressBar = document.querySelector(".progress")
+const infoAccept = document.querySelector(".info-accept")
+
+
+
+gsap.set([progressBar, infoAccept], {
+    opacity: 0,
+    onComplete: function () {
+        progressBar.style.zIndex = "9999";
+        infoAccept.style.zIndex = "9999";
+    }
+})
+gsap.to([progressBar, infoAccept], {
+    opacity: 1,
+    delay: 2.5,
+    duration: 1
+})
+
+document.onreadystatechange = function () {
+    if (document.readyState === "complete") {
+        gsap.to([progressBar, infoAccept], {
+            opacity: 0,
+            duration: 0.5,
+            onComplete: function () {
+                progressBar.style.display = "none";
+                infoAccept.style.display = "none";
+            }
+        })
+
+    }
+}
+
+const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+let vwNew = 0;
+let vhNew = 0;
+
+window.addEventListener('resize', function () {
+    "use strict";
+    vwNew = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    vhNew = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+
+    if (Math.abs(vwNew - vw) > 250 || Math.abs(vhNew - vh) > 150) {
+        window.location.reload();
+    }
+});

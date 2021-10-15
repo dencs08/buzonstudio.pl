@@ -63,3 +63,9 @@
         height: clamp(300px, 35vh, 500px);
     }
 }
+
+@media (max-width: 1024px) {
+    body {
+        overflow-y: scroll !important;
+    }
+}

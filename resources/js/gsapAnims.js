@@ -1,6 +1,4 @@
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-// import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 //!navbar
 const navBurger = document.getElementById("nav-burger")
@@ -69,7 +67,6 @@ function navBarAnimation() {
         })
     } else {
         //closed
-        // dBlockContent()
         gsap.to(navBg, {
             duration: 0.75,
             ease: "expo",
@@ -110,14 +107,6 @@ function navBarAnimation() {
     i++
 }
 
-function dNoneContent() {
-    webContent.style.display = "none"
-}
-
-function dBlockContent() {
-    webContent.style.display = "block"
-}
-
 function getPosition(el) {
     var xPos = 0;
     var yPos = 0;
@@ -149,64 +138,3 @@ function zIndexNavBar() {
     navWrapper.style.zIndex = "-5";
     navBg.style.zIndex = "-5";
 }
-
-//!auto animations
-function animateFrom(elem, direction) {
-    direction = direction || 1;
-    var x = 0,
-        y = direction * 100;
-    if (elem.classList.contains("gs_fromLeft")) {
-        x = -250;
-        y = 0;
-    } else if (elem.classList.contains("gs_fromRight")) {
-        x = 250;
-        y = 0;
-    } else if (elem.classList.contains("gs_fromBottom")) {
-        y = 250;
-        x = 0;
-    } else if (elem.classList.contains("gs_fromTop")) {
-        y = -250;
-        x = 0;
-    } else if (elem.classList.contains("gs_fromFadeIn")) {
-        y = 0;
-        x = 0;
-    }
-    elem.style.transform = "translate(" + x + "px, " + y + "px)";
-    elem.style.opacity = "0";
-    gsap.fromTo(elem, { x: x, y: y, autoAlpha: 0 }, {
-        duration: 1,
-        x: 0,
-        y: 0,
-        autoAlpha: 1,
-        ease: "expo",
-        lazy: false,
-        delay: 0
-        // overwrite: "auto"
-    });
-}
-
-function hide(elem) {
-    gsap.set(elem, { autoAlpha: 0 });
-    console.log("hidden")
-}
-
-// //!On doc load hide .gs elements and create scroll trigger
-document.addEventListener("DOMContentLoaded", function () {
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.utils.toArray(".gs").forEach(function (elem) {
-        hide(elem); // assure that the element is hidden when scrolled into view
-
-        ScrollTrigger.create({
-            trigger: elem,
-            start: "top center",
-            end: "bottom top",
-            once: true,
-            markers: true,
-            // scroller: ".smooth-locomotive-scroll",
-            onEnter: function () { animateFrom(elem) },
-            onEnterBack: function () { animateFrom(elem) },
-            onLeave: function () { hide(elem) } // assure that the element is hidden when scrolled into view
-        });
-    });
-});
