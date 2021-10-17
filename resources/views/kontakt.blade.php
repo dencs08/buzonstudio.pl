@@ -37,7 +37,7 @@
 
         <section data-scroll-section id="Contact">
             <div class="container text-center">
-                <h3 data-scroll data-scroll-speed="1.25" class="gs gs_fromLeft">Co możemy dla ciebie zrobić?</h3>
+                <h3 data-scroll data-scroll-speed="1.25" class="gs gs_fromLeft">Co możemy dla Ciebie zrobić?</h3>
             </div>
             <form id="contact-form" name="myForm" name="contact-form" class="contact-form validate-form" action="{{ route('send.email') }}" method="post">
             @csrf

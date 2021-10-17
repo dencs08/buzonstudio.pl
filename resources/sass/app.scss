@@ -50,9 +50,9 @@ body {
     color: $font-color-primary;
     font-family: $font-family-primary;
     overflow: hidden;
-    // background-color: transparent;
-    // background: none;
-    background-color: $body-bg !important;
+    background-color: transparent;
+    background: none;
+    // background-color: $body-bg !important;
 }
 
 h1 {
@@ -114,8 +114,8 @@ a {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: -10;
-    // z-index: 100;
+    // z-index: -10;
+    z-index: 100;
     // outline: none;
     // mix-blend-mode: exclusion;
 }

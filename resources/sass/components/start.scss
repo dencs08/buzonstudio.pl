@@ -78,26 +78,32 @@
     border-radius: 10px;
 
     margin: 0.5em 8em 0.5em 0em;
+
+    transition: all 0.5s;
+}
+
+.portfolio-item:hover {
+    filter: brightness(130%) saturate(130%);
 }
 
 .portfolio-item1 {
-    background-image: url("/images/portfolio1.png");
+    background-image: url("/images/portfolio2.png");
 }
 
 .portfolio-item2 {
-    background-image: url("/images/portfolio1.png");
+    background-image: url("/images/portfolio2.png");
 }
 
 .portfolio-item3 {
-    background-image: url("/images/portfolio1.png");
+    background-image: url("/images/portfolio2.png");
 }
 
 .portfolio-item4 {
-    background-image: url("/images/portfolio1.png");
+    background-image: url("/images/portfolio2.png");
 }
 
 .portfolio-item5 {
-    background-image: url("/images/portfolio1.png");
+    background-image: url("/images/portfolio2.png");
 }
 
 //!client logos

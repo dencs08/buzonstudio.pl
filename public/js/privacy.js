@@ -10552,7 +10552,9 @@ __webpack_require__.r(__webpack_exports__);
 var locoScroll = new locomotive_scroll__WEBPACK_IMPORTED_MODULE_0__.default({
   el: document.querySelector('.smooth-locomotive-scroll'),
   smooth: true,
-  lerp: .05
+  lerp: .06,
+  multiplier: 1.125,
+  firefoxMultiplier: 50
 }); //!auto animations
 
 function animateFrom(elem, direction) {

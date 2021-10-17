@@ -5,7 +5,9 @@ import LocomotiveScroll from 'locomotive-scroll';
 const locoScroll = new LocomotiveScroll({
     el: document.querySelector('.smooth-locomotive-scroll'),
     smooth: true,
-    lerp: .05,
+    lerp: .06,
+    multiplier: 1.125,
+    firefoxMultiplier: 50,
 });
 
 //!auto animations
