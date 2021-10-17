@@ -50,35 +50,35 @@
                 <div class="control-group-error">
                     <h3 class="control-group-error-text">Wybierz conajmniej jedną z poniższych opcji:</h3>
                 </div>
-                <div class="control-group">
-                    <input class="gs gs_fromBottom form_subject" type="checkbox" id="talk" name="controlInfo[]" value="Chcę porozmawiać">
+                <div class="gs gs_fromBottom control-group ">
+                    <input class="form_subject" type="checkbox" id="talk" name="controlInfo[]" value="Chcę porozmawiać">
                     <label for="talk">
                         <span class="label-name">Chcę porozmawiać</span>
                     </label>
 
-                    <input class="gs gs_fromBottom form_subject" type="checkbox" id="website" name="controlInfo[]" value="Strona Internetowa">
+                    <input class="form_subject" type="checkbox" id="website" name="controlInfo[]" value="Strona Internetowa">
                     <label for="website">
                         <span class="label-name">Strona Internetowa</span>
                     </label>
 
-                    <input class="gs gs_fromBottom form_subject" type="checkbox" id="app" name="controlInfo[]" value="Aplikacja">
+                    <input class="form_subject" type="checkbox" id="app" name="controlInfo[]" value="Aplikacja">
                     <label for="app">
                         <span class="label-name">Aplikacja</span>
                     </label>
 
-                    <input class="gs gs_fromBottom form_subject" type="checkbox" id="branding" name="controlInfo[]" value="Branding">
+                    <input class="form_subject" type="checkbox" id="branding" name="controlInfo[]" value="Branding">
                     <label for="branding">
                         <span class="label-name">Branding</span>
                     </label>
 
-                    <input class="gs gs_fromBottom form_subject" type="checkbox" id="other" name="controlInfo[]" value="Coś Innego">
+                    <input class="form_subject" type="checkbox" id="other" name="controlInfo[]" value="Coś Innego">
                     <label for="other">
                         <span class="label-name">Coś Innego</span>
                     </label>
                 </div>
             </div>
 
-            <hr class="section-divider mt-5" />
+            <hr class="gs gs_fromBottom section-divider mt-5" />
 
                 <div class="row">
                     <div data-scroll data-scroll-speed="1" class="col-md-6 gs gs_fromLeft">
