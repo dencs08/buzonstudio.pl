@@ -1,14 +1,15 @@
 {
-    "/js/app.js": "/js/app.js?id=387185e23ce26c987b2e",
+    "/js/app.js": "/js/app.js?id=1e5592674451fe0dc5ae",
     "/js/start.js": "/js/start.js?id=1ea5ea1b05ebaef1463f",
-    "/js/testimonials.js": "/js/testimonials.js?id=fb4306d37c3f61b7458d",
-    "/js/offer.js": "/js/offer.js?id=a75c06981f1562d863c4",
-    "/js/contact.js": "/js/contact.js?id=5ec4d5121fb12ee05bea",
-    "/js/privacy.js": "/js/privacy.js?id=52a8b73901b52963c209",
-    "/css/app.css": "/css/app.css?id=02f6d480ed4cbf04cdbe",
+    "/js/testimonials.js": "/js/testimonials.js?id=353939b2d5f12c7992fc",
+    "/js/offer.js": "/js/offer.js?id=3aeb1c70abf0e136241d",
+    "/js/contact.js": "/js/contact.js?id=48a660a6b0d168beadd7",
+    "/js/contactSent.js": "/js/contactSent.js?id=d00e4c55eb855ac7eb8b",
+    "/js/privacy.js": "/js/privacy.js?id=d251ced9b2b31ef14c3f",
+    "/css/app.css": "/css/app.css?id=95b329de9918b3254fa3",
     "/css/privacy.css": "/css/privacy.css?id=5e5e56c635ecb195847c",
     "/css/testimonials.css": "/css/testimonials.css?id=71679b3e87ad5df94f19",
     "/css/offer.css": "/css/offer.css?id=afec05704ac3d83e4d68",
     "/css/start.css": "/css/start.css?id=294175e3ee49b81de94a",
-    "/css/contact.css": "/css/contact.css?id=235dfe6ae5184971f3ec"
+    "/css/contact.css": "/css/contact.css?id=c155a37811c5ce173250"
 }

@@ -3,12 +3,13 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="shortcut icon" href="images/logo_white.svg" />
+        <link rel="shortcut icon" href="images/logos/logo_white-cropped.svg" />
         <link rel="stylesheet" href="css/app.css" />
         <link rel="stylesheet" href="css/contact.css" />
 
         <title>bisonstudio</title>
     </head>
+    
     <body class="antialiased">
 
         <!-- WEBGL -->
@@ -33,11 +34,12 @@
 
         <!-- Contact -->
 
+
         <section data-scroll-section id="Contact">
             <div class="container text-center">
                 <h3 data-scroll data-scroll-speed="1.25" class="gs gs_fromLeft">Co możemy dla ciebie zrobić?</h3>
             </div>
-            <form data-scroll data-scroll-speed="1.5" name="contact-form" class="contact-form validate-form" action="{{ route('send.email') }}" method="post">
+            <form id="contact-form" name="myForm" name="contact-form" class="contact-form validate-form" action="{{ route('send.email') }}" method="post">
             @csrf
             @if(session()->has('message'))
                 <div class="alert alert-success">
@@ -45,30 +47,33 @@
                 </div>
             @endif
             <div data-scroll data-scroll-speed="1.5" class="contact-buttons">
+                <div class="control-group-error">
+                    <h3 class="control-group-error-text">Wybierz conajmniej jedną z poniższych opcji:</h3>
+                </div>
                 <div class="control-group">
-                    <input class="gs gs_fromBottom" type="checkbox" id="talk" name="talk">
+                    <input class="gs gs_fromBottom form_subject" type="checkbox" id="talk" name="controlInfo[]" value="Chcę porozmawiać">
                     <label for="talk">
-                      <span class="label-name">Chcę porozmawiać</span>
+                        <span class="label-name">Chcę porozmawiać</span>
                     </label>
 
-                    <input class="gs gs_fromBottom" type="checkbox" id="website" name="website">
+                    <input class="gs gs_fromBottom form_subject" type="checkbox" id="website" name="controlInfo[]" value="Strona Internetowa">
                     <label for="website">
-                      <span class="label-name">Strona Internetowa</span>
+                        <span class="label-name">Strona Internetowa</span>
                     </label>
 
-                    <input class="gs gs_fromBottom" type="checkbox" id="app" name="app">
+                    <input class="gs gs_fromBottom form_subject" type="checkbox" id="app" name="controlInfo[]" value="Aplikacja">
                     <label for="app">
-                      <span class="label-name">Aplikacja</span>
+                        <span class="label-name">Aplikacja</span>
                     </label>
 
-                    <input class="gs gs_fromBottom" type="checkbox" id="branding" name="branding">
+                    <input class="gs gs_fromBottom form_subject" type="checkbox" id="branding" name="controlInfo[]" value="Branding">
                     <label for="branding">
-                      <span class="label-name">Branding</span>
+                        <span class="label-name">Branding</span>
                     </label>
 
-                    <input class="gs gs_fromBottom" type="checkbox" id="other" name="other">
+                    <input class="gs gs_fromBottom form_subject" type="checkbox" id="other" name="controlInfo[]" value="Coś Innego">
                     <label for="other">
-                      <span class="label-name">Coś Innego</span>
+                        <span class="label-name">Coś Innego</span>
                     </label>
                 </div>
             </div>
@@ -76,27 +81,36 @@
             <hr class="section-divider mt-5" />
 
                 <div class="row">
-                    <div class="col-md-6 gs gs_fromLeft">
-                        <div class="form-field validate-input" data-validate = "Imie jest wymagane">
+                    <div data-scroll data-scroll-speed="1" class="col-md-6 gs gs_fromLeft">
+                        <div class="form-field validate-input" data-validate = "To pole jest wymagane!">
                             <input id="name" name="name" class="input-text js-input" type="text" required>
                             <label class="label" for="name">Imię</label>
-                         </div>
+                            @error('name')
+                            <span class="mt-3 text-alert"> {{ $message }} </span>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="col-md-6 gs gs_fromRight">
-                        <div class="form-field">
+                    <div data-scroll data-scroll-speed="1" class="col-md-6 gs gs_fromRight">
+                        <div class="form-field validate-input" data-validate = "To pole jest wymagane!">
                             <input id="email" name="email" class="input-text js-input" type="email" required>
                             <label class="label" for="email">E-mail</label>
-                         </div>
+                            @error('email')
+                            <span class="mt-3 text-alert"> {{ $message }} </span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
-                <div class="form-field gs gs_fromBottom">
-                    <textarea id="message" name="message" class="input-text js-input" cols="30" rows="10" required></textarea>
-                   <label class="label" for="message">Wiadomość</label>
+                <div data-scroll data-scroll-speed="1.5" class="form-field validate-input gs gs_fromBottom" data-validate = "To pole jest wymagane!">
+                    <textarea id="content" name="content" class="input-text js-input" cols="30" rows="10" required></textarea>
+                    <label class="label" for="message">Wiadomość</label>
+                    @error('content')
+                    <span class="mt-3 text-alert"> {{ $message }} </span>
+                    @enderror
                 </div>
-                <div class="form-field text-center submit-container gs gs_fromBottom">
-                   <input type="submit" value="WYŚLIJ" class="btn btn-submit color"></input>
+                <div data-scroll data-scroll-speed="1.75" class="form-field text-center submit-container gs gs_fromBottom">
+                    <input type="submit" value="WYŚLIJ" class="btn btn-submit color"></input>
                 </div>
-             </form>
+            </form>
 
         </section>
 

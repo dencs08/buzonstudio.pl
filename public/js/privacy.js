@@ -10640,6 +10640,53 @@ function startTrigger() {
   return start;
 }
 
+if (location.pathname == "/kontakt") {
+  var validateForm = function validateForm() {
+    document.getElementById('contact-form').addEventListener("submit", function () {
+      for (var i = 0; i < subjectButtons.length; i++) {
+        var element = subjectButtons[i];
+
+        if (element.checked) {
+          checkNumber++;
+        }
+      }
+
+      if (checkNumber < 1) {
+        event.preventDefault();
+        locoScroll.scrollTo(target, {
+          offset: -200
+        });
+        var errorTl = new gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline();
+        errorTl.to(buttonsError, {
+          onStart: function onStart() {
+            buttonsError.style.display = "block";
+          },
+          opacity: 1,
+          duration: 1.5,
+          delay: 0.25
+        });
+        errorTl.to(buttonsError, {
+          opacity: 0,
+          duration: 0.5,
+          repeat: 3,
+          yoyo: true,
+          ease: "sine"
+        });
+        return false;
+      }
+
+      return true;
+    }, false);
+  };
+
+  var subjectButtonsGroup = document.querySelectorAll(".control-group");
+  var subjectButtons = document.querySelectorAll(".form_subject");
+  var target = document.querySelector('#Contact');
+  var buttonsError = document.querySelector(".control-group-error");
+  var checkNumber = 0;
+  window.addEventListener("load", validateForm, false);
+}
+
 gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__.ScrollTrigger);
 locoScroll.on("scroll", gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__.ScrollTrigger.update); // tell ScrollTrigger to use these proxy methods for the ".smooth-locomotive-scroll" element since Locomotive Scroll is hijacking things
 

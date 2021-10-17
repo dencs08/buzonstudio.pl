@@ -83,6 +83,54 @@ function startTrigger() {
     return start;
 }
 
+if (location.pathname == "/kontakt") {
+    const subjectButtonsGroup = document.querySelectorAll(".control-group")
+    const subjectButtons = document.querySelectorAll(".form_subject")
+    const target = document.querySelector('#Contact');
+    const buttonsError = document.querySelector(".control-group-error")
+    let checkNumber = 0;
+
+    function validateForm() {
+        document.getElementById('contact-form').addEventListener("submit", function () {
+            for (let i = 0; i < subjectButtons.length; i++) {
+                const element = subjectButtons[i];
+
+                if (element.checked) {
+                    checkNumber++
+                }
+            }
+
+            if (checkNumber < 1) {
+                event.preventDefault()
+                locoScroll.scrollTo(target, {
+                    offset: -200
+                });
+
+                let errorTl = new gsap.timeline()
+                errorTl.to(buttonsError, {
+                    onStart: function () { buttonsError.style.display = "block" },
+                    opacity: 1,
+                    duration: 1.5,
+                    delay: 0.25,
+                })
+                errorTl.to(buttonsError, {
+                    opacity: 0,
+                    duration: 0.5,
+                    repeat: 3,
+                    yoyo: true,
+                    ease: "sine"
+                })
+
+                return false;
+            }
+
+            return true;
+        }, false);
+    }
+
+    window.addEventListener("load", validateForm, false);
+}
+
 gsap.registerPlugin(ScrollTrigger);
 locoScroll.on("scroll", ScrollTrigger.update);
 // tell ScrollTrigger to use these proxy methods for the ".smooth-locomotive-scroll" element since Locomotive Scroll is hijacking things

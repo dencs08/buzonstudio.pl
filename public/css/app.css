@@ -6466,6 +6466,10 @@ html.has-scroll-dragging {
   fill: #00ff80;
 }
 
+.text-alert {
+  color: #912d2d;
+}
+
 @media (max-width: 768px) {
   .section-divider {
     margin-top: 75px;

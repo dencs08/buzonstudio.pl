@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="shortcut icon" href="images/logo_white.svg" />
+        <link rel="shortcut icon" href="images/logos/logo_white-cropped.svg" />
         <link rel="stylesheet" href="css/app.css" />
         <link rel="stylesheet" href="css/offer.css" />
 

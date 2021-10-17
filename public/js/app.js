@@ -160,7 +160,14 @@ navBg.style.zIndex = "-99";
 function navBarAnimation() {
   if (i % 2 == 0) {
     //opened
-    var yScroll = position.x;
+    var yScroll = 0;
+
+    if (location.pathname == "/" || location.pathname == "/start") {
+      yScroll = position.y * 2;
+    } else {
+      yScroll = position.y;
+    }
+
     navWrapper.style.zIndex = "98";
     navBg.style.zIndex = "97";
     gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(navBg, {

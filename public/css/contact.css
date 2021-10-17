@@ -48,12 +48,26 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  transition-property: left;
+  transition-duration: 1s;
   -webkit-transition-property: left;
   -webkit-transition-duration: 1s;
 }
 #Contact input[type=checkbox]:checked + label div.checkmark {
   display: block;
   fill: #f0f0f0;
+}
+
+.control-group-error {
+  display: none;
+  opacity: 0;
+}
+
+.control-group-error-text {
+  margin-top: 0px !important;
+  margin-bottom: clamp(25px, 5vh, 100px);
+  color: #bebebe;
+  font-size: clamp(0.9rem, 1.9vw, 2rem);
 }
 
 .contact-form .form-field {
@@ -97,6 +111,11 @@
   max-width: 100%;
   border-radius: 35px !important;
   font-family: "Poppins";
+}
+
+.email-sent {
+  margin-top: clamp(100px, 25vh, 350px);
+  margin-bottom: clamp(100px, 40vh, 500px);
 }
 
 @-webkit-keyframes scale {
