@@ -1,12 +1,6 @@
 @import "../variables";
 @import "~fullpage.js/dist/fullpage";
 
-#fp-nav {
-    span {
-        background: $font-color-primary !important;
-    }
-}
-
 .landing-page-content {
     margin-bottom: clamp(5rem, 20vh, 9rem);
 }

@@ -69,6 +69,7 @@ function navBarAnimation() {
             opacity: 0,
             scale: 1.35,
             y: yScroll + "px",
+            onComplete: function () { webContent.style.display = "none"; }
         })
     } else {
         //closed
@@ -105,6 +106,7 @@ function navBarAnimation() {
             opacity: 1,
             scale: 1,
             y: "0",
+            onStart: function () { webContent.style.display = "block"; }
         })
 
         setInterval(zIndexNavBar(), 1250);

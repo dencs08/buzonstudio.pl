@@ -9,7 +9,7 @@
     border-radius: 50%;
     font-size: 20px;
     cursor: pointer;
-    color: $font-color-secondary;
+    color: $font-color-secondary !important;
     transition: all 0.3s ease-in-out;
     z-index: 99;
 }
@@ -26,7 +26,7 @@
     top: calc(50% - 1px);
     left: 0%;
     width: 70%;
-    border-bottom: 2px solid $font-color-secondary;
+    border-bottom: 2px solid $font-color-secondary !important;
     transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
@@ -53,12 +53,12 @@
 
 #active:checked + .menu-btn:before {
     transform: rotate(45deg);
-    border-color: $font-color-secondary;
+    border-color: $font-color-secondary !important;
 }
 
 #active:checked + .menu-btn:after {
     transform: rotate(-45deg);
-    border-color: $font-color-secondary;
+    border-color: $font-color-secondary !important;
 }
 
 .wrapper {
@@ -81,13 +81,13 @@
     text-decoration: none;
     font-size: clamp(1.75rem, 3.5vw, 3rem);
     font-weight: 500;
-    color: $font-color-primary;
+    color: $font-color-primary !important;
     transition: 0.5s;
     line-height: clamp(3rem, 8vh, 6rem);
 }
 
 .wrapper ul li a:hover {
-    color: $primary-color;
+    color: $primary-color !important;
     transition: 0.5s;
 }
 
@@ -111,7 +111,7 @@
 .nav-info {
     .p1 {
         font-size: clamp(0.75rem, 2vw, 1rem);
-        color: $font-color-tertiary;
+        color: $font-color-tertiary !important;
     }
 
     .p2 {
@@ -137,7 +137,7 @@
     cursor: pointer;
 
     .nav-icon {
-        fill: $font-color-secondary;
+        fill: $font-color-secondary !important;
         transition: 0.5s all;
     }
 }
@@ -150,7 +150,18 @@
 }
 
 .nav-item.active {
-    color: $primary-color;
+    color: $primary-color !important;
+}
+
+.nav-copyright-container {
+    margin-top: clamp(10px, 2vh, 20px);
+    text-align: center !important;
+}
+
+.nav-copyright {
+    font-size: clamp(0.65rem, 1vw, 0.95rem);
+    color: #3a3a3a !important;
+    text-align: center !important;
 }
 
 #navbar {

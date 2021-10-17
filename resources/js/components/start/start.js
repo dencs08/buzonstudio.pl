@@ -99,7 +99,7 @@ let tlIn = new gsap.timeline();
     };
 
     const fullPage = new fullpage("#fullpage", {
-        licenseKey: 'YOUR_KEY_HERE',
+        licenseKey: '6193823F-901948D3-ACA324B5-09340F06',
         navigation: true,
         anchors: ['section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7'],
         navigationTooltips: ['Start', 'Przyciągnij uwagę', 'Zapadnij w pamięć', 'Większa sprzedaż', 'Portfolio', 'Kontakt', 'Stopka'],

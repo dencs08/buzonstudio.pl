@@ -167,9 +167,13 @@
                 </div>
             </div>
         </div>
+        <div class="nav-copyright-container container">
+            <span class="nav-copyright">
+                        Wykorzystujemy pliki cookies. W związku z tym, korzystając z naszej strony decydujesz się na ich wykorzystanie zgodnie z ustawieniami przeglądarki. Więcej w naszej polityce prywatności. <br>
+            </span>
+        </div>
     </div>    
     </div>
-
 </nav>
 
 <div id="nav-floater">

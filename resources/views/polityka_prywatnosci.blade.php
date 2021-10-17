@@ -75,29 +75,6 @@
                     <strong>9. Modyfikacja polityki prywatności</strong><br />
                     Przyjmujesz do wiadomości, ze ta polityka prywatności jest obiektem modyfikacji, alternacji i poprawek przez bisonstudio przez cały czas, bez lub z powiadomieniem Ciebie o nich. Zgadzasz się równiez z tym, ze jakiekolwiek modyfikacje są w wazne i mają wpływ po ich zamieszczeniu w tej Witrynie.
                 </p>
-
-                
-                <img src="https://source.unsplash.com/random/3000×3000/?fruit" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?neon" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?city" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?what" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?lorem" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?pc" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?cup" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?box" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?key" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?water" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?tv" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?table" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?hair" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?chair" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?pillow" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?couch" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?iron" alt="">
-                <img src="https://source.unsplash.com/random/3000×3000/?kitchen" alt="">
-
-
-
             </div>
             <x-footer/>
         </div>

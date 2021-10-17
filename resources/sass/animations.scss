@@ -11,7 +11,7 @@
     width: 100vw;
     height: 50vh;
 
-    background-color: $body-bg-color-lighter;
+    background-color: $body-bg-color-lighter !important;
 
     z-index: 999;
 }
@@ -24,7 +24,7 @@
     width: 100vw;
     height: 50vh;
 
-    background-color: $body-bg-color-lighter;
+    background-color: $body-bg-color-lighter !important;
 
     z-index: 999;
 }
@@ -32,7 +32,7 @@
 .info-accept {
     position: relative;
 
-    color: $font-color-fourth;
+    color: $font-color-fourth !important;
     text-align: center;
 }
 

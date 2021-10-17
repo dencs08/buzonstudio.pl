@@ -98,7 +98,7 @@ gsap.set([progressBar, infoAccept], {
 })
 gsap.to([progressBar, infoAccept], {
     opacity: 1,
-    delay: 2.5,
+    delay: 1.5,
     duration: 1
 })
 

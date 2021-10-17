@@ -11,22 +11,22 @@
 }
 
 .btn-primary {
-    border: 0.5px solid rgba(216, 216, 216, 0.5);
-    background: rgba(255, 255, 255, 0.05);
+    border: 0.5px solid #d8d8d880 !important;
+    background-color: #ffffff0d !important;
 
-    color: $font-color-primary;
+    color: $font-color-primary !important;
 
     transition: 0.5s background-color;
-}
 
-.btn-primary:hover {
-    background: $font-color-secondary;
+    &:hover {
+        background: $font-color-secondary !important;
 
-    color: $body-bg;
+        color: $body-bg !important;
 
-    .arrow-right-icon {
-        fill: $body-bg !important;
-        transition: 0.25s all;
+        .arrow-right-icon {
+            fill: $body-bg !important;
+            transition: 0.25s all;
+        }
     }
 }
 
@@ -36,20 +36,20 @@
     text-align: center;
     cursor: pointer;
     display: inline-block;
-    font-family: $font-family-primary;
+    font-family: $font-family-primary !important;
     font-size: clamp(0.9rem, 2vw, 1rem);
     border-radius: 5em;
     padding: 1.15em 4em;
-    border: 0.5px solid rgba(216, 216, 216, 0.5);
-    background: rgba(255, 255, 255, 0.05);
+    border: 0.5px solid #d8d8d880 !important;
+    background-color: #ffffff0d !important;
 
-    color: $font-color-primary;
+    color: $font-color-primary !important;
 
     transition: 0.5s background-color;
     &:hover {
-        background: $font-color-secondary;
+        background: $font-color-secondary !important;
 
-        color: $body-bg;
+        color: $body-bg !important;
 
         .arrow-right-icon {
             fill: $body-bg !important;
@@ -61,13 +61,14 @@
 .btn-submit {
     width: 40%;
     border: none;
-    background: $primary-color;
+    background: $primary-color !important;
+    color: $body-bg !important;
 
     transition: 0.5s all;
 }
 
 .btn-submit:hover {
-    background: $primary-color-dark;
+    background: $primary-color-dark !important;
 
     transform: scale(0.9);
 }

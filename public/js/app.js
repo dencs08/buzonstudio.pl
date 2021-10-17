@@ -97,7 +97,7 @@ gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set([progressBar, infoAccept], {
 });
 gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to([progressBar, infoAccept], {
   opacity: 1,
-  delay: 2.5,
+  delay: 1.5,
   duration: 1
 });
 
@@ -205,7 +205,10 @@ function navBarAnimation() {
       ease: "expo",
       opacity: 0,
       scale: 1.35,
-      y: yScroll + "px"
+      y: yScroll + "px",
+      onComplete: function onComplete() {
+        webContent.style.display = "none";
+      }
     });
   } else {
     //closed
@@ -241,7 +244,10 @@ function navBarAnimation() {
       ease: "expo",
       opacity: 1,
       scale: 1,
-      y: "0"
+      y: "0",
+      onStart: function onStart() {
+        webContent.style.display = "block";
+      }
     });
     setInterval(zIndexNavBar(), 1250);
   }

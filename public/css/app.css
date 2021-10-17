@@ -6039,7 +6039,7 @@ html.has-scroll-dragging {
   border-radius: 50%;
   font-size: 20px;
   cursor: pointer;
-  color: #ececec;
+  color: #ececec !important;
   transition: all 0.3s ease-in-out;
   z-index: 99;
 }
@@ -6056,7 +6056,7 @@ html.has-scroll-dragging {
   top: calc(50% - 1px);
   left: 0%;
   width: 70%;
-  border-bottom: 2px solid #ececec;
+  border-bottom: 2px solid #ececec !important;
   transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
@@ -6083,12 +6083,12 @@ html.has-scroll-dragging {
 
 #active:checked + .menu-btn:before {
   transform: rotate(45deg);
-  border-color: #ececec;
+  border-color: #ececec !important;
 }
 
 #active:checked + .menu-btn:after {
   transform: rotate(-45deg);
-  border-color: #ececec;
+  border-color: #ececec !important;
 }
 
 .wrapper {
@@ -6109,13 +6109,13 @@ html.has-scroll-dragging {
   text-decoration: none;
   font-size: clamp(1.75rem, 3.5vw, 3rem);
   font-weight: 500;
-  color: #ffffff;
+  color: #ffffff !important;
   transition: 0.5s;
   line-height: clamp(3rem, 8vh, 6rem);
 }
 
 .wrapper ul li a:hover {
-  color: #00ff80;
+  color: #00ff80 !important;
   transition: 0.5s;
 }
 
@@ -6138,7 +6138,7 @@ html.has-scroll-dragging {
 
 .nav-info .p1 {
   font-size: clamp(0.75rem, 2vw, 1rem);
-  color: #bebebe;
+  color: #bebebe !important;
 }
 .nav-info .p2 {
   font-size: clamp(1rem, 2.5vw, 1.25rem);
@@ -6158,7 +6158,7 @@ html.has-scroll-dragging {
   cursor: pointer;
 }
 .nav-icon-div .nav-icon {
-  fill: #ececec;
+  fill: #ececec !important;
   transition: 0.5s all;
 }
 
@@ -6168,7 +6168,18 @@ html.has-scroll-dragging {
 }
 
 .nav-item.active {
-  color: #00ff80;
+  color: #00ff80 !important;
+}
+
+.nav-copyright-container {
+  margin-top: clamp(10px, 2vh, 20px);
+  text-align: center !important;
+}
+
+.nav-copyright {
+  font-size: clamp(0.65rem, 1vw, 0.95rem);
+  color: #3a3a3a !important;
+  text-align: center !important;
 }
 
 #navbar input[type=checkbox] {
@@ -6494,15 +6505,14 @@ html.has-scroll-dragging {
 }
 
 .btn-primary {
-  border: 0.5px solid rgba(216, 216, 216, 0.5);
-  background: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
+  border: 0.5px solid #d8d8d880 !important;
+  background-color: #ffffff0d !important;
+  color: #ffffff !important;
   transition: 0.5s background-color;
 }
-
 .btn-primary:hover {
-  background: #ececec;
-  color: #111111;
+  background: #ececec !important;
+  color: #111111 !important;
 }
 .btn-primary:hover .arrow-right-icon {
   fill: #111111 !important;
@@ -6515,18 +6525,18 @@ html.has-scroll-dragging {
   text-align: center;
   cursor: pointer;
   display: inline-block;
-  font-family: "Poppins";
+  font-family: "Poppins" !important;
   font-size: clamp(0.9rem, 2vw, 1rem);
   border-radius: 5em;
   padding: 1.15em 4em;
-  border: 0.5px solid rgba(216, 216, 216, 0.5);
-  background: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
+  border: 0.5px solid #d8d8d880 !important;
+  background-color: #ffffff0d !important;
+  color: #ffffff !important;
   transition: 0.5s background-color;
 }
 .a_btn:hover {
-  background: #ececec;
-  color: #111111;
+  background: #ececec !important;
+  color: #111111 !important;
 }
 .a_btn:hover .arrow-right-icon {
   fill: #111111 !important;
@@ -6536,12 +6546,13 @@ html.has-scroll-dragging {
 .btn-submit {
   width: 40%;
   border: none;
-  background: #00ff80;
+  background: #00ff80 !important;
+  color: #111111 !important;
   transition: 0.5s all;
 }
 
 .btn-submit:hover {
-  background: #1fd18d;
+  background: #1fd18d !important;
   transform: scale(0.9);
 }
 
@@ -6713,7 +6724,7 @@ html.has-scroll-dragging {
   left: 0;
   width: 100vw;
   height: 50vh;
-  background-color: #161616;
+  background-color: #161616 !important;
   z-index: 999;
 }
 
@@ -6723,13 +6734,13 @@ html.has-scroll-dragging {
   left: 0;
   width: 100vw;
   height: 50vh;
-  background-color: #161616;
+  background-color: #161616 !important;
   z-index: 999;
 }
 
 .info-accept {
   position: relative;
-  color: #707070;
+  color: #707070 !important;
   text-align: center;
 }
 
@@ -6857,7 +6868,7 @@ body {
   color: #ffffff;
   font-family: "Poppins";
   overflow: hidden;
-  background-color: #111111;
+  background-color: #111111 !important;
 }
 
 h1 {
@@ -6997,4 +7008,101 @@ a {
   100% {
     height: 0%;
   }
+}
+#fp-nav ul li a span {
+  background-color: #f1f1f1 !important;
+  color: #f1f1f1 !important;
+}
+
+#Contact {
+  width: 75%;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+#Contact input[type=checkbox] {
+  display: none;
+}
+#Contact input[type=checkbox] + label {
+  display: inline-block;
+  position: relative;
+  width: 20em;
+  background: #ffffff0d !important;
+  margin-bottom: 25px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 2.5em 0em;
+  border: 1px solid #72727280 !important;
+  border-radius: 100px;
+  color: #444 !important;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s all;
+}
+#Contact input[type=checkbox] + label:hover {
+  background: #24242480 !important;
+  color: #ffffff !important;
+  transform: scale(0.9);
+}
+#Contact input[type=checkbox]:checked + label {
+  background: #ececec !important;
+  color: #111111 !important;
+}
+#Contact .label-name {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition-property: left;
+  transition-duration: 1s;
+  -webkit-transition-property: left;
+  -webkit-transition-duration: 1s;
+}
+#Contact input[type=checkbox]:checked + label div.checkmark {
+  display: block;
+  fill: #f0f0f0 !important;
+}
+
+.contact-form .form-field {
+  position: relative;
+  margin: 32px 0;
+}
+.contact-form .input-text {
+  display: block;
+  width: 100%;
+  border: 0.5px solid #d8d8d880 !important;
+  border-radius: 50px;
+  padding: 1.75em 2.5em;
+  background-color: #ffffff0d !important;
+  color: #ffffff !important;
+  transition: 0.5s all;
+}
+.contact-form .input-text:focus {
+  outline: none;
+  border: solid 1px #00ff80 !important;
+  transition: all 0.25s;
+}
+.contact-form .input-text:focus + .label, .contact-form .input-text.not-empty + .label {
+  transform: translateY(-55px);
+  font-size: 1.2rem;
+  color: #bebebe !important;
+  font-weight: 500;
+  transition: all 0.25s;
+}
+.contact-form .label {
+  position: absolute;
+  left: 30px;
+  top: 19px;
+  font-size: 1rem !important;
+  line-height: 26px;
+  font-weight: 300;
+  color: #707070 !important;
+  cursor: text;
+  transition: all 0.25s ease-in-out;
+}
+.contact-form textarea {
+  max-width: 100%;
+  border-radius: 35px !important;
+  font-family: "Poppins" !important;
 }
