@@ -124,7 +124,7 @@ window.addEventListener('resize', function () {
   vwNew = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
   vhNew = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
 
-  if (Math.abs(vwNew - vw) > 250 || Math.abs(vhNew - vh) > 150) {
+  if (Math.abs(vwNew - vw) > 250 || Math.abs(vhNew - vh) > 650) {
     window.location.reload();
   }
 });
