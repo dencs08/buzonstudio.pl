@@ -418,7 +418,8 @@ function init() {
   document.body.appendChild(container); //!Base camera
 
   camera = new three__WEBPACK_IMPORTED_MODULE_10__.PerspectiveCamera(cameraParams.fov, width / height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax);
-  camera.position.set(0, 2, -4.5);
+  camera.position.set(0, 2, 3.6); //0, 2, 3.60
+
   camera.rotation.set(0, 0, 0);
   var cameraTargetGeo = new three__WEBPACK_IMPORTED_MODULE_10__.SphereGeometry(1, 32, 16);
   var cameraTargetMat = new three__WEBPACK_IMPORTED_MODULE_10__.MeshStandardMaterial();
@@ -429,8 +430,8 @@ function init() {
     canvas: canvas
   });
   renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(width, height); // renderer.outputEncoding = THREE.sRGBEncoding
-  // renderer.toneMapping = THREE.ACESFilmicToneMapping
+  renderer.setSize(width, height);
+  renderer.outputEncoding = three__WEBPACK_IMPORTED_MODULE_10__.sRGBEncoding; // renderer.toneMapping = THREE.ACESFilmicToneMapping
 
   container.appendChild(renderer.domElement);
   parameters = {
@@ -438,8 +439,8 @@ function init() {
   }; //, envMap: textureCube 
 
   cubeMaterial = new three__WEBPACK_IMPORTED_MODULE_10__.MeshBasicMaterial(parameters); //! Controls
-
-  controls = new three_examples_jsm_controls_OrbitControls_js__WEBPACK_IMPORTED_MODULE_0__.OrbitControls(camera, renderer.domElement); //! Scene
+  // controls = new OrbitControls(camera, renderer.domElement)
+  //! Scene
 
   new three__WEBPACK_IMPORTED_MODULE_10__.CubeTextureLoader().load(['3d/textures/skybox/stars_ft.jpg', '3d/textures/skybox/stars_bk.jpg', '3d/textures/skybox/stars_up.jpg', '3d/textures/skybox/stars_dn.jpg', '3d/textures/skybox/stars_rt.jpg', '3d/textures/skybox/stars_lf.jpg'], function (cubeTexture) {
     cubeTexture.encoding = three__WEBPACK_IMPORTED_MODULE_10__.sRGBEncoding;
@@ -450,14 +451,14 @@ function init() {
 
   var lightProbe;
   var directionalLight;
-  var API = {
-    lightProbeIntensity: .1,
-    directionalLightIntensity: 0.55,
-    envMapIntensity: 0.1
+  var lightParam = {
+    lightProbeIntensity: .05,
+    directionalLightIntensity: 0.25,
+    envMapIntensity: 0.05
   };
   lightProbe = new three__WEBPACK_IMPORTED_MODULE_10__.LightProbe();
   scene.add(lightProbe);
-  directionalLight = new three__WEBPACK_IMPORTED_MODULE_10__.DirectionalLight(0xffffff, API.directionalLightIntensity);
+  directionalLight = new three__WEBPACK_IMPORTED_MODULE_10__.DirectionalLight(0xffffff, lightParam.directionalLightIntensity);
   directionalLight.position.set(10, 10, 10);
   scene.add(directionalLight);
   initPostprocessing();
@@ -503,36 +504,38 @@ function init() {
   // ground.rotation.z = 3.141
 
   uniforms = {
-    "time": {
-      value: 1
+    iTime: {
+      value: 0
     },
-    "resolution": {
-      value: 1
+    iResolution: {
+      value: new three__WEBPACK_IMPORTED_MODULE_10__.Vector3(1600 / 2, 900 / 2, 1)
+    },
+    iMouse: {
+      value: new three__WEBPACK_IMPORTED_MODULE_10__.Vector4()
     }
   };
-  var wallGeo = new three__WEBPACK_IMPORTED_MODULE_10__.PlaneGeometry(2, 2);
+  var wallGeo = new three__WEBPACK_IMPORTED_MODULE_10__.PlaneGeometry(21.5, 10);
   var wallMat = new three__WEBPACK_IMPORTED_MODULE_10__.ShaderMaterial({
     uniforms: uniforms,
     vertexShader: vertexShader(),
-    fragmentShader: fragmentShader()
+    fragmentShader: fragmentShaderTest1()
   });
   var wall = new three__WEBPACK_IMPORTED_MODULE_10__.Mesh(wallGeo, wallMat);
   scene.add(wall);
   wall.position.set(0, 2, -5); //human
-
-  var humanMaterial = new three__WEBPACK_IMPORTED_MODULE_10__.MeshStandardMaterial({
-    color: 0x95ff00,
-    emissive: 0x95ff00,
-    emissiveIntensity: 100
-  });
-  gltfLoader.load('3d/models/human.gltf', function (gltf) {
-    human = gltf.scene;
-    human.traverse(function (o) {
-      if (o.isMesh) o.material = humanMaterial;
-    });
-    scene.add(human);
-    human.position.set(0, 0, 0);
-  });
+  // const humanMaterial = new THREE.MeshStandardMaterial({
+  //     // color: 0x95ff00,
+  //     // emissive: 0x95ff00,
+  //     // emissiveIntensity: 100,
+  // })
+  // gltfLoader.load('3d/models/human.gltf', (gltf) => {
+  //     human = gltf.scene
+  //     human.traverse((o) => {
+  //         if (o.isMesh) o.material = humanMaterial;
+  //     });
+  //     scene.add(human)
+  //     human.position.set(0, 0, 0)
+  // })
 }
 
 function onPointerMove(event) {
@@ -572,8 +575,11 @@ function initPostprocessing() {
   postprocessing.bokeh = bokehPass;
 }
 
-function animate() {
-  // controls.update();
+function animate(time) {
+  time *= 0.001;
+  uniforms.iTime.value = time;
+  uniforms.iMouse.value.set(mouseX, mouseY, mouseX, mouseY); // controls.update();
+
   requestAnimationFrame(animate, renderer.domElement);
   stats.begin();
   render();
@@ -581,9 +587,6 @@ function animate() {
 }
 
 function render() {
-  var time = Date.now() * 0.00005;
-  var delta = clock.getDelta();
-  uniforms["time"].value += delta * 5;
   mouseInteractivity();
   postprocessing.composer.render(0.1);
 }
@@ -598,8 +601,16 @@ function vertexShader() {
   return "\n    varying vec2 vUv;\n\n    void main()\n    {\n        vUv = uv;\n        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );\n        gl_Position = projectionMatrix * mvPosition;\n    }\n    ";
 }
 
-function fragmentShader() {
-  return "\n\n    #define PI 3.14159265359\n    #define EXP 2.71828182846\n\n    float w1 = 2.0;\n    float w2 = 1.5;\n    float w3 = 30.0;\n    float A = 0.1;\n    float R = 10.0;\n\n    float timer = 30.0;\n\n    uniform float time;\n    float resolution = 4.0;\n    varying vec2 vUv;\n\n    float horizontal(in vec2 xy, float t)\t{\n        float v = cos(w1*xy.x + A*t);\n        return v;\n    }\n\n    float diagonal(in vec2 xy, float t)\t{\n        float v = cos(w2*(xy.x*cos(t) + 5.0*xy.y*sin(t)) + A*t);\n        return v;\n    }\n\n    float radial(in vec2 xy, float t)\t{\n        float x = 0.3*xy.x - 0.5 + cos(t);\n        float y = 0.3*xy.y - 0.5 + sin(t*0.5);\n        float v = sin(w3*sqrt(x*x+y*y+1.0)+A*t);\n        return v;\n    }\n\n    float map(float a,float b,float c,float d,float x) {\n        return ((x-a)*(d-c)/(b-a))+c;\n    }\n\n    float log_map(float a,float b,float c,float d,float x) {\n        float x1 = map(a,b,1.0,EXP,x);\n        return log(x1)*(d-c)+c;\n    }\n\n    void main( void )\t{\n        float t = time / timer;\n        vec2 xy = vUv * resolution;\n        float v = horizontal(xy,t);\n        v += diagonal(xy,t);\n        v += radial(xy,t);\n        v /= 5.0;\n        float r = map(-1.0, 1.0,   0.2, 0.25, sin(PI*v));\n        float g = map(-1.0, 1.0,   0.32, 0.53, sin(PI*v));\n        g += log_map(-1.0, 1.0,   0.32, 0.4, cos(PI*v));\n        float b = map(-1.0, 1.0,   0.35, 0.55, sin(PI*v));\n        b += log_map(-1.0, 1.0,   0.35, 0.4, cos(PI*v));\n        gl_FragColor = vec4(pow(r,R),pow(g,R),pow(b,R),1.0);\n    }\n";
+function fragmentShaderPlasma1() {
+  return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n\n    #define PI 3.14159265359\n    #define EXP 2.71828182846\n\n    float w1 = 2.0;\n    float w2 = 1.5;\n    float w3 = 30.0;\n    float A = 0.1;\n    float R = 10.0;\n\n    float horizontal(in vec2 xy, float t)\t{\n        float v = cos(w1*xy.x + A*t);\n        return v;\n    }\n\n    float diagonal(in vec2 xy, float t)\t{\n        float v = cos(w2*(xy.x*cos(t) + 5.0*xy.y*sin(t)) + A*t);\n        return v;\n    }\n\n    float radial(in vec2 xy, float t)\t{\n        float x = 0.3*xy.x - 0.5 + cos(t);\n        float y = 0.3*xy.y - 0.5 + sin(t*0.5);\n        float v = sin(w3*sqrt(x*x+y*y+1.0)+A*t);\n        return v;\n    }    \n\n    float map(float a,float b,float c,float d,float x) {\n        return ((x-a)*(d-c)/(b-a))+c;\n    }\n\n    float log_map(float a,float b,float c,float d,float x) {\n        float x1 = map(a,b,1.0,EXP,x);\n        return log(x1)*(d-c)+c;\n    }\n\n    void mainImage( out vec4 fragColor, in vec2 fragCoord )\t{\n        float t = iTime * 0.2;\n        vec2 xy = fragCoord.xy / iResolution.xy;\n        float v = horizontal(xy,t);\n        v += diagonal(xy,t);\n        v += radial(xy,t);\n        v /= 3.0;\n        float r = map(-1.0,1.0,   0.0,0.1,sin(PI*v));\n        float g = map(-1.0,1.0,   0.3,0.5,sin(PI*v));\n        g += log_map(-1.0,1.0,   0.3,0.4,cos(PI*v));\n        float b = map(-1.0,1.0,   0.7,0.9,sin(PI*v));\n        fragColor = vec4(pow(r,R),pow(g,R),pow(b,R),1.0);\n    }\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n";
+}
+
+function fragmentShaderPlasma2() {
+  return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n    uniform vec4 iMouse;\n\n    float len(vec3 p) {\n        return max(abs(p.x)*0.5+abs(p.z)*0.5,max(abs(p.y)*0.5+abs(p.x)*0.5,abs(p.z)*0.5+abs(p.y)*0.5));\n    }\n\n    void mainImage( out vec4 fragColor, in vec2 fragCoord )\n    {\n    \tvec2 R = iResolution.xy,\n            uv = (fragCoord - .5*R) / iResolution.y;\n\n        vec3 rp = vec3(0.,iMouse.y/500.,iTime+iMouse.x/500.);\n        vec3 rd = normalize(vec3(uv,1.));\n\n        vec3 c = vec3(0.);\n        float s = 0.;\n\n        float viewVary = cos(iTime*0.05)*.15;\n\n        for (int i = 0; i < 74; i++) {\n            vec3 hp = rp+rd*s;\n            float d = len(cos(hp*.6+\n            cos(hp*.3+iTime*.5)))-.75;\n            float cc = min(1.,pow(max(0., 1.-abs(d)*10.25),1.))/(float(i)*1.+10.);//clamp(1.-(d*.5+(d*5.)/s),-1.,1.);\n            \n            c += (cos(vec3(hp.xy,s))*.5+.5 + cos(vec3(s+iTime,hp.yx)*.1)*.5+.5 + 1.)/3.\n                  *cc;\n            \n            s += max(abs(d),0.35+viewVary);\n            rd = normalize(rd+vec3(sin(s*0.5),cos(s*0.5),0.)*d*0.05*clamp(s-1.,0.,1.));\n        }\n\n        fragColor = vec4(pow(c,vec3(1.7)),1.);\n    }\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n";
+}
+
+function fragmentShaderTest1() {
+  return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n    uniform vec4 iMouse;\n\n    #define time iTime\n\n    mat2 mm2(in float a){float c = cos(a), s = sin(a);return mat2(c,s,-s,c);}\n    mat2 m2 = mat2(0.95534, 0.29552, -0.29552, 0.95534);\n    float tri(in float x){return clamp(abs(fract(x)-.5),0.01,0.49);}\n    vec2 tri2(in vec2 p){return vec2(tri(p.x)+tri(p.y),tri(p.y+tri(p.x)));}\n    \n    float triNoise2d(in vec2 p, float spd)\n    {\n        float z=1.8;\n        float z2=2.5;\n        float rz = 0.;\n        p *= mm2(p.x*0.06);\n        vec2 bp = p;\n        for (float i=0.; i<5.; i++ )\n        {\n            vec2 dg = tri2(bp*1.85)*.75;\n            dg *= mm2(time*spd);\n            p -= dg/z2;\n    \n            bp *= 1.3;\n            z2 *= .45;\n            z *= .42;\n            p *= 1.21 + (rz-1.0)*.02;\n            \n            rz += tri(p.x+tri(p.y))*z;\n            p*= -m2;\n        }\n        return clamp(1./pow(rz*29., 1.3),0.,.55);\n    }\n    \n    float hash21(in vec2 n){ return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453); }\n    vec4 aurora(vec3 ro, vec3 rd)\n    {\n        vec4 col = vec4(0);\n        vec4 avgCol = vec4(0);\n        \n        for(float i=0.;i<50.;i++)\n        {\n            float of = 0.006*hash21(gl_FragCoord.xy)*smoothstep(0.,15., i);\n            float pt = ((.8+pow(i,1.4)*.002)-ro.y)/(rd.y*2.+0.4);\n            pt -= of;\n            vec3 bpos = ro + pt*rd;\n            vec2 p = bpos.zx;\n            float rzt = triNoise2d(p, 0.06);\n            vec4 col2 = vec4(0,0,0, rzt);\n            col2.rgb = (sin(1.-vec3(2.15,-.5, 1.2)+i*0.043)*0.5+0.5)*rzt;\n            avgCol =  mix(avgCol, col2, .5);\n            col += avgCol*exp2(-i*0.065 - 2.5)*smoothstep(0.,5., i);\n            \n        }\n        \n        col *= (clamp(rd.y*15.+.4,0.,1.));\n        \n        \n        //return clamp(pow(col,vec4(1.3))*1.5,0.,1.);\n        //return clamp(pow(col,vec4(1.7))*2.,0.,1.);\n        //return clamp(pow(col,vec4(1.5))*2.5,0.,1.);\n        //return clamp(pow(col,vec4(1.8))*1.5,0.,1.);\n        \n        //return smoothstep(0.,1.1,pow(col,vec4(1.))*1.5);\n        return col*1.8;\n        //return pow(col,vec4(1.))*2.\n    }\n    \n    \n    //-------------------Background and Stars--------------------\n    \n    vec3 nmzHash33(vec3 q)\n    {\n        uvec3 p = uvec3(ivec3(q));\n        p = p*uvec3(374761393U, 1103515245U, 668265263U) + p.zxy + p.yzx;\n        p = p.yzx*(p.zxy^(p >> 3U));\n        return vec3(p^(p >> 16U))*(1.0/vec3(0xffffffffU));\n    }\n    \n    vec3 stars(in vec3 p)\n    {\n        vec3 c = vec3(0.);\n        float res = iResolution.x*1.;\n        \n        for (float i=0.;i<4.;i++)\n        {\n            vec3 q = fract(p*(.15*res))-0.5;\n            vec3 id = floor(p*(.15*res));\n            vec2 rn = nmzHash33(id).xy;\n            float c2 = 1.-smoothstep(0.,.6,length(q));\n            c2 *= step(rn.x,.0005+i*i*0.001);\n            c += c2*(mix(vec3(1.0,0.49,0.1),vec3(0.75,0.9,1.),rn.y)*0.1+0.9);\n            p *= 1.3;\n        }\n        return c*c*.8;\n    }\n    \n    vec3 bg(in vec3 rd)\n    {\n        float sd = dot(normalize(vec3(-0.5, -0.6, 0.9)), rd)*0.5+0.5;\n        sd = pow(sd, 5.);\n        vec3 col = mix(vec3(0.05,0.1,0.2), vec3(0.1,0.05,0.2), sd);\n        return col*.63;\n    }\n    //-----------------------------------------------------------\n    \n    \n    void mainImage( out vec4 fragColor, in vec2 fragCoord )\n    {\n        vec2 q = fragCoord.xy / iResolution.xy;\n        vec2 p = q - 0.5;\n        p.x*=iResolution.x/iResolution.y;\n        \n        vec3 ro = vec3(0,0,-6.7);\n        vec3 rd = normalize(vec3(p,1.3));\n        vec2 mo = (iMouse.xy / iResolution.xy-.5) * 0.1;\n        mo = (mo==vec2(-.5))?mo=vec2(-0.1,0.1):mo;\n        mo.x *= iResolution.x/iResolution.y;\n        rd.yz *= mm2(mo.y);\n        rd.xz *= mm2(mo.x + sin(time*0.05)*0.2);\n        \n        vec3 col = vec3(0.);\n        vec3 brd = rd;\n        float fade = smoothstep(0.,0.01,abs(brd.y))*0.1+0.9;\n        \n        col = bg(rd)*fade;\n        \n        if (rd.y > 0.){\n            vec4 aur = smoothstep(0.,1.5,aurora(ro,rd))*fade;\n            col += stars(rd);\n            col = col*(1.-aur.a) + aur.rgb;\n        }\n        else //Reflections\n        {\n            rd.y = abs(rd.y);\n            col = bg(rd)*fade*0.6;\n            vec4 aur = smoothstep(0.0,2.5,aurora(ro,rd));\n            col += stars(rd)*0.1;\n            col = col*(1.-aur.a) + aur.rgb;\n            vec3 pos = ro + ((0.5-ro.y)/rd.y)*rd;\n            float nz2 = triNoise2d(pos.xz*vec2(.5,.7), 0.);\n            col += mix(vec3(0.2,0.25,0.5)*0.08,vec3(0.3,0.3,0.5)*0.7, nz2*0.4);\n        }\n        \n        fragColor = vec4(col, 1.);\n    }\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n";
 }
 
 init();
