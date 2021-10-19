@@ -33,7 +33,7 @@
                             </li>
                             <li class="nav-li">
                                 <span class="nav-number">03</span
-                                ><a href="start#section5" class="nav-item web_link web_link_transitions">Portfolio</a>
+                                ><a href="oferta#prace" class="nav-item web_link web_link_transitions">Portfolio</a>
                             </li>
                             <li class="nav-li">
                                 <span class="nav-number">04</span

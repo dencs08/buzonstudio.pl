@@ -10675,48 +10675,72 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! gsap/CSSRulePlugin */ "./node_modules/gsap/CSSRulePlugin.js");
 
 
- // Splitting();
 
 gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_CSSPlugin__WEBPACK_IMPORTED_MODULE_1__.CSSPlugin, gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_2__.CSSRulePlugin); //! Landing page timeline
 
 var h1 = document.querySelector('h1');
 var h2 = document.querySelector('h2');
 var arrow = document.getElementsByClassName('arrow-down-icon');
-var tl = gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.timeline(); //!timeline 1
+var three = document.getElementById('web_gl');
+var tl = gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.timeline();
+gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.set([three, h1, h2, arrow], {
+  opacity: 0
+});
+var stopCheck = false;
+var checkI = 0;
 
-tl.fromTo(h2, {
-  clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
-  opacity: 0,
-  x: '-30px'
-}, {
-  delay: 0.5,
-  opacity: 1,
-  x: '0px',
-  clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-  ease: "expo",
-  duration: 1.5,
-  stagger: 0.5
-}, "+=0.5");
-tl.fromTo(h1, {
-  opacity: 0,
-  y: '60px' // clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
+if (stopCheck == false) {
+  setInterval(function () {
+    if (webEntered == true) {
+      stopCheck = true;
 
-}, {
-  opacity: 1,
-  y: '0px',
-  // clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-  ease: "expo",
-  duration: 1.5,
-  stagger: 0.5
-}, "-=1");
-tl.fromTo(arrow, {
-  opacity: 0,
-  y: '-60px'
-}, {
-  opacity: 1,
-  y: '0px',
-  duration: 0.5
-}, "-=1.25");
+      for (checkI; checkI < 1; checkI++) {
+        //!timeline 1
+        tl.fromTo(three, {
+          opacity: 0
+        }, {
+          opacity: 1,
+          delay: 0.25,
+          duration: 0.75,
+          ease: "sine.in"
+        });
+        tl.fromTo(h2, {
+          clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
+          opacity: 0,
+          x: '-30px'
+        }, {
+          delay: 0.5,
+          opacity: 1,
+          x: '0px',
+          clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+          ease: "expo",
+          duration: 1.5,
+          stagger: 0.5
+        }, "-=0.35");
+        tl.fromTo(h1, {
+          opacity: 0,
+          y: '60px' // clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
+
+        }, {
+          opacity: 1,
+          y: '0px',
+          // clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+          ease: "expo",
+          duration: 1.5,
+          stagger: 0.5
+        }, "-=1");
+        tl.fromTo(arrow, {
+          opacity: 0,
+          y: '-60px'
+        }, {
+          opacity: 1,
+          y: '0px',
+          duration: 0.5
+        }, "-=1.25");
+      }
+    }
+  }, 250);
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
@@ -10794,7 +10818,7 @@ document.addEventListener("DOMContentLoaded", function () {
     gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__.ScrollTrigger.create({
       trigger: elem,
       start: startTrigger(),
-      end: "bottom top",
+      end: "top top",
       once: true,
       // markers: true,
       scroller: ".smooth-locomotive-scroll",
@@ -10813,10 +10837,10 @@ function startTrigger() {
   var start = "";
 
   if (h == 0) {
-    var startTriggerNumber = h2 * 0.75;
+    var startTriggerNumber = h2 * 0.85;
     start = "top " + startTriggerNumber;
   } else {
-    var _startTriggerNumber = h * 0.75;
+    var _startTriggerNumber = h * 0.85;
 
     start = "top " + _startTriggerNumber;
   }
@@ -10871,6 +10895,16 @@ if (location.pathname == "/kontakt") {
   window.addEventListener("load", validateForm, false);
 }
 
+setTimeout(function () {
+  var path = window.location;
+
+  if (path.hash == "#prace") {
+    var workTarget = document.getElementById("works");
+    locoScroll.scrollTo(workTarget, {
+      offset: -200
+    });
+  }
+}, 1000);
 gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__.ScrollTrigger);
 locoScroll.on("scroll", gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__.ScrollTrigger.update); // tell ScrollTrigger to use these proxy methods for the ".smooth-locomotive-scroll" element since Locomotive Scroll is hijacking things
 

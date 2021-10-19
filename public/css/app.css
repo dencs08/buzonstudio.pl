@@ -6715,7 +6715,9 @@ html.has-scroll-dragging {
   }
 }
 .courtain {
-  position: relative;
+  position: fixed;
+  height: 100vh;
+  z-index: 9998;
 }
 
 .top-side {
@@ -6736,12 +6738,6 @@ html.has-scroll-dragging {
   height: 50vh;
   background-color: #161616 !important;
   z-index: 999;
-}
-
-.info-accept {
-  position: relative;
-  color: #707070 !important;
-  text-align: center;
 }
 
 .progress {
@@ -6784,6 +6780,51 @@ html.has-scroll-dragging {
   animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
   -webkit-animation-delay: 1.15s;
   animation-delay: 1.15s;
+}
+
+.courtain-wrapper {
+  position: relative;
+  opacity: 0;
+  display: none;
+  justify-content: center;
+  place-items: center;
+  height: 100vh;
+  width: 100vw;
+  z-index: 9999;
+}
+.courtain-wrapper .container {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+.courtain-wrapper #start-button {
+  cursor: pointer;
+  font-size: clamp(2rem, 5vw, 4rem) !important;
+  font-weight: 600;
+  color: #00ff80 !important;
+  transition: all 0.5s;
+}
+.courtain-wrapper #start-button:hover {
+  color: #1fd18d !important;
+  transform: scale(0.9);
+}
+.courtain-wrapper .privacy-policy-start {
+  position: absolute;
+  top: 95%;
+  font-size: clamp(0.6rem, 2vw, 0.9rem);
+  text-align: center;
+}
+.courtain-wrapper .privacy-policy-start span {
+  color: #3a3a3a !important;
+  text-align: center;
+}
+.courtain-wrapper .privacy-policy-start a {
+  color: #3a3a3a !important;
+  text-align: center;
+}
+
+.info-accept {
+  color: #707070 !important;
 }
 
 @-webkit-keyframes indeterminate {
@@ -6868,8 +6909,7 @@ body {
   color: #ffffff;
   font-family: "Poppins";
   overflow: hidden;
-  background-color: transparent;
-  background: none;
+  background-color: #111111 !important;
 }
 
 h1 {
@@ -6922,6 +6962,11 @@ a {
   fill: #00ff80;
   height: 100px !important;
   width: 100px !important;
+}
+
+#fp-nav span {
+  background-color: #f1f1f1 !important;
+  color: #f1f1f1 !important;
 }
 
 #web_gl {
@@ -7009,101 +7054,4 @@ a {
   100% {
     height: 0%;
   }
-}
-#fp-nav ul li a span {
-  background-color: #f1f1f1 !important;
-  color: #f1f1f1 !important;
-}
-
-#Contact {
-  width: 75%;
-  margin-right: auto;
-  margin-left: auto;
-  text-align: center;
-}
-#Contact input[type=checkbox] {
-  display: none;
-}
-#Contact input[type=checkbox] + label {
-  display: inline-block;
-  position: relative;
-  width: 20em;
-  background: #ffffff0d !important;
-  margin-bottom: 25px;
-  margin-left: 5px;
-  margin-right: 5px;
-  padding: 2.5em 0em;
-  border: 1px solid #72727280 !important;
-  border-radius: 100px;
-  color: #444 !important;
-  font-size: 14px;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.5s all;
-}
-#Contact input[type=checkbox] + label:hover {
-  background: #24242480 !important;
-  color: #ffffff !important;
-  transform: scale(0.9);
-}
-#Contact input[type=checkbox]:checked + label {
-  background: #ececec !important;
-  color: #111111 !important;
-}
-#Contact .label-name {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  transition-property: left;
-  transition-duration: 1s;
-  -webkit-transition-property: left;
-  -webkit-transition-duration: 1s;
-}
-#Contact input[type=checkbox]:checked + label div.checkmark {
-  display: block;
-  fill: #f0f0f0 !important;
-}
-
-.contact-form .form-field {
-  position: relative;
-  margin: 32px 0;
-}
-.contact-form .input-text {
-  display: block;
-  width: 100%;
-  border: 0.5px solid #d8d8d880 !important;
-  border-radius: 50px;
-  padding: 1.75em 2.5em;
-  background-color: #ffffff0d !important;
-  color: #ffffff !important;
-  transition: 0.5s all;
-}
-.contact-form .input-text:focus {
-  outline: none;
-  border: solid 1px #00ff80 !important;
-  transition: all 0.25s;
-}
-.contact-form .input-text:focus + .label, .contact-form .input-text.not-empty + .label {
-  transform: translateY(-55px);
-  font-size: 1.2rem;
-  color: #bebebe !important;
-  font-weight: 500;
-  transition: all 0.25s;
-}
-.contact-form .label {
-  position: absolute;
-  left: 30px;
-  top: 19px;
-  font-size: 1rem !important;
-  line-height: 26px;
-  font-weight: 300;
-  color: #707070 !important;
-  cursor: text;
-  transition: all 0.25s ease-in-out;
-}
-.contact-form textarea {
-  max-width: 100%;
-  border-radius: 35px !important;
-  font-family: "Poppins" !important;
 }

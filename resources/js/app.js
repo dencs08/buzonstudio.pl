@@ -1,27 +1,53 @@
 import { gsap } from 'gsap'
-import * as $ from 'jquery'
+
+const topCover = document.getElementsByClassName("top-side")
+const bottomCover = document.getElementsByClassName("bottom-side")
+const tl = gsap.timeline()
 
 //! page transitions
 window.onload = () => {
-    const anchors = document.querySelectorAll('.web_link_transitions');
-    const topCover = document.getElementsByClassName("top-side")
-    const bottomCover = document.getElementsByClassName("bottom-side")
-    const tl = gsap.timeline()
+    const anchors = document.querySelectorAll('.web_link_transitions')
+    const startButton = document.getElementById('start-button');
+    const courtainWrapper = document.querySelector(".courtain-wrapper")
 
-    setTimeout(() => {
-        tl.to(topCover, {
-            duration: 1.25,
-            ease: 'expo.out',
-            y: '-50vh'
+    if (!sessionStorage.noFirstVisit) {
+        courtainWrapper.style.display = 'flex';
+
+        tl.to(courtainWrapper, {
+            opacity: 1,
+            duration: 2.5,
+            ease: "expo",
+            delay: 0.5,
         })
-        tl.to(bottomCover, {
-            duration: 1.25,
-            ease: 'expo.out',
-            y: '50vh'
-        },
-            "-=1.25")
-    }, 250);
 
+        startButton.addEventListener('click', e => {
+            sessionStorage.noFirstVisit = "1";
+            setTimeout(() => {
+                tl.to(courtainWrapper, {
+                    opacity: 0,
+                    duration: 0.5,
+                    onComplete: function () {
+                        courtainWrapper.style.display = "none";
+                    }
+                })
+                courtainAnimStart()
+
+            }, 250);
+        })
+    } else {
+        courtainWrapper.style.display = 'none';
+
+        setTimeout(() => {
+            tl.to(courtainWrapper, {
+                opacity: 0,
+                duration: 0.5,
+                onComplete: function () {
+                    courtainWrapper.style.display = "none";
+                }
+            })
+            courtainAnimStart()
+        }, 250);
+    }
 
     var path = location.pathname;
     //only on start to prevent #portfolio section page transition
@@ -38,17 +64,7 @@ window.onload = () => {
                     console.log(target)
 
                     e.preventDefault();
-                    tl.to(topCover, {
-                        duration: 0.5,
-                        ease: 'expo.out',
-                        y: '0vh'
-                    })
-                    tl.to(bottomCover, {
-                        duration: 0.5,
-                        ease: 'expo.out',
-                        y: '0vh'
-                    },
-                        "-=0.5")
+                    courtainAnimExit()
 
                     setTimeout(() => {
                         window.location.href = target;
@@ -62,19 +78,7 @@ window.onload = () => {
             anchor.addEventListener('click', e => {
                 let target = e.target.href;
                 e.preventDefault();
-
-                tl.to(topCover, {
-                    duration: 0.5,
-                    ease: 'expo.out',
-                    y: '0vh'
-                })
-                tl.to(bottomCover, {
-                    duration: 0.5,
-                    ease: 'expo.out',
-                    y: '0vh'
-                },
-                    "-=0.5")
-
+                courtainAnimExit()
 
                 setTimeout(() => {
                     window.location.href = target;
@@ -85,18 +89,14 @@ window.onload = () => {
 }
 
 const progressBar = document.querySelector(".progress")
-const infoAccept = document.querySelector(".info-accept")
 
-
-
-gsap.set([progressBar, infoAccept], {
+gsap.set([progressBar], {
     opacity: 0,
     onComplete: function () {
         progressBar.style.zIndex = "9999";
-        infoAccept.style.zIndex = "9999";
     }
 })
-gsap.to([progressBar, infoAccept], {
+gsap.to([progressBar], {
     opacity: 1,
     delay: 1.5,
     duration: 1
@@ -104,15 +104,13 @@ gsap.to([progressBar, infoAccept], {
 
 document.onreadystatechange = function () {
     if (document.readyState === "complete") {
-        gsap.to([progressBar, infoAccept], {
+        gsap.to([progressBar], {
             opacity: 0,
             duration: 0.5,
             onComplete: function () {
                 progressBar.style.display = "none";
-                infoAccept.style.display = "none";
             }
         })
-
     }
 }
 
@@ -130,3 +128,34 @@ window.addEventListener('resize', function () {
         window.location.reload();
     }
 });
+
+function courtainAnimStart() {
+    tl.to(topCover, {
+        duration: 0.75,
+        ease: 'expo.out',
+        y: '-50vh'
+    })
+    tl.to(bottomCover, {
+        duration: 0.75,
+        ease: 'expo.out',
+        y: '50vh',
+        onStart: function () {
+            webEntered = true;
+        }
+    },
+        "-=0.75")
+}
+
+function courtainAnimExit() {
+    tl.to(topCover, {
+        duration: 0.5,
+        ease: 'expo.out',
+        y: '-0vh'
+    })
+    tl.to(bottomCover, {
+        duration: 0.5,
+        ease: 'expo.out',
+        y: '0vh',
+    },
+        "-=0.5")
+}

@@ -15,6 +15,7 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass'
 import { BokehPass } from 'three/examples/jsm/postprocessing/BokehPass'
 import Stats from 'three/examples/jsm/libs/stats.module'
+import { last } from 'lodash'
 
 // ***
 // *** MAIN PROPERITES
@@ -24,13 +25,13 @@ const planeScale = 100
 const planeResolution = 64
 
 const bloomParams = {
-    bloomStrength: 0.5,
+    bloomStrength: 0.1, //0.5
     bloomThreshold: 0,
-    bloomRadius: 0.01,
+    bloomRadius: 0.005, //0.1
 }
 
 const filmParams = {
-    noiseIntensity: 0.2,
+    noiseIntensity: 0.05,
     scanLinesIntensity: 0,
     scanLinesCount: 0,
     greyScale: false
@@ -71,6 +72,7 @@ let tl = gsap.timeline()
 const gui = new GUI()
 
 const canvas = document.querySelector('#web_gl')
+const mouseOverlay = document.querySelector('#mouse_overlay')
 
 clock = new THREE.Clock();
 
@@ -85,6 +87,10 @@ let height = window.innerHeight;
 const materials = [], objects = [];
 
 const postprocessing = {};
+
+let videoTexture, video;
+let fragmentTexture;
+let wallMatVideo, wallGeo, wallMat, wall;
 
 function init() {
     const container = document.createElement('div');
@@ -144,9 +150,9 @@ function init() {
     let directionalLight;
 
     const lightParam = {
-        lightProbeIntensity: .05,
-        directionalLightIntensity: 0.25,
-        envMapIntensity: 0.05
+        lightProbeIntensity: 1.5,
+        directionalLightIntensity: 1.5,
+        envMapIntensity: 1
     };
 
     lightProbe = new THREE.LightProbe();
@@ -209,25 +215,35 @@ function init() {
     // ground.rotation.x = -1.571
     // ground.rotation.z = 3.141
 
+    fragmentTexture = textureLoader.load('3d/textures/shader/shader1.png');
+    fragmentTexture.minFilter = THREE.NearestFilter;
+    fragmentTexture.magFilter = THREE.NearestFilter;
+    fragmentTexture.wrapS = THREE.RepeatWrapping;
+    fragmentTexture.wrapT = THREE.RepeatWrapping;
+
     uniforms = {
         iTime: { value: 0 },
-        iResolution: { value: new THREE.Vector3(1600 / 2, 900 / 2, 1) },
+        iResolution: { value: new THREE.Vector3(1920, 1080, 1) },
         iMouse: { value: new THREE.Vector4() },
+        iChannel0: { value: fragmentTexture },
     };
 
-    const wallGeo = new THREE.PlaneGeometry(21.5, 10)
-    const wallMat = new THREE.ShaderMaterial({
+    // video = document.getElementById('video');
+    // video.muted = true;
+    // video.play();
+    // videoTexture = new THREE.VideoTexture(video);
+    // wallMatVideo = new THREE.MeshLambertMaterial({ color: 0xffffff, map: videoTexture });
+
+    wallGeo = new THREE.PlaneGeometry(21.5, 10)
+    wallMat = new THREE.ShaderMaterial({
         uniforms: uniforms,
         vertexShader: vertexShader(),
-        fragmentShader: fragmentShaderTest1()
+        fragmentShader: fragmentShaderPlasma2()
     });
 
-    const wall = new THREE.Mesh(wallGeo, wallMat)
-
+    wall = new THREE.Mesh(wallGeo, wallMat)
     scene.add(wall)
     wall.position.set(0, 2, -5)
-
-
     //human
     // const humanMaterial = new THREE.MeshStandardMaterial({
     //     // color: 0x95ff00,
@@ -243,14 +259,13 @@ function init() {
     //     scene.add(human)
     //     human.position.set(0, 0, 0)
     // })
-
 }
 
 function onPointerMove(event) {
     if (event.isPrimary === false) return;
 
-    mouseX = event.clientX - windowHalfX;
-    mouseY = event.clientY - windowHalfY;
+    mouseX = event.pageX - windowHalfX;
+    mouseY = event.pageY - windowHalfY;
 }
 
 function onWindowResize() {
@@ -296,12 +311,17 @@ function initPostprocessing() {
     composer.addPass(renderPass)
     composer.addPass(ubloomPass)
     composer.addPass(bokehPass)
-    // composer.addPass(filmPass)
+    composer.addPass(filmPass)
 
     postprocessing.composer = composer;
     postprocessing.bokeh = bokehPass;
 }
 
+var fpsChecked = false;
+var lastLoop = new Date();
+var thisLoop, fps, lastLoop, avgFps;
+var fpsArray = [];
+let pushNumber = 0;
 function animate(time) {
     time *= 0.001;
 
@@ -313,6 +333,29 @@ function animate(time) {
     stats.begin();
     render();
     stats.end();
+
+    thisLoop = new Date();
+    fps = 1000 / (thisLoop - lastLoop);
+    lastLoop = thisLoop;
+
+
+    if (pushNumber < 30) {
+        fpsArray.push(fps);
+        pushNumber++;
+    }
+
+    if (fpsChecked == false) {
+        fpsChecked = true;
+        setTimeout(() => {
+            avgFps = ArrayAvg(fpsArray);
+            console.log(canvas.width)
+            console.log(avgFps)
+            if (avgFps < 20) {
+                // wallVideoAdd();
+            }
+        }, 1000);
+    }
+
 }
 
 function render() {
@@ -350,10 +393,10 @@ function fragmentShaderPlasma1() {
     #define PI 3.14159265359
     #define EXP 2.71828182846
 
-    float w1 = 2.0;
+    float w1 = 3.0;
     float w2 = 1.5;
     float w3 = 30.0;
-    float A = 0.1;
+    float A = 0.5;
     float R = 10.0;
 
     float horizontal(in vec2 xy, float t)	{
@@ -389,10 +432,10 @@ function fragmentShaderPlasma1() {
         v += diagonal(xy,t);
         v += radial(xy,t);
         v /= 3.0;
-        float r = map(-1.0,1.0,   0.0,0.1,sin(PI*v));
-        float g = map(-1.0,1.0,   0.3,0.5,sin(PI*v));
-        g += log_map(-1.0,1.0,   0.3,0.4,cos(PI*v));
-        float b = map(-1.0,1.0,   0.7,0.9,sin(PI*v));
+        float r = map(-1.0,1.0,   0.1,0.23,sin(PI*v));
+        float g = map(-1.0,1.0,   0.35,0.5,sin(PI*v));
+        g += log_map(-1.0,1.0,   0.335,0.435,cos(PI*v));
+        float b = map(-1.0,1.0,   0.8,0.93,sin(PI*v));
         fragColor = vec4(pow(r,R),pow(g,R),pow(b,R),1.0);
     }
 
@@ -409,37 +452,61 @@ function fragmentShaderPlasma2() {
     uniform float iTime;
     uniform vec4 iMouse;
 
-    float len(vec3 p) {
-        return max(abs(p.x)*0.5+abs(p.z)*0.5,max(abs(p.y)*0.5+abs(p.x)*0.5,abs(p.z)*0.5+abs(p.y)*0.5));
+    const int deg = 5;
+    vec2 roots[deg];
+
+    vec2 mul(vec2 a, vec2 b) {
+        return vec2(
+            a.x*b.x - a.y*b.y,
+            a.x*b.y + a.y*b.y
+        );
     }
 
-    void mainImage( out vec4 fragColor, in vec2 fragCoord )
-    {
-    	vec2 R = iResolution.xy,
-            uv = (fragCoord - .5*R) / iResolution.y;
+    vec2 div(vec2 a, vec2 b) {
+        return mul(a, vec2(b.x, -b.y))/(b.x*b.x+b.y*b.y);
+    }
 
-        vec3 rp = vec3(0.,iMouse.y/500.,iTime+iMouse.x/500.);
-        vec3 rd = normalize(vec3(uv,1.));
+    vec2 inv(vec2 a) {
+        return vec2(a.x, -a.y) / (a.x*a.x + a.y*a.y);
+    }
 
-        vec3 c = vec3(0.);
-        float s = 0.;
+    vec2 f(vec2 a) {
+        vec2 ret = vec2(1.0, 0.0);
+        for (int i = 0; i < deg; i++) {
+            ret = mul(ret, a-roots[i]);
+        }
+        return ret;
+    }
 
-        float viewVary = cos(iTime*0.05)*.15;
+    vec2 fp(vec2 a) {
+        vec2 sum = vec2(0.0, 0.0);
+        for (int i = 0; i < deg; i++) {
+            sum += inv(a-roots[i]);
+        }
+        return inv(sum);
+    }
 
-        for (int i = 0; i < 74; i++) {
-            vec3 hp = rp+rd*s;
-            float d = len(cos(hp*.6+
-            cos(hp*.3+iTime*.5)))-.75;
-            float cc = min(1.,pow(max(0., 1.-abs(d)*10.25),1.))/(float(i)*1.+10.);//clamp(1.-(d*.5+(d*5.)/s),-1.,1.);
-            
-            c += (cos(vec3(hp.xy,s))*.5+.5 + cos(vec3(s+iTime,hp.yx)*.1)*.5+.5 + 1.)/3.
-                  *cc;
-            
-            s += max(abs(d),0.35+viewVary);
-            rd = normalize(rd+vec3(sin(s*0.5),cos(s*0.5),0.)*d*0.05*clamp(s-1.,0.,1.));
+    vec4 col(vec2 a) {
+        return vec4(
+            1.0/(1.5+abs(a.x)),
+            1.0/(1.25+abs(a.y)),
+            1.0/(1.1+0.01*abs(a.y)),
+            1.0
+            );
         }
 
-        fragColor = vec4(pow(c,vec3(1.7)),1.);
+        void mainImage(out vec4 fragColor, in vec2 fragCoord) {
+        roots[0] = vec2(cos(0.6*iTime), sin(0.3*iTime));
+        roots[1] = vec2(cos(0.4*iTime), sin(0.25*iTime));
+        roots[2] = vec2(cos(0.1*iTime), sin(0.05*iTime));
+        roots[3] = vec2(cos(0.1*iTime), sin(0.15*iTime));
+        roots[4] = vec2(cos(0.3*iTime), sin(0.2*iTime));
+        vec2 u0 = 2.0*(fragCoord-iResolution.xy/2.0)/min(iResolution.x, iResolution.y);
+        vec2 u = u0;
+        for(int i = 0; i < 3; i++) {
+            u -= div(f(u), fp(u));
+        }
+        fragColor = col(u);
     }
 
     void main( void )	{
@@ -448,155 +515,302 @@ function fragmentShaderPlasma2() {
 `
 }
 
-function fragmentShaderTest1() {
+function fragmentShaderAurora() {
+    return `
+    varying vec2 vUv;
+    uniform vec3 iResolution;
+    uniform float iTime;
+    uniform vec4 iMouse;
+    uniform sampler2D iChannel0;
+
+// Auroras by nimitz 2017 (twitter: @stormoid)
+// License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+// Contact the author for other licensing options
+
+#define time iTime
+
+mat2 mm2(in float a){float c = cos(a), s = sin(a);return mat2(c,s,-s,c);}
+mat2 m2 = mat2(0.95534, 0.29552, -0.29552, 0.95534);
+float tri(in float x){return clamp(abs(fract(x)-.5),0.01,0.49);}
+vec2 tri2(in vec2 p){return vec2(tri(p.x)+tri(p.y),tri(p.y+tri(p.x)));}
+
+float triNoise2d(in vec2 p, float spd)
+{
+    float z=1.8;
+    float z2=2.5;
+	float rz = 0.;
+    p *= mm2(p.x*0.06);
+    vec2 bp = p;
+	for (float i=0.; i<5.; i++ )
+	{
+        vec2 dg = tri2(bp*1.85)*.75;
+        dg *= mm2(time*spd);
+        p -= dg/z2;
+
+        bp *= 1.3;
+        z2 *= .45;
+        z *= .42;
+		p *= 1.21 + (rz-1.0)*.02;
+
+        rz += tri(p.x+tri(p.y))*z;
+        p*= -m2;
+	}
+    return clamp(1./pow(rz*29., 1.3),0.,.55);
+}
+
+float hash21(in vec2 n){ return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453); }
+vec4 aurora(vec3 ro, vec3 rd)
+{
+    vec4 col = vec4(0);
+    vec4 avgCol = vec4(0);
+
+    for(float i=0.;i<50.;i++)
+    {
+        float of = 0.006*hash21(gl_FragCoord.xy)*smoothstep(0.,15., i);
+        float pt = ((.8+pow(i,1.4)*.002)-ro.y)/(rd.y*2.+0.4);
+        pt -= of;
+    	vec3 bpos = ro + pt*rd;
+        vec2 p = bpos.zx;
+        float rzt = triNoise2d(p, 0.06);
+        vec4 col2 = vec4(0,0,0, rzt);
+        col2.rgb = (sin(1.-vec3(2.15,-.5, 1.2)+i*0.043)*0.5+0.5)*rzt;
+        avgCol =  mix(avgCol, col2, .5);
+        col += avgCol*exp2(-i*0.065 - 2.5)*smoothstep(0.,5., i);
+
+    }
+
+    col *= (clamp(rd.y*15.+.4,0.,1.));
+
+
+    //return clamp(pow(col,vec4(1.3))*1.5,0.,1.);
+    //return clamp(pow(col,vec4(1.7))*2.,0.,1.);
+    //return clamp(pow(col,vec4(1.5))*2.5,0.,1.);
+    //return clamp(pow(col,vec4(1.8))*1.5,0.,1.);
+
+    //return smoothstep(0.,1.1,pow(col,vec4(1.))*1.5);
+    return col*1.8;
+    //return pow(col,vec4(1.))*2.
+}
+
+
+//-------------------Background and Stars--------------------
+
+vec3 nmzHash33(vec3 q)
+{
+    uvec3 p = uvec3(ivec3(q));
+    p = p*uvec3(374761393U, 1103515245U, 668265263U) + p.zxy + p.yzx;
+    p = p.yzx*(p.zxy^(p >> 3U));
+    return vec3(p^(p >> 16U))*(1.0/vec3(0xffffffffU));
+}
+
+vec3 stars(in vec3 p)
+{
+    vec3 c = vec3(0.);
+    float res = iResolution.x*1.;
+
+	for (float i=0.;i<4.;i++)
+    {
+        vec3 q = fract(p*(.15*res))-0.5;
+        vec3 id = floor(p*(.15*res));
+        vec2 rn = nmzHash33(id).xy;
+        float c2 = 1.-smoothstep(0.,.6,length(q));
+        c2 *= step(rn.x,.0005+i*i*0.001);
+        c += c2*(mix(vec3(1.0,0.49,0.1),vec3(0.75,0.9,1.),rn.y)*0.1+0.9);
+        p *= 1.3;
+    }
+    return c*c*.8;
+}
+
+vec3 bg(in vec3 rd)
+{
+    float sd = dot(normalize(vec3(-0.5, -0.6, 0.9)), rd)*0.5+0.5;
+    sd = pow(sd, 5.);
+    vec3 col = mix(vec3(0.05,0.1,0.2), vec3(0.1,0.05,0.2), sd);
+    return col*.63;
+}
+//-----------------------------------------------------------
+
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+	vec2 q = fragCoord.xy / iResolution.xy;
+    vec2 p = q - 0.5;
+	p.x*=iResolution.x/iResolution.y;
+
+    vec3 ro = vec3(0,0,-6.7);
+    vec3 rd = normalize(vec3(p,1.3));
+    vec2 mo = iMouse.xy / iResolution.xy-.5;
+    mo = (mo==vec2(-.5))?mo=vec2(-0.1,0.1):mo;
+	mo.x *= iResolution.x/iResolution.y;
+    rd.yz *= mm2(0.001);
+    rd.xz *= mm2(mo.x + sin(time*0.05)*0.2);
+
+    vec3 col = vec3(0.);
+    vec3 brd = rd;
+    float fade = smoothstep(0.,0.01,abs(brd.y))*0.1+0.9;
+
+    col = bg(rd)*fade;
+
+    if (rd.y > 0.){
+        vec4 aur = smoothstep(0.,1.5,aurora(ro,rd))*fade;
+        col += stars(rd);
+        col = col*(1.-aur.a) + aur.rgb;
+    }
+    else //Reflections
+    {
+        rd.y = abs(rd.y);
+        col = bg(rd)*fade*0.6;
+        vec4 aur = smoothstep(0.0,2.5,aurora(ro,rd));
+        col += stars(rd)*0.1;
+        col = col*(1.-aur.a) + aur.rgb;
+        vec3 pos = ro + ((0.5-ro.y)/rd.y)*rd;
+        float nz2 = triNoise2d(pos.xz*vec2(.5,.7), 0.);
+        col += mix(vec3(0.2,0.25,0.5)*0.08,vec3(0.3,0.3,0.5)*0.7, nz2*0.4);
+    }
+
+	fragColor = vec4(col, 1.);
+}
+
+
+    void main( void )	{
+        mainImage(gl_FragColor, vUv * iResolution.xy);
+    }
+    `
+}
+
+function fragmentShaderTunnel1() {
     return `
     varying vec2 vUv;
     uniform vec3 iResolution;
     uniform float iTime;
     uniform vec4 iMouse;
 
-    #define time iTime
+    //Base values modified with depth later
+    float intensity = 1.0;
+    float radius = 0.05;
 
-    mat2 mm2(in float a){float c = cos(a), s = sin(a);return mat2(c,s,-s,c);}
-    mat2 m2 = mat2(0.95534, 0.29552, -0.29552, 0.95534);
-    float tri(in float x){return clamp(abs(fract(x)-.5),0.01,0.49);}
-    vec2 tri2(in vec2 p){return vec2(tri(p.x)+tri(p.y),tri(p.y+tri(p.x)));}
-    
-    float triNoise2d(in vec2 p, float spd)
-    {
-        float z=1.8;
-        float z2=2.5;
-        float rz = 0.;
-        p *= mm2(p.x*0.06);
-        vec2 bp = p;
-        for (float i=0.; i<5.; i++ )
-        {
-            vec2 dg = tri2(bp*1.85)*.75;
-            dg *= mm2(time*spd);
-            p -= dg/z2;
-    
-            bp *= 1.3;
-            z2 *= .45;
-            z *= .42;
-            p *= 1.21 + (rz-1.0)*.02;
-            
-            rz += tri(p.x+tri(p.y))*z;
-            p*= -m2;
-        }
-        return clamp(1./pow(rz*29., 1.3),0.,.55);
+    //Distance functions from 
+    //https://www.iquilezles.org/www/articles/distfunctions2d/distfunctions2d.htm
+    float triangleDist(vec2 p){ 
+        const float k = sqrt(3.0);
+        p.x = abs(p.x) - 1.0;
+        p.y = p.y + 1.0/k;
+        if( p.x+k*p.y>0.0 ) p=vec2(p.x-k*p.y,-k*p.x-p.y)/2.0;
+        p.x -= clamp( p.x, -2.0, 0.0 );
+        return -length(p)*sign(p.y);
     }
-    
-    float hash21(in vec2 n){ return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453); }
-    vec4 aurora(vec3 ro, vec3 rd)
-    {
-        vec4 col = vec4(0);
-        vec4 avgCol = vec4(0);
-        
-        for(float i=0.;i<50.;i++)
-        {
-            float of = 0.006*hash21(gl_FragCoord.xy)*smoothstep(0.,15., i);
-            float pt = ((.8+pow(i,1.4)*.002)-ro.y)/(rd.y*2.+0.4);
-            pt -= of;
-            vec3 bpos = ro + pt*rd;
-            vec2 p = bpos.zx;
-            float rzt = triNoise2d(p, 0.06);
-            vec4 col2 = vec4(0,0,0, rzt);
-            col2.rgb = (sin(1.-vec3(2.15,-.5, 1.2)+i*0.043)*0.5+0.5)*rzt;
-            avgCol =  mix(avgCol, col2, .5);
-            col += avgCol*exp2(-i*0.065 - 2.5)*smoothstep(0.,5., i);
-            
-        }
-        
-        col *= (clamp(rd.y*15.+.4,0.,1.));
-        
-        
-        //return clamp(pow(col,vec4(1.3))*1.5,0.,1.);
-        //return clamp(pow(col,vec4(1.7))*2.,0.,1.);
-        //return clamp(pow(col,vec4(1.5))*2.5,0.,1.);
-        //return clamp(pow(col,vec4(1.8))*1.5,0.,1.);
-        
-        //return smoothstep(0.,1.1,pow(col,vec4(1.))*1.5);
-        return col*1.8;
-        //return pow(col,vec4(1.))*2.
+
+    float boxDist(vec2 p){
+        vec2 d = abs(p)-1.0;
+        return length(max(d,vec2(0))) + min(max(d.x,d.y),0.0);
     }
-    
-    
-    //-------------------Background and Stars--------------------
-    
-    vec3 nmzHash33(vec3 q)
-    {
-        uvec3 p = uvec3(ivec3(q));
-        p = p*uvec3(374761393U, 1103515245U, 668265263U) + p.zxy + p.yzx;
-        p = p.yzx*(p.zxy^(p >> 3U));
-        return vec3(p^(p >> 16U))*(1.0/vec3(0xffffffffU));
+
+    float circleDist( vec2 p){
+      return length(p) - 1.0;
     }
-    
-    vec3 stars(in vec3 p)
-    {
-        vec3 c = vec3(0.);
-        float res = iResolution.x*1.;
-        
-        for (float i=0.;i<4.;i++)
-        {
-            vec3 q = fract(p*(.15*res))-0.5;
-            vec3 id = floor(p*(.15*res));
-            vec2 rn = nmzHash33(id).xy;
-            float c2 = 1.-smoothstep(0.,.6,length(q));
-            c2 *= step(rn.x,.0005+i*i*0.001);
-            c += c2*(mix(vec3(1.0,0.49,0.1),vec3(0.75,0.9,1.),rn.y)*0.1+0.9);
-            p *= 1.3;
-        }
-        return c*c*.8;
+
+    //https://www.shadertoy.com/view/3s3GDn
+    float getGlow(float dist, float radius, float intensity){
+        return pow(radius/dist, intensity);
     }
-    
-    vec3 bg(in vec3 rd)
-    {
-        float sd = dot(normalize(vec3(-0.5, -0.6, 0.9)), rd)*0.5+0.5;
-        sd = pow(sd, 5.);
-        vec3 col = mix(vec3(0.05,0.1,0.2), vec3(0.1,0.05,0.2), sd);
-        return col*.63;
-    }
-    //-----------------------------------------------------------
-    
-    
-    void mainImage( out vec4 fragColor, in vec2 fragCoord )
-    {
-        vec2 q = fragCoord.xy / iResolution.xy;
-        vec2 p = q - 0.5;
-        p.x*=iResolution.x/iResolution.y;
-        
-        vec3 ro = vec3(0,0,-6.7);
-        vec3 rd = normalize(vec3(p,1.3));
-        vec2 mo = (iMouse.xy / iResolution.xy-.5) * 0.1;
-        mo = (mo==vec2(-.5))?mo=vec2(-0.1,0.1):mo;
-        mo.x *= iResolution.x/iResolution.y;
-        rd.yz *= mm2(mo.y);
-        rd.xz *= mm2(mo.x + sin(time*0.05)*0.2);
-        
-        vec3 col = vec3(0.);
-        vec3 brd = rd;
-        float fade = smoothstep(0.,0.01,abs(brd.y))*0.1+0.9;
-        
-        col = bg(rd)*fade;
-        
-        if (rd.y > 0.){
-            vec4 aur = smoothstep(0.,1.5,aurora(ro,rd))*fade;
-            col += stars(rd);
-            col = col*(1.-aur.a) + aur.rgb;
+
+    void mainImage( out vec4 fragColor, in vec2 fragCoord ){
+
+        vec2 uv = fragCoord/iResolution.xy;
+        float widthHeightRatio = iResolution.x/iResolution.y;
+        vec2 centre;
+        vec2 pos;
+
+        float t = iTime * 0.05;
+
+        float dist;
+        float glow;
+        vec3 col = vec3(0);
+
+        //The spacing between shapes
+        float scale = 500.0;
+        //Number of shapes
+        float layers = 15.0;
+
+        float depth;
+        vec2 bend;
+
+        vec3 purple = vec3(0.611, 0.129, 0.909);
+        vec3 green = vec3(0.133, 0.62, 0.698);
+
+        float angle;
+        float rotationAngle;
+        mat2 rotation;
+
+        //For movement of the anchor point in time
+        float d = 2.5*(sin(t) + sin(3.0*t));
+
+        //Create an out of frame anchor point where all shapes converge to    
+        vec2 anchor = vec2(0.5 + cos(d), 0.5 + sin(d));
+
+        //Create light purple glow at the anchor loaction
+        pos = anchor - uv;
+        pos.y /= widthHeightRatio;
+        dist = length(pos);
+        glow = getGlow(dist, 0.25, 3.5);
+        col += glow * vec3(0.6,0.4,1.0);
+
+        for(float i = 0.0; i < layers; i++){
+
+            //Time varying depth information depending on layer
+            depth = fract(i/layers + t);
+
+            //Move the focus of the camera in a circle
+            centre = vec2(0.5 + 0.2 * sin(t), 0.5 + 0.2 * cos(t));
+
+            //Position shapes between the anchor and the camera focus based on depth
+            bend = mix(anchor, centre, depth);
+
+            pos = bend - uv;
+            pos.y /= widthHeightRatio;
+
+            //Rotate shapes
+               rotationAngle = 3.14 * sin(depth + fract(t) * 6.28) + i;
+            rotation = mat2(cos(rotationAngle), -sin(rotationAngle), 
+                            sin(rotationAngle),  cos(rotationAngle));
+
+            pos *= rotation;
+
+            //Position shapes according to depth
+            pos *= mix(scale, 0.0, depth);
+
+            float m = mod(i, 3.0);
+            if(m == 0.0){
+                dist = abs(boxDist(pos));
+            }else if(m == 1.0){
+                dist = abs(triangleDist(pos));
+            }else{
+                dist = abs(circleDist(pos));
+            }
+
+            //Get glow from base radius and intensity modified by depth
+            glow = getGlow(dist, radius+(1.0-depth)*2.0, intensity + depth);
+
+            //Find angle along shape and map from [-PI; PI] to [0; 1]
+            angle = (atan(pos.y, pos.x)+3.14)/6.28;
+            //Shift angle depending on layer and map to [1...0...1]
+            angle = abs((2.0*fract(angle + i/layers)) - 1.0);
+
+            //White core
+            //col += 10.0*vec3(smoothstep(0.03, 0.02, dist));
+
+            //Glow according to angle value
+             col += glow * mix(green, purple, angle);
         }
-        else //Reflections
-        {
-            rd.y = abs(rd.y);
-            col = bg(rd)*fade*0.6;
-            vec4 aur = smoothstep(0.0,2.5,aurora(ro,rd));
-            col += stars(rd)*0.1;
-            col = col*(1.-aur.a) + aur.rgb;
-            vec3 pos = ro + ((0.5-ro.y)/rd.y)*rd;
-            float nz2 = triNoise2d(pos.xz*vec2(.5,.7), 0.);
-            col += mix(vec3(0.2,0.25,0.5)*0.08,vec3(0.3,0.3,0.5)*0.7, nz2*0.4);
-        }
-        
-        fragColor = vec4(col, 1.);
+
+        //Tone mapping
+        col = 1.0 - exp(-col);
+
+        //Gamma
+        col = pow(col, vec3(0.4545));
+
+        //Output to screen
+        fragColor = vec4(col,1.0);
     }
 
     void main( void )	{
@@ -605,6 +819,41 @@ function fragmentShaderTest1() {
 `
 }
 
+function ArrayAvg(myArray) {
+    var i = 0, summ = 0, ArrayLen = myArray.length;
+    while (i < ArrayLen) {
+        summ = summ + myArray[i++];
+    }
+    return summ / ArrayLen;
+}
+
+function wallVideoAdd() {
+    scene.remove(wall);
+    console.log("wall removed")
+
+    wall = new THREE.Mesh(wallGeo, wallMatVideo)
+    console.log("wall video added")
+
+    scene.add(wall)
+    wall.position.set(0, 2, -5)
+    console.log("scene wall added")
+}
+
 init()
 animate()
 
+
+function fragmentShader() {
+    return `
+    varying vec2 vUv;
+    uniform vec3 iResolution;
+    uniform float iTime;
+    uniform vec4 iMouse;
+    uniform sampler2D iChannel0;
+
+
+    void main( void )	{
+        mainImage(gl_FragColor, vUv * iResolution.xy);
+    }
+`
+}

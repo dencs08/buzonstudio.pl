@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ScrollTrigger.create({
             trigger: elem,
             start: startTrigger(),
-            end: "bottom top",
+            end: "top top",
             once: true,
             // markers: true,
             scroller: ".smooth-locomotive-scroll",
@@ -75,10 +75,10 @@ function startTrigger() {
     const h2 = window.innerHeight
     let start = ""
     if (h == 0) {
-        let startTriggerNumber = h2 * 0.75;
+        let startTriggerNumber = h2 * 0.85;
         start = "top " + startTriggerNumber
     } else {
-        let startTriggerNumber = h * 0.75;
+        let startTriggerNumber = h * 0.85;
         start = "top " + startTriggerNumber
     }
 
@@ -132,6 +132,17 @@ if (location.pathname == "/kontakt") {
 
     window.addEventListener("load", validateForm, false);
 }
+
+setTimeout(() => {
+    var path = window.location;
+    if (path.hash == "#prace") {
+        var workTarget = document.getElementById("works")
+        locoScroll.scrollTo(workTarget, {
+            offset: -200
+        });
+    }
+}, 1000);
+
 
 gsap.registerPlugin(ScrollTrigger);
 locoScroll.on("scroll", ScrollTrigger.update);

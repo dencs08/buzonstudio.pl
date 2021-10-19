@@ -107,7 +107,8 @@
         <x-footer/>
         </div>
 
-        <script src="js/page-transition.js"></script>
+        <x-GlobalJsVariables/>
+
         <script src="js/app.js"></script>
         <script src="js/offer.js"></script>
 

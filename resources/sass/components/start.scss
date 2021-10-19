@@ -19,7 +19,7 @@
     top: 0;
     left: -30px;
     height: 115%;
-    border-left: 1px solid $font-color-primary;
+    border-left: 1px solid $font-color-fourth;
     transform: scaleY(1);
 }
 
@@ -79,7 +79,7 @@
 
     margin: 0.5em 8em 0.5em 0em;
 
-    transition: all 0.5s;
+    transition: filter 0.5s;
 }
 
 .portfolio-item:hover {

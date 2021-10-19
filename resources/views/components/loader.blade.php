@@ -2,9 +2,15 @@
     <div class="progress" id="PreLoaderBar">
         <div class="indeterminate"></div>
     </div>
-
-    <div class="info-accept-wrapper">
-        <p class="info-accept">Wejście i korzystanie ze strony jest jednoznaczne z zaakceptowaniem naszej polityki prywatności.</p>
+    
+    <div class="courtain-wrapper">
+        <div class="container">
+            <p id="start-button" class="underline">WEJDŹ</p>
+            <div class="privacy-policy-start">
+                <span class="info-accept mx-1">Wejście i korzystanie ze strony jest jednoznaczne z zaakceptowaniem naszej</span>
+                <a href="polityka_prywatnosci" class="privacy-policy underline web_link_transitions">polityki prywatności</a>
+            </div>
+        </div>
     </div>
     <div class="top-side"></div>
     <div class="bottom-side"></div>

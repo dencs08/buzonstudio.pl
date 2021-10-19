@@ -127,69 +127,105 @@ const h1 = document.querySelector('h1')
 const h2 = document.querySelector('h2')
 const button1 = document.getElementsByClassName("btn-landing1")
 const button2 = document.getElementsByClassName("btn-landing2")
+const three = document.getElementById('web_gl')
+const rightNav = document.getElementById('fp-nav')
 const tl = gsap.timeline()
 
-//!timeline
-tl.from(line, {
-    delay: 1.25,
-    duration: 2,
-    ease: "expo",
+gsap.set([three, h1, h2, button1, button2, rightNav], {
+    opacity: 0
+})
+
+gsap.set(line, {
     cssRule: {
         scaleY: 0
     },
-    onComplete: function () { isLandingAnimDone = true },
-},
-    "-=0.5")
-tl.fromTo(h2, {
-    clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
-    opacity: 0,
-    x: '-30px'
-}, {
-    opacity: 1,
-    x: '0px',
-    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-    ease: "expo",
-    duration: 1.75,
-},
-    "-=1")
-tl.fromTo(h1, {
-    opacity: 0,
-    y: '60px',
-}, {
-    opacity: 1,
-    y: '0px',
-    ease: "expo",
-    duration: 1.25,
-},
-    "-=1.25")
-tl.fromTo(button1, {
-    ease: "expo",
-    opacity: 0,
-    y: '-40px',
-}, {
-    opacity: 1,
-    y: '0px',
-    ease: "expo",
-    duration: 1.25,
-},
-    "-=0.85")
-tl.fromTo(button2, {
-    opacity: 0,
-    y: '-40px',
-}, {
-    duration: 1.25,
-    ease: "expo",
-    opacity: 1,
-    y: '0px',
-},
-    "-=1")
-tl.to(line, {
-    duration: 1,
-    ease: "expo",
-    cssRule: {
-        scaleY: 0
-    },
-},
-    "-=0.6")
+})
+
+let stopCheck = false;
+let checkI = 0
+if (stopCheck == false) {
+    setInterval(function () {
+        if (webEntered == true) {
+            stopCheck = true
+            for (checkI; checkI < 1; checkI++) {
+                tl.fromTo(three, {
+                    opacity: 0,
+                }, {
+                    opacity: 1,
+                    delay: 0.25,
+                    duration: 0.75,
+                    ease: "sine.in",
+                    onComplete: function () { isLandingAnimDone = true },
+                })
+                tl.to(line, {
+                    delay: 1.25,
+                    duration: 2,
+                    ease: "expo",
+                    cssRule: {
+                        scaleY: 1
+                    },
+                },
+                    "-=1.25")
+                tl.fromTo(h2, {
+                    clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
+                    opacity: 0,
+                    x: '-30px'
+                }, {
+                    opacity: 1,
+                    x: '0px',
+                    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+                    ease: "expo",
+                    duration: 1.75,
+                },
+                    "-=1.1")
+                tl.fromTo(h1, {
+                    opacity: 0,
+                    y: '60px',
+                }, {
+                    opacity: 1,
+                    y: '0px',
+                    ease: "expo",
+                    duration: 1.25,
+                },
+                    "-=1.25")
+                tl.fromTo(button1, {
+                    ease: "expo",
+                    opacity: 0,
+                    y: '-40px',
+                }, {
+                    opacity: 1,
+                    y: '0px',
+                    ease: "expo",
+                    duration: 1.25,
+                },
+                    "-=0.85")
+                tl.fromTo(button2, {
+                    opacity: 0,
+                    y: '-40px',
+                }, {
+                    duration: 1.25,
+                    ease: "expo",
+                    opacity: 1,
+                    y: '0px',
+                },
+                    "-=1")
+                tl.to(line, {
+                    duration: 1,
+                    ease: "expo",
+                    cssRule: {
+                        scaleY: 0
+                    },
+                },
+                    "-=0.6")
+                tl.to(rightNav, {
+                    duration: 1,
+                    ease: "expo",
+                    opacity: 1,
+                },
+                    "-=1")
+            }
+        }
+    }, 250);
+}
 
 gsap.registerPlugin(ScrollTrigger);

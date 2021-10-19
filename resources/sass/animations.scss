@@ -1,13 +1,14 @@
 //courtain
 .courtain {
-    position: relative;
+    position: fixed;
+    height: 100vh;
+    z-index: 9998;
 }
 
 .top-side {
     position: fixed;
     top: 0;
     left: 0;
-
     width: 100vw;
     height: 50vh;
 
@@ -27,13 +28,6 @@
     background-color: $body-bg-color-lighter !important;
 
     z-index: 999;
-}
-
-.info-accept {
-    position: relative;
-
-    color: $font-color-fourth !important;
-    text-align: center;
 }
 
 .progress {
@@ -77,6 +71,63 @@
         infinite;
     -webkit-animation-delay: 1.15s;
     animation-delay: 1.15s;
+}
+
+.courtain-wrapper {
+    position: relative;
+
+    opacity: 0;
+
+    display: none;
+    justify-content: center;
+    place-items: center;
+
+    height: 100vh;
+    width: 100vw;
+
+    z-index: 9999;
+
+    .container {
+        display: grid;
+        place-items: center;
+
+        height: 100vh;
+    }
+
+    #start-button {
+        cursor: pointer;
+        font-size: clamp(2rem, 5vw, 4rem) !important;
+        font-weight: 600;
+        color: $primary-color !important;
+        transition: all 0.5s;
+
+        &:hover {
+            color: $primary-color-dark !important;
+            transform: scale(0.9);
+        }
+    }
+
+    .privacy-policy-start {
+        position: absolute;
+        top: 95%;
+
+        font-size: clamp(0.6rem, 2vw, 0.9rem);
+        text-align: center;
+
+        span {
+            color: #3a3a3a !important;
+            text-align: center;
+        }
+
+        a {
+            color: #3a3a3a !important;
+            text-align: center;
+        }
+    }
+}
+
+.info-accept {
+    color: $font-color-fourth !important;
 }
 
 @-webkit-keyframes indeterminate {

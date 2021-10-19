@@ -132,7 +132,11 @@
     </div>
 </div>
 
-        <script src="js/page-transition.js"></script>
+        <!-- <video id="video" loop crossOrigin="anonymous" playsinline style="display:none">
+			<source src="images/video.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' muted="muted" autoplay="false">
+        </video> -->
+        <x-GlobalJsVariables/>
+
         <script src="js/app.js"></script>
         <script src="js/start.js"></script>
     </body>
