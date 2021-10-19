@@ -10,6 +10,8 @@
     </head>
     <body class="antialiased">
 
+    <canvas id="web_gl"></canvas>
+
         <x-loader/>
 
         <x-navbar/>
