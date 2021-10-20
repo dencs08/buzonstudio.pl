@@ -23,6 +23,7 @@ navBg.style.zIndex = "-99";
 function navBarAnimation() {
     if (i % 2 == 0) {
         //opened
+        navBarIsOpened = true;
         let yScroll = 0;
         if (location.pathname == "/" || location.pathname == "/start") {
             yScroll = position.y * 2;
@@ -73,6 +74,7 @@ function navBarAnimation() {
         })
     } else {
         //closed
+        navBarIsOpened = false;
         gsap.to(navBg, {
             duration: 0.75,
             ease: "expo",

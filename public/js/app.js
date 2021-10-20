@@ -191,6 +191,7 @@ navBg.style.zIndex = "-99";
 function navBarAnimation() {
   if (i % 2 == 0) {
     //opened
+    navBarIsOpened = true;
     var yScroll = 0;
 
     if (location.pathname == "/" || location.pathname == "/start") {
@@ -243,6 +244,7 @@ function navBarAnimation() {
     });
   } else {
     //closed
+    navBarIsOpened = false;
     gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(navBg, {
       duration: 0.75,
       ease: "expo",
@@ -429,7 +431,7 @@ var fogParams = {
 }; //Objects
 
 var knotObj, ground, human;
-var camera, cameraTarget, scene, renderer, stats, parameters, cubeMaterial, controls, clock; //Shaders
+var camera, cameraTarget, cameraTargetPos, scene, renderer, stats, parameters, cubeMaterial, controls, clock; //Shaders
 
 var uniforms; //Loaders
 
@@ -455,17 +457,29 @@ var wallMatVideo, wallGeo, wallMat, wall;
 
 function init() {
   var container = document.createElement('div');
-  document.body.appendChild(container); //!Base camera
+  document.body.appendChild(container);
+  scene = new three__WEBPACK_IMPORTED_MODULE_11__.Scene(); //!Base camera
 
   camera = new three__WEBPACK_IMPORTED_MODULE_11__.PerspectiveCamera(cameraParams.fov, width / height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax);
   camera.position.set(0, 2, 3.6); //0, 2, 3.60
 
   camera.rotation.set(0, 0, 0);
   var cameraTargetGeo = new three__WEBPACK_IMPORTED_MODULE_11__.SphereGeometry(1, 32, 16);
-  var cameraTargetMat = new three__WEBPACK_IMPORTED_MODULE_11__.MeshStandardMaterial();
+  var cameraTargetMat = new three__WEBPACK_IMPORTED_MODULE_11__.MeshPhysicalMaterial({
+    transmission: 0.0
+  });
+  cameraTargetPos = new three__WEBPACK_IMPORTED_MODULE_11__.Mesh(cameraTargetGeo, cameraTargetMat);
+  cameraTargetPos.position.set(0, 2, 3.6);
+  scene.add(cameraTargetPos);
+  cameraTargetPos.material.opacity = 0;
+  cameraTargetPos.material.transparent = true;
+  cameraTargetPos.transparent = true;
   cameraTarget = new three__WEBPACK_IMPORTED_MODULE_11__.Mesh(cameraTargetGeo, cameraTargetMat);
-  cameraTarget.position.set(-25, 1, -20);
-  scene = new three__WEBPACK_IMPORTED_MODULE_11__.Scene();
+  cameraTarget.position.set(5, 0, -4);
+  scene.add(cameraTarget);
+  cameraTarget.material.opacity = 0;
+  cameraTarget.material.transparent = true;
+  cameraTarget.transparent = true;
   renderer = new three__WEBPACK_IMPORTED_MODULE_11__.WebGLRenderer({
     canvas: canvas
   });
@@ -576,12 +590,12 @@ function init() {
   wall = new three__WEBPACK_IMPORTED_MODULE_11__.Mesh(wallGeo, wallMat);
   scene.add(wall);
   wall.position.set(0, 2, -5); //human
-  // const humanMaterial = new THREE.MeshStandardMaterial({
-  //     // color: 0x95ff00,
-  //     // emissive: 0x95ff00,
-  //     // emissiveIntensity: 100,
-  // })
-  // gltfLoader.load('3d/models/human.gltf', (gltf) => {
+
+  var humanMaterial = new three__WEBPACK_IMPORTED_MODULE_11__.MeshStandardMaterial({
+    color: 0x95ff00,
+    emissive: 0x95ff00,
+    emissiveIntensity: 100
+  }); // gltfLoader.load('3d/models/human.gltf', (gltf) => {
   //     human = gltf.scene
   //     human.traverse((o) => {
   //         if (o.isMesh) o.material = humanMaterial;
@@ -589,6 +603,8 @@ function init() {
   //     scene.add(human)
   //     human.position.set(0, 0, 0)
   // })
+
+  readyToMove = true;
 }
 
 function onPointerMove(event) {
@@ -630,11 +646,13 @@ function initPostprocessing() {
 
 var fpsChecked = false;
 var lastLoop = new Date();
-var thisLoop, fps, lastLoop, avgFps;
+var thisLoop, fps, lastLoop, avgFps, delta;
 var fpsArray = [];
 var pushNumber = 0;
+var readyToMove = false;
 
 function animate(time) {
+  delta = clock.getDelta();
   time *= 0.001;
   uniforms.iTime.value = time;
   uniforms.iMouse.value.set(mouseX, mouseY, mouseX, mouseY); // controls.update();
@@ -643,6 +661,7 @@ function animate(time) {
   stats.begin();
   render();
   stats.end();
+  cameraMove(delta);
   thisLoop = new Date();
   fps = 1000 / (thisLoop - lastLoop);
   lastLoop = thisLoop;
@@ -676,26 +695,6 @@ function mouseInteractivity() {// camera.position.x += (- (mouseX) - camera.posi
   // camera.lookAt(cameraTarget.position);
 }
 
-function vertexShader() {
-  return "\n    varying vec2 vUv;\n\n    void main()\n    {\n        vUv = uv;\n        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );\n        gl_Position = projectionMatrix * mvPosition;\n    }\n    ";
-}
-
-function fragmentShaderPlasma1() {
-  return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n\n    #define PI 3.14159265359\n    #define EXP 2.71828182846\n\n    float w1 = 3.0;\n    float w2 = 1.5;\n    float w3 = 30.0;\n    float A = 0.5;\n    float R = 10.0;\n\n    float horizontal(in vec2 xy, float t)\t{\n        float v = cos(w1*xy.x + A*t);\n        return v;\n    }\n\n    float diagonal(in vec2 xy, float t)\t{\n        float v = cos(w2*(xy.x*cos(t) + 5.0*xy.y*sin(t)) + A*t);\n        return v;\n    }\n\n    float radial(in vec2 xy, float t)\t{\n        float x = 0.3*xy.x - 0.5 + cos(t);\n        float y = 0.3*xy.y - 0.5 + sin(t*0.5);\n        float v = sin(w3*sqrt(x*x+y*y+1.0)+A*t);\n        return v;\n    }    \n\n    float map(float a,float b,float c,float d,float x) {\n        return ((x-a)*(d-c)/(b-a))+c;\n    }\n\n    float log_map(float a,float b,float c,float d,float x) {\n        float x1 = map(a,b,1.0,EXP,x);\n        return log(x1)*(d-c)+c;\n    }\n\n    void mainImage( out vec4 fragColor, in vec2 fragCoord )\t{\n        float t = iTime * 0.2;\n        vec2 xy = fragCoord.xy / iResolution.xy;\n        float v = horizontal(xy,t);\n        v += diagonal(xy,t);\n        v += radial(xy,t);\n        v /= 3.0;\n        float r = map(-1.0,1.0,   0.1,0.23,sin(PI*v));\n        float g = map(-1.0,1.0,   0.35,0.5,sin(PI*v));\n        g += log_map(-1.0,1.0,   0.335,0.435,cos(PI*v));\n        float b = map(-1.0,1.0,   0.8,0.93,sin(PI*v));\n        fragColor = vec4(pow(r,R),pow(g,R),pow(b,R),1.0);\n    }\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n";
-}
-
-function fragmentShaderPlasma2() {
-  return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n    uniform vec4 iMouse;\n\n    const int deg = 5;\n    vec2 roots[deg];\n\n    vec2 mul(vec2 a, vec2 b) {\n        return vec2(\n            a.x*b.x - a.y*b.y,\n            a.x*b.y + a.y*b.y\n        );\n    }\n\n    vec2 div(vec2 a, vec2 b) {\n        return mul(a, vec2(b.x, -b.y))/(b.x*b.x+b.y*b.y);\n    }\n\n    vec2 inv(vec2 a) {\n        return vec2(a.x, -a.y) / (a.x*a.x + a.y*a.y);\n    }\n\n    vec2 f(vec2 a) {\n        vec2 ret = vec2(1.0, 0.0);\n        for (int i = 0; i < deg; i++) {\n            ret = mul(ret, a-roots[i]);\n        }\n        return ret;\n    }\n\n    vec2 fp(vec2 a) {\n        vec2 sum = vec2(0.0, 0.0);\n        for (int i = 0; i < deg; i++) {\n            sum += inv(a-roots[i]);\n        }\n        return inv(sum);\n    }\n\n    vec4 col(vec2 a) {\n        return vec4(\n            1.0/(1.5+abs(a.x)),\n            1.0/(1.25+abs(a.y)),\n            1.0/(1.1+0.01*abs(a.y)),\n            1.0\n            );\n        }\n\n        void mainImage(out vec4 fragColor, in vec2 fragCoord) {\n        roots[0] = vec2(cos(0.6*iTime), sin(0.3*iTime));\n        roots[1] = vec2(cos(0.4*iTime), sin(0.25*iTime));\n        roots[2] = vec2(cos(0.1*iTime), sin(0.05*iTime));\n        roots[3] = vec2(cos(0.1*iTime), sin(0.15*iTime));\n        roots[4] = vec2(cos(0.3*iTime), sin(0.2*iTime));\n        vec2 u0 = 2.0*(fragCoord-iResolution.xy/2.0)/min(iResolution.x, iResolution.y);\n        vec2 u = u0;\n        for(int i = 0; i < 3; i++) {\n            u -= div(f(u), fp(u));\n        }\n        fragColor = col(u);\n    }\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n";
-}
-
-function fragmentShaderAurora() {
-  return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n    uniform vec4 iMouse;\n    uniform sampler2D iChannel0;\n\n// Auroras by nimitz 2017 (twitter: @stormoid)\n// License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n// Contact the author for other licensing options\n\n#define time iTime\n\nmat2 mm2(in float a){float c = cos(a), s = sin(a);return mat2(c,s,-s,c);}\nmat2 m2 = mat2(0.95534, 0.29552, -0.29552, 0.95534);\nfloat tri(in float x){return clamp(abs(fract(x)-.5),0.01,0.49);}\nvec2 tri2(in vec2 p){return vec2(tri(p.x)+tri(p.y),tri(p.y+tri(p.x)));}\n\nfloat triNoise2d(in vec2 p, float spd)\n{\n    float z=1.8;\n    float z2=2.5;\n\tfloat rz = 0.;\n    p *= mm2(p.x*0.06);\n    vec2 bp = p;\n\tfor (float i=0.; i<5.; i++ )\n\t{\n        vec2 dg = tri2(bp*1.85)*.75;\n        dg *= mm2(time*spd);\n        p -= dg/z2;\n\n        bp *= 1.3;\n        z2 *= .45;\n        z *= .42;\n\t\tp *= 1.21 + (rz-1.0)*.02;\n\n        rz += tri(p.x+tri(p.y))*z;\n        p*= -m2;\n\t}\n    return clamp(1./pow(rz*29., 1.3),0.,.55);\n}\n\nfloat hash21(in vec2 n){ return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453); }\nvec4 aurora(vec3 ro, vec3 rd)\n{\n    vec4 col = vec4(0);\n    vec4 avgCol = vec4(0);\n\n    for(float i=0.;i<50.;i++)\n    {\n        float of = 0.006*hash21(gl_FragCoord.xy)*smoothstep(0.,15., i);\n        float pt = ((.8+pow(i,1.4)*.002)-ro.y)/(rd.y*2.+0.4);\n        pt -= of;\n    \tvec3 bpos = ro + pt*rd;\n        vec2 p = bpos.zx;\n        float rzt = triNoise2d(p, 0.06);\n        vec4 col2 = vec4(0,0,0, rzt);\n        col2.rgb = (sin(1.-vec3(2.15,-.5, 1.2)+i*0.043)*0.5+0.5)*rzt;\n        avgCol =  mix(avgCol, col2, .5);\n        col += avgCol*exp2(-i*0.065 - 2.5)*smoothstep(0.,5., i);\n\n    }\n\n    col *= (clamp(rd.y*15.+.4,0.,1.));\n\n\n    //return clamp(pow(col,vec4(1.3))*1.5,0.,1.);\n    //return clamp(pow(col,vec4(1.7))*2.,0.,1.);\n    //return clamp(pow(col,vec4(1.5))*2.5,0.,1.);\n    //return clamp(pow(col,vec4(1.8))*1.5,0.,1.);\n\n    //return smoothstep(0.,1.1,pow(col,vec4(1.))*1.5);\n    return col*1.8;\n    //return pow(col,vec4(1.))*2.\n}\n\n\n//-------------------Background and Stars--------------------\n\nvec3 nmzHash33(vec3 q)\n{\n    uvec3 p = uvec3(ivec3(q));\n    p = p*uvec3(374761393U, 1103515245U, 668265263U) + p.zxy + p.yzx;\n    p = p.yzx*(p.zxy^(p >> 3U));\n    return vec3(p^(p >> 16U))*(1.0/vec3(0xffffffffU));\n}\n\nvec3 stars(in vec3 p)\n{\n    vec3 c = vec3(0.);\n    float res = iResolution.x*1.;\n\n\tfor (float i=0.;i<4.;i++)\n    {\n        vec3 q = fract(p*(.15*res))-0.5;\n        vec3 id = floor(p*(.15*res));\n        vec2 rn = nmzHash33(id).xy;\n        float c2 = 1.-smoothstep(0.,.6,length(q));\n        c2 *= step(rn.x,.0005+i*i*0.001);\n        c += c2*(mix(vec3(1.0,0.49,0.1),vec3(0.75,0.9,1.),rn.y)*0.1+0.9);\n        p *= 1.3;\n    }\n    return c*c*.8;\n}\n\nvec3 bg(in vec3 rd)\n{\n    float sd = dot(normalize(vec3(-0.5, -0.6, 0.9)), rd)*0.5+0.5;\n    sd = pow(sd, 5.);\n    vec3 col = mix(vec3(0.05,0.1,0.2), vec3(0.1,0.05,0.2), sd);\n    return col*.63;\n}\n//-----------------------------------------------------------\n\n\nvoid mainImage( out vec4 fragColor, in vec2 fragCoord )\n{\n\tvec2 q = fragCoord.xy / iResolution.xy;\n    vec2 p = q - 0.5;\n\tp.x*=iResolution.x/iResolution.y;\n\n    vec3 ro = vec3(0,0,-6.7);\n    vec3 rd = normalize(vec3(p,1.3));\n    vec2 mo = iMouse.xy / iResolution.xy-.5;\n    mo = (mo==vec2(-.5))?mo=vec2(-0.1,0.1):mo;\n\tmo.x *= iResolution.x/iResolution.y;\n    rd.yz *= mm2(0.001);\n    rd.xz *= mm2(mo.x + sin(time*0.05)*0.2);\n\n    vec3 col = vec3(0.);\n    vec3 brd = rd;\n    float fade = smoothstep(0.,0.01,abs(brd.y))*0.1+0.9;\n\n    col = bg(rd)*fade;\n\n    if (rd.y > 0.){\n        vec4 aur = smoothstep(0.,1.5,aurora(ro,rd))*fade;\n        col += stars(rd);\n        col = col*(1.-aur.a) + aur.rgb;\n    }\n    else //Reflections\n    {\n        rd.y = abs(rd.y);\n        col = bg(rd)*fade*0.6;\n        vec4 aur = smoothstep(0.0,2.5,aurora(ro,rd));\n        col += stars(rd)*0.1;\n        col = col*(1.-aur.a) + aur.rgb;\n        vec3 pos = ro + ((0.5-ro.y)/rd.y)*rd;\n        float nz2 = triNoise2d(pos.xz*vec2(.5,.7), 0.);\n        col += mix(vec3(0.2,0.25,0.5)*0.08,vec3(0.3,0.3,0.5)*0.7, nz2*0.4);\n    }\n\n\tfragColor = vec4(col, 1.);\n}\n\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n    ";
-}
-
-function fragmentShaderTunnel1() {
-  return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n    uniform vec4 iMouse;\n\n    //Base values modified with depth later\n    float intensity = 1.0;\n    float radius = 0.05;\n\n    //Distance functions from \n    //https://www.iquilezles.org/www/articles/distfunctions2d/distfunctions2d.htm\n    float triangleDist(vec2 p){ \n        const float k = sqrt(3.0);\n        p.x = abs(p.x) - 1.0;\n        p.y = p.y + 1.0/k;\n        if( p.x+k*p.y>0.0 ) p=vec2(p.x-k*p.y,-k*p.x-p.y)/2.0;\n        p.x -= clamp( p.x, -2.0, 0.0 );\n        return -length(p)*sign(p.y);\n    }\n\n    float boxDist(vec2 p){\n        vec2 d = abs(p)-1.0;\n        return length(max(d,vec2(0))) + min(max(d.x,d.y),0.0);\n    }\n\n    float circleDist( vec2 p){\n      return length(p) - 1.0;\n    }\n\n    //https://www.shadertoy.com/view/3s3GDn\n    float getGlow(float dist, float radius, float intensity){\n        return pow(radius/dist, intensity);\n    }\n\n    void mainImage( out vec4 fragColor, in vec2 fragCoord ){\n\n        vec2 uv = fragCoord/iResolution.xy;\n        float widthHeightRatio = iResolution.x/iResolution.y;\n        vec2 centre;\n        vec2 pos;\n\n        float t = iTime * 0.05;\n\n        float dist;\n        float glow;\n        vec3 col = vec3(0);\n\n        //The spacing between shapes\n        float scale = 500.0;\n        //Number of shapes\n        float layers = 15.0;\n\n        float depth;\n        vec2 bend;\n\n        vec3 purple = vec3(0.611, 0.129, 0.909);\n        vec3 green = vec3(0.133, 0.62, 0.698);\n\n        float angle;\n        float rotationAngle;\n        mat2 rotation;\n\n        //For movement of the anchor point in time\n        float d = 2.5*(sin(t) + sin(3.0*t));\n\n        //Create an out of frame anchor point where all shapes converge to    \n        vec2 anchor = vec2(0.5 + cos(d), 0.5 + sin(d));\n\n        //Create light purple glow at the anchor loaction\n        pos = anchor - uv;\n        pos.y /= widthHeightRatio;\n        dist = length(pos);\n        glow = getGlow(dist, 0.25, 3.5);\n        col += glow * vec3(0.6,0.4,1.0);\n\n        for(float i = 0.0; i < layers; i++){\n\n            //Time varying depth information depending on layer\n            depth = fract(i/layers + t);\n\n            //Move the focus of the camera in a circle\n            centre = vec2(0.5 + 0.2 * sin(t), 0.5 + 0.2 * cos(t));\n\n            //Position shapes between the anchor and the camera focus based on depth\n            bend = mix(anchor, centre, depth);\n\n            pos = bend - uv;\n            pos.y /= widthHeightRatio;\n\n            //Rotate shapes\n               rotationAngle = 3.14 * sin(depth + fract(t) * 6.28) + i;\n            rotation = mat2(cos(rotationAngle), -sin(rotationAngle), \n                            sin(rotationAngle),  cos(rotationAngle));\n\n            pos *= rotation;\n\n            //Position shapes according to depth\n            pos *= mix(scale, 0.0, depth);\n\n            float m = mod(i, 3.0);\n            if(m == 0.0){\n                dist = abs(boxDist(pos));\n            }else if(m == 1.0){\n                dist = abs(triangleDist(pos));\n            }else{\n                dist = abs(circleDist(pos));\n            }\n\n            //Get glow from base radius and intensity modified by depth\n            glow = getGlow(dist, radius+(1.0-depth)*2.0, intensity + depth);\n\n            //Find angle along shape and map from [-PI; PI] to [0; 1]\n            angle = (atan(pos.y, pos.x)+3.14)/6.28;\n            //Shift angle depending on layer and map to [1...0...1]\n            angle = abs((2.0*fract(angle + i/layers)) - 1.0);\n\n            //White core\n            //col += 10.0*vec3(smoothstep(0.03, 0.02, dist));\n\n            //Glow according to angle value\n             col += glow * mix(green, purple, angle);\n        }\n\n        //Tone mapping\n        col = 1.0 - exp(-col);\n\n        //Gamma\n        col = pow(col, vec3(0.4545));\n\n        //Output to screen\n        fragColor = vec4(col,1.0);\n    }\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n";
-}
-
 function ArrayAvg(myArray) {
   var i = 0,
       summ = 0,
@@ -718,12 +717,58 @@ function wallVideoAdd() {
   console.log("scene wall added");
 }
 
-init();
-animate();
+function cameraMove(delta) {
+  var alpha = 0;
+  alpha += delta * 2;
+
+  if (readyToMove == true) {
+    camera.position.lerp(cameraTargetPos.position, alpha);
+  }
+}
+
+var i = 0;
+
+function cameraSetPos() {
+  if (i % 2 == 0) {
+    cameraTargetPos.position.set(0, 2, -2);
+  } else {
+    cameraTargetPos.position.set(0, 2, 3.6);
+  }
+
+  i++;
+}
+
+function mainInit() {}
+
+function vertexShader() {
+  return "\n    varying vec2 vUv;\n\n    void main()\n    {\n        vUv = uv;\n        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );\n        gl_Position = projectionMatrix * mvPosition;\n    }\n    ";
+}
+
+function fragmentShaderPlasma1() {
+  return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n\n    #define PI 3.14159265359\n    #define EXP 2.71828182846\n\n    float w1 = 3.0;\n    float w2 = 1.5;\n    float w3 = 30.0;\n    float A = 0.5;\n    float R = 10.0;\n\n    float horizontal(in vec2 xy, float t)\t{\n        float v = cos(w1*xy.x + A*t);\n        return v;\n    }\n\n    float diagonal(in vec2 xy, float t)\t{\n        float v = cos(w2*(xy.x*cos(t) + 5.0*xy.y*sin(t)) + A*t);\n        return v;\n    }\n\n    float radial(in vec2 xy, float t)\t{\n        float x = 0.3*xy.x - 0.5 + cos(t);\n        float y = 0.3*xy.y - 0.5 + sin(t*0.5);\n        float v = sin(w3*sqrt(x*x+y*y+1.0)+A*t);\n        return v;\n    }    \n\n    float map(float a,float b,float c,float d,float x) {\n        return ((x-a)*(d-c)/(b-a))+c;\n    }\n\n    float log_map(float a,float b,float c,float d,float x) {\n        float x1 = map(a,b,1.0,EXP,x);\n        return log(x1)*(d-c)+c;\n    }\n\n    void mainImage( out vec4 fragColor, in vec2 fragCoord )\t{\n        float t = iTime * 0.2;\n        vec2 xy = fragCoord.xy / iResolution.xy;\n        float v = horizontal(xy,t);\n        v += diagonal(xy,t);\n        v += radial(xy,t);\n        v /= 3.0;\n        float r = map(-1.0,1.0,   0.1,0.23,sin(PI*v));\n        float g = map(-1.0,1.0,   0.35,0.5,sin(PI*v));\n        g += log_map(-1.0,1.0,   0.335,0.435,cos(PI*v));\n        float b = map(-1.0,1.0,   0.8,0.93,sin(PI*v));\n        fragColor = vec4(pow(r,R),pow(g,R),pow(b,R),1.0);\n    }\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n";
+}
+
+function fragmentShaderPlasma2() {
+  return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n    uniform vec4 iMouse;\n\n    const int deg = 5;\n    vec2 roots[deg];\n\n    vec2 mul(vec2 a, vec2 b) {\n        return vec2(\n            a.x*b.x - a.y*b.y,\n            a.x*b.y + a.y*b.y\n        );\n    }\n\n    vec2 div(vec2 a, vec2 b) {\n        return mul(a, vec2(b.x, -b.y))/(b.x*b.x+b.y*b.y);\n    }\n\n    vec2 inv(vec2 a) {\n        return vec2(a.x, -a.y) / (a.x*a.x + a.y*a.y);\n    }\n\n    vec2 f(vec2 a) {\n        vec2 ret = vec2(1.0, 0.0);\n        for (int i = 0; i < deg; i++) {\n            ret = mul(ret, a-roots[i]);\n        }\n        return ret;\n    }\n\n    vec2 fp(vec2 a) {\n        vec2 sum = vec2(0.0, 0.0);\n        for (int i = 0; i < deg; i++) {\n            sum += inv(a-roots[i]);\n        }\n        return inv(sum);\n    }\n\n    vec4 col(vec2 a) {\n        return vec4(\n            1.0/(1.5+abs(a.x)),\n            1.0/(1.5+abs(a.y)),\n            1.0/(1.25+0.01*abs(a.y)),\n            1.0\n            );\n        }\n\n        void mainImage(out vec4 fragColor, in vec2 fragCoord) {\n        roots[0] = vec2(cos(0.6*iTime), sin(0.3*iTime));\n        roots[1] = vec2(cos(0.4*iTime), sin(0.25*iTime));\n        roots[2] = vec2(cos(0.1*iTime), sin(0.05*iTime));\n        roots[3] = vec2(cos(0.1*iTime), sin(0.15*iTime));\n        roots[4] = vec2(cos(0.3*iTime), sin(0.2*iTime));\n        vec2 u0 = 2.0*(fragCoord-iResolution.xy/2.0)/min(iResolution.x, iResolution.y);\n        vec2 u = u0;\n        for(int i = 0; i < 3; i++) {\n            u -= div(f(u), fp(u));\n        }\n        fragColor = col(u);\n    }\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n";
+}
+
+function fragmentShaderAurora() {
+  return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n    uniform vec4 iMouse;\n    uniform sampler2D iChannel0;\n\n// Auroras by nimitz 2017 (twitter: @stormoid)\n// License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License\n// Contact the author for other licensing options\n\n#define time iTime\n\nmat2 mm2(in float a){float c = cos(a), s = sin(a);return mat2(c,s,-s,c);}\nmat2 m2 = mat2(0.95534, 0.29552, -0.29552, 0.95534);\nfloat tri(in float x){return clamp(abs(fract(x)-.5),0.01,0.49);}\nvec2 tri2(in vec2 p){return vec2(tri(p.x)+tri(p.y),tri(p.y+tri(p.x)));}\n\nfloat triNoise2d(in vec2 p, float spd)\n{\n    float z=1.8;\n    float z2=2.5;\n\tfloat rz = 0.;\n    p *= mm2(p.x*0.06);\n    vec2 bp = p;\n\tfor (float i=0.; i<5.; i++ )\n\t{\n        vec2 dg = tri2(bp*1.85)*.75;\n        dg *= mm2(time*spd);\n        p -= dg/z2;\n\n        bp *= 1.3;\n        z2 *= .45;\n        z *= .42;\n\t\tp *= 1.21 + (rz-1.0)*.02;\n\n        rz += tri(p.x+tri(p.y))*z;\n        p*= -m2;\n\t}\n    return clamp(1./pow(rz*29., 1.3),0.,.55);\n}\n\nfloat hash21(in vec2 n){ return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453); }\nvec4 aurora(vec3 ro, vec3 rd)\n{\n    vec4 col = vec4(0);\n    vec4 avgCol = vec4(0);\n\n    for(float i=0.;i<50.;i++)\n    {\n        float of = 0.006*hash21(gl_FragCoord.xy)*smoothstep(0.,15., i);\n        float pt = ((.8+pow(i,1.4)*.002)-ro.y)/(rd.y*2.+0.4);\n        pt -= of;\n    \tvec3 bpos = ro + pt*rd;\n        vec2 p = bpos.zx;\n        float rzt = triNoise2d(p, 0.06);\n        vec4 col2 = vec4(0,0,0, rzt);\n        col2.rgb = (sin(1.-vec3(2.15,-.5, 1.2)+i*0.043)*0.5+0.5)*rzt;\n        avgCol =  mix(avgCol, col2, .5);\n        col += avgCol*exp2(-i*0.065 - 2.5)*smoothstep(0.,5., i);\n\n    }\n\n    col *= (clamp(rd.y*15.+.4,0.,1.));\n\n\n    //return clamp(pow(col,vec4(1.3))*1.5,0.,1.);\n    //return clamp(pow(col,vec4(1.7))*2.,0.,1.);\n    //return clamp(pow(col,vec4(1.5))*2.5,0.,1.);\n    //return clamp(pow(col,vec4(1.8))*1.5,0.,1.);\n\n    //return smoothstep(0.,1.1,pow(col,vec4(1.))*1.5);\n    return col*1.8;\n    //return pow(col,vec4(1.))*2.\n}\n\n\n//-------------------Background and Stars--------------------\n\nvec3 nmzHash33(vec3 q)\n{\n    uvec3 p = uvec3(ivec3(q));\n    p = p*uvec3(374761393U, 1103515245U, 668265263U) + p.zxy + p.yzx;\n    p = p.yzx*(p.zxy^(p >> 3U));\n    return vec3(p^(p >> 16U))*(1.0/vec3(0xffffffffU));\n}\n\nvec3 stars(in vec3 p)\n{\n    vec3 c = vec3(0.);\n    float res = iResolution.x*1.;\n\n\tfor (float i=0.;i<4.;i++)\n    {\n        vec3 q = fract(p*(.15*res))-0.5;\n        vec3 id = floor(p*(.15*res));\n        vec2 rn = nmzHash33(id).xy;\n        float c2 = 1.-smoothstep(0.,.6,length(q));\n        c2 *= step(rn.x,.0005+i*i*0.001);\n        c += c2*(mix(vec3(1.0,0.49,0.1),vec3(0.75,0.9,1.),rn.y)*0.1+0.9);\n        p *= 1.3;\n    }\n    return c*c*.8;\n}\n\nvec3 bg(in vec3 rd)\n{\n    float sd = dot(normalize(vec3(-0.5, -0.6, 0.9)), rd)*0.5+0.5;\n    sd = pow(sd, 5.);\n    vec3 col = mix(vec3(0.05,0.1,0.2), vec3(0.1,0.05,0.2), sd);\n    return col*.63;\n}\n//-----------------------------------------------------------\n\n\nvoid mainImage( out vec4 fragColor, in vec2 fragCoord )\n{\n\tvec2 q = fragCoord.xy / iResolution.xy;\n    vec2 p = q - 0.5;\n\tp.x*=iResolution.x/iResolution.y;\n\n    vec3 ro = vec3(0,0,-6.7);\n    vec3 rd = normalize(vec3(p,1.3));\n    vec2 mo = iMouse.xy / iResolution.xy-.5;\n    mo = (mo==vec2(-.5))?mo=vec2(-0.1,0.1):mo;\n\tmo.x *= iResolution.x/iResolution.y;\n    rd.yz *= mm2(0.001);\n    rd.xz *= mm2(mo.x + sin(time*0.05)*0.2);\n\n    vec3 col = vec3(0.);\n    vec3 brd = rd;\n    float fade = smoothstep(0.,0.01,abs(brd.y))*0.1+0.9;\n\n    col = bg(rd)*fade;\n\n    if (rd.y > 0.){\n        vec4 aur = smoothstep(0.,1.5,aurora(ro,rd))*fade;\n        col += stars(rd);\n        col = col*(1.-aur.a) + aur.rgb;\n    }\n    else //Reflections\n    {\n        rd.y = abs(rd.y);\n        col = bg(rd)*fade*0.6;\n        vec4 aur = smoothstep(0.0,2.5,aurora(ro,rd));\n        col += stars(rd)*0.1;\n        col = col*(1.-aur.a) + aur.rgb;\n        vec3 pos = ro + ((0.5-ro.y)/rd.y)*rd;\n        float nz2 = triNoise2d(pos.xz*vec2(.5,.7), 0.);\n        col += mix(vec3(0.2,0.25,0.5)*0.08,vec3(0.3,0.3,0.5)*0.7, nz2*0.4);\n    }\n\n\tfragColor = vec4(col, 1.);\n}\n\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n    ";
+}
+
+function fragmentShaderTunnel1() {
+  return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n    uniform vec4 iMouse;\n\n    //Base values modified with depth later\n    float intensity = 1.0;\n    float radius = 0.05;\n\n    //Distance functions from \n    //https://www.iquilezles.org/www/articles/distfunctions2d/distfunctions2d.htm\n    float triangleDist(vec2 p){ \n        const float k = sqrt(3.0);\n        p.x = abs(p.x) - 1.0;\n        p.y = p.y + 1.0/k;\n        if( p.x+k*p.y>0.0 ) p=vec2(p.x-k*p.y,-k*p.x-p.y)/2.0;\n        p.x -= clamp( p.x, -2.0, 0.0 );\n        return -length(p)*sign(p.y);\n    }\n\n    float boxDist(vec2 p){\n        vec2 d = abs(p)-1.0;\n        return length(max(d,vec2(0))) + min(max(d.x,d.y),0.0);\n    }\n\n    float circleDist( vec2 p){\n      return length(p) - 1.0;\n    }\n\n    //https://www.shadertoy.com/view/3s3GDn\n    float getGlow(float dist, float radius, float intensity){\n        return pow(radius/dist, intensity);\n    }\n\n    void mainImage( out vec4 fragColor, in vec2 fragCoord ){\n\n        vec2 uv = fragCoord/iResolution.xy;\n        float widthHeightRatio = iResolution.x/iResolution.y;\n        vec2 centre;\n        vec2 pos;\n\n        float t = iTime * 0.05;\n\n        float dist;\n        float glow;\n        vec3 col = vec3(0);\n\n        //The spacing between shapes\n        float scale = 500.0;\n        //Number of shapes\n        float layers = 15.0;\n\n        float depth;\n        vec2 bend;\n\n        vec3 purple = vec3(0.611, 0.129, 0.909);\n        vec3 green = vec3(0.133, 0.62, 0.698);\n\n        float angle;\n        float rotationAngle;\n        mat2 rotation;\n\n        //For movement of the anchor point in time\n        float d = 2.5*(sin(t) + sin(3.0*t));\n\n        //Create an out of frame anchor point where all shapes converge to    \n        vec2 anchor = vec2(0.5 + cos(d), 0.5 + sin(d));\n\n        //Create light purple glow at the anchor loaction\n        pos = anchor - uv;\n        pos.y /= widthHeightRatio;\n        dist = length(pos);\n        glow = getGlow(dist, 0.25, 3.5);\n        col += glow * vec3(0.6,0.4,1.0);\n\n        for(float i = 0.0; i < layers; i++){\n\n            //Time varying depth information depending on layer\n            depth = fract(i/layers + t);\n\n            //Move the focus of the camera in a circle\n            centre = vec2(0.5 + 0.2 * sin(t), 0.5 + 0.2 * cos(t));\n\n            //Position shapes between the anchor and the camera focus based on depth\n            bend = mix(anchor, centre, depth);\n\n            pos = bend - uv;\n            pos.y /= widthHeightRatio;\n\n            //Rotate shapes\n               rotationAngle = 3.14 * sin(depth + fract(t) * 6.28) + i;\n            rotation = mat2(cos(rotationAngle), -sin(rotationAngle), \n                            sin(rotationAngle),  cos(rotationAngle));\n\n            pos *= rotation;\n\n            //Position shapes according to depth\n            pos *= mix(scale, 0.0, depth);\n\n            float m = mod(i, 3.0);\n            if(m == 0.0){\n                dist = abs(boxDist(pos));\n            }else if(m == 1.0){\n                dist = abs(triangleDist(pos));\n            }else{\n                dist = abs(circleDist(pos));\n            }\n\n            //Get glow from base radius and intensity modified by depth\n            glow = getGlow(dist, radius+(1.0-depth)*2.0, intensity + depth);\n\n            //Find angle along shape and map from [-PI; PI] to [0; 1]\n            angle = (atan(pos.y, pos.x)+3.14)/6.28;\n            //Shift angle depending on layer and map to [1...0...1]\n            angle = abs((2.0*fract(angle + i/layers)) - 1.0);\n\n            //White core\n            //col += 10.0*vec3(smoothstep(0.03, 0.02, dist));\n\n            //Glow according to angle value\n             col += glow * mix(green, purple, angle);\n        }\n\n        //Tone mapping\n        col = 1.0 - exp(-col);\n\n        //Gamma\n        col = pow(col, vec3(0.4545));\n\n        //Output to screen\n        fragColor = vec4(col,1.0);\n    }\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n";
+}
 
 function fragmentShader() {
   return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n    uniform vec4 iMouse;\n    uniform sampler2D iChannel0;\n\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n";
 }
+
+init();
+animate(); //other stuff
+
+var navBurger = document.getElementById("nav-burger");
+navBurger.addEventListener("click", cameraSetPos);
 
 /***/ }),
 
@@ -744,7 +789,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gsap-core.js */ "./node_modules/gsap/gsap-core.js");
 /*!
- * CSSPlugin 3.7.1
+ * CSSPlugin 3.8.0
  * https://greensock.com
  *
  * Copyright 2008-2021, GreenSock. All rights reserved.
@@ -2005,6 +2050,7 @@ var CSSPlugin = {
           startValue = typeof startAt[p] === "function" ? startAt[p].call(tween, index, target, targets) : startAt[p];
           p in _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__._config.units && !(0,_gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.getUnit)(startValue) && (startValue += _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__._config.units[p]); // for cases when someone passes in a unitless value like {x: 100}; if we try setting translate(100, 0px) it won't work.
 
+          (0,_gsap_core_js__WEBPACK_IMPORTED_MODULE_0__._isString)(startValue) && ~startValue.indexOf("random(") && (startValue = (0,_gsap_core_js__WEBPACK_IMPORTED_MODULE_0__._replaceRandom)(startValue));
           (startValue + "").charAt(1) === "=" && (startValue = _get(target, p)); // can't work with relative values
         } else {
           startValue = _get(target, p);
@@ -2096,7 +2142,7 @@ var CSSPlugin = {
           this._pt = new _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.PropTween(this._pt, isTransformRelated ? cache : style, p, startNum, relative ? relative * endNum : endNum - startNum, !isTransformRelated && (endUnit === "px" || p === "zIndex") && vars.autoRound !== false ? _renderRoundedCSSProp : _renderCSSProp);
           this._pt.u = endUnit || 0;
 
-          if (startUnit !== endUnit) {
+          if (startUnit !== endUnit && endUnit !== "%") {
             //when the tween goes all the way back to the beginning, we need to revert it to the OLD/ORIGINAL value (with those units). We record that as a "b" (beginning) property and point to a render method that handles that. (performance optimization)
             this._pt.b = startValue;
             this._pt.r = _renderCSSPropWithBeginning;
@@ -2245,7 +2291,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
 /*!
- * GSAP 3.7.1
+ * GSAP 3.8.0
  * https://greensock.com
  *
  * @license Copyright 2008-2021, GreenSock. All rights reserved.
@@ -2382,7 +2428,11 @@ _unitExp = /[\d.+\-=]+(?:e[-+]\d*)*/i,
 _round = function _round(value) {
   return Math.round(value * 100000) / 100000 || 0;
 },
-    _arrayContainsAny = function _arrayContainsAny(toSearch, toFind) {
+    _roundPrecise = function _roundPrecise(value) {
+  return Math.round(value * 10000000) / 10000000 || 0;
+},
+    // increased precision mostly for timing values.
+_arrayContainsAny = function _arrayContainsAny(toSearch, toFind) {
   //searches one array to find matches for any of the items in the toFind array. As soon as one is found, it returns true. It does NOT return all the matches; it's simply a boolean search.
   var l = toFind.length,
       i = 0;
@@ -2582,14 +2632,14 @@ _animationCycle = function _animationCycle(tTime, cycleDuration) {
   return (parentTime - child._start) * child._ts + (child._ts >= 0 ? 0 : child._dirty ? child.totalDuration() : child._tDur);
 },
     _setEnd = function _setEnd(animation) {
-  return animation._end = _round(animation._start + (animation._tDur / Math.abs(animation._ts || animation._rts || _tinyNum) || 0));
+  return animation._end = _roundPrecise(animation._start + (animation._tDur / Math.abs(animation._ts || animation._rts || _tinyNum) || 0));
 },
     _alignPlayhead = function _alignPlayhead(animation, totalTime) {
   // adjusts the animation's _start and _end according to the provided totalTime (only if the parent's smoothChildTiming is true and the animation isn't paused). It doesn't do any rendering or forcing things back into parent timelines, etc. - that's what totalTime() is for.
   var parent = animation._dp;
 
   if (parent && parent.smoothChildTiming && animation._ts) {
-    animation._start = _round(parent._time - (animation._ts > 0 ? totalTime / animation._ts : ((animation._dirty ? animation.totalDuration() : animation._tDur) - totalTime) / -animation._ts));
+    animation._start = _roundPrecise(parent._time - (animation._ts > 0 ? totalTime / animation._ts : ((animation._dirty ? animation.totalDuration() : animation._tDur) - totalTime) / -animation._ts));
 
     _setEnd(animation);
 
@@ -2639,8 +2689,8 @@ _postAddChecks = function _postAddChecks(timeline, child) {
 },
     _addToTimeline = function _addToTimeline(timeline, child, position, skipChecks) {
   child.parent && _removeFromParent(child);
-  child._start = _round((_isNumber(position) ? position : position || timeline !== _globalTimeline ? _parsePosition(timeline, position, child) : timeline._time) + child._delay);
-  child._end = _round(child._start + (child.totalDuration() / Math.abs(child.timeScale()) || 0));
+  child._start = _roundPrecise((_isNumber(position) ? position : position || timeline !== _globalTimeline ? _parsePosition(timeline, position, child) : timeline._time) + child._delay);
+  child._end = _roundPrecise(child._start + (child.totalDuration() / Math.abs(child.timeScale()) || 0));
 
   _addLinkedListItem(timeline, child, "_first", "_last", timeline._sort ? "_start" : 0);
 
@@ -2763,11 +2813,11 @@ _isFromOrFromStart = function _isFromOrFromStart(_ref2) {
 },
     _setDuration = function _setDuration(animation, duration, skipUncache, leavePlayhead) {
   var repeat = animation._repeat,
-      dur = _round(duration) || 0,
+      dur = _roundPrecise(duration) || 0,
       totalProgress = animation._tTime / animation._tDur;
   totalProgress && !leavePlayhead && (animation._time *= dur / animation._dur);
   animation._dur = dur;
-  animation._tDur = !repeat ? dur : repeat < 0 ? 1e10 : _round(dur * (repeat + 1) + animation._rDelay * repeat);
+  animation._tDur = !repeat ? dur : repeat < 0 ? 1e10 : _roundPrecise(dur * (repeat + 1) + animation._rDelay * repeat);
   totalProgress && !leavePlayhead ? _alignPlayhead(animation, animation._tTime = animation._tDur * totalProgress) : animation.parent && _setEnd(animation);
   skipUncache || _uncache(animation.parent, animation);
   return animation;
@@ -2975,12 +3025,12 @@ distribute = function distribute(v) {
     }
 
     l = (distances[i] - distances.min) / distances.max || 0;
-    return _round(distances.b + (ease ? ease(l) : l) * distances.v) + distances.u; //round in order to work around floating point errors
+    return _roundPrecise(distances.b + (ease ? ease(l) : l) * distances.v) + distances.u; //round in order to work around floating point errors
   };
 },
     _roundModifier = function _roundModifier(v) {
   //pass in 0.1 get a function that'll round to the nearest tenth, or 5 to round to the closest 5, or 0.001 to the closest 1000th, etc.
-  var p = v < 1 ? Math.pow(10, (v + "").length - 2) : 1; //to avoid floating point math errors (like 24 * 0.1 == 2.4000000000000004), we chop off at a specific number of decimal places (much faster than toFixed()
+  var p = Math.pow(10, ((v + "").split(".")[1] || "").length); //to avoid floating point math errors (like 24 * 0.1 == 2.4000000000000004), we chop off at a specific number of decimal places (much faster than toFixed())
 
   return function (raw) {
     var n = Math.round(parseFloat(raw) / v) * v * p;
@@ -3886,7 +3936,7 @@ var Animation = /*#__PURE__*/function () {
       !parent._dp || parent.parent || _postAddChecks(parent, this); // edge case: if this is a child of a timeline that already completed, for example, we must re-activate the parent.
       //in case any of the ancestor timelines had completed but should now be enabled, we should reset their totalTime() which will also ensure that they're lined up properly and enabled. Skip for animations that are on the root (wasteful). Example: a TimelineLite.exportRoot() is performed when there's a paused tween on the root, the export will not complete until that tween is unpaused, but imagine a child gets restarted later, after all [unpaused] tweens have completed. The start of that child would get pushed out, but one of the ancestors may have completed.
 
-      while (parent.parent) {
+      while (parent && parent.parent) {
         if (parent.parent._time !== parent._start + (parent._ts >= 0 ? parent._tTime / parent._ts : (parent.totalDuration() - parent._tTime) / -parent._ts)) {
           parent.totalTime(parent._tTime, true);
         }
@@ -3959,7 +4009,12 @@ var Animation = /*#__PURE__*/function () {
     this._rts = +value || 0;
     this._ts = this._ps || value === -_tinyNum ? 0 : this._rts; // _ts is the functional timeScale which would be 0 if the animation is paused.
 
-    return _recacheAncestors(this.totalTime(_clamp(-this._delay, this._tDur, tTime), true));
+    _recacheAncestors(this.totalTime(_clamp(-this._delay, this._tDur, tTime), true));
+
+    _setEnd(this); // if parent.smoothChildTiming was false, the end time didn't get updated in the _alignPlayhead() method, so do it here.
+
+
+    return this;
   };
 
   _proto.paused = function paused(value) {
@@ -3998,7 +4053,7 @@ var Animation = /*#__PURE__*/function () {
   };
 
   _proto.endTime = function endTime(includeRepeats) {
-    return this._start + (_isNotFalse(includeRepeats) ? this.totalDuration() : this.duration()) / Math.abs(this._ts);
+    return this._start + (_isNotFalse(includeRepeats) ? this.totalDuration() : this.duration()) / Math.abs(this._ts || 1);
   };
 
   _proto.rawTime = function rawTime(wrapRepeats) {
@@ -4255,8 +4310,9 @@ var Timeline = /*#__PURE__*/function (_Animation) {
     var prevTime = this._time,
         tDur = this._dirty ? this.totalDuration() : this._tDur,
         dur = this._dur,
-        tTime = this !== _globalTimeline && totalTime > tDur - _tinyNum && totalTime >= 0 ? tDur : totalTime < _tinyNum ? 0 : totalTime,
-        crossingStart = this._zTime < 0 !== totalTime < 0 && (this._initted || !dur),
+        tTime = totalTime <= 0 ? 0 : _roundPrecise(totalTime),
+        // if a paused timeline is resumed (or its _start is updated for another reason...which rounds it), that could result in the playhead shifting a **tiny** amount and a zero-duration child at that spot may get rendered at a different ratio, like its totalTime in render() may be 1e-17 instead of 0, for example.
+    crossingStart = this._zTime < 0 !== totalTime < 0 && (this._initted || !dur),
         time,
         child,
         next,
@@ -4269,6 +4325,7 @@ var Timeline = /*#__PURE__*/function (_Animation) {
         prevIteration,
         yoyo,
         isYoyo;
+    this !== _globalTimeline && tTime > tDur && totalTime >= 0 && (tTime = tDur);
 
     if (tTime !== this._tTime || force || crossingStart) {
       if (prevTime !== this._time && dur) {
@@ -4297,7 +4354,7 @@ var Timeline = /*#__PURE__*/function (_Animation) {
           return this.totalTime(cycleDuration * 100 + totalTime, suppressEvents, force);
         }
 
-        time = _round(tTime % cycleDuration); //round to avoid floating point errors. (4 % 0.8 should be 0 but some browsers report it as 0.79999999!)
+        time = _roundPrecise(tTime % cycleDuration); //round to avoid floating point errors. (4 % 0.8 should be 0 but some browsers report it as 0.79999999!)
 
         if (tTime === tDur) {
           // the tDur === tTime is for edge cases where there's a lengthy decimal on the duration and it may reach the very end but the time is rendered as not-quite-there (remember, tDur is rounded to 4 decimals whereas dur isn't)
@@ -4337,7 +4394,7 @@ var Timeline = /*#__PURE__*/function (_Animation) {
           iteration < prevIteration && (rewinding = !rewinding);
           prevTime = rewinding ? 0 : dur;
           this._lock = 1;
-          this.render(prevTime || (isYoyo ? 0 : _round(iteration * cycleDuration)), suppressEvents, !dur)._lock = 0;
+          this.render(prevTime || (isYoyo ? 0 : _roundPrecise(iteration * cycleDuration)), suppressEvents, !dur)._lock = 0;
           this._tTime = tTime; // if a user gets the iteration() inside the onRepeat, for example, it should be accurate.
 
           !suppressEvents && this.parent && _callback(this, "onRepeat");
@@ -4371,7 +4428,7 @@ var Timeline = /*#__PURE__*/function (_Animation) {
       }
 
       if (this._hasPause && !this._forcing && this._lock < 2) {
-        pauseTween = _findNextPauseTween(this, _round(prevTime), _round(time));
+        pauseTween = _findNextPauseTween(this, _roundPrecise(prevTime), _roundPrecise(time));
 
         if (pauseTween) {
           tTime -= time - (time = pauseTween._start);
@@ -4581,7 +4638,7 @@ var Timeline = /*#__PURE__*/function (_Animation) {
 
     if (!this._dp && this._ts) {
       //special case for the global timeline (or any other that has no parent or detached parent).
-      this._start = _round(_ticker.time - (this._ts > 0 ? _totalTime2 / this._ts : (this.totalDuration() - _totalTime2) / -this._ts));
+      this._start = _roundPrecise(_ticker.time - (this._ts > 0 ? _totalTime2 / this._ts : (this.totalDuration() - _totalTime2) / -this._ts));
     }
 
     _Animation.prototype.totalTime.call(this, _totalTime2, suppressEvents);
@@ -5174,7 +5231,7 @@ _initTween = function _initTween(tween, time) {
       if (autoOverwrite && tween._pt) {
         _overwritingTween = tween;
 
-        _globalTimeline.killTweensOf(target, ptLookup, tween.globalTime(0)); //Also make sure the overwriting doesn't overwrite THIS tween!!!
+        _globalTimeline.killTweensOf(target, ptLookup, tween.globalTime(time)); // make sure the overwriting doesn't overwrite THIS tween!!!
 
 
         overwritten = !tween.parent;
@@ -5279,9 +5336,9 @@ var Tween = /*#__PURE__*/function (_Animation2) {
       tl._start = 0;
 
       if (keyframes) {
-        _setDefaults(tl.vars.defaults, {
+        _inheritDefaults(_setDefaults(tl.vars.defaults, {
           ease: "none"
-        });
+        }));
 
         stagger ? parsedTargets.forEach(function (t, i) {
           return keyframes.forEach(function (frame, j) {
@@ -5352,7 +5409,7 @@ var Tween = /*#__PURE__*/function (_Animation2) {
     vars.reversed && _this3.reverse();
     vars.paused && _this3.paused(true);
 
-    if (immediateRender || !duration && !keyframes && _this3._start === _round(parent._time) && _isNotFalse(immediateRender) && _hasNoPausedAncestors(_assertThisInitialized(_this3)) && parent.data !== "nested") {
+    if (immediateRender || !duration && !keyframes && _this3._start === _roundPrecise(parent._time) && _isNotFalse(immediateRender) && _hasNoPausedAncestors(_assertThisInitialized(_this3)) && parent.data !== "nested") {
       _this3._tTime = -_tinyNum; //forces a render without having to set the render() "force" parameter to true because we want to allow lazying by default (using the "force" parameter always forces an immediate full render)
 
       _this3.render(Math.max(0, -delay)); //in case delay is negative
@@ -5395,7 +5452,7 @@ var Tween = /*#__PURE__*/function (_Animation2) {
           return this.totalTime(cycleDuration * 100 + totalTime, suppressEvents, force);
         }
 
-        time = _round(tTime % cycleDuration); //round to avoid floating point errors. (4 % 0.8 should be 0 but some browsers report it as 0.79999999!)
+        time = _roundPrecise(tTime % cycleDuration); //round to avoid floating point errors. (4 % 0.8 should be 0 but some browsers report it as 0.79999999!)
 
         if (tTime === tDur) {
           // the tDur === tTime is for edge cases where there's a lengthy decimal on the duration and it may reach the very end but the time is rendered as not-quite-there (remember, tDur is rounded to 4 decimals whereas dur isn't)
@@ -5432,7 +5489,7 @@ var Tween = /*#__PURE__*/function (_Animation2) {
           if (this.vars.repeatRefresh && !isYoyo && !this._lock) {
             this._lock = force = 1; //force, otherwise if lazy is true, the _attemptInitTween() will return and we'll jump out and get caught bouncing on each tick.
 
-            this.render(_round(cycleDuration * iteration), true).invalidate()._lock = 0;
+            this.render(_roundPrecise(cycleDuration * iteration), true).invalidate()._lock = 0;
           }
         }
       }
@@ -6121,7 +6178,7 @@ var gsap = _gsap.registerPlugin({
   }
 }, _buildModifierPlugin("roundProps", _roundModifier), _buildModifierPlugin("modifiers"), _buildModifierPlugin("snap", snap)) || _gsap; //to prevent the core plugins from being dropped via aggressive tree shaking, we must include them in the variable declaration in this way.
 
-Tween.version = Timeline.version = gsap.version = "3.7.1";
+Tween.version = Timeline.version = gsap.version = "3.8.0";
 _coreReady = 1;
 _windowExists() && _wake();
 var Power0 = _easeMap.Power0,

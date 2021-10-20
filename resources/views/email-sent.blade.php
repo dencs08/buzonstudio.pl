@@ -37,7 +37,7 @@
         <x-footer/>
         </div>
 
-        <x-GlobalJsVariables/>
+        <x-global-js-variables/>
 
         <script src="js/app.js"></script>
         <script src="js/contactSent.js"></script>

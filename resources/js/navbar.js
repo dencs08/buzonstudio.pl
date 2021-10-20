@@ -4,7 +4,6 @@ const navItems = document.querySelectorAll('.web_link');
 const navWebItems = document.querySelectorAll('.web_link_active');
 const start_web_link = document.querySelector('.web_link');
 
-
 navItems.forEach(element => {
     element.addEventListener('click', closeNavBar);
 });

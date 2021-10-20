@@ -57,7 +57,7 @@ const fogParams = {
 let knotObj, ground, human
 
 
-let camera, cameraTarget, scene, renderer, stats,
+let camera, cameraTarget, cameraTargetPos, scene, renderer, stats,
     parameters, cubeMaterial, controls, clock;
 
 //Shaders
@@ -95,6 +95,7 @@ let wallMatVideo, wallGeo, wallMat, wall;
 function init() {
     const container = document.createElement('div');
     document.body.appendChild(container);
+    scene = new THREE.Scene();
 
     //!Base camera
     camera = new THREE.PerspectiveCamera(cameraParams.fov, width / height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax)
@@ -102,12 +103,24 @@ function init() {
     camera.rotation.set(0, 0, 0)
 
     const cameraTargetGeo = new THREE.SphereGeometry(1, 32, 16)
-    const cameraTargetMat = new THREE.MeshStandardMaterial()
+    const cameraTargetMat = new THREE.MeshPhysicalMaterial({
+        transmission: 0.0,
+
+    })
+
+    cameraTargetPos = new THREE.Mesh(cameraTargetGeo, cameraTargetMat)
+    cameraTargetPos.position.set(0, 2, 3.6)
+    scene.add(cameraTargetPos)
+    cameraTargetPos.material.opacity = 0;
+    cameraTargetPos.material.transparent = true;
+    cameraTargetPos.transparent = true;
 
     cameraTarget = new THREE.Mesh(cameraTargetGeo, cameraTargetMat)
-    cameraTarget.position.set(-25, 1, -20)
-
-    scene = new THREE.Scene();
+    cameraTarget.position.set(5, 0, -4)
+    scene.add(cameraTarget)
+    cameraTarget.material.opacity = 0;
+    cameraTarget.material.transparent = true;
+    cameraTarget.transparent = true;
 
     renderer = new THREE.WebGLRenderer({
         canvas: canvas
@@ -244,12 +257,13 @@ function init() {
     wall = new THREE.Mesh(wallGeo, wallMat)
     scene.add(wall)
     wall.position.set(0, 2, -5)
+
     //human
-    // const humanMaterial = new THREE.MeshStandardMaterial({
-    //     // color: 0x95ff00,
-    //     // emissive: 0x95ff00,
-    //     // emissiveIntensity: 100,
-    // })
+    const humanMaterial = new THREE.MeshStandardMaterial({
+        color: 0x95ff00,
+        emissive: 0x95ff00,
+        emissiveIntensity: 100,
+    })
 
     // gltfLoader.load('3d/models/human.gltf', (gltf) => {
     //     human = gltf.scene
@@ -259,6 +273,8 @@ function init() {
     //     scene.add(human)
     //     human.position.set(0, 0, 0)
     // })
+
+    readyToMove = true
 }
 
 function onPointerMove(event) {
@@ -319,10 +335,13 @@ function initPostprocessing() {
 
 var fpsChecked = false;
 var lastLoop = new Date();
-var thisLoop, fps, lastLoop, avgFps;
+var thisLoop, fps, lastLoop, avgFps, delta;
 var fpsArray = [];
 let pushNumber = 0;
+let readyToMove = false;
+
 function animate(time) {
+    delta = clock.getDelta();
     time *= 0.001;
 
     uniforms.iTime.value = time;
@@ -334,10 +353,11 @@ function animate(time) {
     render();
     stats.end();
 
+    cameraMove(delta)
+
     thisLoop = new Date();
     fps = 1000 / (thisLoop - lastLoop);
     lastLoop = thisLoop;
-
 
     if (pushNumber < 30) {
         fpsArray.push(fps);
@@ -369,6 +389,48 @@ function mouseInteractivity() {
     // camera.position.y += (- (mouseY) - camera.position.y) * 0.000002;
     // camera.position.z += (- (mouseX) - camera.position.z) * 0.00001;
     // camera.lookAt(cameraTarget.position);
+}
+
+function ArrayAvg(myArray) {
+    var i = 0, summ = 0, ArrayLen = myArray.length;
+    while (i < ArrayLen) {
+        summ = summ + myArray[i++];
+    }
+    return summ / ArrayLen;
+}
+
+function wallVideoAdd() {
+    scene.remove(wall);
+    console.log("wall removed")
+
+    wall = new THREE.Mesh(wallGeo, wallMatVideo)
+    console.log("wall video added")
+
+    scene.add(wall)
+    wall.position.set(0, 2, -5)
+    console.log("scene wall added")
+}
+
+function cameraMove(delta) {
+    let alpha = 0
+    alpha += delta * 2;
+    if (readyToMove == true) {
+        camera.position.lerp(cameraTargetPos.position, alpha);
+    }
+}
+
+let i = 0;
+function cameraSetPos() {
+    if (i % 2 == 0) {
+        cameraTargetPos.position.set(0, 2, -2);
+    } else {
+        cameraTargetPos.position.set(0, 2, 3.6);
+    }
+    i++
+}
+
+function mainInit() {
+
 }
 
 function vertexShader() {
@@ -489,8 +551,8 @@ function fragmentShaderPlasma2() {
     vec4 col(vec2 a) {
         return vec4(
             1.0/(1.5+abs(a.x)),
-            1.0/(1.25+abs(a.y)),
-            1.0/(1.1+0.01*abs(a.y)),
+            1.0/(1.5+abs(a.y)),
+            1.0/(1.25+0.01*abs(a.y)),
             1.0
             );
         }
@@ -819,30 +881,6 @@ function fragmentShaderTunnel1() {
 `
 }
 
-function ArrayAvg(myArray) {
-    var i = 0, summ = 0, ArrayLen = myArray.length;
-    while (i < ArrayLen) {
-        summ = summ + myArray[i++];
-    }
-    return summ / ArrayLen;
-}
-
-function wallVideoAdd() {
-    scene.remove(wall);
-    console.log("wall removed")
-
-    wall = new THREE.Mesh(wallGeo, wallMatVideo)
-    console.log("wall video added")
-
-    scene.add(wall)
-    wall.position.set(0, 2, -5)
-    console.log("scene wall added")
-}
-
-init()
-animate()
-
-
 function fragmentShader() {
     return `
     varying vec2 vUv;
@@ -857,3 +895,11 @@ function fragmentShader() {
     }
 `
 }
+
+init()
+animate()
+
+
+//other stuff
+const navBurger = document.getElementById("nav-burger")
+navBurger.addEventListener("click", cameraSetPos);
