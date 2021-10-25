@@ -50,8 +50,8 @@ window.onload = () => {
     }
 
     var path = location.pathname;
-    //only on start to prevent #portfolio section page transition
-    if (path == "/start" || path == "/") {
+    //only on offer view to prevent #portfolio section page transition
+    if (path == "/oferta" || path == "/") {
         for (let i = 0; i < anchors.length; i++) {
             const anchor = anchors[i];
 
@@ -61,10 +61,10 @@ window.onload = () => {
                 } else {
                     let target = e.target.href;
 
-                    console.log(target)
+                    // console.log(target)
 
                     e.preventDefault();
-                    courtainAnimExit()
+                    // courtainAnimExit()
 
                     setTimeout(() => {
                         window.location.href = target;

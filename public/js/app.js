@@ -55,17 +55,17 @@ window.onload = function () {
     }, 250);
   }
 
-  var path = location.pathname; //only on start to prevent #portfolio section page transition
+  var path = location.pathname; //only on offer view to prevent #portfolio section page transition
 
-  if (path == "/start" || path == "/") {
+  if (path == "/oferta" || path == "/") {
     var _loop = function _loop(i) {
       var anchor = anchors[i];
       anchor.addEventListener('click', function (e) {
         if (anchor.innerHTML == "Portfolio") {} else {
-          var target = e.target.href;
-          console.log(target);
-          e.preventDefault();
-          courtainAnimExit();
+          var target = e.target.href; // console.log(target)
+
+          e.preventDefault(); // courtainAnimExit()
+
           setTimeout(function () {
             window.location.href = target;
           }, 500);
