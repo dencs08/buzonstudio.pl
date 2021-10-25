@@ -110,14 +110,17 @@ let tlIn = new gsap.timeline();
             animateIn({ currentIndex: destination.index });
             setTimeout(() => {
                 fullpage_api.setAllowScrolling(true);
-            }, 400);
+                fullpage_api.setKeyboardScrolling(true);
+            }, 500);
+            startSectionIndex = destination.index
         },
-        onLeave: function (origin, nextIndex, direction) {
+        onLeave: function (origin, destination, nextIndex, direction) {
             animateOut({ currentIndex: origin.index, direction });
             setTimeout(() => {
                 fullpage_api.setAllowScrolling(false);
+                fullpage_api.setKeyboardScrolling(false);
             }, 50);
-
+            startSectionIndex = destination.index
         },
     });
     const switchIndex = () => {
@@ -127,6 +130,8 @@ let tlIn = new gsap.timeline();
     switchIndex();
     hideElements();
 })();
+
+
 
 //! Landing page timeline
 const line = CSSRulePlugin.getRule('.landing-page-content:before')

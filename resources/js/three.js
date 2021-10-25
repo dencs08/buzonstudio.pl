@@ -1,6 +1,3 @@
-
-
-
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { LightProbeGenerator } from 'three/examples/jsm/lights/LightProbeGenerator'
@@ -58,7 +55,7 @@ let knotObj, ground, human
 
 
 let camera, cameraTarget, cameraTargetPos, scene, renderer, stats,
-    parameters, cubeMaterial, controls, clock;
+    parameters, cubeMaterial, controls, clock, cameraTargetVector3;
 
 //Shaders
 let uniforms
@@ -98,18 +95,18 @@ function init() {
     scene = new THREE.Scene();
 
     //!Base camera
-    camera = new THREE.PerspectiveCamera(cameraParams.fov, width / height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax)
-    camera.position.set(0, 2, 3.6) //0, 2, 3.60
-    camera.rotation.set(0, 0, 0)
-
     const cameraTargetGeo = new THREE.SphereGeometry(1, 32, 16)
     const cameraTargetMat = new THREE.MeshPhysicalMaterial({
         transmission: 0.0,
-
     })
 
+    camera = new THREE.PerspectiveCamera(cameraParams.fov, width / height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax)
+    cameraTargetVector3 = new THREE.Vector3(0, 2, 3.6)
+    camera.position.copy(cameraTargetVector3)
+    camera.rotation.set(0, 0, 0)
+
     cameraTargetPos = new THREE.Mesh(cameraTargetGeo, cameraTargetMat)
-    cameraTargetPos.position.set(0, 2, 3.6)
+    cameraTargetPos.position.copy(cameraTargetVector3)
     scene.add(cameraTargetPos)
     cameraTargetPos.material.opacity = 0;
     cameraTargetPos.material.transparent = true;
@@ -140,21 +137,21 @@ function init() {
     // controls = new OrbitControls(camera, renderer.domElement)
 
     //! Scene
-    new THREE.CubeTextureLoader().load([
-        '3d/textures/skybox/stars_ft.jpg',
-        '3d/textures/skybox/stars_bk.jpg',
-        '3d/textures/skybox/stars_up.jpg',
-        '3d/textures/skybox/stars_dn.jpg',
-        '3d/textures/skybox/stars_rt.jpg',
-        '3d/textures/skybox/stars_lf.jpg'
-    ], function (cubeTexture) {
+    // new THREE.CubeTextureLoader().load([
+    //     '3d/textures/skybox/stars_ft.jpg',
+    //     '3d/textures/skybox/stars_bk.jpg',
+    //     '3d/textures/skybox/stars_up.jpg',
+    //     '3d/textures/skybox/stars_dn.jpg',
+    //     '3d/textures/skybox/stars_rt.jpg',
+    //     '3d/textures/skybox/stars_lf.jpg'
+    // ], function (cubeTexture) {
 
-        cubeTexture.encoding = THREE.sRGBEncoding;
+    //     cubeTexture.encoding = THREE.sRGBEncoding;
 
-        scene.background = cubeTexture;
+    //     scene.background = cubeTexture;
 
-        lightProbe.copy(LightProbeGenerator.fromCubeTexture(cubeTexture));
-    });
+    //     lightProbe.copy(LightProbeGenerator.fromCubeTexture(cubeTexture));
+    // });
 
     scene.fog = new THREE.FogExp2(0x000000, fogParams.density)
 
@@ -234,12 +231,25 @@ function init() {
     fragmentTexture.wrapS = THREE.RepeatWrapping;
     fragmentTexture.wrapT = THREE.RepeatWrapping;
 
+    let iResolutionMultiplierValue;
+    let screenProportions = canvas.width / canvas.height;
+    if (screenProportions > 1.7 && canvas.width >= 1921) {
+        //wide
+        iResolutionMultiplierValue = (canvas.width / 2000);
+    } else if (screenProportions > 1.7 && canvas.width <= 1920) {
+        iResolutionMultiplierValue = (canvas.width / 1000) + 1;
+    } else {
+        iResolutionMultiplierValue = 5.0;
+    }
+
     uniforms = {
-        iTime: { value: 0 },
+        iTime: { value: 0.0 },
         iResolution: { value: new THREE.Vector3(1920, 1080, 1) },
         iMouse: { value: new THREE.Vector4() },
         iChannel0: { value: fragmentTexture },
+        iResolutionMultiplier: { value: iResolutionMultiplierValue },
     };
+
 
     // video = document.getElementById('video');
     // video.muted = true;
@@ -276,6 +286,19 @@ function init() {
 
     readyToMove = true
 }
+
+function amountscrolled() {
+    var winheight = window.innerHeight || (document.documentElement || document.body).clientHeight
+    var docheight = getDocHeight()
+    var scrollTop = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop
+    var trackLength = docheight - winheight
+    var pctScrolled = Math.floor(scrollTop / trackLength * 100) // gets percentage scrolled (ie: 80 or NaN if tracklength == 0)
+    console.log(pctScrolled + '% scrolled')
+}
+
+window.addEventListener("scroll", function () {
+    amountscrolled()
+}, false)
 
 function onPointerMove(event) {
     if (event.isPrimary === false) return;
@@ -376,6 +399,7 @@ function animate(time) {
         }, 1000);
     }
 
+    cameraScrollPos()
 }
 
 function render() {
@@ -419,14 +443,73 @@ function cameraMove(delta) {
     }
 }
 
-let i = 0;
+let cameraPosi = 0;
 function cameraSetPos() {
-    if (i % 2 == 0) {
+    if (cameraPosi % 2 == 0) {
         cameraTargetPos.position.set(0, 2, -2);
     } else {
-        cameraTargetPos.position.set(0, 2, 3.6);
+        cameraTargetPos.position.copy(cameraTargetVector3);
     }
-    i++
+    cameraPosi++
+}
+
+function cameraScrollPos() {
+    switch (startSectionIndex) {
+        case 0:
+            if (cameraPosi % 2 == 0) {
+                cameraTargetPos.position.copy(cameraTargetVector3)
+            } else {
+                cameraTargetPos.position.set(0, 2, -2);
+            }
+            break;
+        case 1:
+            if (cameraPosi % 2 == 0) {
+                cameraTargetPos.position.set(0, 2, 15)
+            } else {
+                cameraTargetPos.position.set(0, 2, -2);
+            }
+
+            break;
+        case 2:
+            if (cameraPosi % 2 == 0) {
+                cameraTargetPos.position.set(0, 2, 30)
+            } else {
+                cameraTargetPos.position.set(0, 2, -2);
+            }
+
+            break;
+        case 3:
+            if (cameraPosi % 2 == 0) {
+                cameraTargetPos.position.set(0, 2, 40)
+            } else {
+                cameraTargetPos.position.set(0, 2, -2);
+            }
+
+            break;
+        case 4:
+            if (cameraPosi % 2 == 0) {
+                cameraTargetPos.position.set(0, 2, 50)
+            } else {
+                cameraTargetPos.position.set(0, 2, -2);
+            }
+
+            break;
+        case 5:
+            if (cameraPosi % 2 == 0) {
+                cameraTargetPos.position.set(0, 2, 60)
+            } else {
+                cameraTargetPos.position.set(0, 2, -2);
+            }
+
+            break;
+        case 6:
+            if (cameraPosi % 2 == 0) {
+                cameraTargetPos.position.set(0, 2, 70)
+            } else {
+                cameraTargetPos.position.set(0, 2, -2);
+            }
+
+    }
 }
 
 function mainInit() {
@@ -513,6 +596,7 @@ function fragmentShaderPlasma2() {
     uniform vec3 iResolution;
     uniform float iTime;
     uniform vec4 iMouse;
+    uniform float iResolutionMultiplier;
 
     const int deg = 5;
     vec2 roots[deg];
@@ -550,10 +634,10 @@ function fragmentShaderPlasma2() {
 
     vec4 col(vec2 a) {
         return vec4(
-            1.0/(1.5+abs(a.x)),
-            1.0/(1.5+abs(a.y)),
-            1.0/(1.25+0.01*abs(a.y)),
-            1.0
+            0.75/(1.5+abs(a.x)),
+            0.75/(1.5+abs(a.y)),
+            0.75/(1.25+0.01*abs(a.y)),
+            0.75
             );
         }
 
@@ -563,7 +647,7 @@ function fragmentShaderPlasma2() {
         roots[2] = vec2(cos(0.1*iTime), sin(0.05*iTime));
         roots[3] = vec2(cos(0.1*iTime), sin(0.15*iTime));
         roots[4] = vec2(cos(0.3*iTime), sin(0.2*iTime));
-        vec2 u0 = 2.0*(fragCoord-iResolution.xy/2.0)/min(iResolution.x, iResolution.y);
+        vec2 u0 = iResolutionMultiplier*(fragCoord-iResolution.xy/2.0)/min(iResolution.x, iResolution.y);
         vec2 u = u0;
         for(int i = 0; i < 3; i++) {
             u -= div(f(u), fp(u));

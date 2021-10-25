@@ -11978,16 +11978,20 @@ var tlIn = new gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline();
       });
       setTimeout(function () {
         fullpage_api.setAllowScrolling(true);
-      }, 400);
+        fullpage_api.setKeyboardScrolling(true);
+      }, 500);
+      startSectionIndex = destination.index;
     },
-    onLeave: function onLeave(origin, nextIndex, direction) {
+    onLeave: function onLeave(origin, destination, nextIndex, direction) {
       animateOut({
         currentIndex: origin.index,
         direction: direction
       });
       setTimeout(function () {
         fullpage_api.setAllowScrolling(false);
+        fullpage_api.setKeyboardScrolling(false);
       }, 50);
+      startSectionIndex = destination.index;
     }
   });
 
