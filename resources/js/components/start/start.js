@@ -17,7 +17,7 @@ var staggerParamFrom = {
 var staggerParamTo = {
     y: 0,
     opacity: 1,
-    duration: 1,
+    duration: 0.5,
     stagger: 0.2,
 }
 
@@ -33,14 +33,14 @@ var animateInParam = {
 var animateOutDownParam = {
     autoAlpha: 0,
     opacity: 0,
-    duration: 0.5,
+    duration: 0.25,
     ease: "power1",
 };
 
 var animateOutOtherParam = {
     autoAlpha: 0,
     opacity: 0,
-    duration: 0.5,
+    duration: 0.25,
     ease: "power1",
 };
 
@@ -103,14 +103,23 @@ let tlIn = new gsap.timeline();
         navigation: true,
         anchors: ['section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7'],
         navigationTooltips: ['Start', 'Przyciągnij uwagę', 'Zapadnij w pamięć', 'Większa sprzedaż', 'Portfolio', 'Kontakt', 'Stopka'],
-        scrollingSpeed: 1000,
+        scrollingSpeed: 750,
         css3: true,
 
         afterLoad: function (origin, destination, direction) {
             animateIn({ currentIndex: destination.index });
+            setTimeout(() => {
+                console.log("enabled")
+                fullpage_api.setAllowScrolling(true);
+            }, 400);
         },
         onLeave: function (origin, nextIndex, direction) {
             animateOut({ currentIndex: origin.index, direction });
+            setTimeout(() => {
+                console.log("disabled")
+                fullpage_api.setAllowScrolling(false);
+            }, 50);
+
         },
     });
     const switchIndex = () => {
@@ -157,15 +166,21 @@ if (stopCheck == false) {
                     ease: "sine.in",
                     onComplete: function () { isLandingAnimDone = true },
                 })
+                tl.to(rightNav, {
+                    duration: 1,
+                    ease: "expo",
+                    opacity: 1,
+                },
+                    "-=0.75")
                 tl.to(line, {
-                    delay: 1.25,
-                    duration: 2,
+                    delay: 1.5,
+                    duration: 1.25,
                     ease: "expo",
                     cssRule: {
                         scaleY: 1
                     },
                 },
-                    "-=1.25")
+                    "-=1.65")
                 tl.fromTo(h2, {
                     clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
                     opacity: 0,
@@ -175,9 +190,9 @@ if (stopCheck == false) {
                     x: '0px',
                     clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
                     ease: "expo",
-                    duration: 1.75,
+                    duration: 1.5,
                 },
-                    "-=1.1")
+                    "-=0.65")
                 tl.fromTo(h1, {
                     opacity: 0,
                     y: '60px',
@@ -187,7 +202,7 @@ if (stopCheck == false) {
                     ease: "expo",
                     duration: 1.25,
                 },
-                    "-=1.25")
+                    "-=1.05")
                 tl.fromTo(button1, {
                     ease: "expo",
                     opacity: 0,
@@ -198,7 +213,7 @@ if (stopCheck == false) {
                     ease: "expo",
                     duration: 1.25,
                 },
-                    "-=0.85")
+                    "-=0.8")
                 tl.fromTo(button2, {
                     opacity: 0,
                     y: '-40px',
@@ -208,7 +223,7 @@ if (stopCheck == false) {
                     opacity: 1,
                     y: '0px',
                 },
-                    "-=1")
+                    "-=1.05")
                 tl.to(line, {
                     duration: 1,
                     ease: "expo",
@@ -217,15 +232,8 @@ if (stopCheck == false) {
                     },
                 },
                     "-=0.6")
-                tl.to(rightNav, {
-                    duration: 1,
-                    ease: "expo",
-                    opacity: 1,
-                },
-                    "-=1")
             }
         }
     }, 250);
 }
-
 gsap.registerPlugin(ScrollTrigger);

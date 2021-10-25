@@ -262,6 +262,10 @@ html.fp-enabled,
   border: 0;
 }
 
+body {
+  overflow-y: hidden !important;
+}
+
 .landing-page-content {
   margin-bottom: clamp(5rem, 20vh, 9rem);
 }

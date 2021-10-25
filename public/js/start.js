@@ -11883,7 +11883,7 @@ var staggerParamFrom = {
 var staggerParamTo = {
   y: 0,
   opacity: 1,
-  duration: 1,
+  duration: 0.5,
   stagger: 0.2
 };
 var staggerParamToDelay = "-=0";
@@ -11896,13 +11896,13 @@ var animateInParam = {
 var animateOutDownParam = {
   autoAlpha: 0,
   opacity: 0,
-  duration: 0.5,
+  duration: 0.25,
   ease: "power1"
 };
 var animateOutOtherParam = {
   autoAlpha: 0,
   opacity: 0,
-  duration: 0.5,
+  duration: 0.25,
   ease: "power1"
 };
 
@@ -11970,18 +11970,26 @@ var tlIn = new gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline();
     navigation: true,
     anchors: ['section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7'],
     navigationTooltips: ['Start', 'Przyciągnij uwagę', 'Zapadnij w pamięć', 'Większa sprzedaż', 'Portfolio', 'Kontakt', 'Stopka'],
-    scrollingSpeed: 1000,
+    scrollingSpeed: 750,
     css3: true,
     afterLoad: function afterLoad(origin, destination, direction) {
       animateIn({
         currentIndex: destination.index
       });
+      setTimeout(function () {
+        console.log("enabled");
+        fullpage_api.setAllowScrolling(true);
+      }, 400);
     },
     onLeave: function onLeave(origin, nextIndex, direction) {
       animateOut({
         currentIndex: origin.index,
         direction: direction
       });
+      setTimeout(function () {
+        console.log("disabled");
+        fullpage_api.setAllowScrolling(false);
+      }, 50);
     }
   });
 
@@ -12031,14 +12039,19 @@ if (stopCheck == false) {
             isLandingAnimDone = true;
           }
         });
+        tl.to(rightNav, {
+          duration: 1,
+          ease: "expo",
+          opacity: 1
+        }, "-=0.75");
         tl.to(line, {
-          delay: 1.25,
-          duration: 2,
+          delay: 1.5,
+          duration: 1.25,
           ease: "expo",
           cssRule: {
             scaleY: 1
           }
-        }, "-=1.25");
+        }, "-=1.65");
         tl.fromTo(h2, {
           clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
           opacity: 0,
@@ -12048,8 +12061,8 @@ if (stopCheck == false) {
           x: '0px',
           clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
           ease: "expo",
-          duration: 1.75
-        }, "-=1.1");
+          duration: 1.5
+        }, "-=0.65");
         tl.fromTo(h1, {
           opacity: 0,
           y: '60px'
@@ -12058,7 +12071,7 @@ if (stopCheck == false) {
           y: '0px',
           ease: "expo",
           duration: 1.25
-        }, "-=1.25");
+        }, "-=1.05");
         tl.fromTo(button1, {
           ease: "expo",
           opacity: 0,
@@ -12068,7 +12081,7 @@ if (stopCheck == false) {
           y: '0px',
           ease: "expo",
           duration: 1.25
-        }, "-=0.85");
+        }, "-=0.8");
         tl.fromTo(button2, {
           opacity: 0,
           y: '-40px'
@@ -12077,7 +12090,7 @@ if (stopCheck == false) {
           ease: "expo",
           opacity: 1,
           y: '0px'
-        }, "-=1");
+        }, "-=1.05");
         tl.to(line, {
           duration: 1,
           ease: "expo",
@@ -12085,11 +12098,6 @@ if (stopCheck == false) {
             scaleY: 0
           }
         }, "-=0.6");
-        tl.to(rightNav, {
-          duration: 1,
-          ease: "expo",
-          opacity: 1
-        }, "-=1");
       }
     }
   }, 250);
