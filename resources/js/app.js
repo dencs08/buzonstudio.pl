@@ -57,14 +57,18 @@ window.onload = () => {
 
             anchor.addEventListener('click', e => {
                 if (anchor.innerHTML == "Portfolio") {
+                    courtainAnimExit()
 
+                    setTimeout(() => {
+                        window.location.reload(false);
+                    }, 500);
                 } else {
                     let target = e.target.href;
 
-                    // console.log(target)
+                    console.log(target)
 
                     e.preventDefault();
-                    // courtainAnimExit()
+                    courtainAnimExit()
 
                     setTimeout(() => {
                         window.location.href = target;

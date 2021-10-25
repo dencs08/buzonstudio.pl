@@ -61,11 +61,16 @@ window.onload = function () {
     var _loop = function _loop(i) {
       var anchor = anchors[i];
       anchor.addEventListener('click', function (e) {
-        if (anchor.innerHTML == "Portfolio") {} else {
-          var target = e.target.href; // console.log(target)
-
-          e.preventDefault(); // courtainAnimExit()
-
+        if (anchor.innerHTML == "Portfolio") {
+          courtainAnimExit();
+          setTimeout(function () {
+            window.location.reload(false);
+          }, 500);
+        } else {
+          var target = e.target.href;
+          console.log(target);
+          e.preventDefault();
+          courtainAnimExit();
           setTimeout(function () {
             window.location.href = target;
           }, 500);

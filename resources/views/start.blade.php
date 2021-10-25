@@ -104,7 +104,7 @@
                     </div>
                 </div>  
                 <div class="portfolio-btn-container container">
-                    <a href="oferta" class="web_link_transitions a_btn  my-5 anim-stagger4">WIĘCEJ PRAC</a>
+                    <a href="oferta#prace" class="web_link_transitions a_btn  my-5 anim-stagger4">WIĘCEJ PRAC</a>
                 </div>
         </section>
 

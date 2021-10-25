@@ -22878,19 +22878,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mousemove', function (e) {
     },
     delay: 0.03
   });
-}); // $(".navigation-link-1").hover(function () {
-//     $(".project-preview").css({ "background-image": "url(images/portfolio2.png)" });
-// });
-// $(".navigation-link-2").hover(function () {
-//     $(".project-preview").css({ "background-image": "url(images/portfolio1.png)" });
-// });
-// $(".navigation-link-3").hover(function () {
-//     $(".project-preview").css({ "background-image": "url(images/portfolio2.png)" });
-// });
-// $(".navigation-link-4").hover(function () {
-//     $(".project-preview").css({ "background-image": "url(images/portfolio1.png)" });
-// });
-
+});
 var projects = document.querySelectorAll(".navigation-link");
 
 var _loop = function _loop(i) {

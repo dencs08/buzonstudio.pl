@@ -341,23 +341,23 @@ body {
 }
 
 .portfolio-item1 {
-  background-image: url("/images/portfolio2.png");
+  background-image: url("/images/portfolio/portfolio2.png");
 }
 
 .portfolio-item2 {
-  background-image: url("/images/portfolio2.png");
+  background-image: url("/images/portfolio/portfolio1.png");
 }
 
 .portfolio-item3 {
-  background-image: url("/images/portfolio2.png");
+  background-image: url("/images/portfolio/portfolio2.png");
 }
 
 .portfolio-item4 {
-  background-image: url("/images/portfolio2.png");
+  background-image: url("/images/portfolio/portfolio1.png");
 }
 
 .portfolio-item5 {
-  background-image: url("/images/portfolio2.png");
+  background-image: url("/images/portfolio/portfolio2.png");
 }
 
 #clients {
