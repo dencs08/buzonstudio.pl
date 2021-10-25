@@ -437,7 +437,7 @@ var uniforms; //Loaders
 
 var textureLoader = new three__WEBPACK_IMPORTED_MODULE_11__.TextureLoader();
 var gltfLoader = new three_examples_jsm_loaders_GLTFLoader_js__WEBPACK_IMPORTED_MODULE_2__.GLTFLoader();
-var tl = gsap__WEBPACK_IMPORTED_MODULE_12__.default.timeline();
+var tl = gsap__WEBPACK_IMPORTED_MODULE_12__["default"].timeline();
 var gui = new three_examples_jsm_libs_dat_gui_module__WEBPACK_IMPORTED_MODULE_3__.GUI();
 var canvas = document.querySelector('#web_gl');
 var mouseOverlay = document.querySelector('#mouse_overlay');
@@ -517,7 +517,7 @@ function init() {
   scene.add(directionalLight);
   initPostprocessing();
   renderer.autoClear = false;
-  stats = new three_examples_jsm_libs_stats_module__WEBPACK_IMPORTED_MODULE_9__.default();
+  stats = new three_examples_jsm_libs_stats_module__WEBPACK_IMPORTED_MODULE_9__["default"]();
   container.appendChild(stats.dom);
   container.style.touchAction = 'none';
   container.addEventListener('pointermove', onPointerMove);

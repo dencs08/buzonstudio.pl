@@ -10710,7 +10710,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var locoScroll = new locomotive_scroll__WEBPACK_IMPORTED_MODULE_0__.default({
+var locoScroll = new locomotive_scroll__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: document.querySelector('.smooth-locomotive-scroll'),
   smooth: true,
   lerp: .06,
