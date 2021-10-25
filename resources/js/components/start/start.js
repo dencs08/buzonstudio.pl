@@ -109,14 +109,12 @@ let tlIn = new gsap.timeline();
         afterLoad: function (origin, destination, direction) {
             animateIn({ currentIndex: destination.index });
             setTimeout(() => {
-                console.log("enabled")
                 fullpage_api.setAllowScrolling(true);
             }, 400);
         },
         onLeave: function (origin, nextIndex, direction) {
             animateOut({ currentIndex: origin.index, direction });
             setTimeout(() => {
-                console.log("disabled")
                 fullpage_api.setAllowScrolling(false);
             }, 50);
 

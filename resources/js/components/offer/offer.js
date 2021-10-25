@@ -3,9 +3,6 @@ import { gsap } from "gsap";
 
 var preview = document.querySelectorAll('.project-preview');
 
-
-let timer = 0
-
 $(document).ready(function () {
     gsap.set(preview, { width: 0 });
     $(document)
@@ -39,21 +36,27 @@ $(document).on('mousemove', function (e) {
     });
 });
 
-$(".navigation-link-1").hover(function () {
-    $(".project-preview").css({ "background-image": "url(images/portfolio2.png)" });
-});
-$(".navigation-link-2").hover(function () {
-    $(".project-preview").css({ "background-image": "url(images/portfolio1.png)" });
-});
+// $(".navigation-link-1").hover(function () {
+//     $(".project-preview").css({ "background-image": "url(images/portfolio2.png)" });
+// });
+// $(".navigation-link-2").hover(function () {
+//     $(".project-preview").css({ "background-image": "url(images/portfolio1.png)" });
+// });
+// $(".navigation-link-3").hover(function () {
+//     $(".project-preview").css({ "background-image": "url(images/portfolio2.png)" });
+// });
+// $(".navigation-link-4").hover(function () {
+//     $(".project-preview").css({ "background-image": "url(images/portfolio1.png)" });
+// });
 
-$(".navigation-link-3").hover(function () {
-    $(".project-preview").css({ "background-image": "url(images/portfolio2.png)" });
-});
+const projects = document.querySelectorAll(".navigation-link");
+for (let i = 1; i < projects.length + 1; i++) {
+    const project = projects[i];
 
-$(".navigation-link-4").hover(function () {
-    $(".project-preview").css({ "background-image": "url(images/portfolio1.png)" });
-});
-
-
+    $(".navigation-link-" + i).hover(function () {
+        var url = `url(images/portfolio/portfolio${i}.png)`;
+        $(".project-preview").css({ "background-image": url });
+    });
+}
 
 

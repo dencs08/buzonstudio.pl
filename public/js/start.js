@@ -11977,7 +11977,6 @@ var tlIn = new gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline();
         currentIndex: destination.index
       });
       setTimeout(function () {
-        console.log("enabled");
         fullpage_api.setAllowScrolling(true);
       }, 400);
     },
@@ -11987,7 +11986,6 @@ var tlIn = new gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline();
         direction: direction
       });
       setTimeout(function () {
-        console.log("disabled");
         fullpage_api.setAllowScrolling(false);
       }, 50);
     }

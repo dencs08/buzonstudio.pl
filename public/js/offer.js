@@ -22839,7 +22839,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var preview = document.querySelectorAll('.project-preview');
-var timer = 0;
 jquery__WEBPACK_IMPORTED_MODULE_0__(document).ready(function () {
   gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set(preview, {
     width: 0
@@ -22879,27 +22878,34 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mousemove', function (e) {
     },
     delay: 0.03
   });
-});
-jquery__WEBPACK_IMPORTED_MODULE_0__(".navigation-link-1").hover(function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0__(".project-preview").css({
-    "background-image": "url(images/portfolio2.png)"
+}); // $(".navigation-link-1").hover(function () {
+//     $(".project-preview").css({ "background-image": "url(images/portfolio2.png)" });
+// });
+// $(".navigation-link-2").hover(function () {
+//     $(".project-preview").css({ "background-image": "url(images/portfolio1.png)" });
+// });
+// $(".navigation-link-3").hover(function () {
+//     $(".project-preview").css({ "background-image": "url(images/portfolio2.png)" });
+// });
+// $(".navigation-link-4").hover(function () {
+//     $(".project-preview").css({ "background-image": "url(images/portfolio1.png)" });
+// });
+
+var projects = document.querySelectorAll(".navigation-link");
+
+var _loop = function _loop(i) {
+  var project = projects[i];
+  jquery__WEBPACK_IMPORTED_MODULE_0__(".navigation-link-" + i).hover(function () {
+    var url = "url(images/portfolio/portfolio".concat(i, ".png)");
+    jquery__WEBPACK_IMPORTED_MODULE_0__(".project-preview").css({
+      "background-image": url
+    });
   });
-});
-jquery__WEBPACK_IMPORTED_MODULE_0__(".navigation-link-2").hover(function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0__(".project-preview").css({
-    "background-image": "url(images/portfolio1.png)"
-  });
-});
-jquery__WEBPACK_IMPORTED_MODULE_0__(".navigation-link-3").hover(function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0__(".project-preview").css({
-    "background-image": "url(images/portfolio2.png)"
-  });
-});
-jquery__WEBPACK_IMPORTED_MODULE_0__(".navigation-link-4").hover(function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0__(".project-preview").css({
-    "background-image": "url(images/portfolio1.png)"
-  });
-});
+};
+
+for (var i = 1; i < projects.length + 1; i++) {
+  _loop(i);
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
