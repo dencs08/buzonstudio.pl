@@ -19,7 +19,6 @@ window.onload = function () {
   var anchors = document.querySelectorAll('.web_link_transitions');
   var startButton = document.getElementById('start-button');
   var courtainWrapper = document.querySelector(".courtain-wrapper");
-  console.log(sessionStorage.noFirstVisit);
 
   if (!sessionStorage.noFirstVisit) {
     courtainWrapper.style.display = 'flex';
@@ -575,15 +574,11 @@ function init() {
   fragmentTexture.wrapS = three__WEBPACK_IMPORTED_MODULE_11__.RepeatWrapping;
   fragmentTexture.wrapT = three__WEBPACK_IMPORTED_MODULE_11__.RepeatWrapping;
   var iResolutionMultiplierValue;
-  var screenProportions = canvas.width / canvas.height;
 
-  if (screenProportions > 1.7 && canvas.width >= 1921) {
-    //wide
-    iResolutionMultiplierValue = canvas.width / 2000;
-  } else if (screenProportions > 1.7 && canvas.width <= 1920 || canvas.width <= 1920 && canvas.width >= 1024) {
-    iResolutionMultiplierValue = canvas.width / 1000 + 0.25;
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    iResolutionMultiplierValue = canvas.width / 1000 + canvas.width / 1000; // iResolutionMultiplierValue = 5.0;
   } else {
-    iResolutionMultiplierValue = 5.0;
+    iResolutionMultiplierValue = canvas.width / 2000;
   }
 
   uniforms = {
@@ -632,21 +627,28 @@ function init() {
   // })
 
   readyToMove = true;
-}
+} //! get scrolled amount
+// function getDocHeight() {
+//     var D = document;
+//     return Math.max(
+//         D.body.scrollHeight, D.documentElement.scrollHeight,
+//         D.body.offsetHeight, D.documentElement.offsetHeight,
+//         D.body.clientHeight, D.documentElement.clientHeight
+//     )
+// }
+// var pctScrolled, docheight, scrollTop, trackLength, winheight;
+// function amountscrolled() {
+//     var winheight = window.innerHeight || (document.documentElement || document.body).clientHeight
+//     var docheight = getDocHeight()
+//     var scrollTop = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop
+//     var trackLength = docheight - winheight
+//     var pctScrolled = Math.floor(scrollTop / trackLength * 100) // gets percentage scrolled (ie: 80 or NaN if tracklength == 0)
+//     console.log(pctScrolled + '% scrolled')
+// }
+// window.addEventListener("scroll", function () {
+//     amountscrolled()
+// }, false)
 
-function amountscrolled() {
-  var winheight = window.innerHeight || (document.documentElement || document.body).clientHeight;
-  var docheight = getDocHeight();
-  var scrollTop = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop;
-  var trackLength = docheight - winheight;
-  var pctScrolled = Math.floor(scrollTop / trackLength * 100); // gets percentage scrolled (ie: 80 or NaN if tracklength == 0)
-
-  console.log(pctScrolled + '% scrolled');
-}
-
-window.addEventListener("scroll", function () {
-  amountscrolled();
-}, false);
 
 function onPointerMove(event) {
   if (event.isPrimary === false) return;
@@ -716,16 +718,16 @@ function animate(time) {
   if (isFpsReadyToCheck == true && fpsChecked == false) {
     if (sessionStorage.noFirstVisit == "1") {
       isFpsReadyToCheck = false;
-      avgFps = ArrayAvg(fpsArray);
       setTimeout(function () {
         avgFps = ArrayAvg(fpsArray);
         console.log(canvas.width);
         console.log(avgFps);
 
         if (avgFps < 20) {
-          removeShaderWall(); // wallVideoAdd();
+          threeJsDNone(); // scene.remove(wall);
+          // wallVideoAdd();
         }
-      }, 1000);
+      }, 2500);
     }
   }
 
@@ -766,8 +768,8 @@ function wallVideoAdd() {
   console.log("scene wall added");
 }
 
-function removeShaderWall() {
-  scene.remove(wall);
+function threeJsDNone() {
+  canvas.style.display = "none";
 }
 
 function cameraMove(delta) {
@@ -789,71 +791,77 @@ function cameraSetPos() {
   }
 
   cameraPosi++;
-}
+} //pctScrolled
+
+
+var path = location.pathname;
 
 function cameraScrollPos() {
-  switch (startSectionIndex) {
-    case 0:
-      if (cameraPosi % 2 == 0) {
-        cameraTargetPos.position.copy(cameraTargetVector3);
-      } else {
-        cameraTargetPos.position.set(0, 2, -2);
-      }
+  if (path == "/start" || path == "/") {
+    switch (startSectionIndex) {
+      case 0:
+        if (cameraPosi % 2 == 0) {
+          cameraTargetPos.position.copy(cameraTargetVector3);
+        } else {
+          cameraTargetPos.position.set(0, 2, -2);
+        }
 
-      break;
+        break;
 
-    case 1:
-      if (cameraPosi % 2 == 0) {
-        cameraTargetPos.position.set(0, 2, 15);
-      } else {
-        cameraTargetPos.position.set(0, 2, -2);
-      }
+      case 1:
+        if (cameraPosi % 2 == 0) {
+          cameraTargetPos.position.set(0, 2, 15);
+        } else {
+          cameraTargetPos.position.set(0, 2, -2);
+        }
 
-      break;
+        break;
 
-    case 2:
-      if (cameraPosi % 2 == 0) {
-        cameraTargetPos.position.set(0, 2, 30);
-      } else {
-        cameraTargetPos.position.set(0, 2, -2);
-      }
+      case 2:
+        if (cameraPosi % 2 == 0) {
+          cameraTargetPos.position.set(0, 2, 30);
+        } else {
+          cameraTargetPos.position.set(0, 2, -2);
+        }
 
-      break;
+        break;
 
-    case 3:
-      if (cameraPosi % 2 == 0) {
-        cameraTargetPos.position.set(0, 2, 40);
-      } else {
-        cameraTargetPos.position.set(0, 2, -2);
-      }
+      case 3:
+        if (cameraPosi % 2 == 0) {
+          cameraTargetPos.position.set(0, 2, 40);
+        } else {
+          cameraTargetPos.position.set(0, 2, -2);
+        }
 
-      break;
+        break;
 
-    case 4:
-      if (cameraPosi % 2 == 0) {
-        cameraTargetPos.position.set(0, 2, 50);
-      } else {
-        cameraTargetPos.position.set(0, 2, -2);
-      }
+      case 4:
+        if (cameraPosi % 2 == 0) {
+          cameraTargetPos.position.set(0, 2, 50);
+        } else {
+          cameraTargetPos.position.set(0, 2, -2);
+        }
 
-      break;
+        break;
 
-    case 5:
-      if (cameraPosi % 2 == 0) {
-        cameraTargetPos.position.set(0, 2, 60);
-      } else {
-        cameraTargetPos.position.set(0, 2, -2);
-      }
+      case 5:
+        if (cameraPosi % 2 == 0) {
+          cameraTargetPos.position.set(0, 2, 60);
+        } else {
+          cameraTargetPos.position.set(0, 2, -2);
+        }
 
-      break;
+        break;
 
-    case 6:
-      if (cameraPosi % 2 == 0) {
-        cameraTargetPos.position.set(0, 2, 70);
-      } else {
-        cameraTargetPos.position.set(0, 2, -2);
-      }
+      case 6:
+        if (cameraPosi % 2 == 0) {
+          cameraTargetPos.position.set(0, 2, 70);
+        } else {
+          cameraTargetPos.position.set(0, 2, -2);
+        }
 
+    }
+  } else {// console.log(pctScrolled)
   }
 }
 

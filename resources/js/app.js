@@ -10,7 +10,6 @@ window.onload = () => {
     const startButton = document.getElementById('start-button');
     const courtainWrapper = document.querySelector(".courtain-wrapper")
 
-    console.log(sessionStorage.noFirstVisit)
     if (!sessionStorage.noFirstVisit) {
         courtainWrapper.style.display = 'flex';
 

@@ -131,21 +131,8 @@
         justify-content: center;
     }
 
-    img {
-        position: absolute;
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 400px;
-        left: 50%;
-        top: 50%;
-        opacity: 0;
-        // transform: translateY(-50%) translateX(20%);
-        transition: opacity 0.6s;
-    }
-
     .visible {
         opacity: 1;
-        // transform: translateY(-50%) translateX(0%);
     }
 }
 
@@ -186,5 +173,18 @@
 @media (max-width: 1024px) {
     body {
         overflow-y: scroll !important;
+    }
+    .project-preview {
+        width: clamp(150px, 40vh, 300px);
+        height: clamp(100px, 25vh, 200px);
+    }
+}
+
+@media (max-width: $md-screen-size) {
+    body {
+        overflow-y: scroll !important;
+    }
+    .project-preview {
+        display: none;
     }
 }

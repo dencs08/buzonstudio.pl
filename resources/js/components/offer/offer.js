@@ -14,23 +14,27 @@ $(document).on('mousemove', function (e) {
 
 const hoverEl = document.querySelectorAll('.js-hover')
 let imgArray = []
+let hrefArray = []
 let image;
+
 const data = [
-    "url('images/portfolio/portfolio_zielonewidoki_m.png')",
-    "url('images/portfolio/portfolio_komb.png')",
-    "url('images/portfolio/portfolio_castle.png')",
-    "url('images/portfolio/portfolio_watch.png')",
-    "url('images/portfolio/portfolio_danfit_m.png')",
-    "url('images/portfolio/portfolio_ats_m.png')",
+    "images/portfolio/portfolio_castle.png",
+    "images/portfolio/portfolio_watch.png",
+    "images/portfolio/portfolio_danfit_m.png",
+    "images/portfolio/portfolio_komb.png",
+    "images/portfolio/portfolio_zielonewidoki_m.png",
+    "images/portfolio/portfolio_ats_m.png",
 ]
+
+hrefArray = document.querySelectorAll(".navigation-link")
 
 data.forEach((el, i) => {
     image = document.createElement('div')
     document.getElementById("works_images").appendChild(image)
     image.className = "project-preview"
-    image.style.backgroundImage = el
+    image.style.backgroundImage = `url('${el}')`
     imgArray.push(image)
-
+    hrefArray[i].href = el
 })
 
 hoverEl.forEach((el, i) => {

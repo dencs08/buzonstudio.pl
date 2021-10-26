@@ -22850,14 +22850,17 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mousemove', function (e) {
 });
 var hoverEl = document.querySelectorAll('.js-hover');
 var imgArray = [];
+var hrefArray = [];
 var image;
-var data = ["url('images/portfolio/portfolio_zielonewidoki_m.png')", "url('images/portfolio/portfolio_komb.png')", "url('images/portfolio/portfolio_castle.png')", "url('images/portfolio/portfolio_watch.png')", "url('images/portfolio/portfolio_danfit_m.png')", "url('images/portfolio/portfolio_ats_m.png')"];
+var data = ["images/portfolio/portfolio_castle.png", "images/portfolio/portfolio_watch.png", "images/portfolio/portfolio_danfit_m.png", "images/portfolio/portfolio_komb.png", "images/portfolio/portfolio_zielonewidoki_m.png", "images/portfolio/portfolio_ats_m.png"];
+hrefArray = document.querySelectorAll(".navigation-link");
 data.forEach(function (el, i) {
   image = document.createElement('div');
   document.getElementById("works_images").appendChild(image);
   image.className = "project-preview";
-  image.style.backgroundImage = el;
+  image.style.backgroundImage = "url('".concat(el, "')");
   imgArray.push(image);
+  hrefArray[i].href = el;
 });
 hoverEl.forEach(function (el, i) {
   el.addEventListener('mouseover', function () {
