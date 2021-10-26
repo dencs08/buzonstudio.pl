@@ -84,39 +84,34 @@
                         <div class="li-separate"></div>
                         <li data-scroll data-scroll-speed="1" class="navigation-item gs gs_fromLeft">
                             <a class="js-hover navigation-link" href="#">
-                                <span data-text="ATSKONSULTING">ATSKONSULTING</span>
+                                <span data-text="KOMB">KOMB</span>
                             </a>
                         </li>
                         <div class="li-separate"></div>
                         <li data-scroll data-scroll-speed="1.25" class="navigation-item gs gs_fromLeft">
                             <a class="js-hover navigation-link" href="#">
-                                <span data-text="DANFIT">DANFIT</span>
+                                <span data-text="CASTLE3D">CASTLE3D</span>
                             </a>
                         </li>
                         <div class="li-separate"></div>
                         <li data-scroll data-scroll-speed="1.5" class="navigation-item gs gs_fromLeft">
                             <a class="js-hover navigation-link" href="#">
-                                <span data-text="KOMB">KOMB</span>
+                                <span data-text="WATCH3D">WATCH3D</span>
                             </a>
                         </li>
                         <div class="li-separate"></div>
                         <li data-scroll data-scroll-speed="1.75" class="navigation-item gs gs_fromLeft">
                             <a class="js-hover navigation-link" href="#">
-                                <span data-text="TEST">TEST</span>
+                                <span data-text="ATSKONSULTING">ATSKONSULTING</span>
                             </a>
                         </li>
                         <div class="li-separate"></div>
                         <li data-scroll data-scroll-speed="2.0" class="navigation-item gs gs_fromLeft">
                             <a class="js-hover navigation-link" href="#">
-                                <span data-text="TEST">TEST</span>
+                                <span data-text="DANFIT">DANFIT</span>
                             </a>
                         </li>
                         <div class="li-separate"></div>
-                        <li data-scroll data-scroll-speed="2.25" class="navigation-item gs gs_fromLeft">
-                            <a class="js-hover navigation-link" href="#">
-                                <span data-text="TEST">TEST</span>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>

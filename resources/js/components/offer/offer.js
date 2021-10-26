@@ -1,30 +1,6 @@
 import * as $ from 'jquery'
 import { gsap } from "gsap";
 
-var preview = document.querySelectorAll('.project-preview');
-
-// $(document).ready(function () {
-//     gsap.set(preview, { width: 0 });
-//     $(document)
-//         .on("mouseover", ".navigation-item", function (evt) {
-//             gsap.fromTo(preview, { width: "0px", opacity: 0.5 }, {
-//                 duration: 1,
-//                 opacity: 1,
-//                 width: "600px",
-//                 ease: "expo.inOut",
-//             });
-//         })
-//         .on("mouseout", ".navigation-item", function (evt) {
-//             gsap.fromTo(preview, { opacity: 1, width: "600px" }, {
-//                 duration: 0.5,
-//                 opacity: 0,
-//                 width: "0px",
-//                 ease: "expo.inOut",
-//             });
-//             gsap.set(preview, { width: 0, delay: 1 });
-//         });
-// });
-
 $(document).on('mousemove', function (e) {
     gsap.to(".project-preview", {
         duration: 0.5,
@@ -39,13 +15,19 @@ $(document).on('mousemove', function (e) {
 const hoverEl = document.querySelectorAll('.js-hover')
 let imgArray = []
 let image;
-const data = ["url('images/portfolio/portfolio1.png')", "url('images/portfolio/portfolio2.png')", "url('images/portfolio/portfolio1.png')", "url('images/portfolio/portfolio2.png')", "url('images/portfolio/portfolio1.png')", "url('images/portfolio/portfolio2.png')", "url('images/portfolio/portfolio1.png')"]
+const data = [
+    "url('images/portfolio/portfolio_zielonewidoki_m.png')",
+    "url('images/portfolio/portfolio_komb.png')",
+    "url('images/portfolio/portfolio_castle.png')",
+    "url('images/portfolio/portfolio_watch.png')",
+    "url('images/portfolio/portfolio_danfit_m.png')",
+    "url('images/portfolio/portfolio_ats_m.png')",
+]
 
 data.forEach((el, i) => {
     image = document.createElement('div')
     document.getElementById("works_images").appendChild(image)
     image.className = "project-preview"
-    // image.setAttribute('src', el)
     image.style.backgroundImage = el
     imgArray.push(image)
 

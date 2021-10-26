@@ -22838,28 +22838,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
 
 
-var preview = document.querySelectorAll('.project-preview'); // $(document).ready(function () {
-//     gsap.set(preview, { width: 0 });
-//     $(document)
-//         .on("mouseover", ".navigation-item", function (evt) {
-//             gsap.fromTo(preview, { width: "0px", opacity: 0.5 }, {
-//                 duration: 1,
-//                 opacity: 1,
-//                 width: "600px",
-//                 ease: "expo.inOut",
-//             });
-//         })
-//         .on("mouseout", ".navigation-item", function (evt) {
-//             gsap.fromTo(preview, { opacity: 1, width: "600px" }, {
-//                 duration: 0.5,
-//                 opacity: 0,
-//                 width: "0px",
-//                 ease: "expo.inOut",
-//             });
-//             gsap.set(preview, { width: 0, delay: 1 });
-//         });
-// });
-
 jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mousemove', function (e) {
   gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(".project-preview", {
     duration: 0.5,
@@ -22873,12 +22851,11 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mousemove', function (e) {
 var hoverEl = document.querySelectorAll('.js-hover');
 var imgArray = [];
 var image;
-var data = ["url('images/portfolio/portfolio1.png')", "url('images/portfolio/portfolio2.png')", "url('images/portfolio/portfolio1.png')", "url('images/portfolio/portfolio2.png')", "url('images/portfolio/portfolio1.png')", "url('images/portfolio/portfolio2.png')", "url('images/portfolio/portfolio1.png')"];
+var data = ["url('images/portfolio/portfolio_zielonewidoki_m.png')", "url('images/portfolio/portfolio_komb.png')", "url('images/portfolio/portfolio_castle.png')", "url('images/portfolio/portfolio_watch.png')", "url('images/portfolio/portfolio_danfit_m.png')", "url('images/portfolio/portfolio_ats_m.png')"];
 data.forEach(function (el, i) {
   image = document.createElement('div');
   document.getElementById("works_images").appendChild(image);
-  image.className = "project-preview"; // image.setAttribute('src', el)
-
+  image.className = "project-preview";
   image.style.backgroundImage = el;
   imgArray.push(image);
 });
