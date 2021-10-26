@@ -36,9 +36,9 @@
                 <div class="row">
                     <div data-scroll class="col-md-6 d-flex justify-content-center">
                         <div class="col-content1">
-                            <h2 data-scroll-speed="1.5" class="gs gs_fromTop">Produkty cyfrowe</h2>
-                            <p data-scroll-speed="1.25" class="gs gs_fromLeft">Tworzymy i rozwijamy, strony internetowe, aplikacje, wizualizacje, grafiki, projekty UI i UX adekwatnie pod Twoje potrzeby, tak abyś otrzymał najlepiej dostosowany produkt który działa. </p>
-                            <ul data-scroll-speed="1.1" class="gs gs_fromFadeIn">
+                            <h2 data-scroll data-scroll-speed="1.5" class="gs gs_fromTop">Produkty cyfrowe</h2>
+                            <p data-scroll data-scroll-speed="1.25" class="gs gs_fromLeft">Tworzymy i rozwijamy, strony internetowe, aplikacje, wizualizacje, grafiki, projekty UI i UX adekwatnie pod Twoje potrzeby, tak abyś otrzymał najlepiej dostosowany produkt który działa. </p>
+                            <ul data-scroll data-scroll-speed="1.1" class="gs gs_fromFadeIn">
                                 <li>Strony internetowe</li>
                                 <li>E-commerce</li>
                                 <li>UI / UX </li>
@@ -52,9 +52,9 @@
                     </div>
                     <div data-scroll class="col-md-6 d-flex justify-content-center">
                         <div class="col-content2">
-                            <h2 data-scroll-speed="1.5" class="gs gs_fromTop">Branding</h2>
-                            <p data-scroll-speed="1.25" class="gs gs_fromLeft">Dziś branding jest najważniejszym elementem każdego dobrze prosperującego biznesu, łatwe do zapamiętania logo, charakterystyczna identyfikacja wizualna czy dobrze obrana strategia marketingowa, to wszystko ma znaczenie w jaki sposób odbierze Ciebie przyszły klient.</p>
-                            <ul data-scroll-speed="1.1" class="gs gs_fromFadeIn">
+                            <h2 data-scroll data-scroll-speed="1.5" class="gs gs_fromTop">Branding</h2>
+                            <p data-scroll data-scroll-speed="1.25" class="gs gs_fromLeft">Dziś branding jest najważniejszym elementem każdego dobrze prosperującego biznesu, łatwe do zapamiętania logo, charakterystyczna identyfikacja wizualna czy dobrze obrana strategia marketingowa, to wszystko ma znaczenie w jaki sposób odbierze Ciebie przyszły klient.</p>
+                            <ul data-scroll data-scroll-speed="1.1" class="gs gs_fromFadeIn">
                                 <li>Nazewnictwo</li>
                                 <li>Identyfikacja wizualna</li>
                                 <li>Logotypy</li>
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-
+                <div id="liquid"></div>
                     <a data-scroll-speed="1.5" href="kontakt" class="contact-us underline gs gs_fromLeft">Napisz do nas i stwórzmy coś razem.</a>
             </div>
         </section>
@@ -75,28 +75,46 @@
             <div class="project-preview d-sm-block d-none"></div>
             <div class="navigation-wrapper">
                 <div class="project-overlay"></div>
-                    <ul class="navigation-list">
-                        <li class="navigation-item gs gs_fromLeft">
-                            <a class="navigation-link navigation-link-1" href="#">
-                            <span data-text="ZIELONEWIDOKI">ZIELONEWIDOKI</span>
+                    <ul id="works_images" class="navigation-list">
+                        <li data-scroll data-scroll-speed="0.75" class="navigation-item gs gs_fromLeft">
+                            <a class="js-hover navigation-link" href="#">
+                                <span data-text="ZIELONEWIDOKI">ZIELONEWIDOKI</span>
                             </a>
                         </li>
                         <div class="li-separate"></div>
-                        <li class="navigation-item gs gs_fromLeft">
-                            <a class="navigation-link navigation-link-2" href="#">
-                            <span data-text="ATSKONSULTING">ATSKONSULTING</span>
+                        <li data-scroll data-scroll-speed="1" class="navigation-item gs gs_fromLeft">
+                            <a class="js-hover navigation-link" href="#">
+                                <span data-text="ATSKONSULTING">ATSKONSULTING</span>
                             </a>
                         </li>
                         <div class="li-separate"></div>
-                        <li class="navigation-item gs gs_fromLeft">
-                            <a class="navigation-link navigation-link-3" href="#">
+                        <li data-scroll data-scroll-speed="1.25" class="navigation-item gs gs_fromLeft">
+                            <a class="js-hover navigation-link" href="#">
                                 <span data-text="DANFIT">DANFIT</span>
                             </a>
                         </li>
                         <div class="li-separate"></div>
-                        <li class="navigation-item gs gs_fromLeft">
-                            <a class="navigation-link navigation-link-4" href="#">
+                        <li data-scroll data-scroll-speed="1.5" class="navigation-item gs gs_fromLeft">
+                            <a class="js-hover navigation-link" href="#">
                                 <span data-text="KOMB">KOMB</span>
+                            </a>
+                        </li>
+                        <div class="li-separate"></div>
+                        <li data-scroll data-scroll-speed="1.75" class="navigation-item gs gs_fromLeft">
+                            <a class="js-hover navigation-link" href="#">
+                                <span data-text="TEST">TEST</span>
+                            </a>
+                        </li>
+                        <div class="li-separate"></div>
+                        <li data-scroll data-scroll-speed="2.0" class="navigation-item gs gs_fromLeft">
+                            <a class="js-hover navigation-link" href="#">
+                                <span data-text="TEST">TEST</span>
+                            </a>
+                        </li>
+                        <div class="li-separate"></div>
+                        <li data-scroll data-scroll-speed="2.25" class="navigation-item gs gs_fromLeft">
+                            <a class="js-hover navigation-link" href="#">
+                                <span data-text="TEST">TEST</span>
                             </a>
                         </li>
                     </ul>

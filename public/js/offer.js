@@ -22838,37 +22838,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
 
 
-var preview = document.querySelectorAll('.project-preview');
-jquery__WEBPACK_IMPORTED_MODULE_0__(document).ready(function () {
-  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set(preview, {
-    width: 0
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on("mouseover", ".navigation-item", function (evt) {
-    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.fromTo(preview, {
-      width: "0px",
-      opacity: 0.5
-    }, {
-      duration: 1,
-      opacity: 1,
-      width: "600px",
-      ease: "expo.inOut"
-    });
-  }).on("mouseout", ".navigation-item", function (evt) {
-    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.fromTo(preview, {
-      opacity: 1,
-      width: "600px"
-    }, {
-      duration: 0.5,
-      opacity: 0,
-      width: "0px",
-      ease: "expo.inOut"
-    });
-    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set(preview, {
-      width: 0,
-      delay: 1
-    });
-  });
-});
+var preview = document.querySelectorAll('.project-preview'); // $(document).ready(function () {
+//     gsap.set(preview, { width: 0 });
+//     $(document)
+//         .on("mouseover", ".navigation-item", function (evt) {
+//             gsap.fromTo(preview, { width: "0px", opacity: 0.5 }, {
+//                 duration: 1,
+//                 opacity: 1,
+//                 width: "600px",
+//                 ease: "expo.inOut",
+//             });
+//         })
+//         .on("mouseout", ".navigation-item", function (evt) {
+//             gsap.fromTo(preview, { opacity: 1, width: "600px" }, {
+//                 duration: 0.5,
+//                 opacity: 0,
+//                 width: "0px",
+//                 ease: "expo.inOut",
+//             });
+//             gsap.set(preview, { width: 0, delay: 1 });
+//         });
+// });
+
 jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mousemove', function (e) {
   gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(".project-preview", {
     duration: 0.5,
@@ -22879,21 +22870,40 @@ jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mousemove', function (e) {
     delay: 0.03
   });
 });
-var projects = document.querySelectorAll(".navigation-link");
+var hoverEl = document.querySelectorAll('.js-hover');
+var imgArray = [];
+var image;
+var data = ["url('images/portfolio/portfolio1.png')", "url('images/portfolio/portfolio2.png')", "url('images/portfolio/portfolio1.png')", "url('images/portfolio/portfolio2.png')", "url('images/portfolio/portfolio1.png')", "url('images/portfolio/portfolio2.png')", "url('images/portfolio/portfolio1.png')"];
+data.forEach(function (el, i) {
+  image = document.createElement('div');
+  document.getElementById("works_images").appendChild(image);
+  image.className = "project-preview"; // image.setAttribute('src', el)
 
-var _loop = function _loop(i) {
-  var project = projects[i];
-  jquery__WEBPACK_IMPORTED_MODULE_0__(".navigation-link-" + i).hover(function () {
-    var url = "url(images/portfolio/portfolio".concat(i, ".png)");
-    jquery__WEBPACK_IMPORTED_MODULE_0__(".project-preview").css({
-      "background-image": url
+  image.style.backgroundImage = el;
+  imgArray.push(image);
+});
+hoverEl.forEach(function (el, i) {
+  el.addEventListener('mouseover', function () {
+    imgArray[i].classList.add('visible');
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.fromTo(imgArray[i], {
+      width: "0px"
+    }, {
+      duration: 1,
+      width: "600px",
+      ease: "expo.inOut"
     });
   });
-};
-
-for (var i = 1; i < projects.length + 1; i++) {
-  _loop(i);
-}
+  el.addEventListener('mouseleave', function () {
+    imgArray[i].classList.remove('visible');
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.fromTo(imgArray[i], {
+      width: "600px"
+    }, {
+      duration: 0.5,
+      width: "0px",
+      ease: "expo.inOut"
+    });
+  });
+});
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.

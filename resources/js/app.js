@@ -65,8 +65,6 @@ window.onload = () => {
                 } else {
                     let target = e.target.href;
 
-                    console.log(target)
-
                     e.preventDefault();
                     courtainAnimExit()
 

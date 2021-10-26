@@ -68,7 +68,6 @@ window.onload = function () {
           }, 500);
         } else {
           var target = e.target.href;
-          console.log(target);
           e.preventDefault();
           courtainAnimExit();
           setTimeout(function () {

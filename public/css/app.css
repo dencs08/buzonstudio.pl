@@ -6476,6 +6476,7 @@ html.has-scroll-dragging {
 
 .arrow-right-icon {
   fill: #00ff80;
+  pointer-events: none;
 }
 
 .text-alert {
