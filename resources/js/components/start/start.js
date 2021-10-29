@@ -111,7 +111,7 @@ let tlIn = new gsap.timeline();
             setTimeout(() => {
                 fullpage_api.setAllowScrolling(true);
                 fullpage_api.setKeyboardScrolling(true);
-            }, 500);
+            }, 600);
             startSectionIndex = destination.index
         },
         onLeave: function (origin, destination, nextIndex, direction) {

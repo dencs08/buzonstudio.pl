@@ -26,6 +26,8 @@ Route::get('polityka_prywatnosci', function () {
 Route::get('/kontakt', [App\Http\Controllers\EmailController::class, 'create']);
 Route::post('/kontaktsent', [App\Http\Controllers\EmailController::class, 'sendEmail'])->name('send.email');
 
+
+
 // Route::get('test', function () {
 //     return view('test');
 // });

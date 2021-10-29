@@ -40,6 +40,7 @@ mix.js([
     .sass('resources/sass/components/offer.scss', 'public/css')
     .sass('resources/sass/components/testimonials.scss', 'public/css')
     .sass('resources/sass/components/privacy.scss', 'public/css')
+    .sass('resources/sass/components/email.scss', 'public/css')
     .sass('resources/sass/components/contact.scss', 'public/css');
 
 mix.browserSync('127.0.0.1:8000');
