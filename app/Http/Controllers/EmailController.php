@@ -25,12 +25,22 @@ class EmailController extends Controller
           'name' => $request->name,
           'email' => $request->email,
           'content' => $request->content,
-          'controlInfo' => $request->controlInfo
+          'controlInfo' => $request->controlInfo,
+          'logo' => asset('images/logos/logo_black.svg')
         ];
 
         Mail::send('email-template', $data, function($message) use ($data) {
           $message->to("biuro@bisonstudio.pl")
-          ->subject("Nowa wiadomość ze strony bisonstudio");
+          ->subject("Nowa wiadomość ze strony bisonstudio")
+          ->from("biuro@bisonstudio.pl", "Bisonstudio")
+          ->sender("biuro@bisonstudio.pl", "Bisonstudio");
+        });
+
+        Mail::send('email-template-user-confirm', $data, function($message) use ($data) {
+          $message->to($data['email'])
+          ->subject("Dziękujemy za kontakt!")
+          ->from("biuro@bisonstudio.pl", "Bisonstudio")
+          ->sender("biuro@bisonstudio.pl", "Bisonstudio");
         });
 
         return view('email-sent');

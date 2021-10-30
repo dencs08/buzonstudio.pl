@@ -9,34 +9,33 @@
             @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&");
 
             h1 {
-                font-size: 2rem;
-
+                font-size: clamp(1.5rem,2.5vw,2rem);
                 color: #111111;
             }
 
             h2 {
-                font-size: 1.5rem;
-
-                color: #111111;
+                font-size: clamp(1.25rem,2.25vw,1.5rem);
+                color: #222222;
             }
 
             h3 {
-                font-size: 1.25rem;
-
-                color: #111111;
+                font-size: clamp(1rem,2.1vw,1.25rem);
+                color: #333333;
             }
 
             p {
-                font-size: 0.9rem;
+                font-size: clamp(0.75rem,1.5vw,0.9rem);
+                color: #444444;
+            }
 
-                color: #111111;
+            span{
+                font-size: clamp(0.75rem,1.5vw,0.9rem);
+                color: #444444;
             }
 
             .container {
                 margin: auto;
                 width: 90%;
-
-                background-color: aliceblue;
             }
 
             .center {
@@ -51,9 +50,12 @@
             .font-bold {
                 font-weight: 600;
             }
+            .font-light{
+                font-weight: 400;
+            }
 
             .card {
-                background-color: #fafafa;
+                background-color: #fdfdfd;
                 padding: 40px;
                 border: 1px #ececec solid;
                 border-radius: 5px;
@@ -63,7 +65,7 @@
                 margin-bottom: 25px;
 
                 height: 200px;
-                width: 30vw;
+                width: clamp(100px, 27.5vw, 800px);
 
                 text-align: center;
             }
@@ -73,7 +75,7 @@
 
                 display: block;
 
-                width: 60vw;
+                width: clamp(200px, 60vw, 1600px);
             }
 
             .li_item {
@@ -87,7 +89,6 @@
             .row {
                 margin: auto;
                 display: inline-block;
-
             }
 
         </style>
@@ -108,13 +109,12 @@
                     </div>
                     
                     <div class="card">
-                        <h2>Podane infromacje:</h2>
+                        <h3>Podane infromacje:</h2>
                         <div class="info">
-                            <span class="font-bold">Imię: </span> {!! $name !!}
+                            <span class="font-bold">Imię: </span> <span class="font-light">{!! $name !!}</span>
                         </div>
                         <div class="info">
-                            <span class="font-bold">Email: </span> {!! $email
-                                !!}
+                            <span class="font-bold">Email: </span> <span class="font-light">{!! $email !!}</span>
                             </div>
                         </div>
                     </div>

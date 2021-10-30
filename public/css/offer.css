@@ -93,7 +93,7 @@
   position: relative;
 }
 #works .navigation-wrapper ul .li-separate {
-  height: 30px;
+  margin-bottom: 30px;
 }
 #works .navigation-wrapper a {
   font-family: "Scheherazade New", serif;
