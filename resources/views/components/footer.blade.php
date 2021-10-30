@@ -2,44 +2,44 @@
 <!-- Footer -->
 <section data-scroll-section id="footer" class="section seventh">
     
-         <!-- Clients section -->
+        <!-- Clients section -->
 
-         <section id="clients">
+        <section id="clients">
             <div class="container clients-content">
                 <h4  class="lh-sm mb-2 anim-stagger6 gs gs_fromTop">Oni juz nam zaufali:</h4>
                 <div style="text-align:center;"> <div></div>
                 <div class="client-logos anim-stagger6 gs gs_fromBotom">
                     <div align="center" class="client-logo">
                         <img
-                            src="images/logos/danfit.svg"
+                            src="{{asset('images/logos/danfit.svg')}}"
                             alt=""
                             class="client-logo-svg"
                         />
                     </div>
                     <div align="center" class="client-logo">
                         <img
-                            src="images/logos/komb.svg"
+                            src="{{asset('images/logos/komb.svg')}}"
                             alt=""
                             class="client-logo-svg"
                         />
                     </div>
                     <div align="center" class="client-logo">
                         <img
-                            src="images/logos/logo_white-cropped.svg"
+                            src="{{asset('images/logos/logo_white-cropped.svg')}}"
                             alt=""
                             class="client-logo-svg"
                         />
                     </div>
                     <div align="center" class="client-logo">
                         <img
-                            src="images/logos/zielonewidoki.svg"
+                            src="{{asset('images/logos/zielonewidoki.svg')}}"
                             alt=""
                             class="client-logo-svg"
                         />
                     </div>
                     <div align="center" class="client-logo">
                         <img
-                            src="images/logos/ats.svg"
+                            src="{{asset('images/logos/ats.svg')}}"
                             alt=""
                             class="client-logo-svg"
                         />

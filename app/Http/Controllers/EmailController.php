@@ -26,7 +26,7 @@ class EmailController extends Controller
           'email' => $request->email,
           'content' => $request->content,
           'controlInfo' => $request->controlInfo,
-          'logo' => asset('images/logos/logo_black.svg')
+          // 'logo' => asset('images/logos/logo_black.svg')
         ];
 
         Mail::send('email-template', $data, function($message) use ($data) {

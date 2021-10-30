@@ -91,11 +91,23 @@
             font-weight: 300;
             text-decoration: none;
             color: rgba(255, 255, 255, 0.3);
+
+            &:hover {
+                span {
+                    mix-blend-mode: difference;
+                }
+
+                span:before {
+                    width: 100%;
+                }
+            }
         }
 
         span {
             position: relative;
             display: block;
+
+            pointer-events: none;
         }
     }
 

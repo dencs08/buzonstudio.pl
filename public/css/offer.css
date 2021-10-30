@@ -103,9 +103,16 @@
   text-decoration: none;
   color: rgba(255, 255, 255, 0.3);
 }
+#works .navigation-wrapper a:hover span {
+  mix-blend-mode: difference;
+}
+#works .navigation-wrapper a:hover span:before {
+  width: 100%;
+}
 #works .navigation-wrapper span {
   position: relative;
   display: block;
+  pointer-events: none;
 }
 #works .navigation-item {
   display: block;

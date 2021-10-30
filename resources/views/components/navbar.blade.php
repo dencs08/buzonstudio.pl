@@ -9,7 +9,7 @@
     <div id="nav-wrapper" class="wrapper">
         <div class="nav-container container">
             <div id="nav-content-outlined">
-                <img src="images/logos/logo_white.svg" class="img-nav" alt="" />
+                <img src="{{asset('images/logos/logo_white.svg')}}" class="img-nav" alt="" />
             </div>
 
             <div id="scaled-content" class="nav-main-content">
@@ -25,23 +25,23 @@
                         <ul id="nav-ul">
                             <li class="nav-li">
                                 <span class="nav-number">01</span
-                                ><a href="start" class="nav-item web_link web_link_active web_link_transitions">Start</a>
+                                ><a href="/start" class="nav-item web_link web_link_active web_link_transitions">Start</a>
                             </li>
                             <li class="nav-li">
                                 <span class="nav-number">02</span
-                                ><a href="oferta" class="nav-item web_link web_link_active web_link_transitions">Oferta</a>
+                                ><a href="/oferta" class="nav-item web_link web_link_active web_link_transitions">Oferta</a>
                             </li>
                             <li class="nav-li">
                                 <span class="nav-number">03</span
-                                ><a href="oferta#prace" class="nav-item web_link web_link_transitions">Portfolio</a>
+                                ><a href="/oferta#prace" class="nav-item web_link web_link_transitions">Portfolio</a>
                             </li>
                             <li class="nav-li">
                                 <span class="nav-number">04</span
-                                ><a href="kontakt" class="nav-item web_link web_link_active web_link_transitions">Kontakt</a>
+                                ><a href="/kontakt" class="nav-item web_link web_link_active web_link_transitions">Kontakt</a>
                             </li>
                             <li class="nav-li">
                                 <span class="nav-number">05</span
-                                ><a href="opinie" class="nav-item web_link web_link_active web_link_transitions">Opinie</a>
+                                ><a href="/opinie" class="nav-item web_link web_link_active web_link_transitions">Opinie</a>
                             </li>
                         </ul>
                     </div>

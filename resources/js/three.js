@@ -225,7 +225,12 @@ function init() {
     // ground.rotation.x = -1.571
     // ground.rotation.z = 3.141
 
-    fragmentTexture = textureLoader.load('3d/textures/shader/shader1.png');
+    var texturesPath = "3d/textures/shader/shader1.png";
+    if (window.location.href.indexOf("portfolio") != -1) {
+        fragmentTexture = textureLoader.load("/" + texturesPath);
+    } else {
+        fragmentTexture = textureLoader.load(texturesPath);
+    }
     fragmentTexture.minFilter = THREE.NearestFilter;
     fragmentTexture.magFilter = THREE.NearestFilter;
     fragmentTexture.wrapS = THREE.RepeatWrapping;
@@ -603,11 +608,15 @@ function fragmentShaderPlasma2() {
         }
 
         void mainImage(out vec4 fragColor, in vec2 fragCoord) {
-        roots[0] = vec2(cos(0.6*iTime), sin(0.3*iTime));
-        roots[1] = vec2(cos(0.4*iTime), sin(0.25*iTime));
-        roots[2] = vec2(cos(0.1*iTime), sin(0.05*iTime));
-        roots[3] = vec2(cos(0.1*iTime), sin(0.15*iTime));
-        roots[4] = vec2(cos(0.3*iTime), sin(0.2*iTime));
+        vec2 mo = iMouse.xy / iResolution.xy-.5;
+        mo = (mo==vec2(-.5))?mo=vec2(-0.1,0.1):mo;
+	    mo.x *= iResolution.x/iResolution.y;
+
+        roots[0] = vec2(cos(0.6*iTime), sin(0.3*iTime) + (mo.x * 0.5));
+        roots[1] = vec2(cos(0.4*iTime), sin(0.25*iTime) + (mo.y * 0.5));
+        roots[2] = vec2(cos(0.1*iTime), sin(0.05*iTime) + (mo.x * 0.5));
+        roots[3] = vec2(cos(0.1*iTime), sin(0.15*iTime) + (mo.y * 0.5));
+        roots[4] = vec2(cos(0.3*iTime), sin(0.2*iTime) + (mo.x * 0.5));
         vec2 u0 = iResolutionMultiplier*(fragCoord-iResolution.xy/2.0)/min(iResolution.x, iResolution.y);
         vec2 u = u0;
         for(int i = 0; i < 3; i++) {

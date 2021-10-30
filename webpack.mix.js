@@ -35,12 +35,16 @@ mix.js([
         'resources/js/components/privacy/privacy.js',
         'resources/js/locomotive-scroll.js',
     ], 'public/js/privacy.js').version()
+    .js([
+        'resources/js/components/portfolio/portfolio.js',
+        'resources/js/locomotive-scroll.js',
+    ], 'public/js/portfolio.js').version()
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/components/start.scss', 'public/css')
     .sass('resources/sass/components/offer.scss', 'public/css')
     .sass('resources/sass/components/testimonials.scss', 'public/css')
     .sass('resources/sass/components/privacy.scss', 'public/css')
-    .sass('resources/sass/components/email.scss', 'public/css')
+    .sass('resources/sass/components/portfolio.scss', 'public/css')
     .sass('resources/sass/components/contact.scss', 'public/css');
 
 mix.browserSync('127.0.0.1:8000');

@@ -1,0 +1,21 @@
+#landing-content {
+  margin-top: 250px;
+}
+
+h1 {
+  margin-bottom: -150px;
+  z-index: 1;
+}
+
+.img-wrapper {
+  display: grid;
+  place-items: center;
+}
+.img-wrapper .img_landing {
+  z-index: -1;
+  width: 90%;
+}
+
+.scroll-blocker {
+  margin-top: 250px;
+}

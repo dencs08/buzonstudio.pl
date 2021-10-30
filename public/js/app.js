@@ -568,7 +568,14 @@ function init() {
   // ground.rotation.x = -1.571
   // ground.rotation.z = 3.141
 
-  fragmentTexture = textureLoader.load('3d/textures/shader/shader1.png');
+  var texturesPath = "3d/textures/shader/shader1.png";
+
+  if (window.location.href.indexOf("portfolio") != -1) {
+    fragmentTexture = textureLoader.load("/" + texturesPath);
+  } else {
+    fragmentTexture = textureLoader.load(texturesPath);
+  }
+
   fragmentTexture.minFilter = three__WEBPACK_IMPORTED_MODULE_11__.NearestFilter;
   fragmentTexture.magFilter = three__WEBPACK_IMPORTED_MODULE_11__.NearestFilter;
   fragmentTexture.wrapS = three__WEBPACK_IMPORTED_MODULE_11__.RepeatWrapping;
@@ -872,7 +879,7 @@ function vertexShader() {
 }
 
 function fragmentShaderPlasma2() {
-  return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n    uniform vec4 iMouse;\n    uniform float iResolutionMultiplier;\n\n    const int deg = 5;\n    vec2 roots[deg];\n\n    vec2 mul(vec2 a, vec2 b) {\n        return vec2(\n            a.x*b.x - a.y*b.y,\n            a.x*b.y + a.y*b.y\n        );\n    }\n\n    vec2 div(vec2 a, vec2 b) {\n        return mul(a, vec2(b.x, -b.y))/(b.x*b.x+b.y*b.y);\n    }\n\n    vec2 inv(vec2 a) {\n        return vec2(a.x, -a.y) / (a.x*a.x + a.y*a.y);\n    }\n\n    vec2 f(vec2 a) {\n        vec2 ret = vec2(1.0, 0.0);\n        for (int i = 0; i < deg; i++) {\n            ret = mul(ret, a-roots[i]);\n        }\n        return ret;\n    }\n\n    vec2 fp(vec2 a) {\n        vec2 sum = vec2(0.0, 0.0);\n        for (int i = 0; i < deg; i++) {\n            sum += inv(a-roots[i]);\n        }\n        return inv(sum);\n    }\n\n    vec4 col(vec2 a) {\n        return vec4(\n            0.75/(1.5+abs(a.x)),\n            0.75/(1.5+abs(a.y)),\n            0.75/(1.25+0.01*abs(a.y)),\n            0.75\n            );\n        }\n\n        void mainImage(out vec4 fragColor, in vec2 fragCoord) {\n        roots[0] = vec2(cos(0.6*iTime), sin(0.3*iTime));\n        roots[1] = vec2(cos(0.4*iTime), sin(0.25*iTime));\n        roots[2] = vec2(cos(0.1*iTime), sin(0.05*iTime));\n        roots[3] = vec2(cos(0.1*iTime), sin(0.15*iTime));\n        roots[4] = vec2(cos(0.3*iTime), sin(0.2*iTime));\n        vec2 u0 = iResolutionMultiplier*(fragCoord-iResolution.xy/2.0)/min(iResolution.x, iResolution.y);\n        vec2 u = u0;\n        for(int i = 0; i < 3; i++) {\n            u -= div(f(u), fp(u));\n        }\n        fragColor = col(u);\n    }\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n";
+  return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n    uniform vec4 iMouse;\n    uniform float iResolutionMultiplier;\n\n    const int deg = 5;\n    vec2 roots[deg];\n\n    vec2 mul(vec2 a, vec2 b) {\n        return vec2(\n            a.x*b.x - a.y*b.y,\n            a.x*b.y + a.y*b.y\n        );\n    }\n\n    vec2 div(vec2 a, vec2 b) {\n        return mul(a, vec2(b.x, -b.y))/(b.x*b.x+b.y*b.y);\n    }\n\n    vec2 inv(vec2 a) {\n        return vec2(a.x, -a.y) / (a.x*a.x + a.y*a.y);\n    }\n\n    vec2 f(vec2 a) {\n        vec2 ret = vec2(1.0, 0.0);\n        for (int i = 0; i < deg; i++) {\n            ret = mul(ret, a-roots[i]);\n        }\n        return ret;\n    }\n\n    vec2 fp(vec2 a) {\n        vec2 sum = vec2(0.0, 0.0);\n        for (int i = 0; i < deg; i++) {\n            sum += inv(a-roots[i]);\n        }\n        return inv(sum);\n    }\n\n    vec4 col(vec2 a) {\n        return vec4(\n            0.75/(1.5+abs(a.x)),\n            0.75/(1.5+abs(a.y)),\n            0.75/(1.25+0.01*abs(a.y)),\n            0.75\n            );\n        }\n\n        void mainImage(out vec4 fragColor, in vec2 fragCoord) {\n        vec2 mo = iMouse.xy / iResolution.xy-.5;\n        mo = (mo==vec2(-.5))?mo=vec2(-0.1,0.1):mo;\n\t    mo.x *= iResolution.x/iResolution.y;\n\n        roots[0] = vec2(cos(0.6*iTime), sin(0.3*iTime) + (mo.x * 0.5));\n        roots[1] = vec2(cos(0.4*iTime), sin(0.25*iTime) + (mo.y * 0.5));\n        roots[2] = vec2(cos(0.1*iTime), sin(0.05*iTime) + (mo.x * 0.5));\n        roots[3] = vec2(cos(0.1*iTime), sin(0.15*iTime) + (mo.y * 0.5));\n        roots[4] = vec2(cos(0.3*iTime), sin(0.2*iTime) + (mo.x * 0.5));\n        vec2 u0 = iResolutionMultiplier*(fragCoord-iResolution.xy/2.0)/min(iResolution.x, iResolution.y);\n        vec2 u = u0;\n        for(int i = 0; i < 3; i++) {\n            u -= div(f(u), fp(u));\n        }\n        fragColor = col(u);\n    }\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n";
 }
 
 function fragmentShaderTunnel1() {
@@ -34475,10 +34482,10 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ "./resources/sass/components/email.scss":
-/*!**********************************************!*\
-  !*** ./resources/sass/components/email.scss ***!
-  \**********************************************/
+/***/ "./resources/sass/components/portfolio.scss":
+/*!**************************************************!*\
+  !*** ./resources/sass/components/portfolio.scss ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -96055,7 +96062,7 @@ const LuminosityHighPassShader = {
 /******/ 			"css/offer": 0,
 /******/ 			"css/start": 0,
 /******/ 			"css/contact": 0,
-/******/ 			"css/email": 0
+/******/ 			"css/portfolio": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -96105,17 +96112,17 @@ const LuminosityHighPassShader = {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/email"], () => (__webpack_require__("./resources/js/gsapAnims.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/email"], () => (__webpack_require__("./resources/js/navbar.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/email"], () => (__webpack_require__("./resources/js/three.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/email"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/email"], () => (__webpack_require__("./resources/sass/app.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/email"], () => (__webpack_require__("./resources/sass/components/start.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/email"], () => (__webpack_require__("./resources/sass/components/offer.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/email"], () => (__webpack_require__("./resources/sass/components/testimonials.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/email"], () => (__webpack_require__("./resources/sass/components/privacy.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/email"], () => (__webpack_require__("./resources/sass/components/email.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/email"], () => (__webpack_require__("./resources/sass/components/contact.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/portfolio"], () => (__webpack_require__("./resources/js/gsapAnims.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/portfolio"], () => (__webpack_require__("./resources/js/navbar.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/portfolio"], () => (__webpack_require__("./resources/js/three.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/portfolio"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/portfolio"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/portfolio"], () => (__webpack_require__("./resources/sass/components/start.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/portfolio"], () => (__webpack_require__("./resources/sass/components/offer.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/portfolio"], () => (__webpack_require__("./resources/sass/components/testimonials.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/portfolio"], () => (__webpack_require__("./resources/sass/components/privacy.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/portfolio"], () => (__webpack_require__("./resources/sass/components/portfolio.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","css/privacy","css/testimonials","css/offer","css/start","css/contact","css/portfolio"], () => (__webpack_require__("./resources/sass/components/contact.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

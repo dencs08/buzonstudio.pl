@@ -17,6 +17,8 @@ let imgArray = []
 let hrefArray = []
 let image;
 
+
+
 const data = [
     "images/portfolio/portfolio_castle.png",
     "images/portfolio/portfolio_watch.png",
@@ -26,15 +28,25 @@ const data = [
     "images/portfolio/portfolio_ats_m.png",
 ]
 
+const url = "images/portfolio/";
+const objectToArray = portfolios => {
+    const keys = Object.keys(portfolios);
+    const res = [];
+    for (let i = 0; i < keys.length; i++) {
+        res.push(portfolios[keys[i]]);
+    };
+    return res;
+};
+const portfoliosArr = (objectToArray(portfolios));
+
 hrefArray = document.querySelectorAll(".navigation-link")
 
-data.forEach((el, i) => {
+portfoliosArr.forEach((el, i) => {
     image = document.createElement('div')
     document.getElementById("works_images").appendChild(image)
     image.className = "project-preview"
-    image.style.backgroundImage = `url('${el}')`
+    image.style.backgroundImage = `url('${url}${el}_portfolio.png')`
     imgArray.push(image)
-    hrefArray[i].href = el
 })
 
 hoverEl.forEach((el, i) => {

@@ -341,23 +341,23 @@ body {
 }
 
 .portfolio-item1 {
-  background-image: url("/images/portfolio/portfolio_castle.png");
+  background-image: url("/images/portfolio/castle3d_portfolio.png");
 }
 
 .portfolio-item2 {
-  background-image: url("/images/portfolio/portfolio_komb.png");
+  background-image: url("/images/portfolio/watch3d_portfolio.png");
 }
 
 .portfolio-item3 {
-  background-image: url("/images/portfolio/portfolio_watch.png");
+  background-image: url("/images/portfolio/danfit_portfolio.png");
 }
 
 .portfolio-item4 {
-  background-image: url("/images/portfolio/portfolio_danfit_m.png");
+  background-image: url("/images/portfolio/komb_portfolio.png");
 }
 
 .portfolio-item5 {
-  background-image: url("/images/portfolio/portfolio_zielonewidoki_m.png");
+  background-image: url("/images/portfolio/zielonewidoki_portfolio.png");
 }
 
 #clients {
