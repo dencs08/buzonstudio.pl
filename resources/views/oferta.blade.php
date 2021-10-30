@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="shortcut icon" href="images/logos/logo_white-cropped.svg" />
+        <link rel="shortcut icon" href="{{asset('images/logos/logo_white.svg')}}" />
         <link rel="stylesheet" href="css/app.css" />
         <link rel="stylesheet" href="css/offer.css" />
 
@@ -76,9 +76,12 @@
             <div class="navigation-wrapper">
                 <div class="project-overlay"></div>
                     <ul id="works_images" class="navigation-list">
+                    @php
+                    $i = 1;
+                    @endphp
 
                     @foreach($portfolios as $id)
-                    <li data-scroll data-scroll-speed="1" class="navigation-item gs gs_fromLeft li-separate">
+                    <li data-scroll data-scroll-speed="{{$i++ / 3}}" class="navigation-item gs gs_fromLeft li-separate">
                         <a class="js-hover navigation-link web_link_transitions" href="portfolio/{{ $id }}">
                             <span data-text="{{ $id }}" class="text-uppercase">{{ $id }}</span>
                         </a>
