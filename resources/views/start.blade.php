@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="pl">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="W bisonstudio zajmujemy się, tworzeniem stron i sklepów internetowych, wizualizacji aplikacji czy brandingu, mówiąc prościej, jesteśmy rozwiązaniem All-In-One i kompleksowo realizujemy zlecenia od A do Z.">
-        <link rel="canonical" href="https://bisonstudio.pl/start"/>
+        <meta name="description" content="W bisonstudio zajmujemy się, tworzeniem stron i sklepów internetowych, wizualizacji aplikacji czy brandingu, zlecenia realizujemy od A do Z">
+        <link rel="canonical" href="https://bisonstudio.pl/"/>
         <link rel="shortcut icon" href="{{asset('images/logos/logo_white.svg')}}" />
         <link rel="stylesheet" href="css/app.css" />
         <link rel="stylesheet" href="css/start.css" />
-        <title>Bison Studio - Start</title>
+        <title>Bison Studio - Strona Główna</title>
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-M2VGTFKH7L"></script>
