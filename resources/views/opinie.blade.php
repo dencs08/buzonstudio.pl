@@ -6,7 +6,17 @@
         <link rel="shortcut icon" href="{{asset('images/logos/logo_white.svg')}}" />
         <link rel="stylesheet" href="css/app.css" />
         <link rel="stylesheet" href="css/testimonials.css" />
-        <title>bisonstudio</title>
+        <title>Bison Studio - Opinie</title>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M2VGTFKH7L"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-M2VGTFKH7L');
+</script>
     </head>
     <body class="antialiased">
 
