@@ -67,7 +67,7 @@ class PortfolioController extends Controller
         // if (stristr('europeisthebest', $name)){
         // }
 
-            // dd($portfolio_data_decoded);
+            // dd($portfolio_data_decoded[$i]["alts"]);
 
 
         return view('portfolio', [
@@ -77,7 +77,8 @@ class PortfolioController extends Controller
         ->with('portfolioResponsibilities',$portfolio_data_decoded_r["responsibilities"])
         ->with('portfolioLinks',$portfolio_data_decoded_l["links"])
         ->with('portfolioGoals',$portfolio_data_decoded_g["goals"])
-        ->with('portfolioImages',$portfolio_data_decoded_i["images"]);
+        ->with('portfolioImages',$portfolio_data_decoded_i["images"])
+        ->with('portfolioAlts',$portfolio_data_decoded[$i]["alts"]);
     }
 }
 

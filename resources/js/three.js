@@ -225,16 +225,16 @@ function init() {
     // ground.rotation.x = -1.571
     // ground.rotation.z = 3.141
 
-    var texturesPath = "3d/textures/shader/shader1.png";
-    if (window.location.href.indexOf("portfolio") != -1) {
-        fragmentTexture = textureLoader.load("/" + texturesPath);
-    } else {
-        fragmentTexture = textureLoader.load(texturesPath);
-    }
-    fragmentTexture.minFilter = THREE.NearestFilter;
-    fragmentTexture.magFilter = THREE.NearestFilter;
-    fragmentTexture.wrapS = THREE.RepeatWrapping;
-    fragmentTexture.wrapT = THREE.RepeatWrapping;
+    // var texturesPath = "3d/textures/shader/shader1.png";
+    // if (window.location.href.indexOf("portfolio") != -1) {
+    //     fragmentTexture = textureLoader.load("/" + texturesPath);
+    // } else {
+    //     fragmentTexture = textureLoader.load(texturesPath);
+    // }
+    // fragmentTexture.minFilter = THREE.NearestFilter;
+    // fragmentTexture.magFilter = THREE.NearestFilter;
+    // fragmentTexture.wrapS = THREE.RepeatWrapping;
+    // fragmentTexture.wrapT = THREE.RepeatWrapping;
 
     let iResolutionMultiplierValue;
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {

@@ -21,6 +21,7 @@ class Portfolio extends Migration
             $table->json('links');
             $table->json('goals');
             $table->json('images');
+            $table->string('alts');
         });
     }
 

@@ -11,7 +11,7 @@
             <a href="#" id="start-button" class="underline">WEJDŹ</a>
             <div class="privacy-policy-start">
                 <span class="info-accept mx-1">Wejście i korzystanie ze strony jest jednoznaczne z zaakceptowaniem naszej</span>
-                <a href="polityka_prywatnosci" class="privacy-policy underline web_link_transitions">polityki prywatności</a>
+                <a href="polityka" class="privacy-policy underline web_link_transitions">polityki prywatności</a>
             </div>
         </div>
     </div>

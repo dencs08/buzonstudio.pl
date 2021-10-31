@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="W bisonstudio oferujemy kompleksowe rozwiązanie na każde zlecenie, dzięki systemowi All-In-One nie będziesz już musiał pracować osobno z różnymi deweloperami od dziś robimy wszystko od A do Z!">
+        <link rel="canonical" href="https://bisonstudio.pl/oferta"/>
         <link rel="shortcut icon" href="{{asset('images/logos/logo_white.svg')}}" />
         <link rel="stylesheet" href="css/app.css" />
         <link rel="stylesheet" href="css/offer.css" />

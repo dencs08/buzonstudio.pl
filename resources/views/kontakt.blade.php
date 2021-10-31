@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Skontaktuj się z nami w sprawie oferty lub jeśli masz jakiekolwiek wątpliwości, na pewno je rozwiejemy!">
+        <link rel="canonical" href="https://bisonstudio.pl/kontakt"/>
         <link rel="shortcut icon" href="{{asset('images/logos/logo_white.svg')}}" />
         <link rel="stylesheet" href="css/app.css" />
         <link rel="stylesheet" href="css/contact.css" />

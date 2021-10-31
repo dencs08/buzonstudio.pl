@@ -3,10 +3,14 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="{{ $portfolioName }} jest jedną z prac wykonanych przez bisonstudio dla {{ $portfolioName }} a w naszych obowiązkach było m.in. @foreach($portfolioResponsibilities as $responsibility)
+                {{ $responsibility }}, 
+            @endforeach">
+        <link rel="canonical" href="https://bisonstudio.pl/portfolio/{{ $portfolioName }}"/>
         <link rel="shortcut icon" href="{{asset('images/logos/logo_white.svg')}}" />
         <link rel="stylesheet" href="/css/app.css" />
         <link rel="stylesheet" href="/css/portfolio.css" />
-        <title>Bison Studio - Portfolio</title>
+        <title>Bison Studio - {{ $portfolioName }}</title>
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-M2VGTFKH7L"></script>
@@ -37,7 +41,7 @@
                 </h1>
 
                 <div class="img-wrapper">
-                    <img class="img_landing" src="{{asset('images')}}/portfolio/{{ $portfolioName }}/{{ $portfolioName }}_portfolio.jpg" alt="">
+                    <img class="img_landing" src="{{asset('images')}}/portfolio/{{ $portfolioName }}/{{ $portfolioName }}_portfolio.jpg" alt="{{$portfolioAlts}}">
                 </div>
             </div>
         </section>
@@ -63,6 +67,7 @@
                                 {{ $responsibility }}
                             </li>
                         @endforeach
+                        @endphp
                         </ul>
                     </div>
                     <div class="col-md-3">
@@ -90,7 +95,7 @@
                     @endphp
                     @foreach($portfolioImages as $portfolioImage)
                     <div data-scroll data-scroll-speed="{{$i_3++ / 2}}" class="portfolio_image_wrapper">
-                        <img src="{{asset('images/portfolio/')}}/{{ $portfolioImage }}/{{ $portfolioImage }}{{$imageId++}}.jpg" class="portfolio_image" alt="">
+                        <img src="{{asset('images/portfolio/')}}/{{ $portfolioImage }}/{{ $portfolioImage }}{{$imageId++}}.jpg" class="portfolio_image" alt="{{$portfolioAlts}}">
                     </div>
                     @endforeach
                 </div>

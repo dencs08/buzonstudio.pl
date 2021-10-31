@@ -177,7 +177,7 @@
             <div class="underfooter-container">
                 <div class="privacy-container">
                     <a
-                        href="polityka_prywatnosci"
+                        href="polityka"
                         class="privacy-policy underline web_link_transitions"
                         >Polityka prywatności</a
                     >

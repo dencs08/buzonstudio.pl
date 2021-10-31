@@ -21,7 +21,7 @@ Route::get('opinie', function () {
     return view('opinie');
 });
 
-Route::get('polityka_prywatnosci', function () {
+Route::get('polityka', function () {
     return view('polityka_prywatnosci');
 });
 
