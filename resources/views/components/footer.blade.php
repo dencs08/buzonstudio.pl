@@ -163,7 +163,7 @@
                     <div class="float-md-end">
                         <h3 class="mt-0 mb-2">Zainteresowaliśmy Cię?</h3>
                         <h4 class="mt-0 mb-4">Sprawdź naszą ofertę lub portfolio!</h4>
-                        <a class="web_link_transitions a_btn" href="oferta">
+                        <a class="web_link_transitions a_btn" href="/oferta">
                             Tworzenie stron i więcej
 
                             <svg
@@ -183,7 +183,7 @@
             <div class="underfooter-container">
                 <div class="privacy-container">
                     <a
-                        href="polityka"
+                        href="/polityka"
                         class="privacy-policy underline web_link_transitions"
                         >Polityka prywatności</a
                     >
