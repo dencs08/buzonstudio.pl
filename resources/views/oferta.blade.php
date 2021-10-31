@@ -4,12 +4,13 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="W bisonstudio oferujemy kompleksowe rozwiązanie na każde zlecenie, dzięki systemowi All-In-One nie będziesz już musiał pracować osobno z różnymi deweloperami od dziś robimy wszystko od A do Z!">
-        <link rel="canonical" href="https://bisonstudio.pl/oferta"/>
+        <link rel="canonical" href="https://www.bisonstudio.pl/oferta"/>
         <link rel="shortcut icon" href="{{asset('images/logos/logo_white.svg')}}" />
+        <link rel="apple-touch-icon" href="{{asset('images/logos/logo_white.svg')}}">
         <link rel="stylesheet" href="css/app.css" />
         <link rel="stylesheet" href="css/offer.css" />
 
-        <title>Bison Studio - Oferta</title>
+        <title>Oferta - Tworzenie Stron i Sklepów Internetowych</title>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-M2VGTFKH7L"></script>
@@ -36,7 +37,9 @@ gtag('config', 'G-M2VGTFKH7L');
                     Dla was budujemy <br> wspaniałe <span id="typed"></span>
                 </h1>
 
-                <h2 class="mb-5">W naszym studio kreujemy prace które, działają, zdobywają serca użytkowników i zapadają w pamięć</h2>
+                <h2 class="mb-5">W naszym studio kreujemy prace które, działają, zdobywają serca użytkowników i zapadają w pamięć
+                    Tworzymy strony internetowe, wizualizacje architektoniczne, 
+                </h2>
                 <x-arrow/>
             </div>
         </section>

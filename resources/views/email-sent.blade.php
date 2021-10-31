@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Dziękujemy za kontakt z nami!">
-    <link rel="canonical" href="https://bisonstudio.pl/kontaktsent"/>
+    <link rel="canonical" href="https://www.bisonstudio.pl/kontaktsent"/>
     <link rel="shortcut icon" href="{{asset('images/logos/logo_white.svg')}}" />
+    <link rel="apple-touch-icon" href="{{asset('images/logos/logo_white.svg')}}">
     <link rel="stylesheet" href="css/app.css" />
     <link rel="stylesheet" href="css/contact.css" />
     <title>Bison Studio - Wysłano, dziękujemy!</title>

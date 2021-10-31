@@ -12,35 +12,35 @@
                     <div align="center" class="client-logo">
                         <img
                             src="{{asset('images/logos/danfit.svg')}}"
-                            alt=""
+                            alt="branding (logotyp) danfit"
                             class="client-logo-svg"
                         />
                     </div>
                     <div align="center" class="client-logo">
                         <img
                             src="{{asset('images/logos/komb.svg')}}"
-                            alt=""
+                            alt="branding (logotyp) komb"
                             class="client-logo-svg"
                         />
                     </div>
                     <div align="center" class="client-logo">
                         <img
                             src="{{asset('images/logos/logo_white-cropped.svg')}}"
-                            alt=""
+                            alt="branding (logotyp) bisonstudio"
                             class="client-logo-svg"
                         />
                     </div>
                     <div align="center" class="client-logo">
                         <img
                             src="{{asset('images/logos/zielonewidoki.svg')}}"
-                            alt=""
+                            alt="branding (logotyp) zielonewidoki"
                             class="client-logo-svg"
                         />
                     </div>
                     <div align="center" class="client-logo">
                         <img
                             src="{{asset('images/logos/ats.svg')}}"
-                            alt=""
+                            alt="branding (logotyp) ats-konsulting"
                             class="client-logo-svg"
                         />
                     </div>
@@ -61,6 +61,7 @@
 
                     <h4 class="my-0 mt-3 mb-4">+48 882 031 130</h4>
 
+                    <a href="https://www.facebook.com/bisonstudiopl" target="_blank">
                     <div class="footer-icon-div">
                         <svg
                             id="facebook-icon"
@@ -83,7 +84,10 @@
                             />
                         </svg>
                     </div>
+                    </a>
 
+
+                    <a href="https://www.instagram.com/bisonstudiopl/" target="_blank">
                     <div class="footer-icon-div">
                         <svg
                             id="ig-icon"
@@ -106,8 +110,10 @@
                             />
                         </svg>
                     </div>
+                    </a>
 
-                    <div class="footer-icon-div">
+
+                    <!-- <div class="footer-icon-div">
                         <svg
                             id="dribble-icon"
                             viewBox="0 0 419 417"
@@ -151,14 +157,14 @@
                                 class="footer-icon"
                             />
                         </svg>
-                    </div>
+                    </div> -->
                 </div>
                 <div data-scroll class="col-md-6 gs gs_fromRight second-col-footer">
                     <div class="float-md-end">
-                        <h3 class="mt-0 mb-2">Nie przekonaliśmy Cię?</h3>
-                        <h4 class="mt-0 mb-4">Zobacz co mowią o nas inni</h4>
-                        <a class="web_link_transitions a_btn" href="opinie">
-                            Opinie naszych klientów
+                        <h3 class="mt-0 mb-2">Zainteresowaliśmy Cię?</h3>
+                        <h4 class="mt-0 mb-4">Sprawdź naszą ofertę lub portfolio!</h4>
+                        <a class="web_link_transitions a_btn" href="oferta">
+                            Tworzenie stron i więcej
 
                             <svg
                                         width="55"

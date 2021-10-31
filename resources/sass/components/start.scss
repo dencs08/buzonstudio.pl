@@ -37,11 +37,17 @@ body {
     }
     p {
         color: $font-color-tertiary;
-        width: clamp(250px, 30vw, 50%);
+        width: clamp(250px, 30vw, 80%);
     }
 }
 
 //!portfolio
+.slide-track {
+    a {
+        color: rgba(0, 0, 0, 0) !important;
+    }
+}
+
 .portfolio-container {
     width: 100%;
 }

@@ -9,7 +9,7 @@
     <div id="nav-wrapper" class="wrapper">
         <div class="nav-container container">
             <div id="nav-content-outlined">
-                <img src="{{asset('images/logos/logo_white.svg')}}" class="img-nav" alt="" />
+                <img src="{{asset('images/logos/logo_white.svg')}}" class="img-nav" alt="branding (logotyp) bisonstudio" />
             </div>
 
             <div id="scaled-content" class="nav-main-content">
@@ -74,7 +74,8 @@
                     align-items-end
                 "
             >
-                <div class="nav-icon-div cursor_expand">
+            <a href="https://www.facebook.com/bisonstudiopl" target="_blank">                
+            <div class="nav-icon-div cursor_expand">
                     <svg
                         id="facebook-icon"
                         viewBox="0 0 417 417"
@@ -96,7 +97,9 @@
                         />
                     </svg>
                 </div>
+            </a>
 
+                <a href="https://www.instagram.com/bisonstudiopl/" target="_blank">
                 <div class="nav-icon-div cursor_expand">
                     <svg
                         id="ig-icon"
@@ -119,8 +122,10 @@
                         />
                     </svg>
                 </div>
+                </a>
 
-                <div class="nav-icon-div cursor_expand">
+
+                <!-- <div class="nav-icon-div cursor_expand">
                     <svg
                         id="dribble-icon"
                         viewBox="0 0 419 417"
@@ -164,12 +169,12 @@
                             class="nav-icon"
                         />
                     </svg>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="nav-copyright-container container">
             <span class="nav-copyright">
-                        Wykorzystujemy pliki cookies. W związku z tym, korzystając z naszej strony decydujesz się na ich wykorzystanie zgodnie z ustawieniami przeglądarki. Więcej w naszej polityce prywatności. <br>
+                        Wykorzystujemy pliki cookies. W związku z tym, korzystając z naszej strony decydujesz się na ich wykorzystanie zgodnie z ustawieniami przeglądarki. Więcej możesz przeczytać w naszej polityce prywatności. <br>
             </span>
         </div>
     </div>    

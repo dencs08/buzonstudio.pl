@@ -1,4 +1,5 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/gsap/CSSPlugin.js":
@@ -7,7 +8,6 @@
   \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CSSPlugin": () => (/* binding */ CSSPlugin),
@@ -1443,7 +1443,6 @@ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(CSSPlugin);
   \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ScrollTrigger": () => (/* binding */ ScrollTrigger),
@@ -3351,7 +3350,6 @@ _getGSAP() && gsap.registerPlugin(ScrollTrigger);
   \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "GSCache": () => (/* binding */ GSCache),
@@ -7349,7 +7347,6 @@ var Power0 = _easeMap.Power0,
   \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "gsap": () => (/* binding */ gsapWithCSS),
@@ -7395,7 +7392,6 @@ TweenMaxWithCSS = gsapWithCSS.core.Tween;
   \**********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
@@ -10682,15 +10678,37 @@ var Native = /*#__PURE__*/function () {
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
+var __webpack_exports__ = {};
 /*!********************************************************!*\
   !*** ./resources/js/components/portfolio/portfolio.js ***!
   \********************************************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
 
+var h1 = document.querySelector('h1');
+var imgLanding = document.querySelector('.img_landing');
+var tl = new gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.timeline();
+tl.fromTo(h1, {
+  opacity: 0,
+  x: '60px'
+}, {
+  opacity: 1,
+  x: '0px',
+  ease: "expo",
+  duration: 1.5
+}, "+=1"), tl.fromTo(imgLanding, {
+  opacity: 0,
+  y: '60px'
+}, {
+  opacity: 1,
+  y: '0px',
+  ease: "expo",
+  duration: 1.5
+}, "-=1.125");
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
-"use strict";
 /*!*******************************************!*\
   !*** ./resources/js/locomotive-scroll.js ***!
   \*******************************************/

@@ -4,8 +4,9 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Wejście i korzystanie ze strony bisonstudio jest równoznaczne z zaakceptowaniem naszej polityki prywatności.">
-        <link rel="canonical" href="https://bisonstudio.pl/polityka"/>
+        <link rel="canonical" href="https://www.bisonstudio.pl/polityka"/>
         <link rel="shortcut icon" href="{{asset('images/logos/logo_white.svg')}}" />
+        <link rel="apple-touch-icon" href="{{asset('images/logos/logo_white.svg')}}">
         <link rel="stylesheet" href="css/app.css" />
         <link rel="stylesheet" href="css/privacy.css" />
         <title>Bison Studio - Polityka Prywatności</title>

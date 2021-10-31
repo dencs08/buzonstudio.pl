@@ -296,7 +296,11 @@ body {
 }
 .aboutus p {
   color: #bebebe;
-  width: clamp(250px, 30vw, 50%);
+  width: clamp(250px, 30vw, 80%);
+}
+
+.slide-track a {
+  color: rgba(0, 0, 0, 0) !important;
 }
 
 .portfolio-container {
