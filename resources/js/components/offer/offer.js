@@ -17,18 +17,7 @@ let imgArray = []
 let hrefArray = []
 let image;
 
-
-
-const data = [
-    "images/portfolio/portfolio_castle.png",
-    "images/portfolio/portfolio_watch.png",
-    "images/portfolio/portfolio_danfit_m.png",
-    "images/portfolio/portfolio_komb.png",
-    "images/portfolio/portfolio_zielonewidoki_m.png",
-    "images/portfolio/portfolio_ats_m.png",
-]
-
-const url = "images/portfolio/";
+const url = "images/portfolio";
 const objectToArray = portfolios => {
     const keys = Object.keys(portfolios);
     const res = [];
@@ -45,7 +34,7 @@ portfoliosArr.forEach((el, i) => {
     image = document.createElement('div')
     document.getElementById("works_images").appendChild(image)
     image.className = "project-preview"
-    image.style.backgroundImage = `url('${url}${el}_portfolio.png')`
+    image.style.backgroundImage = `url('${url}/${el}/${el}_portfolio.jpg')`
     imgArray.push(image)
 })
 

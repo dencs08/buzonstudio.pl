@@ -1,8 +1,8 @@
 <!-- Navbar -->
 <nav id="navbar">
     <div class="">
-    <input type="checkbox" id="active" />
-    <label id="nav-burger" for="active" class="menu-btn"
+    <input data-stick-cursor type="checkbox" id="active" />
+    <label data-stick-cursor id="nav-burger" for="active" class="menu-btn"
         ><span id="nav-closer"></span
     ></label>
     <div id="nav-bg"></div>
@@ -74,7 +74,7 @@
                     align-items-end
                 "
             >
-                <div class="nav-icon-div">
+                <div class="nav-icon-div cursor_expand">
                     <svg
                         id="facebook-icon"
                         viewBox="0 0 417 417"
@@ -97,7 +97,7 @@
                     </svg>
                 </div>
 
-                <div class="nav-icon-div">
+                <div class="nav-icon-div cursor_expand">
                     <svg
                         id="ig-icon"
                         viewBox="0 0 419 417"
@@ -120,7 +120,7 @@
                     </svg>
                 </div>
 
-                <div class="nav-icon-div">
+                <div class="nav-icon-div cursor_expand">
                     <svg
                         id="dribble-icon"
                         viewBox="0 0 419 417"
@@ -143,7 +143,7 @@
                     </svg>
                 </div>
 
-                <div class="nav-icon-div">
+                <div class="nav-icon-div cursor_expand">
                     <svg
                         id="behance-icon"
                         viewBox="0 0 419 417"

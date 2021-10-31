@@ -1,3 +1,7 @@
+#landing-page {
+  margin-bottom: 150px;
+}
+
 #landing-content {
   margin-top: 250px;
 }
@@ -16,6 +20,44 @@ h1 {
   width: 90%;
 }
 
+#responsibilites h2 {
+  color: #ececec;
+}
+#responsibilites p {
+  color: #bebebe !important;
+}
+#responsibilites ul li {
+  color: #bebebe !important;
+}
+
+.websites {
+  margin-top: clamp(50px, 7vh, 100px);
+  margin-bottom: clamp(100px, 14vh, 250px);
+}
+.websites h4 {
+  margin-bottom: 0;
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
+}
+.websites a {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  text-transform: uppercase;
+}
+
+#other_images .portfolio_image_wrapper {
+  display: grid;
+  place-items: center;
+  margin-bottom: clamp(50px, 7vh, 100px);
+}
+#other_images .portfolio_image {
+  width: 85%;
+}
+
 .scroll-blocker {
   margin-top: 250px;
+}
+
+@media (max-width: 1024px) {
+  body {
+    overflow-y: scroll !important;
+  }
 }

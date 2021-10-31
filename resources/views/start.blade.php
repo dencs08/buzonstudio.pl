@@ -96,9 +96,9 @@
                 </div>
                 <div class="grid-item main">
                     <div class="slide-track">
-                        <a href="portfolio/castle3d" class="web_link_transitions portfolio-item portfolio-item1 mx-auto mx-lg-5 item1 anim-stagger4"></a>
-                        <a href="portfolio/watch3d" class="web_link_transitions portfolio-item portfolio-item2 mx-auto mx-lg-5 item2 d-none d-lg-inline-block anim-stagger4"></a>
-                        <a href="portfolio/danfit" class="web_link_transitions portfolio-item portfolio-item3 mx-auto mx-lg-5 item3 d-none d-lg-inline-block anim-stagger4"></a>
+                        <a href="portfolio/danfit" class="web_link_transitions portfolio-item portfolio-item3 mx-auto mx-lg-5 item1 anim-stagger4"></a>
+                        <a href="portfolio/castle3d" class="web_link_transitions portfolio-item portfolio-item1 mx-auto mx-lg-5 item2 d-none d-lg-inline-block anim-stagger4"></a>
+                        <a href="portfolio/watch3d" class="web_link_transitions portfolio-item portfolio-item2 mx-auto mx-lg-5 item3 d-none d-lg-inline-block anim-stagger4"></a>
                         <a href="portfolio/komb" class="web_link_transitions portfolio-item portfolio-item4 mx-auto mx-lg-5 item4 d-none d-lg-inline-block anim-stagger4"></a>
                         <a href="portfolio/zielonewidoki" class="web_link_transitions portfolio-item portfolio-item5 mx-auto mx-lg-5 item5 d-none d-lg-inline-block anim-stagger4"></a>
                     </div>

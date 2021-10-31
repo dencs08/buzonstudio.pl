@@ -9,11 +9,14 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
 
 var topCover = document.getElementsByClassName("top-side");
 var bottomCover = document.getElementsByClassName("bottom-side");
-var tl = gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.timeline(); //! page transitions
+var tl = gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline(); //! page transitions
 
 window.onload = function () {
   var anchors = document.querySelectorAll('.web_link_transitions');
@@ -96,13 +99,13 @@ window.onload = function () {
 };
 
 var progressBar = document.querySelector(".progress");
-gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.set([progressBar], {
+gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set([progressBar], {
   opacity: 0,
   onComplete: function onComplete() {
     progressBar.style.zIndex = "9999";
   }
 });
-gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to([progressBar], {
+gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to([progressBar], {
   opacity: 1,
   delay: 1.5,
   duration: 1
@@ -110,7 +113,7 @@ gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to([progressBar], {
 
 document.onreadystatechange = function () {
   if (document.readyState === "complete") {
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to([progressBar], {
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to([progressBar], {
       opacity: 0,
       duration: 0.5,
       onComplete: function onComplete() {
@@ -162,6 +165,49 @@ function courtainAnimExit() {
     ease: 'expo.out',
     y: '0vh'
   }, "-=0.5");
+}
+
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {// cursor.style.display = "none";
+  // follower.style.display = "none";
+} else {
+  var cursor = jquery__WEBPACK_IMPORTED_MODULE_0__(".cursor"),
+      follower = jquery__WEBPACK_IMPORTED_MODULE_0__(".cursor-follower");
+  var posX = 0,
+      posY = 0;
+  var mouseX = 0,
+      mouseY = 0;
+  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(cursor, {
+    duration: 0.005,
+    repeat: -1,
+    onRepeat: function onRepeat() {
+      posX += (mouseX - posX) / 9;
+      posY += (mouseY - posY) / 9;
+      gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set(follower, {
+        css: {
+          left: posX - 12,
+          top: posY - 12
+        }
+      });
+      gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set(cursor, {
+        css: {
+          left: mouseX,
+          top: mouseY
+        }
+      });
+    }
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on("mousemove", function (e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0__("a, button, input, textarea, input, label, .cursor_expand").on("mouseenter", function () {
+    cursor.addClass("active");
+    follower.addClass("active");
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0__("a, button, input, textarea, input, label, .cursor_expand").on("mouseleave", function () {
+    cursor.removeClass("active");
+    follower.removeClass("active");
+  });
 }
 
 /***/ }),

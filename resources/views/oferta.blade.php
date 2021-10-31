@@ -17,15 +17,14 @@
         <x-loader/>
 
         <x-navbar/>
-
         <div id="web-content" class="smooth-locomotive-scroll">
         <section data-scroll-section id="landing-page">
             <div data-scroll data-scroll-speed="3" class="container landing-page-content">
-                <h1 data-splitting>
+                <h1>
                     Dla was budujemy <br> wspaniałe <span id="typed"></span>
                 </h1>
 
-                <h2 data-splitting class="mb-5">W naszym studio kreujemy prace które, działają, zdobywają serca użytkowników i zapadają w pamięć</h2>
+                <h2 class="mb-5">W naszym studio kreujemy prace które, działają, zdobywają serca użytkowników i zapadają w pamięć</h2>
                 <x-arrow/>
             </div>
         </section>

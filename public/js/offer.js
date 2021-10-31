@@ -22852,8 +22852,7 @@ var hoverEl = document.querySelectorAll('.js-hover');
 var imgArray = [];
 var hrefArray = [];
 var image;
-var data = ["images/portfolio/portfolio_castle.png", "images/portfolio/portfolio_watch.png", "images/portfolio/portfolio_danfit_m.png", "images/portfolio/portfolio_komb.png", "images/portfolio/portfolio_zielonewidoki_m.png", "images/portfolio/portfolio_ats_m.png"];
-var url = "images/portfolio/";
+var url = "images/portfolio";
 
 var objectToArray = function objectToArray(portfolios) {
   var keys = Object.keys(portfolios);
@@ -22873,7 +22872,7 @@ portfoliosArr.forEach(function (el, i) {
   image = document.createElement('div');
   document.getElementById("works_images").appendChild(image);
   image.className = "project-preview";
-  image.style.backgroundImage = "url('".concat(url).concat(el, "_portfolio.png')");
+  image.style.backgroundImage = "url('".concat(url, "/").concat(el, "/").concat(el, "_portfolio.jpg')");
   imgArray.push(image);
 });
 hoverEl.forEach(function (el, i) {

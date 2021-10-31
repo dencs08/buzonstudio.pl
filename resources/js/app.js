@@ -1,4 +1,5 @@
 import { gsap } from 'gsap'
+import * as $ from 'jquery'
 
 const topCover = document.getElementsByClassName("top-side")
 const bottomCover = document.getElementsByClassName("bottom-side")
@@ -161,3 +162,61 @@ function courtainAnimExit() {
     },
         "-=0.5")
 }
+
+
+
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    // cursor.style.display = "none";
+    // follower.style.display = "none";
+} else {
+    var cursor = $(".cursor"),
+        follower = $(".cursor-follower");
+
+    var posX = 0,
+        posY = 0;
+
+    var mouseX = 0,
+        mouseY = 0;
+
+    gsap.to(cursor, {
+        duration: 0.005,
+        repeat: -1,
+        onRepeat: function () {
+            posX += (mouseX - posX) / 9;
+            posY += (mouseY - posY) / 9;
+
+            gsap.set(follower, {
+                css: {
+                    left: posX - 12,
+                    top: posY - 12
+                }
+            });
+
+            gsap.set(cursor, {
+                css: {
+                    left: mouseX,
+                    top: mouseY
+                }
+            });
+        }
+    });
+
+    $(document).on("mousemove", function (e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    $("a, button, input, textarea, input, label, .cursor_expand").on("mouseenter", function () {
+        cursor.addClass("active");
+        follower.addClass("active");
+    });
+    $("a, button, input, textarea, input, label, .cursor_expand").on("mouseleave", function () {
+        cursor.removeClass("active");
+        follower.removeClass("active");
+    });
+
+
+}
+
+
+
