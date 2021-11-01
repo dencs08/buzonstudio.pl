@@ -473,14 +473,15 @@ var bokehParams = {
 };
 var cameraParams = {
   renderDistanceMin: 0.1,
-  renderDistanceMax: 100,
+  renderDistanceMax: 15,
   fov: 60
 };
 var fogParams = {
-  density: 0.0125
+  density: 0.2
 }; //Objects
 
 var knotObj, ground, human;
+var icons = [];
 var camera, cameraTarget, cameraTargetPos, scene, renderer, stats, parameters, cubeMaterial, controls, clock, cameraTargetVector3; //Shaders
 
 var uniforms; //Loaders
@@ -662,21 +663,8 @@ function init() {
   });
   wall = new three__WEBPACK_IMPORTED_MODULE_11__.Mesh(wallGeo, wallMat);
   scene.add(wall);
-  wall.position.set(0, 2, -5); //human
-
-  var humanMaterial = new three__WEBPACK_IMPORTED_MODULE_11__.MeshStandardMaterial({
-    color: 0x95ff00,
-    emissive: 0x95ff00,
-    emissiveIntensity: 100
-  }); // gltfLoader.load('3d/models/human.gltf', (gltf) => {
-  //     human = gltf.scene
-  //     human.traverse((o) => {
-  //         if (o.isMesh) o.material = humanMaterial;
-  //     });
-  //     scene.add(human)
-  //     human.position.set(0, 0, 0)
-  // })
-
+  wall.position.set(0, 2, -5);
+  loadModels();
   readyToMove = true;
 } //! get scrolled amount
 // function getDocHeight() {
@@ -879,7 +867,7 @@ function cameraScrollPos() {
 
       case 3:
         if (cameraPosi % 2 == 0) {
-          cameraTargetPos.position.set(0, 2, 40);
+          cameraTargetPos.position.set(0, 2, 45);
         } else {
           cameraTargetPos.position.set(0, 2, -2);
         }
@@ -888,7 +876,7 @@ function cameraScrollPos() {
 
       case 4:
         if (cameraPosi % 2 == 0) {
-          cameraTargetPos.position.set(0, 2, 50);
+          cameraTargetPos.position.set(0, 2, 60);
         } else {
           cameraTargetPos.position.set(0, 2, -2);
         }
@@ -897,7 +885,7 @@ function cameraScrollPos() {
 
       case 5:
         if (cameraPosi % 2 == 0) {
-          cameraTargetPos.position.set(0, 2, 60);
+          cameraTargetPos.position.set(0, 2, 75);
         } else {
           cameraTargetPos.position.set(0, 2, -2);
         }
@@ -906,7 +894,7 @@ function cameraScrollPos() {
 
       case 6:
         if (cameraPosi % 2 == 0) {
-          cameraTargetPos.position.set(0, 2, 70);
+          cameraTargetPos.position.set(0, 2, 90);
         } else {
           cameraTargetPos.position.set(0, 2, -2);
         }
@@ -918,12 +906,51 @@ function cameraScrollPos() {
 
 function mainInit() {}
 
+function loadModels() {
+  //! Human
+  var humanMaterial = new three__WEBPACK_IMPORTED_MODULE_11__.MeshStandardMaterial({
+    color: 0x95ff00,
+    emissive: 0x95ff00,
+    emissiveIntensity: 100
+  }); // gltfLoader.load('3d/models/human.gltf', (gltf) => {
+  //     human = gltf.scene
+  //     human.traverse((o) => {
+  //         if (o.isMesh) o.material = humanMaterial;
+  //     });
+  //     scene.add(human)
+  //     human.position.set(0, 0, 0)
+  // })
+  //! Icons
+
+  var iconsName = ['share', 'megaphone', 'arrow', 'trend', 'happy', 'email', 'star'];
+  var iconsPos = [new three__WEBPACK_IMPORTED_MODULE_11__.Vector3(0, 2, -10), new three__WEBPACK_IMPORTED_MODULE_11__.Vector3(2.5, 2, 10), new three__WEBPACK_IMPORTED_MODULE_11__.Vector3(-2.5, 2, 25), new three__WEBPACK_IMPORTED_MODULE_11__.Vector3(2.5, 2, 40), new three__WEBPACK_IMPORTED_MODULE_11__.Vector3(0, 2, 55), new three__WEBPACK_IMPORTED_MODULE_11__.Vector3(0, 2, 70), new three__WEBPACK_IMPORTED_MODULE_11__.Vector3(0, 2, 85)];
+  var pos = 0;
+
+  var _loop = function _loop(index) {
+    var icon = iconsName[index];
+    gltfLoader.load("3d/models/icons/icon-" + icon + ".glb", function (glb) {
+      icon = glb.scene;
+      icon.traverse(function (o) {
+        if (o.isMesh) o.material = humanMaterial;
+      });
+      scene.add(icon);
+      icon.position.set(iconsPos[index].x, iconsPos[index].y, iconsPos[index].z);
+      pos += 15;
+      icons.push(icon);
+    });
+  };
+
+  for (var index = 0; index < iconsName.length; index++) {
+    _loop(index);
+  }
+}
+
 function vertexShader() {
   return "\n    varying vec2 vUv;\n\n    void main()\n    {\n        vUv = uv;\n        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );\n        gl_Position = projectionMatrix * mvPosition;\n    }\n    ";
 }
 
 function fragmentShaderPlasma2() {
-  return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n    uniform vec4 iMouse;\n    uniform float iResolutionMultiplier;\n\n    const int deg = 5;\n    vec2 roots[deg];\n\n    vec2 mul(vec2 a, vec2 b) {\n        return vec2(\n            a.x*b.x - a.y*b.y,\n            a.x*b.y + a.y*b.y\n        );\n    }\n\n    vec2 div(vec2 a, vec2 b) {\n        return mul(a, vec2(b.x, -b.y))/(b.x*b.x+b.y*b.y);\n    }\n\n    vec2 inv(vec2 a) {\n        return vec2(a.x, -a.y) / (a.x*a.x + a.y*a.y);\n    }\n\n    vec2 f(vec2 a) {\n        vec2 ret = vec2(1.0, 0.0);\n        for (int i = 0; i < deg; i++) {\n            ret = mul(ret, a-roots[i]);\n        }\n        return ret;\n    }\n\n    vec2 fp(vec2 a) {\n        vec2 sum = vec2(0.0, 0.0);\n        for (int i = 0; i < deg; i++) {\n            sum += inv(a-roots[i]);\n        }\n        return inv(sum);\n    }\n\n    vec4 col(vec2 a) {\n        return vec4(\n            0.75/(1.5+abs(a.x)),\n            0.75/(1.5+abs(a.y)),\n            0.75/(1.25+0.01*abs(a.y)),\n            0.75\n            );\n        }\n\n        void mainImage(out vec4 fragColor, in vec2 fragCoord) {\n        vec2 mo = iMouse.xy / iResolution.xy-.5;\n        mo = (mo==vec2(-.5))?mo=vec2(-0.1,0.1):mo;\n\t    mo.x *= iResolution.x/iResolution.y;\n\n        roots[0] = vec2(cos(0.6*iTime), sin(0.3*iTime) + (mo.x * 0.5));\n        roots[1] = vec2(cos(0.4*iTime), sin(0.25*iTime) + (mo.y * 0.5));\n        roots[2] = vec2(cos(0.1*iTime), sin(0.05*iTime) + (mo.x * 0.5));\n        roots[3] = vec2(cos(0.1*iTime), sin(0.15*iTime) + (mo.y * 0.5));\n        roots[4] = vec2(cos(0.3*iTime), sin(0.2*iTime) + (mo.x * 0.5));\n        vec2 u0 = iResolutionMultiplier*(fragCoord-iResolution.xy/2.0)/min(iResolution.x, iResolution.y);\n        vec2 u = u0;\n        for(int i = 0; i < 3; i++) {\n            u -= div(f(u), fp(u));\n        }\n        fragColor = col(u);\n    }\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n";
+  return "\n    varying vec2 vUv;\n    uniform vec3 iResolution;\n    uniform float iTime;\n    uniform vec4 iMouse;\n    uniform float iResolutionMultiplier;\n\n    const int deg = 5;\n    vec2 roots[deg];\n\n    vec2 mul(vec2 a, vec2 b) {\n        return vec2(\n            a.x*b.x - a.y*b.y,\n            a.x*b.y + a.y*b.y\n        );\n    }\n\n    vec2 div(vec2 a, vec2 b) {\n        return mul(a, vec2(b.x, -b.y))/(b.x*b.x+b.y*b.y);\n    }\n\n    vec2 inv(vec2 a) {\n        return vec2(a.x, -a.y) / (a.x*a.x + a.y*a.y);\n    }\n\n    vec2 f(vec2 a) {\n        vec2 ret = vec2(1.0, 0.0);\n        for (int i = 0; i < deg; i++) {\n            ret = mul(ret, a-roots[i]);\n        }\n        return ret;\n    }\n\n    vec2 fp(vec2 a) {\n        vec2 sum = vec2(0.0, 0.0);\n        for (int i = 0; i < deg; i++) {\n            sum += inv(a-roots[i]);\n        }\n        return inv(sum);\n    }\n\n    vec4 col(vec2 a) {\n        return vec4(\n            0.75/(1.5+abs(a.x)),\n            0.75/(1.5+abs(a.y)),\n            0.75/(1.25+0.01*abs(a.y)),\n            0.75\n            );\n        }\n\n        void mainImage(out vec4 fragColor, in vec2 fragCoord) {\n        vec2 mo = iMouse.xy / iResolution.xy-.5;\n        mo = (mo==vec2(-.5))?mo=vec2(-0.1,0.1):mo;\n\t    mo.x *= iResolution.x/iResolution.y;\n\n        roots[0] = vec2(cos(0.6*iTime), sin(0.3*iTime));\n        roots[1] = vec2(cos(0.4*iTime), sin(0.25*iTime));\n        roots[2] = vec2(cos(0.1*iTime), sin(0.05*iTime));\n        roots[3] = vec2(cos(0.1*iTime), sin(0.15*iTime));\n        roots[4] = vec2(cos(0.3*iTime), sin(0.2*iTime));\n        vec2 u0 = iResolutionMultiplier*(fragCoord-iResolution.xy/2.0)/min(iResolution.x, iResolution.y);\n        vec2 u = u0;\n        for(int i = 0; i < 3; i++) {\n            u -= div(f(u), fp(u));\n        }\n        fragColor = col(u);\n    }\n\n    void main( void )\t{\n        mainImage(gl_FragColor, vUv * iResolution.xy);\n    }\n";
 }
 
 function fragmentShaderTunnel1() {

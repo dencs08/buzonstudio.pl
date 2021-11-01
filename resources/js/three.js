@@ -12,7 +12,7 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass'
 import { BokehPass } from 'three/examples/jsm/postprocessing/BokehPass'
 import Stats from 'three/examples/jsm/libs/stats.module'
-import { last } from 'lodash'
+import { fromPairs, last } from 'lodash'
 
 // ***
 // *** MAIN PROPERITES
@@ -42,16 +42,18 @@ const bokehParams = {
 
 const cameraParams = {
     renderDistanceMin: 0.1,
-    renderDistanceMax: 100,
+    renderDistanceMax: 15,
     fov: 60,
 }
 
 const fogParams = {
-    density: 0.0125,
+    density: 0.2,
 }
 
 //Objects
 let knotObj, ground, human
+
+let icons = []
 
 
 let camera, cameraTarget, cameraTargetPos, scene, renderer, stats,
@@ -252,7 +254,6 @@ function init() {
         iResolutionMultiplier: { value: iResolutionMultiplierValue },
     };
 
-
     // video = document.getElementById('video');
     // video.muted = true;
     // video.play();
@@ -270,21 +271,7 @@ function init() {
     scene.add(wall)
     wall.position.set(0, 2, -5)
 
-    //human
-    const humanMaterial = new THREE.MeshStandardMaterial({
-        color: 0x95ff00,
-        emissive: 0x95ff00,
-        emissiveIntensity: 100,
-    })
-
-    // gltfLoader.load('3d/models/human.gltf', (gltf) => {
-    //     human = gltf.scene
-    //     human.traverse((o) => {
-    //         if (o.isMesh) o.material = humanMaterial;
-    //     });
-    //     scene.add(human)
-    //     human.position.set(0, 0, 0)
-    // })
+    loadModels()
 
     readyToMove = true
 }
@@ -505,7 +492,7 @@ function cameraScrollPos() {
                 break;
             case 3:
                 if (cameraPosi % 2 == 0) {
-                    cameraTargetPos.position.set(0, 2, 40)
+                    cameraTargetPos.position.set(0, 2, 45)
                 } else {
                     cameraTargetPos.position.set(0, 2, -2);
                 }
@@ -513,7 +500,7 @@ function cameraScrollPos() {
                 break;
             case 4:
                 if (cameraPosi % 2 == 0) {
-                    cameraTargetPos.position.set(0, 2, 50)
+                    cameraTargetPos.position.set(0, 2, 60)
                 } else {
                     cameraTargetPos.position.set(0, 2, -2);
                 }
@@ -521,7 +508,7 @@ function cameraScrollPos() {
                 break;
             case 5:
                 if (cameraPosi % 2 == 0) {
-                    cameraTargetPos.position.set(0, 2, 60)
+                    cameraTargetPos.position.set(0, 2, 75)
                 } else {
                     cameraTargetPos.position.set(0, 2, -2);
                 }
@@ -529,7 +516,7 @@ function cameraScrollPos() {
                 break;
             case 6:
                 if (cameraPosi % 2 == 0) {
-                    cameraTargetPos.position.set(0, 2, 70)
+                    cameraTargetPos.position.set(0, 2, 90)
                 } else {
                     cameraTargetPos.position.set(0, 2, -2);
                 }
@@ -541,6 +528,63 @@ function cameraScrollPos() {
 
 function mainInit() {
 
+}
+
+function loadModels() {
+    //! Human
+    const humanMaterial = new THREE.MeshStandardMaterial({
+        color: 0x95ff00,
+        emissive: 0x95ff00,
+        emissiveIntensity: 100,
+    })
+
+    // gltfLoader.load('3d/models/human.gltf', (gltf) => {
+    //     human = gltf.scene
+    //     human.traverse((o) => {
+    //         if (o.isMesh) o.material = humanMaterial;
+    //     });
+    //     scene.add(human)
+    //     human.position.set(0, 0, 0)
+    // })
+
+    //! Icons
+    let iconsName = [
+        'share',
+        'megaphone',
+        'arrow',
+        'trend',
+        'happy',
+        'email',
+        'star',
+    ]
+
+    const iconsPos = [
+        new THREE.Vector3(0, 2, -10),
+        new THREE.Vector3(2.5, 2, 10),
+        new THREE.Vector3(-2.5, 2, 25),
+        new THREE.Vector3(2.5, 2, 40),
+        new THREE.Vector3(0, 2, 55),
+        new THREE.Vector3(0, 2, 70),
+        new THREE.Vector3(0, 2, 85),
+    ]
+
+    let pos = 0
+    for (let index = 0; index < iconsName.length; index++) {
+        const icon = iconsName[index];
+
+
+
+        gltfLoader.load("3d/models/icons/icon-" + icon + ".glb", (glb) => {
+            icon = glb.scene
+            icon.traverse((o) => {
+                if (o.isMesh) o.material = humanMaterial;
+            });
+            scene.add(icon)
+            icon.position.set(iconsPos[index].x, iconsPos[index].y, iconsPos[index].z)
+            pos += 15
+            icons.push(icon);
+        })
+    }
 }
 
 function vertexShader() {
@@ -612,11 +656,11 @@ function fragmentShaderPlasma2() {
         mo = (mo==vec2(-.5))?mo=vec2(-0.1,0.1):mo;
 	    mo.x *= iResolution.x/iResolution.y;
 
-        roots[0] = vec2(cos(0.6*iTime), sin(0.3*iTime) + (mo.x * 0.5));
-        roots[1] = vec2(cos(0.4*iTime), sin(0.25*iTime) + (mo.y * 0.5));
-        roots[2] = vec2(cos(0.1*iTime), sin(0.05*iTime) + (mo.x * 0.5));
-        roots[3] = vec2(cos(0.1*iTime), sin(0.15*iTime) + (mo.y * 0.5));
-        roots[4] = vec2(cos(0.3*iTime), sin(0.2*iTime) + (mo.x * 0.5));
+        roots[0] = vec2(cos(0.6*iTime), sin(0.3*iTime));
+        roots[1] = vec2(cos(0.4*iTime), sin(0.25*iTime));
+        roots[2] = vec2(cos(0.1*iTime), sin(0.05*iTime));
+        roots[3] = vec2(cos(0.1*iTime), sin(0.15*iTime));
+        roots[4] = vec2(cos(0.3*iTime), sin(0.2*iTime));
         vec2 u0 = iResolutionMultiplier*(fragCoord-iResolution.xy/2.0)/min(iResolution.x, iResolution.y);
         vec2 u = u0;
         for(int i = 0; i < 3; i++) {
