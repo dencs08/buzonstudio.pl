@@ -67,7 +67,7 @@
                 <h4 class="my-0 headerline anim-stagger1">Przyciągaj uwagę</h4>
                 <h3 class="mt-2 mb-3 anim-stagger1">Wyróżnij się od konkurencji</h3>
                 <p class="anim-stagger1">
-                    Dzięki naszemu brandingowi stworzonym pod Twoje potrzeby, Twoja marka będzie niepowtarzalna,
+                    Dzięki naszemu <span data-tooltip="Branding to m.in. logo, jest to wygląd Twojej marki co ma wpływ na to jak spostrzegają Cię klienci." class="text-highlight">brandingowi</span> stworzonym pod Twoje potrzeby, Twoja marka będzie niepowtarzalna,
                     sama w sobie będzie "przyciągać wzrok" a klienci będą ją utożsamiać jako wyjątkową i unikalną.
                     Nasz proces tworzenia stron internetowych i brandingu zrobi to wszystko za Ciebie.
                 </p>
