@@ -95245,7 +95245,6 @@ function postProcessingEnable() {
   composer.addPass(bokehPass);
   composer.addPass(filmPass);
   postprocessing.bokeh = bokehPass;
-  console.log("enabled");
 }
 
 var isFpsReadyToCheck = false;
@@ -95284,9 +95283,9 @@ function animate(time) {
         console.log(canvas.width);
         console.log(avgFps);
 
-        if (avgFps < 30) {
+        if (avgFps < 20) {
           threeJsDNone();
-        } else {
+        } else if (avgFps > 30) {
           postProcessingEnable();
         }
       }, 2500);
