@@ -124,6 +124,7 @@
   transition-duration: 1s;
   -webkit-transition-property: left;
   -webkit-transition-duration: 1s;
+  color: #707070;
 }
 #Contact input[type=checkbox]:checked + label div.checkmark {
   display: block;

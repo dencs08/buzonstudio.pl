@@ -171,7 +171,8 @@ function init() {
     //     lightProbe.copy(LightProbeGenerator.fromCubeTexture(cubeTexture));
     // });
 
-    scene.fog = new THREE.FogExp2(0x000000, fogParams.density)
+    scene.fog = new THREE.FogExp2(0x111111, fogParams.density)
+    scene.background = new THREE.Color(0x111111);
 
     //!Lights
     let lightProbe;

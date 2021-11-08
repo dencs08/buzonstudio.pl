@@ -120,8 +120,8 @@ gtag('config', 'G-M2VGTFKH7L');
 
                     @foreach($portfolios as $id)
                     <li data-scroll data-scroll-speed="{{$i++ / 3}}" class="navigation-item li-separate">
-                        <a class="js-hover navigation-link web_link_transitions gs gs_fromLeft" href="portfolio/{{ $id }}">
-                            <span data-text="{{ $id }}" class="text-uppercase">{{ $id }}</span>
+                        <a class="js-hover navigation-link web_link_transitions" href="portfolio/{{ $id }}">
+                            <span data-text="{{ $id }}" class="text-uppercase gs gs_fromLeft">{{ $id }}</span>
                         </a>
                     </li>
                     @endforeach

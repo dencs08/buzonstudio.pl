@@ -96367,7 +96367,8 @@ function init() {
   //     lightProbe.copy(LightProbeGenerator.fromCubeTexture(cubeTexture));
   // });
 
-  scene.fog = new three__WEBPACK_IMPORTED_MODULE_13__.FogExp2(0x000000, fogParams.density); //!Lights
+  scene.fog = new three__WEBPACK_IMPORTED_MODULE_13__.FogExp2(0x111111, fogParams.density);
+  scene.background = new three__WEBPACK_IMPORTED_MODULE_13__.Color(0x111111); //!Lights
 
   var lightProbe;
   var directionalLight;
