@@ -1,17 +1,6 @@
 import * as $ from 'jquery'
 import { gsap } from "gsap";
 
-$(document).on('mousemove', function (e) {
-    gsap.to(".project-preview", {
-        duration: 0.5,
-        css: {
-            left: e.pageX,
-            top: e.pageY / 2
-        },
-        delay: 0.03
-    });
-});
-
 const hoverEl = document.querySelectorAll('.js-hover')
 let imgArray = []
 let hrefArray = []
@@ -38,13 +27,22 @@ portfoliosArr.forEach((el, i) => {
     imgArray.push(image)
 })
 
+
 hoverEl.forEach((el, i) => {
-    el.addEventListener('mouseover', () => {
+    el.addEventListener('mouseover', function (e) {
         imgArray[i].classList.add('visible')
         gsap.fromTo(imgArray[i], { width: "0px" }, {
             duration: 1,
             width: "600px",
             ease: "expo.inOut",
+        });
+        gsap.to(".project-preview", {
+            duration: 0.5,
+            css: {
+                left: e.pageX,
+                top: e.pageY / 2
+            },
+            delay: 0.03
         });
     })
 

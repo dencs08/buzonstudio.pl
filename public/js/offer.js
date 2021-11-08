@@ -106863,16 +106863,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
 
 
-jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('mousemove', function (e) {
-  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(".project-preview", {
-    duration: 0.5,
-    css: {
-      left: e.pageX,
-      top: e.pageY / 2
-    },
-    delay: 0.03
-  });
-});
 var hoverEl = document.querySelectorAll('.js-hover');
 var imgArray = [];
 var hrefArray = [];
@@ -106901,7 +106891,7 @@ portfoliosArr.forEach(function (el, i) {
   imgArray.push(image);
 });
 hoverEl.forEach(function (el, i) {
-  el.addEventListener('mouseover', function () {
+  el.addEventListener('mouseover', function (e) {
     imgArray[i].classList.add('visible');
     gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.fromTo(imgArray[i], {
       width: "0px"
@@ -106909,6 +106899,14 @@ hoverEl.forEach(function (el, i) {
       duration: 1,
       width: "600px",
       ease: "expo.inOut"
+    });
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(".project-preview", {
+      duration: 0.5,
+      css: {
+        left: e.pageX,
+        top: e.pageY / 2
+      },
+      delay: 0.03
     });
   });
   el.addEventListener('mouseleave', function () {
