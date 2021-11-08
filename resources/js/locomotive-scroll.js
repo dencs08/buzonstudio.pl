@@ -26,7 +26,7 @@ setInterval(() => {
     if (loco_timer < 0) {
         loco_scrolling = false
     }
-    console.log(loco_scrolling)
+    // console.log(loco_scrolling)
     // console.log(loco_timer)
 }, 100);
 
@@ -45,23 +45,21 @@ ScrollTrigger.scrollerProxy(".smooth-locomotive-scroll", {
 });
 
 //!prevent gsap animation stop when scrolling with locomotive scroll
-var parallaxElements = Array.prototype.slice.call(document.querySelectorAll("section"));
-var self = this;
-parallaxElements.forEach(function (self) {
-    var box = self.querySelectorAll(".gs");
-
-    gsap.to(box, {
-        scrollTrigger: {
-            scroller: ".smooth-locomotive-scroll",
-            scrub: true,
-            trigger: self,
-            start: "top 100%",
-            end: "bottom 0%",
-        },
-        y: (i, target) => -innerHeight * target.dataset.speed,
-        ease: "none"
-    });
-});
+// var parallaxElements = Array.prototype.slice.call(document.querySelectorAll("section"));
+// parallaxElements.forEach(function (self) {
+//     var gs = self.querySelectorAll(".gs");
+//     gsap.to(gs, {
+//         scrollTrigger: {
+//             scroller: ".smooth-locomotive-scroll",
+//             scrub: true,
+//             trigger: self,
+//             start: "top 100%",
+//             end: "bottom 0%",
+//         },
+//         y: (i, target) => -innerHeight * target.dataset.speed,
+//         ease: "none"
+//     });
+// });
 
 //!auto animations
 function animateFrom(elem, direction) {
@@ -112,8 +110,8 @@ document.addEventListener("DOMContentLoaded", function () {
             start: startTrigger(),
             end: "top top",
             once: true,
-            // markers: true,
             scroller: ".smooth-locomotive-scroll",
+            // markers: true,
             onEnter: function () { animateFrom(elem) },
             // onEnterBack: function () { animateFrom(elem) },
             // onLeave: function () { hide(elem) } // assure that the element is hidden when scrolled into view

@@ -184,18 +184,18 @@ function init() {
     window.addEventListener('resize', onWindowResize);
 
     //bokehPass live changer
-    const matChanger = function () {
+    // const matChanger = function () {
 
-        postprocessing.bokeh.uniforms["focus"].value = bokehParams.focus;
-        postprocessing.bokeh.uniforms["aperture"].value = bokehParams.aperture * 0.00001;
-        postprocessing.bokeh.uniforms["maxblur"].value = bokehParams.maxblur;
+    //     postprocessing.bokeh.uniforms["focus"].value = bokehParams.focus;
+    //     postprocessing.bokeh.uniforms["aperture"].value = bokehParams.aperture * 0.00001;
+    //     postprocessing.bokeh.uniforms["maxblur"].value = bokehParams.maxblur;
 
-    };
-    gui.add(bokehParams, "focus", -50, 300.0, 1).onChange(matChanger);
-    gui.add(bokehParams, "aperture", 0, 50, 0.1).onChange(matChanger);
-    gui.add(bokehParams, "maxblur", 0.0, 0.1, 0.001).onChange(matChanger);
-    gui.close();
-    matChanger();
+    // };
+    // gui.add(bokehParams, "focus", -50, 300.0, 1).onChange(matChanger);
+    // gui.add(bokehParams, "aperture", 0, 50, 0.1).onChange(matChanger);
+    // gui.add(bokehParams, "maxblur", 0.0, 0.1, 0.001).onChange(matChanger);
+    // gui.close();
+    // matChanger();
 
     loadModels()
     enviroParticles()
@@ -203,6 +203,7 @@ function init() {
     setTimeout(() => {
         readyToMove = true
         readyToRotate = true
+        isFpsReadyToCheck = true
     }, 1500);
 }
 
@@ -268,11 +269,11 @@ function onWindowResize() {
     renderer.setSize(width, height);
     postprocessing.composer.setSize(width, height);
 }
-
+let composer, bokehPass, ubloomPass, filmPass;
 function initPostprocessing() {
     const renderPass = new RenderPass(scene, camera);
 
-    const bokehPass = new BokehPass(scene, camera, {
+    bokehPass = new BokehPass(scene, camera, {
         focus: 6,
         aperture: 10.7,
         maxblur: 0.1,
@@ -281,30 +282,39 @@ function initPostprocessing() {
         height: height
     })
 
-    const ubloomPass = new UnrealBloomPass(
+    ubloomPass = new UnrealBloomPass(
         new THREE.Vector2(window.innerWidth, window.innerHeight),
         bloomParams.bloomStrength,
         bloomParams.bloomRadius,
         bloomParams.bloomThreshold)
 
-    const filmPass = new FilmPass(
+    filmPass = new FilmPass(
         filmParams.noiseIntensity,
         filmParams.scanLinesIntensity,
         filmParams.scanLinesCount,
         filmParams.greyScale)
 
-    const composer = new EffectComposer(renderer);
+    composer = new EffectComposer(renderer);
 
     composer.addPass(renderPass)
+
+    postprocessing.composer = composer;
+}
+
+function render() {
+    postprocessing.composer.render(0.1);
+}
+
+function postProcessingEnable() {
     composer.addPass(ubloomPass)
     composer.addPass(bokehPass)
     composer.addPass(filmPass)
-
-    postprocessing.composer = composer;
     postprocessing.bokeh = bokehPass;
+
+    console.log("enabled")
 }
 
-var isFpsReadyToCheck = true;
+var isFpsReadyToCheck = false;
 var fpsChecked = false;
 var lastLoop = new Date();
 var thisLoop, fps, lastLoop, avgFps, delta;
@@ -343,18 +353,16 @@ function animate(time) {
                 avgFps = ArrayAvg(fpsArray);
                 console.log(canvas.width)
                 console.log(avgFps)
-                if (avgFps < 20) {
+                if (avgFps < 30) {
                     threeJsDNone()
+                } else {
+                    postProcessingEnable()
                 }
             }, 2500);
         }
     }
 
     // cameraScrollPos()
-}
-
-function render() {
-    postprocessing.composer.render(0.1);
 }
 
 function ArrayAvg(myArray) {

@@ -105904,9 +105904,9 @@ setInterval(function () {
 
   if (loco_timer < 0) {
     loco_scrolling = false;
-  }
+  } // console.log(loco_scrolling)
+  // console.log(loco_timer)
 
-  console.log(loco_scrolling); // console.log(loco_timer)
 }, 100);
 locoScroll.on("scroll", gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__.ScrollTrigger.update);
 locoScroll.on("scroll", locoScrollBool); // tell ScrollTrigger to use these proxy methods for the ".smooth-locomotive-scroll" element since Locomotive Scroll is hijacking things
@@ -105927,25 +105927,22 @@ gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__.ScrollTrigger.scrollerProxy(".sm
   // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
   pinType: document.querySelector(".smooth-locomotive-scroll").style.transform ? "transform" : "fixed"
 }); //!prevent gsap animation stop when scrolling with locomotive scroll
-
-var parallaxElements = Array.prototype.slice.call(document.querySelectorAll("section"));
-var self = undefined;
-parallaxElements.forEach(function (self) {
-  var box = self.querySelectorAll(".gs");
-  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(box, {
-    scrollTrigger: {
-      scroller: ".smooth-locomotive-scroll",
-      scrub: true,
-      trigger: self,
-      start: "top 100%",
-      end: "bottom 0%"
-    },
-    y: function y(i, target) {
-      return -innerHeight * target.dataset.speed;
-    },
-    ease: "none"
-  });
-}); //!auto animations
+// var parallaxElements = Array.prototype.slice.call(document.querySelectorAll("section"));
+// parallaxElements.forEach(function (self) {
+//     var gs = self.querySelectorAll(".gs");
+//     gsap.to(gs, {
+//         scrollTrigger: {
+//             scroller: ".smooth-locomotive-scroll",
+//             scrub: true,
+//             trigger: self,
+//             start: "top 100%",
+//             end: "bottom 0%",
+//         },
+//         y: (i, target) => -innerHeight * target.dataset.speed,
+//         ease: "none"
+//     });
+// });
+//!auto animations
 
 function animateFrom(elem, direction) {
   direction = direction || 1;
@@ -106001,8 +105998,8 @@ document.addEventListener("DOMContentLoaded", function () {
       start: startTrigger(),
       end: "top top",
       once: true,
-      // markers: true,
       scroller: ".smooth-locomotive-scroll",
+      // markers: true,
       onEnter: function onEnter() {
         animateFrom(elem);
       } // onEnterBack: function () { animateFrom(elem) },
@@ -106262,23 +106259,23 @@ function init() {
   container.style.touchAction = 'none';
   container.addEventListener('pointermove', onPointerMove);
   window.addEventListener('resize', onWindowResize); //bokehPass live changer
+  // const matChanger = function () {
+  //     postprocessing.bokeh.uniforms["focus"].value = bokehParams.focus;
+  //     postprocessing.bokeh.uniforms["aperture"].value = bokehParams.aperture * 0.00001;
+  //     postprocessing.bokeh.uniforms["maxblur"].value = bokehParams.maxblur;
+  // };
+  // gui.add(bokehParams, "focus", -50, 300.0, 1).onChange(matChanger);
+  // gui.add(bokehParams, "aperture", 0, 50, 0.1).onChange(matChanger);
+  // gui.add(bokehParams, "maxblur", 0.0, 0.1, 0.001).onChange(matChanger);
+  // gui.close();
+  // matChanger();
 
-  var matChanger = function matChanger() {
-    postprocessing.bokeh.uniforms["focus"].value = bokehParams.focus;
-    postprocessing.bokeh.uniforms["aperture"].value = bokehParams.aperture * 0.00001;
-    postprocessing.bokeh.uniforms["maxblur"].value = bokehParams.maxblur;
-  };
-
-  gui.add(bokehParams, "focus", -50, 300.0, 1).onChange(matChanger);
-  gui.add(bokehParams, "aperture", 0, 50, 0.1).onChange(matChanger);
-  gui.add(bokehParams, "maxblur", 0.0, 0.1, 0.001).onChange(matChanger);
-  gui.close();
-  matChanger();
   loadModels();
   enviroParticles();
   setTimeout(function () {
     readyToMove = true;
     readyToRotate = true;
+    isFpsReadyToCheck = true;
   }, 1500);
 } //! get scrolled amount
 
@@ -106339,27 +106336,37 @@ function onWindowResize() {
   postprocessing.composer.setSize(width, height);
 }
 
+var composer, bokehPass, ubloomPass, filmPass;
+
 function initPostprocessing() {
   var renderPass = new three_examples_jsm_postprocessing_RenderPass_js__WEBPACK_IMPORTED_MODULE_7__.RenderPass(scene, camera);
-  var bokehPass = new three_examples_jsm_postprocessing_BokehPass__WEBPACK_IMPORTED_MODULE_10__.BokehPass(scene, camera, {
+  bokehPass = new three_examples_jsm_postprocessing_BokehPass__WEBPACK_IMPORTED_MODULE_10__.BokehPass(scene, camera, {
     focus: 6,
     aperture: 10.7,
     maxblur: 0.1,
     width: width,
     height: height
   });
-  var ubloomPass = new three_examples_jsm_postprocessing_UnrealBloomPass__WEBPACK_IMPORTED_MODULE_8__.UnrealBloomPass(new three__WEBPACK_IMPORTED_MODULE_13__.Vector2(window.innerWidth, window.innerHeight), bloomParams.bloomStrength, bloomParams.bloomRadius, bloomParams.bloomThreshold);
-  var filmPass = new three_examples_jsm_postprocessing_FilmPass__WEBPACK_IMPORTED_MODULE_9__.FilmPass(filmParams.noiseIntensity, filmParams.scanLinesIntensity, filmParams.scanLinesCount, filmParams.greyScale);
-  var composer = new three_examples_jsm_postprocessing_EffectComposer_js__WEBPACK_IMPORTED_MODULE_6__.EffectComposer(renderer);
+  ubloomPass = new three_examples_jsm_postprocessing_UnrealBloomPass__WEBPACK_IMPORTED_MODULE_8__.UnrealBloomPass(new three__WEBPACK_IMPORTED_MODULE_13__.Vector2(window.innerWidth, window.innerHeight), bloomParams.bloomStrength, bloomParams.bloomRadius, bloomParams.bloomThreshold);
+  filmPass = new three_examples_jsm_postprocessing_FilmPass__WEBPACK_IMPORTED_MODULE_9__.FilmPass(filmParams.noiseIntensity, filmParams.scanLinesIntensity, filmParams.scanLinesCount, filmParams.greyScale);
+  composer = new three_examples_jsm_postprocessing_EffectComposer_js__WEBPACK_IMPORTED_MODULE_6__.EffectComposer(renderer);
   composer.addPass(renderPass);
+  postprocessing.composer = composer;
+}
+
+function render() {
+  postprocessing.composer.render(0.1);
+}
+
+function postProcessingEnable() {
   composer.addPass(ubloomPass);
   composer.addPass(bokehPass);
   composer.addPass(filmPass);
-  postprocessing.composer = composer;
   postprocessing.bokeh = bokehPass;
+  console.log("enabled");
 }
 
-var isFpsReadyToCheck = true;
+var isFpsReadyToCheck = false;
 var fpsChecked = false;
 var lastLoop = new Date();
 var thisLoop, fps, lastLoop, avgFps, delta;
@@ -106395,17 +106402,15 @@ function animate(time) {
         console.log(canvas.width);
         console.log(avgFps);
 
-        if (avgFps < 20) {
+        if (avgFps < 30) {
           threeJsDNone();
+        } else {
+          postProcessingEnable();
         }
       }, 2500);
     }
   } // cameraScrollPos()
 
-}
-
-function render() {
-  postprocessing.composer.render(0.1);
 }
 
 function ArrayAvg(myArray) {
