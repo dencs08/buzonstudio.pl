@@ -67,7 +67,7 @@
                 <h4 class="my-0 headerline anim-stagger1">Przyciągaj uwagę</h4>
                 <h3 class="mt-2 mb-3 anim-stagger1">Wyróżnij się od konkurencji</h3>
                 <p class="anim-stagger1">
-                    Dzięki naszemu <span data-tooltip="Branding to m.in. logo, jest to wygląd Twojej marki co ma wpływ na to jak spostrzegają Cię klienci." class="text-highlight">brandingowi</span> stworzonym pod Twoje potrzeby, Twoja marka będzie niepowtarzalna,
+                    Dzięki naszemu <span data-tooltip="Branding to m.in. logo, jest to wygląd Twojej marki, to on wpływa na to jak spostrzegają Cię klienci." class="text-highlight cursor-pointer">brandingowi</span> stworzonym pod Twoje potrzeby, Twoja marka będzie niepowtarzalna,
                     sama w sobie będzie "przyciągać wzrok" a klienci będą ją utożsamiać jako wyjątkową i unikalną.
                     Nasz proces tworzenia stron internetowych i brandingu zrobi to wszystko za Ciebie.
                 </p>
@@ -104,7 +104,7 @@
                 <p class="anim-stagger3">
                     Z wieloletnim doświadczeniem, które zebraliśmy, doskonale
                     wiemy jak przekonać potencjalnego klienta do Ciebie i Twojego
-                    produktu, dobry copywritting, niebanalny design czy odpowiedni marketing to tylko kilka zabiegów,
+                    produktu, dobry <span data-tooltip="Copywritting często nazywaną 'kopią'. Jest to treść na stronie, jeśli dobrze napisana ma ogromny wpływ na ostateczną decyzję klienta." class="text-highlight cursor-pointer">copywritting</span>, niebanalny design czy odpowiedni marketing to tylko kilka zabiegów,
                     które stosujemy aby pomóc Ci rozwinąć skrzydła.
                 </p>
             </div>
@@ -157,9 +157,6 @@
     </div>
 </div>
 
-        <!-- <video id="video" loop crossOrigin="anonymous" playsinline style="display:none">
-			<source src="images/video.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' muted="muted" autoplay="false">
-        </video> -->
         <x-global-js-variables/>
 
         <script src="js/app.js"></script>

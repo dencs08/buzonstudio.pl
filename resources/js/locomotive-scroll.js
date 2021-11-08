@@ -2,12 +2,46 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import LocomotiveScroll from 'locomotive-scroll';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const locoScroll = new LocomotiveScroll({
     el: document.querySelector('.smooth-locomotive-scroll'),
     smooth: true,
     lerp: .06,
     multiplier: 1.125,
     firefoxMultiplier: 50,
+});
+
+locoScroll.on("scroll", ScrollTrigger.update);
+// tell ScrollTrigger to use these proxy methods for the ".smooth-locomotive-scroll" element since Locomotive Scroll is hijacking things
+ScrollTrigger.scrollerProxy(".smooth-locomotive-scroll", {
+    scrollTop(value) {
+        return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
+    }, // we don't have to define a scrollLeft because we're only scrolling vertically.
+    getBoundingClientRect() {
+        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+    },
+    // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
+    pinType: document.querySelector(".smooth-locomotive-scroll").style.transform ? "transform" : "fixed"
+});
+
+//!prevent gsap animation stop when scrolling with locomotive scroll
+var parallaxElements = Array.prototype.slice.call(document.querySelectorAll("section"));
+var self = this;
+parallaxElements.forEach(function (self) {
+    var box = self.querySelectorAll(".gs");
+
+    gsap.to(box, {
+        scrollTrigger: {
+            scroller: ".smooth-locomotive-scroll",
+            scrub: true,
+            trigger: self,
+            start: "top 100%",
+            end: "bottom 0%",
+        },
+        y: (i, target) => -innerHeight * target.dataset.speed,
+        ease: "none"
+    });
 });
 
 //!auto animations
@@ -33,15 +67,13 @@ function animateFrom(elem, direction) {
     }
     elem.style.transform = "translate(" + x + "px, " + y + "px)";
     elem.style.opacity = "0";
+
     gsap.fromTo(elem, { x: x, y: y, autoAlpha: 0 }, {
-        duration: 1,
-        x: 0,
-        y: 0,
         autoAlpha: 1,
+        duration: 1,
         ease: "expo",
-        lazy: false,
-        delay: 0
-        // overwrite: "auto"
+        y: 0,
+        x: 0,
     });
 }
 
@@ -143,23 +175,9 @@ setTimeout(() => {
     }
 }, 1000);
 
-
-gsap.registerPlugin(ScrollTrigger);
-locoScroll.on("scroll", ScrollTrigger.update);
-// tell ScrollTrigger to use these proxy methods for the ".smooth-locomotive-scroll" element since Locomotive Scroll is hijacking things
-ScrollTrigger.scrollerProxy(".smooth-locomotive-scroll", {
-    scrollTop(value) {
-        return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
-    }, // we don't have to define a scrollLeft because we're only scrolling vertically.
-    getBoundingClientRect() {
-        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-    },
-    // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
-    pinType: document.querySelector(".smooth-locomotive-scroll").style.transform ? "transform" : "fixed"
-});
-
 // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
 ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
 
 // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
 ScrollTrigger.refresh();
+

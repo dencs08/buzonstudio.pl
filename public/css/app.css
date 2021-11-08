@@ -6483,6 +6483,10 @@ html.has-scroll-dragging {
   color: #912d2d;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .section-divider {
     margin-top: 75px;
@@ -7119,4 +7123,49 @@ a {
   .cursor-follower {
     display: none;
   }
+}
+[data-tooltip] {
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+[data-tooltip]:before,
+[data-tooltip]:after {
+  visibility: hidden;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(25%);
+  transition: all 0.5s;
+}
+
+[data-tooltip]:before {
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+  margin-bottom: 5px;
+  margin-left: clamp(-80px, -10vw, -110px);
+  padding: 7px;
+  width: clamp(160px, 10vw, 220px);
+  border-radius: 3px;
+  background-color: rgba(51, 51, 51, 0.95);
+  color: #ececec;
+  content: attr(data-tooltip);
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.2;
+  transition: all 0.5s;
+}
+
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+  visibility: visible;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  opacity: 1;
+  transform: translateY(0%);
+  transition: all 0.5s;
 }

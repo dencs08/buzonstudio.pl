@@ -2,6 +2,9 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { LightProbeGenerator } from 'three/examples/jsm/lights/LightProbeGenerator'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { EXRLoader } from 'three/examples/jsm/loaders/EXRLoader.js'
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
+
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
 import gsap from 'gsap'
 import { computeStyles } from '@popperjs/core'
@@ -56,8 +59,8 @@ let knotObj, ground, human
 let icons = []
 
 
-let camera, cameraTarget, cameraTargetPos, scene, renderer, stats,
-    parameters, cubeMaterial, controls, clock, cameraTargetVector3;
+let camera, cameraTargetLookAt, cameraTargetLookAtVector3, cameraTargetPos, scene, renderer, stats,
+    parameters, cubeMaterial, controls, clock, cameraTargetVector3, cursorObject, cursorPosVector3, cursorPosObject;
 
 //Shaders
 let uniforms
@@ -65,6 +68,7 @@ let uniforms
 //Loaders
 const textureLoader = new THREE.TextureLoader()
 const gltfLoader = new GLTFLoader()
+const exrLoader = new EXRLoader()
 
 let tl = gsap.timeline()
 
@@ -98,7 +102,7 @@ function init() {
 
     //!Base camera
     const cameraTargetGeo = new THREE.SphereGeometry(1, 32, 16)
-    const cameraTargetMat = new THREE.MeshPhysicalMaterial({
+    const invisibleMat = new THREE.MeshPhysicalMaterial({
         transmission: 0.0,
     })
 
@@ -107,19 +111,30 @@ function init() {
     camera.position.copy(cameraTargetVector3)
     camera.rotation.set(0, 0, 0)
 
-    cameraTargetPos = new THREE.Mesh(cameraTargetGeo, cameraTargetMat)
+
+    cameraTargetPos = new THREE.Mesh(cameraTargetGeo, invisibleMat)
     cameraTargetPos.position.copy(cameraTargetVector3)
     scene.add(cameraTargetPos)
     cameraTargetPos.material.opacity = 0;
     cameraTargetPos.material.transparent = true;
     cameraTargetPos.transparent = true;
 
-    cameraTarget = new THREE.Mesh(cameraTargetGeo, cameraTargetMat)
-    cameraTarget.position.set(5, 0, -4)
-    scene.add(cameraTarget)
-    cameraTarget.material.opacity = 0;
-    cameraTarget.material.transparent = true;
-    cameraTarget.transparent = true;
+    cameraTargetLookAtVector3 = new THREE.Vector3(0, 2, -4)
+    cameraTargetLookAt = new THREE.Mesh(cameraTargetGeo, invisibleMat)
+    cameraTargetLookAt.position.copy(cameraTargetLookAtVector3)
+    scene.add(cameraTargetLookAt)
+    cameraTargetLookAt.material.opacity = 0;
+    cameraTargetLookAt.material.transparent = true;
+    cameraTargetLookAt.transparent = true;
+
+    cursorPosVector3 = new THREE.Vector3(0, 2, -4)
+    cursorObject = new THREE.Mesh(cameraTargetGeo, invisibleMat)
+    cursorObject.position.copy(cursorPosVector3)
+    scene.add(cursorObject)
+    cursorObject.scale.set(0.1, 0.1, 0.1)
+    cursorObject.material.opacity = 0;
+    cursorObject.material.transparent = true;
+    cursorObject.transparent = true;
 
     renderer = new THREE.WebGLRenderer({
         canvas: canvas
@@ -128,7 +143,8 @@ function init() {
     renderer.setSize(width, height);
 
     renderer.outputEncoding = THREE.sRGBEncoding
-    // renderer.toneMapping = THREE.ACESFilmicToneMapping
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.25;
 
     container.appendChild(renderer.domElement);
 
@@ -162,9 +178,9 @@ function init() {
     let directionalLight;
 
     const lightParam = {
-        lightProbeIntensity: 1.5,
-        directionalLightIntensity: 1.5,
-        envMapIntensity: 1
+        lightProbeIntensity: 3,
+        directionalLightIntensity: 3,
+        envMapIntensity: 2
     };
 
     lightProbe = new THREE.LightProbe();
@@ -252,6 +268,9 @@ function init() {
         iMouse: { value: new THREE.Vector4() },
         iChannel0: { value: fragmentTexture },
         iResolutionMultiplier: { value: iResolutionMultiplierValue },
+        fogColor: { type: "c", value: scene.fog.color },
+        fogNear: { type: "f", value: 200 },
+        fogFar: { type: "f", value: 500 }
     };
 
     // video = document.getElementById('video');
@@ -264,7 +283,7 @@ function init() {
     wallMat = new THREE.ShaderMaterial({
         uniforms: uniforms,
         vertexShader: vertexShader(),
-        fragmentShader: fragmentShaderPlasma2()
+        fragmentShader: fragmentShaderPlasma2(),
     });
 
     wall = new THREE.Mesh(wallGeo, wallMat)
@@ -272,6 +291,7 @@ function init() {
     wall.position.set(0, 2, -5)
 
     loadModels()
+    enviroParticles()
 
     readyToMove = true
 }
@@ -300,11 +320,36 @@ function init() {
 //     amountscrolled()
 // }, false)
 
+var mouse = { x: 0, y: 0 };
+var mousePos;
+document.onmousemove = onPointerMove;
 function onPointerMove(event) {
     if (event.isPrimary === false) return;
 
     mouseX = event.pageX - windowHalfX;
     mouseY = event.pageY - windowHalfY;
+
+    // event.preventDefault();
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+    var mouseScreenVector = new THREE.Vector3(mouse.x, mouse.y, 0.5);
+    mouseScreenVector.unproject(camera);
+    var dir = mouseScreenVector.sub(camera.position).normalize();
+    mousePos = camera.position.clone().add(dir.multiplyScalar(4));
+
+    mouseInteractivity()
+}
+
+function mouseInteractivity() {
+    // camera.position.x += (- (mouseX) - camera.position.x) * 0.00001;
+    // camera.position.y += (- (mouseY) - camera.position.y) * 0.000002;
+    // camera.position.z += (- (mouseX) - camera.position.z) * 0.00001;
+
+    cursorObject.position.copy(mousePos);
+    cursorObject.position.z = camera.position.z
+
+    bisonHead.lookAt(cursorObject.position)
 }
 
 function onWindowResize() {
@@ -369,7 +414,7 @@ function animate(time) {
     time *= 0.001;
 
     uniforms.iTime.value = time;
-    uniforms.iMouse.value.set(mouseX, mouseY, mouseX, mouseY);
+    uniforms.iMouse.value.set(Math.abs(mouseX), Math.abs(mouseY), Math.abs(mouseX), Math.abs(mouseY));
     // controls.update();
     requestAnimationFrame(animate, renderer.domElement);
 
@@ -378,6 +423,7 @@ function animate(time) {
     stats.end();
 
     cameraMove(delta)
+    animateParticles(time)
 
     thisLoop = new Date();
     fps = 1000 / (thisLoop - lastLoop);
@@ -408,16 +454,7 @@ function animate(time) {
 }
 
 function render() {
-    mouseInteractivity()
-
     postprocessing.composer.render(0.1);
-}
-
-function mouseInteractivity() {
-    // camera.position.x += (- (mouseX) - camera.position.x) * 0.00001;
-    // camera.position.y += (- (mouseY) - camera.position.y) * 0.000002;
-    // camera.position.z += (- (mouseX) - camera.position.z) * 0.00001;
-    // camera.lookAt(cameraTarget.position);
 }
 
 function ArrayAvg(myArray) {
@@ -450,11 +487,12 @@ function cameraMove(delta) {
     alpha += delta * 2;
     if (readyToMove == true) {
         camera.position.lerp(cameraTargetPos.position, alpha);
+        camera.lookAt(cameraTargetLookAt.position);
     }
 }
 
 let cameraPosi = 0;
-function cameraSetPos() {
+function navCameraPos() {
     if (cameraPosi % 2 == 0) {
         cameraTargetPos.position.set(0, 2, -2);
     } else {
@@ -462,6 +500,7 @@ function cameraSetPos() {
     }
     cameraPosi++
 }
+
 //pctScrolled
 var path = location.pathname;
 function cameraScrollPos() {
@@ -470,6 +509,14 @@ function cameraScrollPos() {
             case 0:
                 if (cameraPosi % 2 == 0) {
                     cameraTargetPos.position.copy(cameraTargetVector3)
+
+                    gsap.to(cameraTargetLookAt.position, {
+                        duration: 3,
+                        ease: 'expo.out',
+                        x: cameraTargetLookAtVector3.x,
+                        y: cameraTargetLookAtVector3.y,
+                        z: cameraTargetLookAtVector3.z
+                    })
                 } else {
                     cameraTargetPos.position.set(0, 2, -2);
                 }
@@ -477,6 +524,14 @@ function cameraScrollPos() {
             case 1:
                 if (cameraPosi % 2 == 0) {
                     cameraTargetPos.position.set(0, 2, 15)
+
+                    gsap.to(cameraTargetLookAt.position, {
+                        duration: 3,
+                        ease: 'expo.out',
+                        x: cameraTargetLookAtVector3.x,
+                        y: cameraTargetLookAtVector3.y,
+                        z: cameraTargetLookAtVector3.z
+                    })
                 } else {
                     cameraTargetPos.position.set(0, 2, -2);
                 }
@@ -485,6 +540,14 @@ function cameraScrollPos() {
             case 2:
                 if (cameraPosi % 2 == 0) {
                     cameraTargetPos.position.set(0, 2, 30)
+
+                    gsap.to(cameraTargetLookAt.position, {
+                        duration: 3,
+                        ease: 'expo.out',
+                        x: cameraTargetLookAtVector3.x,
+                        y: cameraTargetLookAtVector3.y,
+                        z: cameraTargetLookAtVector3.z
+                    })
                 } else {
                     cameraTargetPos.position.set(0, 2, -2);
                 }
@@ -493,6 +556,14 @@ function cameraScrollPos() {
             case 3:
                 if (cameraPosi % 2 == 0) {
                     cameraTargetPos.position.set(0, 2, 45)
+
+                    gsap.to(cameraTargetLookAt.position, {
+                        duration: 3,
+                        ease: 'expo.out',
+                        x: cameraTargetLookAtVector3.x,
+                        y: cameraTargetLookAtVector3.y,
+                        z: cameraTargetLookAtVector3.z
+                    })
                 } else {
                     cameraTargetPos.position.set(0, 2, -2);
                 }
@@ -501,6 +572,14 @@ function cameraScrollPos() {
             case 4:
                 if (cameraPosi % 2 == 0) {
                     cameraTargetPos.position.set(0, 2, 60)
+
+                    gsap.to(cameraTargetLookAt.position, {
+                        duration: 3,
+                        ease: 'expo.out',
+                        x: cameraTargetLookAtVector3.x,
+                        y: cameraTargetLookAtVector3.y,
+                        z: cameraTargetLookAtVector3.z
+                    })
                 } else {
                     cameraTargetPos.position.set(0, 2, -2);
                 }
@@ -509,6 +588,14 @@ function cameraScrollPos() {
             case 5:
                 if (cameraPosi % 2 == 0) {
                     cameraTargetPos.position.set(0, 2, 75)
+
+                    gsap.to(cameraTargetLookAt.position, {
+                        duration: 3,
+                        ease: 'expo.out',
+                        x: cameraTargetLookAtVector3.x,
+                        y: cameraTargetLookAtVector3.y,
+                        z: cameraTargetLookAtVector3.z
+                    })
                 } else {
                     cameraTargetPos.position.set(0, 2, -2);
                 }
@@ -517,6 +604,14 @@ function cameraScrollPos() {
             case 6:
                 if (cameraPosi % 2 == 0) {
                     cameraTargetPos.position.set(0, 2, 90)
+
+                    gsap.to(cameraTargetLookAt.position, {
+                        duration: 3,
+                        ease: 'expo.out',
+                        x: cameraTargetLookAtVector3.x,
+                        y: cameraTargetLookAtVector3.y,
+                        z: cameraTargetLookAtVector3.z
+                    })
                 } else {
                     cameraTargetPos.position.set(0, 2, -2);
                 }
@@ -530,9 +625,10 @@ function mainInit() {
 
 }
 
+let humanMaterial;
 function loadModels() {
     //! Human
-    const humanMaterial = new THREE.MeshStandardMaterial({
+    humanMaterial = new THREE.MeshStandardMaterial({
         color: 0x95ff00,
         emissive: 0x95ff00,
         emissiveIntensity: 100,
@@ -547,7 +643,11 @@ function loadModels() {
     //     human.position.set(0, 0, 0)
     // })
 
-    //! Icons
+    // iconsLoad()
+    bisonHeadLoad()
+}
+
+function iconsLoad() {
     let iconsName = [
         'share',
         'megaphone',
@@ -587,6 +687,82 @@ function loadModels() {
     }
 }
 
+let bisonHead, bisonHeadMaterialParam, bisonHeadMaterial;
+function bisonHeadLoad() {
+    let envmaploader = new THREE.PMREMGenerator(renderer);
+
+    new RGBELoader().load('3d/studio_small_09_1k.hdr', function (hdrmap) {
+        let envmap = envmaploader.fromCubemap(hdrmap);
+        bisonHeadMaterialParam = {
+            color: 0x00ffff,
+            metalness: 0.9,
+            roughness: 0.5,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.1,
+            reflectivity: 0,
+            // normalMap: texture,
+            // normalScale: new THREE.Vector2(0.15, 0.15),
+            envMap: envmap.texture
+        }
+
+        bisonHeadMaterial = new THREE.MeshPhysicalMaterial(bisonHeadMaterialParam)
+
+        gltfLoader.load("3d/models/bison_head.glb", (glb) => {
+            bisonHead = glb.scene
+            bisonHead.traverse((o) => {
+                if (o.isMesh) o.material = bisonHeadMaterial;
+            });
+            scene.add(bisonHead)
+            bisonHead.scale.set(0.75, 0.75, 0.75)
+            bisonHead.position.set(2, 0, 10)
+        })
+    });
+
+
+
+}
+
+let particleGeo, particleVerts, sprite, particleMat, particles;
+function enviroParticles() {
+    particleGeo = new THREE.BufferGeometry();
+    particleVerts = [];
+
+    sprite = new THREE.TextureLoader().load('3d/textures/particle.png');
+
+    for (let i = 0; i < 30000; i++) {
+
+        const x = Math.random() * 25 - 12;
+        const y = Math.random() * 6 - 3;
+        const z = Math.random() * 100 + 5;
+
+        particleVerts.push(x, y, z);
+    }
+
+    particleGeo.setAttribute('position', new THREE.Float32BufferAttribute(particleVerts, 3));
+
+    particleMat = new THREE.PointsMaterial({ size: 0.01, sizeAttenuation: true, map: sprite, alphaTest: 0.5, transparent: true });
+    // particleMat.color.setHSL(1.0, 0.3, 0.7);
+
+    particles = new THREE.Points(particleGeo, particleMat);
+
+
+    scene.add(particles);
+}
+
+function animateParticles(time) {
+    for (let i = 0; i < scene.children.length; i++) {
+
+        const object = scene.children[i];
+
+        if (object instanceof THREE.Points) {
+
+            object.rotation.z = (time / 100) * (i < 4 ? i + 1 : - (i + 1));
+
+        }
+
+    }
+}
+
 function vertexShader() {
     return `
     varying vec2 vUv;
@@ -607,6 +783,9 @@ function fragmentShaderPlasma2() {
     uniform float iTime;
     uniform vec4 iMouse;
     uniform float iResolutionMultiplier;
+    uniform vec3 fogColor;
+    uniform float fogNear;
+    uniform float fogFar;
 
     const int deg = 5;
     vec2 roots[deg];
@@ -651,7 +830,7 @@ function fragmentShaderPlasma2() {
             );
         }
 
-        void mainImage(out vec4 fragColor, in vec2 fragCoord) {
+    void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         vec2 mo = iMouse.xy / iResolution.xy-.5;
         mo = (mo==vec2(-.5))?mo=vec2(-0.1,0.1):mo;
 	    mo.x *= iResolution.x/iResolution.y;
@@ -837,4 +1016,4 @@ animate()
 
 //other stuff
 const navBurger = document.getElementById("nav-burger")
-navBurger.addEventListener("click", cameraSetPos);
+navBurger.addEventListener("click", navCameraPos);

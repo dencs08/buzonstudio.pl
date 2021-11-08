@@ -49,9 +49,11 @@
         <div id="web-content" class="smooth-locomotive-scroll">
         <section data-scroll data-scroll-section id="landing-page">
             <div id="landing-content" class="container landing-page-content">
-                <h1 data-scroll data-scroll-speed="3" class="">
-                    Portfolio  "{{ $portfolioName }}"
-                </h1>
+                <div data-scroll data-scroll-speed="3" class="content-loco-wrapper">
+                    <h1 >
+                        Portfolio  "{{ $portfolioName }}"
+                    </h1>
+                </div>
 
                 <div class="img-wrapper ">
                     <img class="img_landing" src="{{asset('images')}}/portfolio/{{ $portfolioName }}/{{ $portfolioName }}_portfolio.jpg" alt="{{$portfolioAlts}}">
@@ -61,14 +63,22 @@
 
         <section data-scroll data-scroll-section id="responsibilites">
             <div class="container">
-                <h3 data-scroll data-scroll-speed="2" class="headerline gs gs_fromLeft">Podsumowanie realizacji</h3>
+                <div data-scroll data-scroll-speed="2" class="content-loco-wrapper">
+                    <h3 class="headerline gs gs_fromLeft">Podsumowanie realizacji</h3>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <h2 data-scroll data-scroll-speed="1.25" class="gs gs_fromLeft">Opis</h2>
-                        <p data-scroll data-scroll-speed="0.8" class="gs gs_fromLeft">{{$portfolioInfo}}</p>
+                    <div data-scroll data-scroll-speed="1.25" class="content-loco-wrapper">
+                        <h2 class="gs gs_fromLeft">Opis</h2>
+                    </div>
+                    <div data-scroll data-scroll-speed="0.8" class="content-loco-wrapper">
+                        <p class="gs gs_fromLeft">{{$portfolioInfo}}</p>
+                    </div>
                     </div>
                     <div class="col-md-3">
-                        <h2 data-scroll data-scroll-speed="1.25" class="gs gs_fromLeft">Nasze zadanie</h2>
+                        <div data-scroll data-scroll-speed="1.25" class="content-loco-wrapper">
+                            <h2 class="gs gs_fromLeft">Nasze zadanie</h2>
+                        </div>
                         <ul data-scroll data-scroll-speed="0.8"> 
                         @php
                         $i = 1;
@@ -76,18 +86,20 @@
                         $i_3 = 1;
                         @endphp
                         @foreach($portfolioResponsibilities as $responsibility)
-                            <li data-scroll data-scroll-speed="{{$i++ / 3}}" class="gs gs_fromLeft">
-                                {{ $responsibility }}
+                            <li data-scroll data-scroll-speed="{{$i++ / 3}}">
+                                <span class="gs gs_fromLeft">{{ $responsibility }}</span>
                             </li>
                         @endforeach
                         </ul>
                     </div>
                     <div class="col-md-3">
-                        <h2 data-scroll data-scroll-speed="1.25" class="gs gs_fromRight">Cel</h2>
+                        <div data-scroll data-scroll-speed="1.25" class="content-loco-wrapper">
+                            <h2 class="gs gs_fromRight">Cel</h2>
+                        </div>
                         <ul data-scroll data-scroll-speed="0.8">
                         @foreach($portfolioGoals as $goal)
-                            <li data-scroll data-scroll-speed="{{$i_2++ / 3}}" class="gs gs_fromRight">
-                                {{ $goal }}
+                            <li data-scroll data-scroll-speed="{{$i_2++ / 3}}">
+                                <span class="gs gs_fromRight">{{ $goal }}</span>
                             </li>
                         @endforeach
                         </ul>
@@ -107,7 +119,7 @@
                     @endphp
                     @foreach($portfolioImages as $portfolioImage)
                     <div data-scroll class="portfolio_image_wrapper">
-                        <img src="{{asset('images/portfolio/')}}/{{ $portfolioImage }}/{{ $portfolioImage }}{{$imageId++}}.jpg" class="portfolio_image" alt="{{$portfolioAlts}}">
+                        <img src="{{asset('images/portfolio/')}}/{{ $portfolioImage }}/{{ $portfolioImage }}{{$imageId++}}.jpg" class="gs gs_fadeIn portfolio_image" alt="{{$portfolioAlts}}">
                     </div>
                     @endforeach
                 </div>

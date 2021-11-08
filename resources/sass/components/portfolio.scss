@@ -42,13 +42,6 @@ h1 {
 .websites {
     margin-top: clamp(50px, 7vh, 100px);
     margin-bottom: clamp(100px, 14vh, 250px);
-    h4 {
-        margin-bottom: 0;
-        // line-height: 0;
-
-        font-size: clamp(0.8rem, 2vw, 1.2rem);
-    }
-
     a {
         font-size: clamp(1rem, 3vw, 1.5rem);
         text-transform: uppercase;

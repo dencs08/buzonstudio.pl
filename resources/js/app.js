@@ -214,8 +214,6 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
         cursor.removeClass("active");
         follower.removeClass("active");
     });
-
-
 }
 
 

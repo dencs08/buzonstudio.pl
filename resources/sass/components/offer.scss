@@ -19,16 +19,14 @@
         font-size: clamp(1.75rem, 2.25vw, 2rem);
         font-weight: 300 !important;
 
-        color: $font-color-primary;
+        color: $font-color-secondary;
     }
 
     h3 {
         font-size: clamp(2rem, 3.5vw, 3rem);
         font-weight: 500;
 
-        color: $font-color-secondary;
-
-        margin-bottom: 15px;
+        color: $font-color-primary;
     }
 
     p {
@@ -36,9 +34,6 @@
         font-weight: 400;
 
         color: $font-color-tertiary;
-
-        margin-bottom: 35px;
-        margin-top: 0;
     }
 
     ul {
@@ -47,11 +42,11 @@
             font-weight: 400;
 
             color: $font-color-fourth;
-            margin-bottom: 10px;
+            height: 32.5px;
         }
     }
     .contact-us {
-        margin-top: clamp(1.75em, 3vh, 2.5em);
+        margin-top: clamp(2em, 3.5vh, 4em);
         font-size: clamp(1rem, 3vw, 2.5rem);
         color: $font-color-primary;
         &:hover {
@@ -80,7 +75,7 @@
             position: relative;
 
             .li-separate {
-                margin-bottom: 30px;
+                height: 75px;
             }
         }
 

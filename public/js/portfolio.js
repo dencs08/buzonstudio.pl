@@ -1,5 +1,4 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/gsap/CSSPlugin.js":
@@ -8,6 +7,7 @@
   \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CSSPlugin": () => (/* binding */ CSSPlugin),
@@ -1443,6 +1443,7 @@ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(CSSPlugin);
   \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ScrollTrigger": () => (/* binding */ ScrollTrigger),
@@ -3350,6 +3351,7 @@ _getGSAP() && gsap.registerPlugin(ScrollTrigger);
   \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "GSCache": () => (/* binding */ GSCache),
@@ -7347,6 +7349,7 @@ var Power0 = _easeMap.Power0,
   \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "gsap": () => (/* binding */ gsapWithCSS),
@@ -7392,6 +7395,7 @@ TweenMaxWithCSS = gsapWithCSS.core.Tween;
   \**********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
@@ -10676,8 +10680,9 @@ var Native = /*#__PURE__*/function () {
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
+"use strict";
 var __webpack_exports__ = {};
 /*!********************************************************!*\
   !*** ./resources/js/components/portfolio/portfolio.js ***!
@@ -10707,8 +10712,10 @@ tl.fromTo(h1, {
 }, "-=1.125");
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
+"use strict";
+var __webpack_exports__ = {};
 /*!*******************************************!*\
   !*** ./resources/js/locomotive-scroll.js ***!
   \*******************************************/
@@ -10719,12 +10726,50 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__.ScrollTrigger);
 var locoScroll = new locomotive_scroll__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: document.querySelector('.smooth-locomotive-scroll'),
   smooth: true,
   lerp: .06,
   multiplier: 1.125,
   firefoxMultiplier: 50
+});
+locoScroll.on("scroll", gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__.ScrollTrigger.update); // tell ScrollTrigger to use these proxy methods for the ".smooth-locomotive-scroll" element since Locomotive Scroll is hijacking things
+
+gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__.ScrollTrigger.scrollerProxy(".smooth-locomotive-scroll", {
+  scrollTop: function scrollTop(value) {
+    return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
+  },
+  // we don't have to define a scrollLeft because we're only scrolling vertically.
+  getBoundingClientRect: function getBoundingClientRect() {
+    return {
+      top: 0,
+      left: 0,
+      width: window.innerWidth,
+      height: window.innerHeight
+    };
+  },
+  // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
+  pinType: document.querySelector(".smooth-locomotive-scroll").style.transform ? "transform" : "fixed"
+}); //!prevent gsap animation stop when scrolling with locomotive scroll
+
+var parallaxElements = Array.prototype.slice.call(document.querySelectorAll("section"));
+var self = undefined;
+parallaxElements.forEach(function (self) {
+  var box = self.querySelectorAll(".gs");
+  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(box, {
+    scrollTrigger: {
+      scroller: ".smooth-locomotive-scroll",
+      scrub: true,
+      trigger: self,
+      start: "top 100%",
+      end: "bottom 0%"
+    },
+    y: function y(i, target) {
+      return -innerHeight * target.dataset.speed;
+    },
+    ease: "none"
+  });
 }); //!auto animations
 
 function animateFrom(elem, direction) {
@@ -10756,14 +10801,11 @@ function animateFrom(elem, direction) {
     y: y,
     autoAlpha: 0
   }, {
-    duration: 1,
-    x: 0,
-    y: 0,
     autoAlpha: 1,
+    duration: 1,
     ease: "expo",
-    lazy: false,
-    delay: 0 // overwrite: "auto"
-
+    y: 0,
+    x: 0
   });
 }
 
@@ -10868,32 +10910,21 @@ setTimeout(function () {
       offset: -200
     });
   }
-}, 1000);
-gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__.ScrollTrigger);
-locoScroll.on("scroll", gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__.ScrollTrigger.update); // tell ScrollTrigger to use these proxy methods for the ".smooth-locomotive-scroll" element since Locomotive Scroll is hijacking things
-
-gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__.ScrollTrigger.scrollerProxy(".smooth-locomotive-scroll", {
-  scrollTop: function scrollTop(value) {
-    return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
-  },
-  // we don't have to define a scrollLeft because we're only scrolling vertically.
-  getBoundingClientRect: function getBoundingClientRect() {
-    return {
-      top: 0,
-      left: 0,
-      width: window.innerWidth,
-      height: window.innerHeight
-    };
-  },
-  // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
-  pinType: document.querySelector(".smooth-locomotive-scroll").style.transform ? "transform" : "fixed"
-}); // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
+}, 1000); // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
 
 gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__.ScrollTrigger.addEventListener("refresh", function () {
   return locoScroll.update();
 }); // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
 
 gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_2__.ScrollTrigger.refresh();
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!*******************************************!*\
+  !*** ./resources/js/three_other_pages.js ***!
+  \*******************************************/
+
 })();
 
 /******/ })()
