@@ -1,3 +1,7 @@
+import gsap from 'gsap'
+import { computeStyles } from '@popperjs/core'
+import { fromPairs, last } from 'lodash'
+
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { LightProbeGenerator } from 'three/examples/jsm/lights/LightProbeGenerator'
@@ -6,16 +10,17 @@ import { EXRLoader } from 'three/examples/jsm/loaders/EXRLoader.js'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
 
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
-import gsap from 'gsap'
-import { computeStyles } from '@popperjs/core'
 
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
 import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass'
 import { BokehPass } from 'three/examples/jsm/postprocessing/BokehPass'
+
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+import { VignetteShader } from 'three/examples/jsm/shaders/VignetteShader.js';
+
 import Stats from 'three/examples/jsm/libs/stats.module'
-import { fromPairs, last } from 'lodash'
 
 // ***
 // *** MAIN PROPERITES
@@ -269,7 +274,7 @@ function onWindowResize() {
     renderer.setSize(width, height);
     postprocessing.composer.setSize(width, height);
 }
-let composer, bokehPass, ubloomPass, filmPass;
+let composer, bokehPass, ubloomPass, filmPass, shaderVignette, effectVignette;
 function initPostprocessing() {
     const renderPass = new RenderPass(scene, camera);
 
@@ -296,9 +301,17 @@ function initPostprocessing() {
 
     composer = new EffectComposer(renderer);
 
+    shaderVignette = VignetteShader;
+    effectVignette = new ShaderPass(shaderVignette);
+
+    effectVignette.uniforms["offset"].value = 0.4;
+    effectVignette.uniforms["darkness"].value = 2.0;
+
     composer.addPass(renderPass)
+    composer.addPass(effectVignette);
 
     postprocessing.composer = composer;
+    // postProcessingEnable()
 }
 
 function render() {
