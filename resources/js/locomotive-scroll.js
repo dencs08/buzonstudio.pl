@@ -12,26 +12,12 @@ const locoScroll = new LocomotiveScroll({
     firefoxMultiplier: 50,
 });
 
-let loco_timer = 0;
-
-function locoScrollBool() {
-    loco_timer = 0.01
-    if (loco_timer >= 0) {
-        loco_scrolling = true
-    }
+function scrollPositionValue() {
+    locoScrollPosValue = locoScroll.scroll.instance.scroll.y
 }
 
-setInterval(() => {
-    loco_timer -= 0.01;
-    if (loco_timer < 0) {
-        loco_scrolling = false
-    }
-    // console.log(loco_scrolling)
-    // console.log(loco_timer)
-}, 100);
-
 locoScroll.on("scroll", ScrollTrigger.update);
-locoScroll.on("scroll", locoScrollBool);
+locoScroll.on("scroll", scrollPositionValue);
 // tell ScrollTrigger to use these proxy methods for the ".smooth-locomotive-scroll" element since Locomotive Scroll is hijacking things
 ScrollTrigger.scrollerProxy(".smooth-locomotive-scroll", {
     scrollTop(value) {

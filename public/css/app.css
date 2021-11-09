@@ -7086,6 +7086,24 @@ a {
   opacity: 0.08;
 }
 
+.three_disabler_container {
+  position: relative;
+}
+
+.three_disabler {
+  position: absolute;
+  left: 90%;
+  top: 95vh;
+  transform: translate(-50%, 0);
+}
+
+.three_enabler {
+  position: absolute;
+  left: 90%;
+  top: 95vh;
+  transform: translate(-50%, 0);
+}
+
 .cursor-follower {
   position: absolute;
   background-color: rgba(255, 255, 255, 0);

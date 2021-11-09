@@ -41,6 +41,7 @@ gtag('config', 'G-M2VGTFKH7L');
 
         <x-loader/>
 
+        <x-3d-disable/>
         <x-navbar/>
         <div id="web-content" class="smooth-locomotive-scroll">
         <section data-scroll-section id="landing-page">
