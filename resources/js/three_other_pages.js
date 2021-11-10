@@ -32,7 +32,6 @@ const fogParams = {
 }
 
 //Objects
-
 let camera, cameraTargetLookAt, cameraTargetLookAtVector3, cameraTargetPos, scene, renderer, stats, controls, clock, cameraTargetVector3, cursorObject, cursorPosVector3, cursorPosObject;
 
 //Loaders
@@ -65,43 +64,19 @@ function init() {
     document.body.appendChild(container);
     scene = new THREE.Scene();
 
-    //!Base camera
+    //!Inits
     cameraInit()
-    rendererInit();
+    rendererInit()
+    sceneInit()
+    lightsInit()
     container.appendChild(renderer.domElement);
 
     //! Controls
     // controls = new OrbitControls(camera, renderer.domElement)
-
-    //! Scene
-    scene.fog = new THREE.FogExp2(0x111111, fogParams.density)
-    scene.background = new THREE.Color(0x111111);
-
-    //!Lights
-    let lightProbe;
-    let directionalLight;
-
-    const lightParam = {
-        lightProbeIntensity: 3,
-        directionalLightIntensity: 3,
-        envMapIntensity: 2
-    };
-
-    lightProbe = new THREE.LightProbe();
-    scene.add(lightProbe);
-
-    directionalLight = new THREE.DirectionalLight(0xffffff, lightParam.directionalLightIntensity);
-    directionalLight.position.set(10, 10, 10);
-    scene.add(directionalLight);
-
-    renderer.autoClear = false;
-
     // stats = new Stats();
     // container.appendChild(stats.dom);
-
     container.style.touchAction = 'none';
     container.addEventListener('pointermove', onPointerMove);
-
     window.addEventListener('resize', onWindowResize);
 
     loadModels()
@@ -161,10 +136,6 @@ function initPostprocessing() {
     composer.addPass(renderPass)
 }
 
-function render() {
-    postprocessing.composer.render(0.1);
-}
-
 function postProcessingEnable() {
     afterimagePass = new AfterimagePass();
     afterimagePass.uniforms["damp"].value = 0.875;
@@ -176,6 +147,81 @@ function postProcessingEnable() {
 
     composer.addPass(afterimagePass);
     composer.addPass(effectVignette);
+}
+
+function cameraInit() {
+    const cameraTargetGeo = new THREE.SphereGeometry(1, 32, 16)
+    const invisibleMat = new THREE.MeshPhysicalMaterial({
+        transmission: 0.0,
+    })
+
+    camera = new THREE.PerspectiveCamera(cameraParams.fov, width / height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax)
+    cameraTargetVector3 = new THREE.Vector3(0, 1, 5)
+    camera.position.copy(cameraTargetVector3)
+    camera.rotation.set(0, 0, 0)
+
+    cameraTargetPos = new THREE.Mesh(cameraTargetGeo, invisibleMat)
+    cameraTargetPos.position.copy(cameraTargetVector3)
+    scene.add(cameraTargetPos)
+    cameraTargetPos.material.opacity = 0;
+    cameraTargetPos.material.transparent = true;
+    cameraTargetPos.transparent = true;
+
+    cameraTargetLookAtVector3 = new THREE.Vector3(0, 3, -4)
+    cameraTargetLookAt = new THREE.Mesh(cameraTargetGeo, invisibleMat)
+    cameraTargetLookAt.position.copy(cameraTargetLookAtVector3)
+    scene.add(cameraTargetLookAt)
+    cameraTargetLookAt.material.opacity = 0;
+    cameraTargetLookAt.material.transparent = true;
+    cameraTargetLookAt.transparent = true;
+
+    cursorPosVector3 = new THREE.Vector3(0, 2, -4)
+    cursorObject = new THREE.Mesh(cameraTargetGeo, invisibleMat)
+    cursorObject.position.copy(cursorPosVector3)
+    scene.add(cursorObject)
+    cursorObject.scale.set(0.1, 0.1, 0.1)
+    cursorObject.material.opacity = 0;
+    cursorObject.material.transparent = true;
+    cursorObject.transparent = true;
+}
+
+function rendererInit() {
+    renderer = new THREE.WebGLRenderer({
+        canvas: canvas
+    });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(width, height);
+
+    renderer.outputEncoding = THREE.sRGBEncoding
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.25;
+}
+
+function lightsInit() {
+    let lightProbe;
+    let directionalLight;
+
+    const lightParam = {
+        lightProbeIntensity: 3,
+        directionalLightIntensity: 3,
+        envMapIntensity: 2
+    };
+
+    lightProbe = new THREE.LightProbe();
+    scene.add(lightProbe);
+
+    directionalLight = new THREE.DirectionalLight(0xffffff, lightParam.directionalLightIntensity);
+    directionalLight.position.set(10, 10, 10);
+    scene.add(directionalLight);
+}
+
+function sceneInit() {
+    scene.fog = new THREE.FogExp2(0x111111, fogParams.density)
+    scene.background = new THREE.Color(0x111111);
+}
+
+function render() {
+    postprocessing.composer.render(0.1);
 }
 
 var isFpsReadyToCheck = false;
@@ -237,42 +283,6 @@ function fpsChecker() {
     }
 }
 
-function cameraInit() {
-    const cameraTargetGeo = new THREE.SphereGeometry(1, 32, 16)
-    const invisibleMat = new THREE.MeshPhysicalMaterial({
-        transmission: 0.0,
-    })
-
-    camera = new THREE.PerspectiveCamera(cameraParams.fov, width / height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax)
-    cameraTargetVector3 = new THREE.Vector3(0, 1, 5)
-    camera.position.copy(cameraTargetVector3)
-    camera.rotation.set(0, 0, 0)
-
-    cameraTargetPos = new THREE.Mesh(cameraTargetGeo, invisibleMat)
-    cameraTargetPos.position.copy(cameraTargetVector3)
-    scene.add(cameraTargetPos)
-    cameraTargetPos.material.opacity = 0;
-    cameraTargetPos.material.transparent = true;
-    cameraTargetPos.transparent = true;
-
-    cameraTargetLookAtVector3 = new THREE.Vector3(0, 3, -4)
-    cameraTargetLookAt = new THREE.Mesh(cameraTargetGeo, invisibleMat)
-    cameraTargetLookAt.position.copy(cameraTargetLookAtVector3)
-    scene.add(cameraTargetLookAt)
-    cameraTargetLookAt.material.opacity = 0;
-    cameraTargetLookAt.material.transparent = true;
-    cameraTargetLookAt.transparent = true;
-
-    cursorPosVector3 = new THREE.Vector3(0, 2, -4)
-    cursorObject = new THREE.Mesh(cameraTargetGeo, invisibleMat)
-    cursorObject.position.copy(cursorPosVector3)
-    scene.add(cursorObject)
-    cursorObject.scale.set(0.1, 0.1, 0.1)
-    cursorObject.material.opacity = 0;
-    cursorObject.material.transparent = true;
-    cursorObject.transparent = true;
-}
-
 function cameraMove(delta) {
     let alpha = 0
     alpha += delta * 2;
@@ -280,18 +290,6 @@ function cameraMove(delta) {
         camera.position.lerp(cameraTargetPos.position, alpha);
         camera.lookAt(cameraTargetLookAt.position)
     }
-}
-
-function rendererInit() {
-    renderer = new THREE.WebGLRenderer({
-        canvas: canvas
-    });
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(width, height);
-
-    renderer.outputEncoding = THREE.sRGBEncoding
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.25;
 }
 
 let cameraPosi = 0;
@@ -381,67 +379,3 @@ animate()
 //other stuff
 const navBurger = document.getElementById("nav-burger")
 navBurger.addEventListener("click", navCameraPos);
-
-const threeDisabler = document.getElementById("three_disabler")
-threeDisabler.addEventListener("click", threeJsDNone)
-
-const threeEnabler = document.getElementById("three_enabler")
-threeEnabler.addEventListener("click", threeJsDBlock)
-
-gsap.set(threeEnabler, {
-    opacity: 0,
-})
-threeEnabler.style.zIndex = "-10"
-threeDisabler.style.zIndex = "99"
-
-function threeJsDNone() {
-    tl.to(threeDisabler, {
-        opacity: 0,
-        duration: 0.75,
-        ease: "expo",
-        onComplete: function () {
-            threeDisabler.style.zIndex = "-10"
-            threeEnabler.style.zIndex = "99"
-        }
-    })
-    tl.to(threeEnabler, {
-        opacity: 1,
-        duration: 0.75,
-        ease: "expo",
-    })
-    tl.to(canvas, {
-        opacity: 0,
-        duration: 1,
-        ease: "expo",
-        onComplete: function () {
-            canvas.style.display = "none"
-        }
-    }, "-=0.75")
-
-}
-
-function threeJsDBlock() {
-    tl.to(threeEnabler, {
-        opacity: 0,
-        duration: 0.75,
-        ease: "expo",
-        onComplete: function () {
-            threeDisabler.style.zIndex = "99"
-            threeEnabler.style.zIndex = "-10"
-        }
-    })
-    tl.to(threeDisabler, {
-        opacity: 1,
-        duration: 0.75,
-        ease: "expo",
-    })
-    tl.to(canvas, {
-        opacity: 1,
-        duration: 1,
-        ease: "expo",
-        onStart: function () {
-            canvas.style.display = "block"
-        }
-    }, "-=0.75")
-
-}

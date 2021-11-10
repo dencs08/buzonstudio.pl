@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="W bisonstudio zajmujemy się, tworzeniem stron i sklepów internetowych, wizualizacji aplikacji czy brandingu, zlecenia realizujemy od A do Z">
         <link rel="canonical" href="https://www.bisonstudio.pl"/>
-        <link rel="apple-touch-icon" href="{{asset('images/logos/logo_white.svg')}}">
-        <link rel="shortcut icon" href="{{asset('images/logos/logo_white.svg')}}" />
+        <link rel="apple-touch-icon" href="{{asset('images/logos/logo_white-cropped.svg')}}">
+        <link rel="shortcut icon" href="{{asset('images/logos/logo_white-cropped.svg')}}" />
         <link rel="stylesheet" href="css/app.css" />
         <link rel="stylesheet" href="css/start.css" />
         <title>Tworzenie Stron Internetowych UI UX DESIGN</title>
@@ -40,11 +40,11 @@
 
         <x-loader/>
 
+        <x-3d-disable/>
         <x-navbar/>
-
 <div id="web-content">
     <div id="fullpage">
-
+    <x-background-image/>
         <section data-scroll-section id="landing-page" class="scroll-snap-start section first">
             <div  id="landing-content" class="container landing-page-content first-content">
                 <h1 class="anim-stagger0">
@@ -104,7 +104,7 @@
                 <p class="anim-stagger3">
                     Z wieloletnim doświadczeniem, które zebraliśmy, doskonale
                     wiemy jak przekonać potencjalnego klienta do Ciebie i Twojego
-                    produktu, dobry <span data-tooltip="Copywritting często nazywaną 'kopią'. Jest to treść na stronie, jeśli dobrze napisana ma ogromny wpływ na ostateczną decyzję klienta." class="text-highlight cursor-pointer">copywritting</span>, niebanalny design czy odpowiedni marketing to tylko kilka zabiegów,
+                    produktu, dobry <span data-tooltip="Copywritting często nazywany 'kopią'. Jest to treść na stronie, jeśli dobrze napisana ma ogromny wpływ na ostateczną decyzję klienta." class="text-highlight cursor-pointer">copywritting</span>, niebanalny design czy odpowiedni marketing to tylko kilka zabiegów,
                     które stosujemy aby pomóc Ci rozwinąć skrzydła.
                 </p>
             </div>

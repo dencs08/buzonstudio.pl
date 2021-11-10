@@ -39,13 +39,13 @@ gtag('config', 'G-M2VGTFKH7L');
 
         <x-loader/>
 
+        <x-3d-disable/>
         <x-navbar/>
-
         <div id="nav-floater">
         </div>
         
         <div id="web-content" class="smooth-locomotive-scroll">
-            
+        <x-background-image/>
             <div id="privacy-policy-content">
                 <div data-scroll-section class="container">
                 <h1>Polityka prywatności bisonstudio</h1>

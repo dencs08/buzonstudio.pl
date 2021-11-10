@@ -41,12 +41,13 @@
 
         <x-loader/>
 
+        <x-3d-disable/>
         <x-navbar/>
-
         <div id="nav-floater">
         </div>
         
         <div id="web-content" class="smooth-locomotive-scroll">
+        <x-background-image/>
         <section data-scroll data-scroll-section id="landing-page">
             <div id="landing-content" class="container landing-page-content">
                 <div data-scroll data-scroll-speed="3" class="content-loco-wrapper">

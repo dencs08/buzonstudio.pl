@@ -160,19 +160,11 @@ if (stopCheck == false) {
         if (webEntered == true) {
             stopCheck = true
             for (checkI; checkI < 1; checkI++) {
-                tl.fromTo(three, {
-                    opacity: 0,
-                }, {
-                    opacity: 1,
-                    delay: 0.25,
-                    duration: 0.75,
-                    ease: "sine.in",
-                    onComplete: function () { isLandingAnimDone = true },
-                })
                 tl.to(rightNav, {
                     duration: 1,
                     ease: "expo",
                     opacity: 1,
+                    onComplete: function () { isLandingAnimDone = true },
                 },
                     "-=0.75")
                 tl.to(line, {

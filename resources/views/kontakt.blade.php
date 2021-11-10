@@ -42,9 +42,10 @@ gtag('config', 'G-M2VGTFKH7L');
             
         <x-loader/>
 
+        <x-3d-disable/>
         <x-navbar/>
-
         <div id="web-content" class="smooth-locomotive-scroll">
+        <x-background-image/>
         <section data-scroll-section id="landing-page">
             <div data-scroll data-scroll-speed="3" class="container landing-page-content">
                 <h1>Zacznijmy owocną współpracę!</h1>

@@ -71899,30 +71899,15 @@ var postprocessing = {};
 function init() {
   var container = document.createElement('div');
   document.body.appendChild(container);
-  scene = new three__WEBPACK_IMPORTED_MODULE_11__.Scene(); //!Base camera
+  scene = new three__WEBPACK_IMPORTED_MODULE_11__.Scene(); //!Inits
 
   cameraInit();
   rendererInit();
+  sceneInit();
+  lightsInit();
   container.appendChild(renderer.domElement); //! Controls
   // controls = new OrbitControls(camera, renderer.domElement)
-  //! Scene
-
-  scene.fog = new three__WEBPACK_IMPORTED_MODULE_11__.FogExp2(0x111111, fogParams.density);
-  scene.background = new three__WEBPACK_IMPORTED_MODULE_11__.Color(0x111111); //!Lights
-
-  var lightProbe;
-  var directionalLight;
-  var lightParam = {
-    lightProbeIntensity: 3,
-    directionalLightIntensity: 3,
-    envMapIntensity: 2
-  };
-  lightProbe = new three__WEBPACK_IMPORTED_MODULE_11__.LightProbe();
-  scene.add(lightProbe);
-  directionalLight = new three__WEBPACK_IMPORTED_MODULE_11__.DirectionalLight(0xffffff, lightParam.directionalLightIntensity);
-  directionalLight.position.set(10, 10, 10);
-  scene.add(directionalLight);
-  renderer.autoClear = false; // stats = new Stats();
+  // stats = new Stats();
   // container.appendChild(stats.dom);
 
   container.style.touchAction = 'none';
@@ -71978,10 +71963,6 @@ function initPostprocessing() {
   composer.addPass(renderPass);
 }
 
-function render() {
-  postprocessing.composer.render(0.1);
-}
-
 function postProcessingEnable() {
   afterimagePass = new three_examples_jsm_postprocessing_AfterimagePass_js__WEBPACK_IMPORTED_MODULE_7__.AfterimagePass();
   afterimagePass.uniforms["damp"].value = 0.875;
@@ -71991,6 +71972,73 @@ function postProcessingEnable() {
   effectVignette.uniforms["darkness"].value = 2.0;
   composer.addPass(afterimagePass);
   composer.addPass(effectVignette);
+}
+
+function cameraInit() {
+  var cameraTargetGeo = new three__WEBPACK_IMPORTED_MODULE_11__.SphereGeometry(1, 32, 16);
+  var invisibleMat = new three__WEBPACK_IMPORTED_MODULE_11__.MeshPhysicalMaterial({
+    transmission: 0.0
+  });
+  camera = new three__WEBPACK_IMPORTED_MODULE_11__.PerspectiveCamera(cameraParams.fov, width / height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax);
+  cameraTargetVector3 = new three__WEBPACK_IMPORTED_MODULE_11__.Vector3(0, 1, 5);
+  camera.position.copy(cameraTargetVector3);
+  camera.rotation.set(0, 0, 0);
+  cameraTargetPos = new three__WEBPACK_IMPORTED_MODULE_11__.Mesh(cameraTargetGeo, invisibleMat);
+  cameraTargetPos.position.copy(cameraTargetVector3);
+  scene.add(cameraTargetPos);
+  cameraTargetPos.material.opacity = 0;
+  cameraTargetPos.material.transparent = true;
+  cameraTargetPos.transparent = true;
+  cameraTargetLookAtVector3 = new three__WEBPACK_IMPORTED_MODULE_11__.Vector3(0, 3, -4);
+  cameraTargetLookAt = new three__WEBPACK_IMPORTED_MODULE_11__.Mesh(cameraTargetGeo, invisibleMat);
+  cameraTargetLookAt.position.copy(cameraTargetLookAtVector3);
+  scene.add(cameraTargetLookAt);
+  cameraTargetLookAt.material.opacity = 0;
+  cameraTargetLookAt.material.transparent = true;
+  cameraTargetLookAt.transparent = true;
+  cursorPosVector3 = new three__WEBPACK_IMPORTED_MODULE_11__.Vector3(0, 2, -4);
+  cursorObject = new three__WEBPACK_IMPORTED_MODULE_11__.Mesh(cameraTargetGeo, invisibleMat);
+  cursorObject.position.copy(cursorPosVector3);
+  scene.add(cursorObject);
+  cursorObject.scale.set(0.1, 0.1, 0.1);
+  cursorObject.material.opacity = 0;
+  cursorObject.material.transparent = true;
+  cursorObject.transparent = true;
+}
+
+function rendererInit() {
+  renderer = new three__WEBPACK_IMPORTED_MODULE_11__.WebGLRenderer({
+    canvas: canvas
+  });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(width, height);
+  renderer.outputEncoding = three__WEBPACK_IMPORTED_MODULE_11__.sRGBEncoding;
+  renderer.toneMapping = three__WEBPACK_IMPORTED_MODULE_11__.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.25;
+}
+
+function lightsInit() {
+  var lightProbe;
+  var directionalLight;
+  var lightParam = {
+    lightProbeIntensity: 3,
+    directionalLightIntensity: 3,
+    envMapIntensity: 2
+  };
+  lightProbe = new three__WEBPACK_IMPORTED_MODULE_11__.LightProbe();
+  scene.add(lightProbe);
+  directionalLight = new three__WEBPACK_IMPORTED_MODULE_11__.DirectionalLight(0xffffff, lightParam.directionalLightIntensity);
+  directionalLight.position.set(10, 10, 10);
+  scene.add(directionalLight);
+}
+
+function sceneInit() {
+  scene.fog = new three__WEBPACK_IMPORTED_MODULE_11__.FogExp2(0x111111, fogParams.density);
+  scene.background = new three__WEBPACK_IMPORTED_MODULE_11__.Color(0x111111);
+}
+
+function render() {
+  postprocessing.composer.render(0.1);
 }
 
 var isFpsReadyToCheck = false;
@@ -72055,38 +72103,6 @@ function fpsChecker() {
   }
 }
 
-function cameraInit() {
-  var cameraTargetGeo = new three__WEBPACK_IMPORTED_MODULE_11__.SphereGeometry(1, 32, 16);
-  var invisibleMat = new three__WEBPACK_IMPORTED_MODULE_11__.MeshPhysicalMaterial({
-    transmission: 0.0
-  });
-  camera = new three__WEBPACK_IMPORTED_MODULE_11__.PerspectiveCamera(cameraParams.fov, width / height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax);
-  cameraTargetVector3 = new three__WEBPACK_IMPORTED_MODULE_11__.Vector3(0, 1, 5);
-  camera.position.copy(cameraTargetVector3);
-  camera.rotation.set(0, 0, 0);
-  cameraTargetPos = new three__WEBPACK_IMPORTED_MODULE_11__.Mesh(cameraTargetGeo, invisibleMat);
-  cameraTargetPos.position.copy(cameraTargetVector3);
-  scene.add(cameraTargetPos);
-  cameraTargetPos.material.opacity = 0;
-  cameraTargetPos.material.transparent = true;
-  cameraTargetPos.transparent = true;
-  cameraTargetLookAtVector3 = new three__WEBPACK_IMPORTED_MODULE_11__.Vector3(0, 3, -4);
-  cameraTargetLookAt = new three__WEBPACK_IMPORTED_MODULE_11__.Mesh(cameraTargetGeo, invisibleMat);
-  cameraTargetLookAt.position.copy(cameraTargetLookAtVector3);
-  scene.add(cameraTargetLookAt);
-  cameraTargetLookAt.material.opacity = 0;
-  cameraTargetLookAt.material.transparent = true;
-  cameraTargetLookAt.transparent = true;
-  cursorPosVector3 = new three__WEBPACK_IMPORTED_MODULE_11__.Vector3(0, 2, -4);
-  cursorObject = new three__WEBPACK_IMPORTED_MODULE_11__.Mesh(cameraTargetGeo, invisibleMat);
-  cursorObject.position.copy(cursorPosVector3);
-  scene.add(cursorObject);
-  cursorObject.scale.set(0.1, 0.1, 0.1);
-  cursorObject.material.opacity = 0;
-  cursorObject.material.transparent = true;
-  cursorObject.transparent = true;
-}
-
 function cameraMove(delta) {
   var alpha = 0;
   alpha += delta * 2;
@@ -72095,17 +72111,6 @@ function cameraMove(delta) {
     camera.position.lerp(cameraTargetPos.position, alpha);
     camera.lookAt(cameraTargetLookAt.position);
   }
-}
-
-function rendererInit() {
-  renderer = new three__WEBPACK_IMPORTED_MODULE_11__.WebGLRenderer({
-    canvas: canvas
-  });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(width, height);
-  renderer.outputEncoding = three__WEBPACK_IMPORTED_MODULE_11__.sRGBEncoding;
-  renderer.toneMapping = three__WEBPACK_IMPORTED_MODULE_11__.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.25;
 }
 
 var cameraPosi = 0;
@@ -72199,65 +72204,6 @@ animate(); //other stuff
 
 var navBurger = document.getElementById("nav-burger");
 navBurger.addEventListener("click", navCameraPos);
-var threeDisabler = document.getElementById("three_disabler");
-threeDisabler.addEventListener("click", threeJsDNone);
-var threeEnabler = document.getElementById("three_enabler");
-threeEnabler.addEventListener("click", threeJsDBlock);
-gsap__WEBPACK_IMPORTED_MODULE_10__["default"].set(threeEnabler, {
-  opacity: 0
-});
-threeEnabler.style.zIndex = "-10";
-threeDisabler.style.zIndex = "99";
-
-function threeJsDNone() {
-  tl.to(threeDisabler, {
-    opacity: 0,
-    duration: 0.75,
-    ease: "expo",
-    onComplete: function onComplete() {
-      threeDisabler.style.zIndex = "-10";
-      threeEnabler.style.zIndex = "99";
-    }
-  });
-  tl.to(threeEnabler, {
-    opacity: 1,
-    duration: 0.75,
-    ease: "expo"
-  });
-  tl.to(canvas, {
-    opacity: 0,
-    duration: 1,
-    ease: "expo",
-    onComplete: function onComplete() {
-      canvas.style.display = "none";
-    }
-  }, "-=0.75");
-}
-
-function threeJsDBlock() {
-  tl.to(threeEnabler, {
-    opacity: 0,
-    duration: 0.75,
-    ease: "expo",
-    onComplete: function onComplete() {
-      threeDisabler.style.zIndex = "99";
-      threeEnabler.style.zIndex = "-10";
-    }
-  });
-  tl.to(threeDisabler, {
-    opacity: 1,
-    duration: 0.75,
-    ease: "expo"
-  });
-  tl.to(canvas, {
-    opacity: 1,
-    duration: 1,
-    ease: "expo",
-    onStart: function onStart() {
-      canvas.style.display = "block";
-    }
-  }, "-=0.75");
-}
 })();
 
 /******/ })()

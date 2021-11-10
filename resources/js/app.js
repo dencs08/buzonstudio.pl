@@ -4,12 +4,26 @@ import * as $ from 'jquery'
 const topCover = document.getElementsByClassName("top-side")
 const bottomCover = document.getElementsByClassName("bottom-side")
 const tl = gsap.timeline()
+const canvas = document.getElementById("web_gl")
+let checkIfWebEnteredForCookie = false;
 
 //! page transitions
 window.onload = () => {
     const anchors = document.querySelectorAll('.web_link_transitions')
     const startButton = document.getElementById('start-button');
     const courtainWrapper = document.querySelector(".courtain-wrapper")
+
+    let checkI = 0
+    if (checkIfWebEnteredForCookie == false) {
+        checkIfWebEnteredForCookie = true;
+        setInterval(() => {
+            if (webEntered == true) {
+                for (checkI; checkI < 1; checkI++) {
+                    checkCookie(0.5)
+                }
+            }
+        }, 100);
+    }
 
     if (!sessionStorage.noFirstVisit) {
         courtainWrapper.style.display = 'flex';
@@ -216,5 +230,126 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
     });
 }
 
+const threeDisabler = document.getElementById("three_disabler")
+threeDisabler.addEventListener("click", threeJsDNone)
 
+const threeEnabler = document.getElementById("three_enabler")
+threeEnabler.addEventListener("click", threeJsDBlock)
 
+const background_image = document.getElementById("background_image")
+
+if (!sessionStorage.noFirstVisit) {
+    three_enabled == true
+    document.cookie = "three_enable=true; path=/;";
+}
+
+function threeJsDNone(delay) {
+    document.cookie = "three_enable=false; path=/;";
+    var tl = new gsap.timeline()
+    gsap.to(canvas, {
+        opacity: 0,
+        duration: 1,
+        ease: "expo",
+        onComplete: function () {
+            canvas.style.display = "none"
+        }
+    })
+    gsap.to(background_image, {
+        opacity: 1,
+        duration: 1,
+        ease: "expo",
+    })
+    gsap.to(threeDisabler, {
+        opacity: 0,
+        duration: 0.75,
+        ease: "expo",
+        onComplete: function () {
+            threeDisabler.style.zIndex = "-10"
+            threeEnabler.style.zIndex = "99"
+        }
+    })
+    gsap.to(threeEnabler, {
+        opacity: 1,
+        duration: 0.75,
+        ease: "expo",
+    })
+
+}
+
+function threeJsDBlock(delay) {
+    document.cookie = "three_enable=true; path=/;";
+    var tl = new gsap.timeline()
+    gsap.fromTo(canvas, { opacity: 0 }, {
+        opacity: 1,
+        duration: 1.5,
+        ease: "sine2",
+        onStart: function () {
+            canvas.style.display = "block"
+        }
+    }, "=" + delay)
+    gsap.to(background_image, {
+        opacity: 0,
+        duration: 1,
+        ease: "expo",
+    })
+    gsap.to(threeEnabler, {
+        opacity: 0,
+        duration: 0.75,
+        ease: "expo",
+        onComplete: function () {
+            threeDisabler.style.zIndex = "99"
+            threeEnabler.style.zIndex = "-10"
+        }
+    })
+    gsap.to(threeDisabler, {
+        opacity: 1,
+        duration: 0.75,
+        ease: "expo",
+    })
+}
+
+function checkCookie(initDelay) {
+    let three_enable = getCookie("three_enable");
+    if (three_enable == "true") {
+        three_enabled = true;
+        threeJsDBlock(initDelay)
+        gsap.set(threeEnabler, {
+            opacity: 0,
+        })
+    } else {
+        three_enabled = false;
+        threeJsDNone(initDelay)
+        gsap.set(threeDisabler, {
+            opacity: 0,
+        })
+    }
+    // console.log(three_enable);
+}
+
+function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+var body = document.body,
+    html = document.documentElement;
+
+var height = Math.max(body.scrollHeight, body.offsetHeight,
+    html.clientHeight, html.scrollHeight, html.offsetHeight);
+
+var width = document.body.clientWidth;
+
+const background_img = document.getElementById("background_image")
+
+background_img.style.height = height * 2.5 + "px";
+background_img.style.width = width + "px";

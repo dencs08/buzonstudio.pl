@@ -23,14 +23,14 @@ if (stopCheck == false) {
             stopCheck = true
             for (checkI; checkI < 1; checkI++) {
                 //!timeline 1
-                tl.fromTo(three, {
-                    opacity: 0,
-                }, {
-                    opacity: 1,
-                    delay: 0.25,
-                    duration: 0.75,
-                    ease: "sine.in",
-                })
+                // tl.fromTo(three, {
+                //     opacity: 0,
+                // }, {
+                //     opacity: 1,
+                //     delay: 0.25,
+                //     duration: 0.75,
+                //     ease: "sine.in",
+                // })
                 tl.fromTo(h2, {
                     clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
                     opacity: 0,
