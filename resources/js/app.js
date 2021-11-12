@@ -353,3 +353,6 @@ const background_img = document.getElementById("background_image")
 
 background_img.style.height = height * 2.5 + "px";
 background_img.style.width = width + "px";
+
+//exports
+export { threeJsDNone, threeJsDBlock };

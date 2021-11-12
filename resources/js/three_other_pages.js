@@ -15,7 +15,7 @@ import { AfterimagePass } from 'three/examples/jsm/postprocessing/AfterimagePass
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import { VignetteShader } from 'three/examples/jsm/shaders/VignetteShader.js';
 
-// import Stats from 'three/examples/jsm/libs/stats.module'
+import Stats from 'three/examples/jsm/libs/stats.module'
 
 // ***
 // *** MAIN PROPERITES
@@ -39,7 +39,7 @@ const gltfLoader = new GLTFLoader()
 
 let tl = gsap.timeline()
 
-// const gui = new GUI()
+const gui = new GUI()
 
 const canvas = document.querySelector('#web_gl')
 
@@ -73,11 +73,12 @@ function init() {
 
     //! Controls
     // controls = new OrbitControls(camera, renderer.domElement)
-    // stats = new Stats();
-    // container.appendChild(stats.dom);
+    stats = new Stats();
+    container.appendChild(stats.dom);
     container.style.touchAction = 'none';
-    container.addEventListener('pointermove', onPointerMove);
     window.addEventListener('resize', onWindowResize);
+    // container.addEventListener('pointermove', onPointerMove);
+    // document.addEventListener('pointermove', render);
 
     loadModels()
     enviroParticles()
@@ -101,11 +102,12 @@ function onPointerMove(event) {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
 
-    var mouseScreenVector = new THREE.Vector3(mouse.x * 2, mouse.y + 1.5, 5);
+    var mouseScreenVector = new THREE.Vector3(-mouse.x * 2, -mouse.y + 1.5, 5);
     mousePos = mouseScreenVector;
 
     mouseInteractivity()
 }
+
 
 function mouseInteractivity() {
     if (readyToRotate == true) {
@@ -134,6 +136,7 @@ function initPostprocessing() {
 
     postprocessing.composer = composer;
     composer.addPass(renderPass)
+    postProcessingEnable()
 }
 
 function postProcessingEnable() {
@@ -149,8 +152,13 @@ function postProcessingEnable() {
     composer.addPass(effectVignette);
 }
 
+function postProcessingDisable() {
+    composer.removePass(afterimagePass);
+    composer.removePass(effectVignette);
+}
+
 function cameraInit() {
-    const cameraTargetGeo = new THREE.SphereGeometry(1, 32, 16)
+    const cameraTargetGeo = new THREE.SphereBufferGeometry(1, 32, 16)
     const invisibleMat = new THREE.MeshPhysicalMaterial({
         transmission: 0.0,
     })
@@ -185,8 +193,16 @@ function cameraInit() {
     cursorObject.transparent = true;
 }
 
+let pixelRatio = window.devicePixelRatio
+let AA = true
+if (pixelRatio > 1) {
+    AA = false
+}
+
 function rendererInit() {
     renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        powerPreference: "high-performance",
         canvas: canvas
     });
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -221,6 +237,7 @@ function sceneInit() {
 }
 
 function render() {
+    // renderer.render(scene, camera)
     postprocessing.composer.render(0.1);
 }
 
@@ -238,13 +255,15 @@ function animate(time) {
 
     requestAnimationFrame(animate, renderer.domElement);
 
-    // stats.begin();
-    // stats.end();
+    stats.begin();
     render();
+    stats.end();
 
     cameraMove(delta)
     animateParticles(time)
     fpsChecker()
+
+    // console.log(renderer.info.render)
 }
 
 function ArrayAvg(myArray) {
@@ -257,28 +276,25 @@ function ArrayAvg(myArray) {
 }
 
 function fpsChecker() {
-    thisLoop = new Date();
-    fps = 1000 / (thisLoop - lastLoop);
-    lastLoop = thisLoop;
-
-    if (pushNumber < 30) {
-        fpsArray.push(fps);
-        pushNumber++;
-    }
+    thisLoop = new Date()
+    fps = 1000 / (thisLoop - lastLoop)
+    lastLoop = thisLoop
 
     if (isFpsReadyToCheck == true && fpsChecked == false) {
         if (sessionStorage.noFirstVisit == "1") {
             isFpsReadyToCheck = false;
             setTimeout(() => {
+                if (pushNumber < 100) {
+                    fpsArray.push(fps);
+                    pushNumber++;
+                }
                 avgFps = ArrayAvg(fpsArray);
                 // console.log(canvas.width)
                 console.log(avgFps)
-                if (avgFps < 20) {
-                    threeJsDNone()
-                } else if (avgFps > 30) {
-                    postProcessingEnable()
+                if (avgFps < 25) {
+                    postProcessingDisable()
                 }
-            }, 2000);
+            }, 3250);
         }
     }
 }
@@ -371,6 +387,34 @@ function animateParticles(time) {
             object.rotation.z = (time / 100) * (i < 4 ? i + 1 : - (i + 1));
         }
     }
+}
+
+function threeJsDNone() {
+    clearThree(scene)
+    postProcessingDisable()
+}
+
+function clearThree(obj) {
+    while (obj.children.length > 0) {
+        clearThree(obj.children[0])
+        obj.remove(obj.children[0]);
+    }
+    if (obj.geometry) obj.geometry.dispose()
+
+    if (obj.material) {
+        Object.keys(obj.material).forEach(prop => {
+            if (!obj.material[prop])
+                return
+            if (obj.material[prop] !== null && typeof obj.material[prop].dispose === 'function')
+                obj.material[prop].dispose()
+        })
+        obj.material.dispose()
+    }
+    renderer.dispose()
+    renderer.domElement = null;
+    scene = null;
+    camera = null;
+    canvas.style.display = "none"
 }
 
 init()
