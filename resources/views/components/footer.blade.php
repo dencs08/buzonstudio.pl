@@ -11,37 +11,42 @@
                 <div class="client-logos anim-stagger6 gs gs_fromBotom">
                     <div align="center" class="client-logo">
                         <img
-                            src="{{asset('images/logos/danfit.svg')}}"
+                            data-src="{{asset('images/logos/danfit.svg')}}"
                             alt="branding (logotyp) danfit"
                             class="client-logo-svg"
+                            width="350" height="100"
                         />
                     </div>
                     <div align="center" class="client-logo">
                         <img
-                            src="{{asset('images/logos/komb.svg')}}"
+                            data-src="{{asset('images/logos/komb.svg')}}"
                             alt="branding (logotyp) komb"
                             class="client-logo-svg"
+                            width="350" height="100"
                         />
                     </div>
                     <div align="center" class="client-logo">
                         <img
-                            src="{{asset('images/logos/logo_white-cropped.svg')}}"
+                            data-src="{{asset('images/logos/logo_white-cropped.svg')}}"
                             alt="branding (logotyp) bisonstudio"
                             class="client-logo-svg"
+                            width="350" height="100"
                         />
                     </div>
                     <div align="center" class="client-logo">
                         <img
-                            src="{{asset('images/logos/zielonewidoki.svg')}}"
+                            data-src="{{asset('images/logos/zielonewidoki.svg')}}"
                             alt="branding (logotyp) zielonewidoki"
                             class="client-logo-svg"
+                            width="350" height="100"
                         />
                     </div>
                     <div align="center" class="client-logo">
                         <img
-                            src="{{asset('images/logos/ats.svg')}}"
+                            data-src="{{asset('images/logos/ats.svg')}}"
                             alt="branding (logotyp) ats-konsulting"
                             class="client-logo-svg"
+                            width="350" height="100"
                         />
                     </div>
                 </div>
@@ -61,7 +66,7 @@
 
                     <h4 class="my-0 mt-3 mb-4">+48 882 031 130</h4>
 
-                    <a href="https://www.facebook.com/bisonstudiopl" target="_blank">
+                    <a href="https://www.facebook.com/bisonstudiopl" rel="noreferrer" target="_blank">
                     <div class="footer-icon-div">
                         <svg
                             id="facebook-icon"
@@ -87,7 +92,7 @@
                     </a>
 
 
-                    <a href="https://www.instagram.com/bisonstudiopl/" target="_blank">
+                    <a href="https://www.instagram.com/bisonstudiopl/" rel="noreferrer" target="_blank">
                     <div class="footer-icon-div">
                         <svg
                             id="ig-icon"

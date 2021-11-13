@@ -37,13 +37,6 @@ var animateOutDownParam = {
     ease: "power1",
 };
 
-var animateOutOtherParam = {
-    autoAlpha: 0,
-    opacity: 0,
-    duration: 0.25,
-    ease: "power1",
-};
-
 function hideElements() {
     for (let i = 1; i < sections.length; i++) {
         const section = sections[i];

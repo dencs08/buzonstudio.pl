@@ -16,21 +16,11 @@ import { VignetteShader } from 'three/examples/jsm/shaders/VignetteShader.js';
 import Stats from 'three/examples/jsm/libs/stats.module'
 
 import {
-    animateParticles, enviroParticles, bisonHeadLoad, fpsChecker, navCameraPos, cameraInit, cameraMove,
-    bisonHead, isFpsReadyToCheck, isNavOpened, width, height, camera, cameraTargetPos, cameraTargetVector3, cameraTargetLookAtVector3, cameraTargetLookAt, cursorObject
+    animateParticles, enviroParticles, bisonHeadLoad, fpsChecker, navCameraPos, cameraInit, cameraMove, onWindowResize, sceneInit, rendererInit,
+    bisonHead, isFpsReadyToCheck, isNavOpened, width, height, camera, cameraTargetPos, cameraTargetVector3, cameraTargetLookAtVector3, cameraTargetLookAt, cursorObject, avgFps, renderer, canvas
 } from './components/threejs/threeJsClasses.js';
-// ***
-// *** MAIN PROPERITES
-// ***
-
-const fogParams = {
-    density: 0.2,
-}
-
 //Objects
-let icons = []
-
-let scene, renderer, stats,
+let scene, stats,
     parameters, cubeMaterial, controls, clock, iResolutionMultiplierValue;
 
 //Shaders
@@ -43,17 +33,10 @@ let tl = gsap.timeline()
 
 const gui = new GUI()
 
-const canvas = document.querySelector('#web_gl')
-const mouseOverlay = document.querySelector('#mouse_overlay')
-
 clock = new THREE.Clock();
 
-let mouseX = 0, mouseY = 0;
 var mouse = { x: 0, y: 0 };
 var mousePos;
-
-let windowHalfX = window.innerWidth / 2;
-let windowHalfY = window.innerHeight / 2;
 
 const materials = [], objects = [];
 
@@ -107,9 +90,6 @@ document.onmousemove = onPointerMove;
 function onPointerMove(event) {
     if (event.isPrimary === false) return;
 
-    mouseX = event.pageX - windowHalfX;
-    mouseY = event.pageY - windowHalfY;
-
     // event.preventDefault();
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
@@ -125,20 +105,6 @@ function onPointerMove(event) {
 function mouseInteractivity() {
     cursorObject.position.copy(mousePos);
     cursorObject.position.z = camera.position.z
-}
-
-function onWindowResize() {
-    windowHalfX = window.innerWidth / 2;
-    windowHalfY = window.innerHeight / 2;
-
-    width = window.innerWidth;
-    height = window.innerHeight;
-
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(width, height);
-    postprocessing.composer.setSize(width, height);
 }
 
 let composer, shaderVignette, effectVignette, afterimagePass, renderPass;
@@ -169,19 +135,6 @@ function postProcessingDisable() {
     composer.removePass(effectVignette)
 }
 
-function rendererInit() {
-    renderer = new THREE.WebGLRenderer({
-        canvas: canvas
-    });
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(width, height);
-
-    renderer.outputEncoding = THREE.sRGBEncoding
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.25;
-    renderer.autoClear = false;
-}
-
 function lightsInit() {
     let lightProbe;
     let directionalLight;
@@ -200,18 +153,13 @@ function lightsInit() {
     scene.add(directionalLight);
 }
 
-function sceneInit() {
-    scene.fog = new THREE.FogExp2(0x111111, fogParams.density)
-    scene.background = new THREE.Color(0x111111);
-}
-
-var avgFps, delta;
+var delta;
 function animate(time) {
     delta = clock.getDelta();
     time *= 0.001;
 
     uniforms.iTime.value = time;
-    uniforms.iMouse.value.set(Math.abs(mouseX), Math.abs(mouseY), Math.abs(mouseX), Math.abs(mouseY));
+    uniforms.iMouse.value.set(Math.abs(mouse.x), Math.abs(mouse.y), Math.abs(mouse.x), Math.abs(mouse.y));
     requestAnimationFrame(animate, renderer.domElement);
 
     stats.begin();
@@ -233,11 +181,12 @@ var postProcessingEnabled = false;
 function cameraScrollPos() {
     switch (startSectionIndex) {
         case 0:
-            if (isNavOpened % 2 == 0) {
-                cameraTargetPos.position.copy(cameraTargetVector3)
+            if (postProcessingEnabled == true) {
                 postProcessingEnabled = false;
                 postProcessingDisable()
-
+            }
+            if (isNavOpened % 2 == 0) {
+                cameraTargetPos.position.copy(cameraTargetVector3)
                 gsap.to(cameraTargetLookAt.position, {
                     duration: 3,
                     ease: 'expo.out',
@@ -250,18 +199,17 @@ function cameraScrollPos() {
             }
             break;
         case 1:
+            if (postProcessingEnabled == false) {
+                postProcessingEnabled = true;
+                if (avgFps > 30) {
+                    setTimeout(() => {
+                        postProcessingEnable()
+                    }, 500);
+                }
+            }
             if (isNavOpened % 2 == 0) {
                 cameraTargetPos.position.set(0, 2, 15)
                 bisonHead.lookAt(cursorObject.position)
-                setTimeout(() => {
-                    if (postProcessingEnabled == false) {
-                        postProcessingEnabled = true;
-                        if (avgFps > 30) {
-                            postProcessingEnable()
-                        }
-                    }
-                }, 500);
-
                 gsap.to(cameraTargetLookAt.position, {
                     duration: 3,
                     ease: 'expo.out',
@@ -392,46 +340,6 @@ function loadModels() {
     bisonHeadLoad(0.75, bisonHeadPos)
 }
 
-function iconsLoad() {
-    let iconsName = [
-        'share',
-        'megaphone',
-        'arrow',
-        'trend',
-        'happy',
-        'email',
-        'star',
-    ]
-
-    const iconsPos = [
-        new THREE.Vector3(0, 2, -10),
-        new THREE.Vector3(2.5, 2, 10),
-        new THREE.Vector3(-2.5, 2, 25),
-        new THREE.Vector3(2.5, 2, 40),
-        new THREE.Vector3(0, 2, 55),
-        new THREE.Vector3(0, 2, 70),
-        new THREE.Vector3(0, 2, 85),
-    ]
-
-    let pos = 0
-    for (let index = 0; index < iconsName.length; index++) {
-        const icon = iconsName[index];
-
-
-
-        gltfLoader.load("3d/models/icons/icon-" + icon + ".glb", (glb) => {
-            icon = glb.scene
-            icon.traverse((o) => {
-                if (o.isMesh) o.material = humanMaterial;
-            });
-            scene.add(icon)
-            icon.position.set(iconsPos[index].x, iconsPos[index].y, iconsPos[index].z)
-            pos += 15
-            icons.push(icon);
-        })
-    }
-}
-
 function vertexShader() {
     return `
     varying vec2 vUv;
@@ -531,4 +439,4 @@ let navCameraPosValue = new THREE.Vector3(0, 2, -2)
 const navBurger = document.getElementById("nav-burger")
 // navBurger.addEventListener("click", navCameraPos(navCameraPosValue, cameraTargetVector3));
 
-export { scene, renderer, readyToMove, readyToRotate };
+export { scene, readyToMove, readyToRotate, postprocessing };

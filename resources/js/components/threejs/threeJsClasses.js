@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 const gltfLoader = new GLTFLoader()
 
 import { threeJsDNone, threeJsDBlock } from '../../app.js';
-import { scene, renderer, readyToMove, readyToRotate } from "../../three.js"
+import { scene, readyToMove, readyToRotate, postprocessing } from "../../three.js"
 
 var url = new URL("../", document.baseURI).href
 
@@ -39,6 +39,47 @@ function bisonHeadLoad(bisonScale, bisonPos) {
             bisonHead.position.set(bisonPos.x, bisonPos.y, bisonPos.z)
         })
     });
+}
+
+let icons = []
+function iconsLoad() {
+    let iconsName = [
+        'share',
+        'megaphone',
+        'arrow',
+        'trend',
+        'happy',
+        'email',
+        'star',
+    ]
+
+    const iconsPos = [
+        new THREE.Vector3(0, 2, -10),
+        new THREE.Vector3(2.5, 2, 10),
+        new THREE.Vector3(-2.5, 2, 25),
+        new THREE.Vector3(2.5, 2, 40),
+        new THREE.Vector3(0, 2, 55),
+        new THREE.Vector3(0, 2, 70),
+        new THREE.Vector3(0, 2, 85),
+    ]
+
+    let pos = 0
+    for (let index = 0; index < iconsName.length; index++) {
+        const icon = iconsName[index];
+
+
+
+        gltfLoader.load("3d/models/icons/icon-" + icon + ".glb", (glb) => {
+            icon = glb.scene
+            icon.traverse((o) => {
+                if (o.isMesh) o.material = humanMaterial;
+            });
+            scene.add(icon)
+            icon.position.set(iconsPos[index].x, iconsPos[index].y, iconsPos[index].z)
+            pos += 15
+            icons.push(icon);
+        })
+    }
 }
 
 let particleGeo, particleVerts, sprite, particleMat, particles;
@@ -76,6 +117,7 @@ var thisLoop, fps, lastLoop, avgFps
 var fpsChecked = false
 var lastLoop = new Date()
 var fpsArray = []
+let pushNumber = 0
 let isFpsReadyToCheck = {
     isReady: false,
     get check() {
@@ -85,7 +127,6 @@ let isFpsReadyToCheck = {
         this.isReady = value
     }
 };
-let pushNumber = 0
 function fpsChecker() {
     thisLoop = new Date();
     fps = 1000 / (thisLoop - lastLoop);
@@ -139,7 +180,6 @@ const cameraParams = {
     renderDistanceMax: 15,
     fov: 60,
 }
-
 let width = window.innerWidth;
 let height = window.innerHeight;
 let camera, cameraTargetLookAt, cameraTargetLookAtVector3, cameraTargetPos, cameraTargetVector3, cursorPosVector3, cursorObject, cursorPosObject
@@ -188,7 +228,44 @@ function cameraMove(delta) {
     }
 }
 
+let windowHalfX = window.innerWidth / 2;
+let windowHalfY = window.innerHeight / 2;
+function onWindowResize() {
+    windowHalfX = window.innerWidth / 2;
+    windowHalfY = window.innerHeight / 2;
+
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(width, height);
+    postprocessing.composer.setSize(width, height);
+}
+
+let renderer, canvas
+function rendererInit() {
+    canvas = document.querySelector('#web_gl')
+    renderer = new THREE.WebGLRenderer({
+        canvas: canvas
+    });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(width, height);
+
+    renderer.outputEncoding = THREE.sRGBEncoding
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.25;
+    renderer.autoClear = false;
+}
+
+function sceneInit() {
+    scene.fog = new THREE.FogExp2(0x111111, 0.2)
+    scene.background = new THREE.Color(0x111111);
+}
+
+
 export {
-    bisonHeadLoad, animateParticles, enviroParticles, fpsChecker, navCameraPos, cameraInit, cameraMove,
-    bisonHead, isFpsReadyToCheck, isNavOpened, width, height, camera, cameraTargetPos, cameraTargetVector3, cameraTargetLookAtVector3, cameraTargetLookAt, cursorObject
+    bisonHeadLoad, animateParticles, enviroParticles, fpsChecker, navCameraPos, cameraInit, cameraMove, onWindowResize, sceneInit, rendererInit,
+    bisonHead, isFpsReadyToCheck, isNavOpened, width, height, camera, cameraTargetPos, cameraTargetVector3, cameraTargetLookAtVector3, cameraTargetLookAt, cursorObject, avgFps, renderer, canvas
 };

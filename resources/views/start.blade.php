@@ -121,11 +121,11 @@
                 </div>
                 <div class="grid-item main">
                     <div class="slide-track">
-                        <a href="portfolio/danfit" class="web_link_transitions portfolio-item portfolio-item3 mx-auto mx-lg-5 item1 anim-stagger4">branding</a>
-                        <a href="portfolio/castle3d" class="web_link_transitions portfolio-item portfolio-item1 mx-auto mx-lg-5 item2 d-none d-lg-inline-block anim-stagger4">wizualizacje architektoniczne</a>
-                        <a href="portfolio/watch3d" class="web_link_transitions portfolio-item portfolio-item2 mx-auto mx-lg-5 item3 d-none d-lg-inline-block anim-stagger4">wizualizacje produktów</a>
-                        <a href="portfolio/komb" class="web_link_transitions portfolio-item portfolio-item4 mx-auto mx-lg-5 item4 d-none d-lg-inline-block anim-stagger4">wizualizacje reklamy</a>
-                        <a href="portfolio/zielonewidoki" class="web_link_transitions portfolio-item portfolio-item5 mx-auto mx-lg-5 item5 d-none d-lg-inline-block anim-stagger4">tworzenie stron internetowych</a>
+                        <a href="portfolio/danfit" class="web_link_transitions portfolio-item portfolio-item3 mx-auto mx-lg-5 item1 anim-stagger4"><img data-src="images/portfolio/danfit/danfit_portfolio.jpg" alt="tworzenie logotypu i brandingu" class="portfolio_image_item"></a>
+                        <a href="portfolio/castle3d" class="web_link_transitions portfolio-item portfolio-item1 mx-auto mx-lg-5 item2 d-none d-lg-inline-block anim-stagger4"><img data-src="images/portfolio/castle3d/castle3d_portfolio.jpg" alt="wizualizacja archietktoniczna 3D" class="portfolio_image_item"></a>
+                        <a href="portfolio/watch3d" class="web_link_transitions portfolio-item portfolio-item2 mx-auto mx-lg-5 item3 d-none d-lg-inline-block anim-stagger4"><img data-src="images/portfolio/watch3d/watch3d_portfolio.jpg" alt="wizualizacja produktu zegarka w 3D" class="portfolio_image_item"></a>
+                        <a href="portfolio/komb" class="web_link_transitions portfolio-item portfolio-item4 mx-auto mx-lg-5 item4 d-none d-lg-inline-block anim-stagger4"><img data-src="images/portfolio/komb/komb_portfolio.jpg" alt="wizualizacja reklamy busa w 3D" class="portfolio_image_item"></a>
+                        <a href="portfolio/zielonewidoki" class="web_link_transitions portfolio-item portfolio-item5 mx-auto mx-lg-5 item5 d-none d-lg-inline-block anim-stagger4"><img data-src="images/portfolio/zielonewidoki/zielonewidoki_portfolio.jpg" alt="tworzenie stron internetowych" class="portfolio_image_item"></a>
                     </div>
                 </div>  
                 <div class="portfolio-btn-container container">

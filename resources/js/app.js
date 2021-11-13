@@ -258,6 +258,9 @@ function threeJsDNone(delay) {
         opacity: 1,
         duration: 1,
         ease: "expo",
+        onStart: function () {
+            background_image.style.display = "block"
+        }
     })
     gsap.to(threeDisabler, {
         opacity: 0,
@@ -291,6 +294,9 @@ function threeJsDBlock(delay) {
         opacity: 0,
         duration: 1,
         ease: "expo",
+        onComplete: function () {
+            background_image.style.display = "none"
+        }
     })
     gsap.to(threeEnabler, {
         opacity: 0,

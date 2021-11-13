@@ -91,11 +91,16 @@
     transition: 0.5s;
 }
 
+.img-nav-a {
+    width: clamp(6em, 5vw, 10em);
+}
+
 .img-nav {
     position: fixed;
     top: 15px;
     left: 30px;
     width: clamp(6em, 5vw, 10em);
+    // pointer-events: none;
 }
 
 .nav-number {
@@ -159,7 +164,7 @@
 }
 
 .nav-copyright {
-    font-size: clamp(0.65rem, 1vw, 0.95rem);
+    font-size: clamp(0.75rem, 1vw, 0.95rem);
     color: #3a3a3a !important;
     text-align: center !important;
 }

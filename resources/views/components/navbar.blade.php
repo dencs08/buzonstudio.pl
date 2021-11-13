@@ -9,7 +9,9 @@
     <div id="nav-wrapper" class="wrapper">
         <div class="nav-container container">
             <div id="nav-content-outlined">
-                <img src="{{asset('images/logos/logo_white.svg')}}" class="img-nav" alt="branding (logotyp) bisonstudio" />
+                <a href="/start" class="img-nav-a">
+                    <img src="{{asset('images/logos/logo_white.svg')}}" class="img-nav" alt="branding (logotyp) bisonstudio" />
+                </a>
             </div>
 
             <div id="scaled-content" class="nav-main-content">
@@ -25,7 +27,7 @@
                         <ul id="nav-ul">
                             <li class="nav-li">
                                 <span class="nav-number">01</span
-                                ><a href="/start" class="nav-item web_link web_link_active web_link_transitions">Start</a>
+                                ><a href="/start" class="nav-item web_link web_link_active web_link_transitions">Strona Główna</a>
                             </li>
                             <li class="nav-li">
                                 <span class="nav-number">02</span
@@ -74,7 +76,7 @@
                     align-items-end
                 "
             >
-            <a href="https://www.facebook.com/bisonstudiopl" target="_blank">                
+            <a href="https://www.facebook.com/bisonstudiopl" rel="noreferrer" target="_blank">                
             <div class="nav-icon-div cursor_expand">
                     <svg
                         id="facebook-icon"
@@ -99,7 +101,7 @@
                 </div>
             </a>
 
-                <a href="https://www.instagram.com/bisonstudiopl/" target="_blank">
+                <a href="https://www.instagram.com/bisonstudiopl/" rel="noreferrer" target="_blank">
                 <div class="nav-icon-div cursor_expand">
                     <svg
                         id="ig-icon"
