@@ -1,13 +1,8 @@
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CSSPlugin } from "gsap/CSSPlugin";
-import { CSSRulePlugin } from "gsap/CSSRulePlugin";
 import * as fullpage from 'fullpage.js'
+import { isLandingAnimDone } from '../app/onWebEntered'
 
-gsap.registerPlugin(CSSPlugin, CSSRulePlugin);
 var sections = document.getElementsByClassName("section");
-
-let isLandingAnimDone = false;
 
 var staggerParamFrom = {
     y: 25,
@@ -37,6 +32,13 @@ var animateOutDownParam = {
     ease: "power1",
 };
 
+var animateOutOtherParam = {
+    autoAlpha: 0,
+    opacity: 0,
+    duration: 0.25,
+    ease: "power1",
+};
+
 function hideElements() {
     for (let i = 1; i < sections.length; i++) {
         const section = sections[i];
@@ -60,10 +62,10 @@ let tlIn = new gsap.timeline();
             const section = sections[i];
             if (currentIndex === i) {
                 if (currentIndex === 0) {
-                    if (isLandingAnimDone == true) {
-                        tlIn.to(section, animateInParam)
-                        gsapStaggerAnim(0);
-                    }
+                    // if (isLandingAnimDone.check === true) {
+                    tlIn.to(section, animateInParam)
+                    gsapStaggerAnim(0);
+                    // }
                 } else {
                     gsap.to(section, animateInParam)
                     gsapStaggerAnim(i)
@@ -123,105 +125,3 @@ let tlIn = new gsap.timeline();
     switchIndex();
     hideElements();
 })();
-
-
-
-//! Landing page timeline
-const line = CSSRulePlugin.getRule('.landing-page-content:before')
-const h1 = document.querySelector('h1')
-const h2 = document.querySelector('h2')
-const button1 = document.getElementsByClassName("btn-landing1")
-const button2 = document.getElementsByClassName("btn-landing2")
-const three = document.getElementById('web_gl')
-const rightNav = document.getElementById('fp-nav')
-const tl = gsap.timeline()
-
-gsap.set([three, h1, h2, button1, button2, rightNav], {
-    opacity: 0
-})
-
-gsap.set(line, {
-    cssRule: {
-        scaleY: 0
-    },
-})
-
-let stopCheck = false;
-let checkI = 0
-if (stopCheck == false) {
-    setInterval(function () {
-        if (webEntered == true) {
-            stopCheck = true
-            for (checkI; checkI < 1; checkI++) {
-                tl.to(rightNav, {
-                    duration: 1,
-                    ease: "expo",
-                    opacity: 1,
-                    onComplete: function () { isLandingAnimDone = true },
-                },
-                    "-=0.75")
-                tl.to(line, {
-                    delay: 1.5,
-                    duration: 1.25,
-                    ease: "expo",
-                    cssRule: {
-                        scaleY: 1
-                    },
-                },
-                    "-=1.65")
-                tl.fromTo(h2, {
-                    clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
-                    opacity: 0,
-                    x: '-30px'
-                }, {
-                    opacity: 1,
-                    x: '0px',
-                    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-                    ease: "expo",
-                    duration: 1.5,
-                },
-                    "-=0.65")
-                tl.fromTo(h1, {
-                    opacity: 0,
-                    y: '60px',
-                }, {
-                    opacity: 1,
-                    y: '0px',
-                    ease: "expo",
-                    duration: 1.25,
-                },
-                    "-=1.05")
-                tl.fromTo(button1, {
-                    ease: "expo",
-                    opacity: 0,
-                    y: '-40px',
-                }, {
-                    opacity: 1,
-                    y: '0px',
-                    ease: "expo",
-                    duration: 1.25,
-                },
-                    "-=0.8")
-                tl.fromTo(button2, {
-                    opacity: 0,
-                    y: '-40px',
-                }, {
-                    duration: 1.25,
-                    ease: "expo",
-                    opacity: 1,
-                    y: '0px',
-                },
-                    "-=1.05")
-                tl.to(line, {
-                    duration: 1,
-                    ease: "expo",
-                    cssRule: {
-                        scaleY: 0
-                    },
-                },
-                    "-=0.6")
-            }
-        }
-    }, 250);
-}
-gsap.registerPlugin(ScrollTrigger);

@@ -30,23 +30,6 @@ ScrollTrigger.scrollerProxy(".smooth-locomotive-scroll", {
     pinType: document.querySelector(".smooth-locomotive-scroll").style.transform ? "transform" : "fixed"
 });
 
-//!prevent gsap animation stop when scrolling with locomotive scroll
-// var parallaxElements = Array.prototype.slice.call(document.querySelectorAll("section"));
-// parallaxElements.forEach(function (self) {
-//     var gs = self.querySelectorAll(".gs");
-//     gsap.to(gs, {
-//         scrollTrigger: {
-//             scroller: ".smooth-locomotive-scroll",
-//             scrub: true,
-//             trigger: self,
-//             start: "top 100%",
-//             end: "bottom 0%",
-//         },
-//         y: (i, target) => -innerHeight * target.dataset.speed,
-//         ease: "none"
-//     });
-// });
-
 //!auto animations
 function animateFrom(elem, direction) {
     direction = direction || 1;

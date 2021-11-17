@@ -4,16 +4,14 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 const gltfLoader = new GLTFLoader()
 
-import { threeJsDNone, threeJsDBlock } from '../../app.js';
-import { scene, readyToMove, readyToRotate, postprocessing } from "../../three.js"
+// import { threeJsDNone } from '../app/onWebEntered';
 
 var url = new URL("../", document.baseURI).href
-
 let bisonHead, bisonHeadMaterialParam, bisonHeadMaterial;
-function bisonHeadLoad(bisonScale, bisonPos) {
+function bisonHeadLoad(bisonScale, bisonPos, scene) {
     let envmaploader = new THREE.PMREMGenerator(renderer);
 
-    new RGBELoader().load('3d/studio_small_09_1k.hdr', function (hdrmap) {
+    new RGBELoader().load(url + '3d/studio_small_09_1k.hdr', function (hdrmap) {
         let envmap = envmaploader.fromCubemap(hdrmap);
         bisonHeadMaterialParam = {
             color: 0x00ffff,
@@ -29,7 +27,7 @@ function bisonHeadLoad(bisonScale, bisonPos) {
 
         bisonHeadMaterial = new THREE.MeshPhysicalMaterial(bisonHeadMaterialParam)
 
-        gltfLoader.load("3d/models/bison_head.glb", (glb) => {
+        gltfLoader.load(url + "3d/models/bison_head.glb", (glb) => {
             bisonHead = glb.scene
             bisonHead.traverse((o) => {
                 if (o.isMesh) o.material = bisonHeadMaterial;
@@ -83,7 +81,7 @@ function iconsLoad() {
 }
 
 let particleGeo, particleVerts, sprite, particleMat, particles;
-function enviroParticles(particleAmount) {
+function enviroParticles(particleAmount, minX, maxX, minY, maxY, minZ, maxZ, scene) {
     particleGeo = new THREE.BufferGeometry();
     particleVerts = [];
 
@@ -91,9 +89,9 @@ function enviroParticles(particleAmount) {
 
     for (let i = 0; i < particleAmount; i++) {
 
-        const x = Math.random() * (3 - (-10) + 1) + -(10);
-        const y = Math.random() * (2.5 - (-10) + 1) + -(10);
-        const z = Math.random() * (10 - 90 + 1) + 90;
+        const x = Math.random() * (minX - (maxX) + 1) + (maxX);
+        const y = Math.random() * (minY - (maxY) + 1) + (maxY);
+        const z = Math.random() * (minZ - maxZ + 1) + maxZ;
 
         particleVerts.push(x, y, z);
     }
@@ -104,10 +102,11 @@ function enviroParticles(particleAmount) {
     scene.add(particles);
 }
 
-function animateParticles(time) {
+function animateParticles(time, locoScrollPosValue, scene) {
     for (let i = 0; i < scene.children.length; i++) {
         const object = scene.children[i];
         if (object instanceof THREE.Points) {
+            object.position.y = locoScrollPosValue / 1000;
             object.rotation.z = (time / 100) * (i < 4 ? i + 1 : - (i + 1));
         }
     }
@@ -143,9 +142,9 @@ function fpsChecker() {
             setTimeout(() => {
                 avgFps = ArrayAvg(fpsArray);
                 // console.log(canvas.width)
-                console.log(avgFps)
+                // console.log(avgFps)
                 if (avgFps < 20) {
-                    threeJsDNone()
+                    // threeJsDNone()
                 } else if (avgFps > 30) {
                     // postProcessingEnable()
                 }
@@ -157,10 +156,8 @@ function fpsChecker() {
 let isNavOpened = 0;
 function navCameraPos(navCameraPos, cameraTargetVector3) {
     if (isNavOpened % 2 == 0) {
-        console.log("nav is opened" + navCameraPos)
-        cameraTargetPos.position.set(navCameraPos.x, navCameraPos.y, navCameraPos.z);
+        cameraTargetPos.position.set(camera.position.x + navCameraPos.x, camera.position.y + navCameraPos.y, camera.position.z + navCameraPos.z);
     } else {
-        console.log("nav is closed" + cameraTargetVector3)
         cameraTargetPos.position.copy(cameraTargetVector3);
     }
     isNavOpened++
@@ -180,17 +177,24 @@ const cameraParams = {
     renderDistanceMax: 15,
     fov: 60,
 }
-let width = window.innerWidth;
-let height = window.innerHeight;
+
 let camera, cameraTargetLookAt, cameraTargetLookAtVector3, cameraTargetPos, cameraTargetVector3, cursorPosVector3, cursorObject, cursorPosObject
-function cameraInit() {
+function cameraInit(scene, width, height) {
+    let screenRatio = width / height
+
     const cameraTargetGeo = new THREE.SphereGeometry(1, 32, 16)
     const invisibleMat = new THREE.MeshPhysicalMaterial({
         transmission: 0.0,
     })
 
+
     camera = new THREE.PerspectiveCamera(cameraParams.fov, width / height, cameraParams.renderDistanceMin, cameraParams.renderDistanceMax)
-    cameraTargetVector3 = new THREE.Vector3(0, 2, 3.6)
+
+    if (screenRatio > 2.2) {
+        cameraTargetVector3 = new THREE.Vector3(0, 2, 3.6 - (screenRatio))
+    } else {
+        cameraTargetVector3 = new THREE.Vector3(0, 2, 3.6)
+    }
     camera.position.copy(cameraTargetVector3)
     camera.rotation.set(0, 0, 0)
 
@@ -219,7 +223,7 @@ function cameraInit() {
     cursorObject.transparent = true;
 }
 
-function cameraMove(delta) {
+function cameraMove(delta, readyToMove) {
     let alpha = 0
     alpha += delta * 2;
     if (readyToMove == true) {
@@ -228,27 +232,19 @@ function cameraMove(delta) {
     }
 }
 
-let windowHalfX = window.innerWidth / 2;
-let windowHalfY = window.innerHeight / 2;
-function onWindowResize() {
-    windowHalfX = window.innerWidth / 2;
-    windowHalfY = window.innerHeight / 2;
-
-    width = window.innerWidth;
-    height = window.innerHeight;
-
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(width, height);
-    postprocessing.composer.setSize(width, height);
+let pixelRatio = window.devicePixelRatio
+let AA = true
+if (pixelRatio > 1) {
+    AA = false
 }
-
 let renderer, canvas
-function rendererInit() {
+function rendererInit(width, height) {
     canvas = document.querySelector('#web_gl')
     renderer = new THREE.WebGLRenderer({
-        canvas: canvas
+        canvas: canvas,
+        antialias: AA,
+        powerPreference: "high-performance",
+        alpha: true
     });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
@@ -259,13 +255,36 @@ function rendererInit() {
     renderer.autoClear = false;
 }
 
-function sceneInit() {
-    scene.fog = new THREE.FogExp2(0x111111, 0.2)
-    scene.background = new THREE.Color(0x111111);
+function sceneInit(fogStart, fogEnd, scene) {
+    // scene.fog = new THREE.FogExp2(0x111111, 0.2)
+    scene.fog = new THREE.Fog(0x040404, fogStart, fogEnd);
+    // scene.background = new THREE.Color(0x111111);
 }
 
+function clearThree(scene) {
+    while (scene.children.length > 0) {
+        clearThree(obj.children[0])
+        obj.remove(obj.children[0]);
+    }
+    if (scene.geometry) scene.geometry.dispose()
+
+    if (scene.material) {
+        Object.keys(obj.material).forEach(prop => {
+            if (!obj.material[prop])
+                return
+            if (obj.material[prop] !== null && typeof obj.material[prop].dispose === 'function')
+                obj.material[prop].dispose()
+        })
+        obj.material.dispose()
+    }
+    renderer.dispose()
+    renderer.domElement = null;
+    scene = null;
+    camera = null;
+    canvas.style.display = "none"
+}
 
 export {
-    bisonHeadLoad, animateParticles, enviroParticles, fpsChecker, navCameraPos, cameraInit, cameraMove, onWindowResize, sceneInit, rendererInit,
-    bisonHead, isFpsReadyToCheck, isNavOpened, width, height, camera, cameraTargetPos, cameraTargetVector3, cameraTargetLookAtVector3, cameraTargetLookAt, cursorObject, avgFps, renderer, canvas
+    bisonHeadLoad, animateParticles, enviroParticles, fpsChecker, navCameraPos, cameraInit, cameraMove, sceneInit, rendererInit,
+    bisonHead, isFpsReadyToCheck, isNavOpened, camera, cameraTargetPos, cameraTargetVector3, cameraTargetLookAtVector3, cameraTargetLookAt, cursorObject, avgFps, renderer, canvas
 };

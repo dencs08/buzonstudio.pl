@@ -51,6 +51,10 @@ body {
     font-family: $font-family-primary;
     overflow: hidden;
     background-color: $body-bg !important;
+    background-image: url("/images/bg_img.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
 }
 
 h1 {
@@ -215,16 +219,9 @@ a {
     position: relative;
 }
 
-.three_disabler {
-    position: absolute;
-    left: 90%;
-    top: 95vh;
-
-    transform: translate(-50%, 0);
-}
-
+.three_disabler,
 .three_enabler {
-    position: absolute;
+    position: fixed;
     left: 90%;
     top: 95vh;
 
@@ -257,15 +254,6 @@ a {
         background-color: rgba(255, 255, 255, 0.35);
         border: none;
         opacity: 0.08;
-    }
-}
-
-@media (max-width: $lg-screen-size) {
-    .cursor {
-        display: none;
-    }
-    .cursor-follower {
-        display: none;
     }
 }
 
@@ -315,4 +303,41 @@ a {
     opacity: 1;
     transform: translateY(0%);
     transition: all 0.5s;
+}
+
+@media (max-width: $lg-screen-size) {
+    .cursor {
+        display: none;
+    }
+    .cursor-follower {
+        display: none;
+    }
+
+    .three_disabler,
+    .three_enabler {
+        left: 87.5%;
+        top: 92.5vh;
+    }
+}
+
+@media (max-width: $md-screen-size) {
+    .three_disabler,
+    .three_enabler {
+        left: 85%;
+        top: 92.5vh;
+    }
+}
+
+@media (max-width: $sm-screen-size) {
+    .three_disabler,
+    .three_enabler {
+        left: 78%;
+    }
+}
+
+@media (max-width: $xs-screen-size) {
+    .three_disabler,
+    .three_enabler {
+        left: 72.5%;
+    }
 }

@@ -45,6 +45,9 @@ mix.js([
         'resources/js/locomotive-scroll.js',
         'resources/js/three_other_pages.js',
     ], 'public/js/portfolio.js').version()
+    .js([
+        'resources/js/barba.js',
+    ], 'public/js/barba.js').version()
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/components/start.scss', 'public/css')
     .sass('resources/sass/components/offer.scss', 'public/css')

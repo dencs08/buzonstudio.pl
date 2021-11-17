@@ -5942,7 +5942,7 @@
     display: none !important;
   }
 }
-/*! locomotive-scroll v4.1.1 | MIT License | https://github.com/locomotivemtl/locomotive-scroll */
+/*! locomotive-scroll v4.1.2 | MIT License | https://github.com/locomotivemtl/locomotive-scroll */
 html.has-scroll-smooth {
   overflow: hidden;
 }
@@ -6920,6 +6920,10 @@ body {
   font-family: "Poppins";
   overflow: hidden;
   background-color: #111111 !important;
+  background-image: url("/images/bg_img.png") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
 }
 
 h1 {
@@ -7110,15 +7114,9 @@ a {
   position: relative;
 }
 
-.three_disabler {
-  position: absolute;
-  left: 90%;
-  top: 95vh;
-  transform: translate(-50%, 0);
-}
-
+.three_disabler,
 .three_enabler {
-  position: absolute;
+  position: fixed;
   left: 90%;
   top: 95vh;
   transform: translate(-50%, 0);
@@ -7153,15 +7151,6 @@ a {
   opacity: 0.08;
 }
 
-@media (max-width: 992px) {
-  .cursor {
-    display: none;
-  }
-
-  .cursor-follower {
-    display: none;
-  }
-}
 [data-tooltip] {
   position: relative;
   z-index: 2;
@@ -7206,4 +7195,39 @@ a {
   opacity: 1;
   transform: translateY(0%);
   transition: all 0.5s;
+}
+
+@media (max-width: 992px) {
+  .cursor {
+    display: none;
+  }
+
+  .cursor-follower {
+    display: none;
+  }
+
+  .three_disabler,
+.three_enabler {
+    left: 87.5%;
+    top: 92.5vh;
+  }
+}
+@media (max-width: 768px) {
+  .three_disabler,
+.three_enabler {
+    left: 85%;
+    top: 92.5vh;
+  }
+}
+@media (max-width: 576px) {
+  .three_disabler,
+.three_enabler {
+    left: 78%;
+  }
+}
+@media (max-width: 400px) {
+  .three_disabler,
+.three_enabler {
+    left: 72.5%;
+  }
 }

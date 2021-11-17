@@ -9,37 +9,18 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "threeJsDNone": () => (/* binding */ threeJsDNone),
-/* harmony export */   "threeJsDBlock": () => (/* binding */ threeJsDBlock)
-/* harmony export */ });
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_app_onWebEntered__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/app/onWebEntered */ "./resources/js/components/app/onWebEntered.js");
 
 
 var topCover = document.getElementsByClassName("top-side");
 var bottomCover = document.getElementsByClassName("bottom-side");
-var tl = gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline();
-var canvas = document.getElementById("web_gl");
-var checkIfWebEnteredForCookie = false; //! page transitions
+var tl = gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline(); //! page transitions
 
 window.onload = function () {
   var anchors = document.querySelectorAll('.web_link_transitions');
   var startButton = document.getElementById('start-button');
   var courtainWrapper = document.querySelector(".courtain-wrapper");
-  var checkI = 0;
-
-  if (checkIfWebEnteredForCookie == false) {
-    checkIfWebEnteredForCookie = true;
-    setInterval(function () {
-      if (webEntered == true) {
-        for (checkI; checkI < 1; checkI++) {
-          checkCookie(0.5);
-        }
-      }
-    }, 100);
-  }
 
   if (!sessionStorage.noFirstVisit) {
     courtainWrapper.style.display = 'flex';
@@ -54,20 +35,20 @@ window.onload = function () {
       setTimeout(function () {
         tl.to(courtainWrapper, {
           opacity: 0,
-          duration: 0.5,
+          duration: 0.4,
           onComplete: function onComplete() {
             courtainWrapper.style.display = "none";
           }
         });
         courtainAnimStart();
-      }, 250);
+      }, 100);
     });
   } else {
     courtainWrapper.style.display = 'none';
     setTimeout(function () {
       tl.to(courtainWrapper, {
         opacity: 0,
-        duration: 0.5,
+        duration: 0.4,
         onComplete: function onComplete() {
           courtainWrapper.style.display = "none";
         }
@@ -76,68 +57,43 @@ window.onload = function () {
     }, 250);
   }
 
-  var path = location.pathname; //only on offer view to prevent #portfolio section page transition
+  var path = location.pathname; // only on offer view to prevent #portfolio section page transition
 
   if (path == "/oferta" || path == "/") {
-    var _loop = function _loop(i) {
-      var anchor = anchors[i];
+    var _loop = function _loop(_i) {
+      var anchor = anchors[_i];
       anchor.addEventListener('click', function (e) {
         if (anchor.innerHTML == "Portfolio") {
           courtainAnimExit();
           setTimeout(function () {
             window.location.reload(false);
-          }, 500);
+          }, 300);
         } else {
           var target = e.target.href;
           e.preventDefault();
           courtainAnimExit();
           setTimeout(function () {
             window.location.href = target;
-          }, 500);
+          }, 300);
         }
       });
     };
 
-    for (var i = 0; i < anchors.length; i++) {
-      _loop(i);
+    for (var _i = 0; _i < anchors.length; _i++) {
+      _loop(_i);
     }
   } else {
-    for (var _i = 0; _i < anchors.length; _i++) {
-      var anchor = anchors[_i];
+    for (var _i2 = 0; _i2 < anchors.length; _i2++) {
+      var anchor = anchors[_i2];
       anchor.addEventListener('click', function (e) {
         var target = e.target.href;
         e.preventDefault();
         courtainAnimExit();
         setTimeout(function () {
           window.location.href = target;
-        }, 500);
+        }, 300);
       });
     }
-  }
-};
-
-var progressBar = document.querySelector(".progress");
-gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set([progressBar], {
-  opacity: 0,
-  onComplete: function onComplete() {
-    progressBar.style.zIndex = "9999";
-  }
-});
-gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to([progressBar], {
-  opacity: 1,
-  delay: 1.5,
-  duration: 1
-});
-
-document.onreadystatechange = function () {
-  if (document.readyState === "complete") {
-    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to([progressBar], {
-      opacity: 0,
-      duration: 0.5,
-      onComplete: function onComplete() {
-        progressBar.style.display = "none";
-      }
-    });
   }
 };
 
@@ -158,157 +114,265 @@ window.addEventListener('resize', function () {
 
 function courtainAnimStart() {
   tl.to(topCover, {
-    duration: 0.75,
+    duration: 0.5,
     ease: 'expo.out',
     y: '-50vh'
   });
   tl.to(bottomCover, {
-    duration: 0.75,
+    duration: 0.5,
     ease: 'expo.out',
     y: '50vh',
     onStart: function onStart() {
-      webEntered = true;
+      (0,_components_app_onWebEntered__WEBPACK_IMPORTED_MODULE_0__.mainWebEnter)();
     }
-  }, "-=0.75");
+  }, "-=0.5");
 }
 
 function courtainAnimExit() {
   tl.to(topCover, {
-    duration: 0.5,
+    duration: 0.4,
     ease: 'expo.out',
     y: '-0vh'
   });
   tl.to(bottomCover, {
-    duration: 0.5,
+    duration: 0.4,
     ease: 'expo.out',
     y: '0vh'
-  }, "-=0.5");
+  }, "-=0.4");
 }
 
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {// cursor.style.display = "none";
   // follower.style.display = "none";
 } else {
-  var cursor = jquery__WEBPACK_IMPORTED_MODULE_0__(".cursor"),
-      follower = jquery__WEBPACK_IMPORTED_MODULE_0__(".cursor-follower");
-  var posX = 0,
-      posY = 0;
-  var mouseX = 0,
-      mouseY = 0;
-  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(cursor, {
-    duration: 0.005,
-    repeat: -1,
-    onRepeat: function onRepeat() {
-      posX += (mouseX - posX) / 9;
-      posY += (mouseY - posY) / 9;
-      gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set(follower, {
-        css: {
-          left: posX - 12,
-          top: posY - 12
-        }
-      });
-      gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set(cursor, {
-        css: {
-          left: mouseX,
-          top: mouseY
-        }
-      });
-    }
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on("mousemove", function (e) {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0__("a, button, input, textarea, input, label, .cursor_expand").on("mouseenter", function () {
-    cursor.addClass("active");
-    follower.addClass("active");
-  });
-  jquery__WEBPACK_IMPORTED_MODULE_0__("a, button, input, textarea, input, label, .cursor_expand").on("mouseleave", function () {
-    cursor.removeClass("active");
-    follower.removeClass("active");
-  });
-}
+  var posX, posY;
+  var mouseX, mouseY;
+  var i;
 
-var threeDisabler = document.getElementById("three_disabler");
-threeDisabler.addEventListener("click", threeJsDNone);
-var threeEnabler = document.getElementById("three_enabler");
-threeEnabler.addEventListener("click", threeJsDBlock);
-var background_image = document.getElementById("background_image");
+  (function () {
+    var cursor = document.getElementById("cursor");
+    var follower = document.getElementById("cursor-follower");
+    posX = 0;
+    posY = 0;
+    mouseX = 0;
+    mouseY = 0;
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(cursor, {
+      duration: 0.005,
+      repeat: -1,
+      onRepeat: function onRepeat() {
+        posX += (mouseX - posX) / 9;
+        posY += (mouseY - posY) / 9;
+        gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set(follower, {
+          css: {
+            left: posX - 12,
+            top: posY - 12
+          }
+        });
+        gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set(cursor, {
+          css: {
+            left: mouseX,
+            top: mouseY
+          }
+        });
+      }
+    });
+    document.addEventListener("mousemove", function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+    var items = document.querySelectorAll("a, button, input, textarea, input, label, .cursor_expand");
+
+    for (i = 0; i < items.length; i++) {
+      (function (index) {
+        items[index].addEventListener("mouseover", function (e) {
+          cursor.classList.add("active");
+          follower.classList.add("active");
+        });
+        items[index].addEventListener("mouseleave", function (e) {
+          cursor.classList.remove("active");
+          follower.classList.remove("active");
+        });
+      })(i);
+    }
+  })();
+}
 
 if (!sessionStorage.noFirstVisit) {
   three_enabled == true;
   document.cookie = "three_enable=true; path=/;";
 }
 
-function threeJsDNone(delay) {
-  document.cookie = "three_enable=false; path=/;";
-  var tl = new gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline();
-  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(canvas, {
-    opacity: 0,
-    duration: 1,
-    ease: "expo",
-    onComplete: function onComplete() {
-      canvas.style.display = "none";
-    }
-  });
-  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(background_image, {
-    opacity: 1,
-    duration: 1,
-    ease: "expo",
-    onStart: function onStart() {
-      background_image.style.display = "block";
-    }
-  });
-  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(threeDisabler, {
-    opacity: 0,
-    duration: 0.75,
-    ease: "expo",
-    onComplete: function onComplete() {
-      threeDisabler.style.zIndex = "-10";
-      threeEnabler.style.zIndex = "99";
-    }
-  });
-  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(threeEnabler, {
-    opacity: 1,
-    duration: 0.75,
-    ease: "expo"
-  });
-}
+var body = document.body,
+    html = document.documentElement;
+var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+var width = document.body.clientWidth;
+var background_img = document.getElementById("background_image");
+background_img.style.height = height * 2.5 + "px";
+background_img.style.width = width + "px";
 
-function threeJsDBlock(delay) {
-  document.cookie = "three_enable=true; path=/;";
-  var tl = new gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.timeline();
-  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.fromTo(canvas, {
-    opacity: 0
-  }, {
-    opacity: 1,
-    duration: 1.5,
-    ease: "sine2",
-    onStart: function onStart() {
-      canvas.style.display = "block";
-    }
-  }, "=" + delay);
-  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(background_image, {
-    opacity: 0,
-    duration: 1,
-    ease: "expo",
-    onComplete: function onComplete() {
-      background_image.style.display = "none";
-    }
-  });
-  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(threeEnabler, {
-    opacity: 0,
-    duration: 0.75,
-    ease: "expo",
-    onComplete: function onComplete() {
-      threeDisabler.style.zIndex = "99";
-      threeEnabler.style.zIndex = "-10";
-    }
-  });
-  gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(threeDisabler, {
-    opacity: 1,
-    duration: 0.75,
-    ease: "expo"
-  });
+/***/ }),
+
+/***/ "./resources/js/components/app/onWebEntered.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/app/onWebEntered.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "mainWebEnter": () => (/* binding */ mainWebEnter),
+/* harmony export */   "threeJsDNone": () => (/* binding */ threeJsDNone),
+/* harmony export */   "isLandingAnimDone": () => (/* binding */ isLandingAnimDone)
+/* harmony export */ });
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap/CSSRulePlugin */ "./node_modules/gsap/CSSRulePlugin.js");
+
+
+gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_1__.CSSRulePlugin); //! Landing page timeline
+
+var h1 = document.querySelector('h1');
+var h2 = document.querySelector('h2');
+var three = document.getElementById('web_gl');
+var tl = gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.timeline();
+var background_image = document.getElementById("background_image");
+var canvas = document.getElementById("web_gl");
+var isLandingAnimDone = {
+  isReady: false,
+
+  get check() {
+    return this.isReady;
+  },
+
+  set set(value) {
+    this.isReady = value;
+  }
+
+};
+
+function mainWebEnter() {
+  webEntered = true;
+  var path = location.pathname;
+
+  if (path == "/start" || path == "/") {
+    var line = gsap_CSSRulePlugin__WEBPACK_IMPORTED_MODULE_1__.CSSRulePlugin.getRule('.landing-page-content:before');
+    var button1 = document.getElementsByClassName("btn-landing1");
+    var button2 = document.getElementsByClassName("btn-landing2");
+    var rightNav = document.getElementById('fp-nav');
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.set([three, h1, h2, button1, button2, rightNav], {
+      opacity: 0
+    });
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.set(line, {
+      cssRule: {
+        scaleY: 0
+      }
+    });
+    tl.to(rightNav, {
+      duration: 1,
+      ease: "expo",
+      opacity: 1,
+      onComplete: function onComplete() {
+        isLandingAnimDone.set = true; // console.log(isLandingAnimDone.check)
+      }
+    }, "-=0.75");
+    tl.to(line, {
+      delay: 1.5,
+      duration: 1.25,
+      ease: "expo",
+      cssRule: {
+        scaleY: 1
+      }
+    }, "-=1.65");
+    tl.fromTo(h2, {
+      clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
+      opacity: 0,
+      x: '-30px'
+    }, {
+      opacity: 1,
+      x: '0px',
+      clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+      ease: "expo",
+      duration: 1.5
+    }, "-=0.65");
+    tl.fromTo(h1, {
+      opacity: 0,
+      y: '60px'
+    }, {
+      opacity: 1,
+      y: '0px',
+      ease: "expo",
+      duration: 1.25
+    }, "-=1.05");
+    tl.fromTo(button1, {
+      ease: "expo",
+      opacity: 0,
+      y: '-40px'
+    }, {
+      opacity: 1,
+      y: '0px',
+      ease: "expo",
+      duration: 1.25
+    }, "-=0.8");
+    tl.fromTo(button2, {
+      ease: "expo",
+      opacity: 0,
+      y: '-40px'
+    }, {
+      duration: 1.25,
+      ease: "expo",
+      opacity: 1,
+      y: '0px'
+    }, "-=1.05");
+    tl.to(line, {
+      duration: 1,
+      ease: "expo",
+      cssRule: {
+        scaleY: 0
+      }
+    }, "-=0.6");
+  } else if (path.includes("/portfolio")) {} else {
+    var arrow = document.getElementsByClassName('arrow-down-icon');
+
+    var _three = document.getElementById('web_gl');
+
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.set([_three, h1, h2, arrow], {
+      opacity: 0
+    });
+    tl.fromTo(h2, {
+      clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
+      opacity: 0,
+      x: '-30px'
+    }, {
+      delay: 0.5,
+      opacity: 1,
+      x: '0px',
+      clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+      ease: "expo",
+      duration: 1.5,
+      stagger: 0.5
+    }, "-=0.35");
+    tl.fromTo(h1, {
+      opacity: 0,
+      y: '60px' // clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
+
+    }, {
+      opacity: 1,
+      y: '0px',
+      // clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+      ease: "expo",
+      duration: 1.5,
+      stagger: 0.5
+    }, "-=1");
+    tl.fromTo(arrow, {
+      opacity: 0,
+      y: '-60px'
+    }, {
+      opacity: 1,
+      y: '0px',
+      duration: 0.5
+    }, "-=1.25");
+  }
+
+  checkCookie(0.5);
 }
 
 function checkCookie(initDelay) {
@@ -317,17 +381,16 @@ function checkCookie(initDelay) {
   if (three_enable == "true") {
     three_enabled = true;
     threeJsDBlock(initDelay);
-    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set(threeEnabler, {
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.set(threeEnabler, {
       opacity: 0
     });
   } else {
     three_enabled = false;
     threeJsDNone(initDelay);
-    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.set(threeDisabler, {
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.set(threeDisabler, {
       opacity: 0
     });
-  } // console.log(three_enable);
-
+  }
 }
 
 function getCookie(cname) {
@@ -349,13 +412,82 @@ function getCookie(cname) {
   return "";
 }
 
-var body = document.body,
-    html = document.documentElement;
-var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-var width = document.body.clientWidth;
-var background_img = document.getElementById("background_image");
-background_img.style.height = height * 2.5 + "px";
-background_img.style.width = width + "px"; //exports
+var threeDisabler = document.getElementById("three_disabler");
+threeDisabler.addEventListener("click", threeJsDNone);
+var threeEnabler = document.getElementById("three_enabler");
+threeEnabler.addEventListener("click", threeJsDBlock);
+
+function threeJsDNone(delay) {
+  document.cookie = "three_enable=false; path=/;";
+  var tl = new gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.timeline();
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(canvas, {
+    opacity: 0,
+    duration: 1,
+    ease: "expo",
+    onComplete: function onComplete() {
+      canvas.style.display = "none";
+    }
+  });
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(background_image, {
+    opacity: 1,
+    duration: 1,
+    ease: "expo",
+    onStart: function onStart() {
+      background_image.style.display = "block";
+    }
+  });
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(threeDisabler, {
+    opacity: 0,
+    duration: 0.75,
+    ease: "expo",
+    onComplete: function onComplete() {
+      threeDisabler.style.zIndex = "-10";
+      threeEnabler.style.zIndex = "99";
+    }
+  });
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(threeEnabler, {
+    opacity: 1,
+    duration: 0.75,
+    ease: "expo"
+  });
+}
+
+function threeJsDBlock(delay) {
+  document.cookie = "three_enable=true; path=/;";
+  var tl = new gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.timeline();
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.fromTo(canvas, {
+    opacity: 0
+  }, {
+    opacity: 1,
+    duration: 1.5,
+    ease: "sine2",
+    onStart: function onStart() {
+      canvas.style.display = "block";
+    }
+  }, "=" + delay);
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(background_image, {
+    opacity: 0,
+    duration: 1,
+    ease: "expo",
+    onComplete: function onComplete() {
+      background_image.style.display = "none";
+    }
+  });
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(threeEnabler, {
+    opacity: 0,
+    duration: 0.75,
+    ease: "expo",
+    onComplete: function onComplete() {
+      threeDisabler.style.zIndex = "99";
+      threeEnabler.style.zIndex = "-10";
+    }
+  });
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(threeDisabler, {
+    opacity: 1,
+    duration: 0.75,
+    ease: "expo"
+  });
+}
 
 
 
@@ -1993,6 +2125,155 @@ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.gsap.utils.checkPrefix = _checkPropPr
 });
 
 _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(CSSPlugin);
+
+
+/***/ }),
+
+/***/ "./node_modules/gsap/CSSRulePlugin.js":
+/*!********************************************!*\
+  !*** ./node_modules/gsap/CSSRulePlugin.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CSSRulePlugin": () => (/* binding */ CSSRulePlugin),
+/* harmony export */   "default": () => (/* binding */ CSSRulePlugin)
+/* harmony export */ });
+/*!
+ * CSSRulePlugin 3.8.0
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2021, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/* eslint-disable */
+var gsap,
+    _coreInitted,
+    _win,
+    _doc,
+    CSSPlugin,
+    _windowExists = function _windowExists() {
+  return typeof window !== "undefined";
+},
+    _getGSAP = function _getGSAP() {
+  return gsap || _windowExists() && (gsap = window.gsap) && gsap.registerPlugin && gsap;
+},
+    _checkRegister = function _checkRegister() {
+  if (!_coreInitted) {
+    _initCore();
+
+    if (!CSSPlugin) {
+      console.warn("Please gsap.registerPlugin(CSSPlugin, CSSRulePlugin)");
+    }
+  }
+
+  return _coreInitted;
+},
+    _initCore = function _initCore(core) {
+  gsap = core || _getGSAP();
+
+  if (_windowExists()) {
+    _win = window;
+    _doc = document;
+  }
+
+  if (gsap) {
+    CSSPlugin = gsap.plugins.css;
+
+    if (CSSPlugin) {
+      _coreInitted = 1;
+    }
+  }
+};
+
+var CSSRulePlugin = {
+  version: "3.8.0",
+  name: "cssRule",
+  init: function init(target, value, tween, index, targets) {
+    if (!_checkRegister() || typeof target.cssText === "undefined") {
+      return false;
+    }
+
+    var div = target._gsProxy = target._gsProxy || _doc.createElement("div");
+
+    this.ss = target;
+    this.style = div.style;
+    div.style.cssText = target.cssText;
+    CSSPlugin.prototype.init.call(this, div, value, tween, index, targets); //we just offload all the work to the regular CSSPlugin and then copy the cssText back over to the rule in the render() method. This allows us to have all of the updates to CSSPlugin automatically flow through to CSSRulePlugin instead of having to maintain both
+  },
+  render: function render(ratio, data) {
+    var pt = data._pt,
+        style = data.style,
+        ss = data.ss,
+        i;
+
+    while (pt) {
+      pt.r(ratio, pt.d);
+      pt = pt._next;
+    }
+
+    i = style.length;
+
+    while (--i > -1) {
+      ss[style[i]] = style[style[i]];
+    }
+  },
+  getRule: function getRule(selector) {
+    _checkRegister();
+
+    var ruleProp = _doc.all ? "rules" : "cssRules",
+        styleSheets = _doc.styleSheets,
+        i = styleSheets.length,
+        pseudo = selector.charAt(0) === ":",
+        j,
+        curSS,
+        cs,
+        a;
+    selector = (pseudo ? "" : ",") + selector.split("::").join(":").toLowerCase() + ","; //note: old versions of IE report tag name selectors as upper case, so we just change everything to lowercase.
+
+    if (pseudo) {
+      a = [];
+    }
+
+    while (i--) {
+      //Firefox may throw insecure operation errors when css is loaded from other domains, so try/catch.
+      try {
+        curSS = styleSheets[i][ruleProp];
+
+        if (!curSS) {
+          continue;
+        }
+
+        j = curSS.length;
+      } catch (e) {
+        console.warn(e);
+        continue;
+      }
+
+      while (--j > -1) {
+        cs = curSS[j];
+
+        if (cs.selectorText && ("," + cs.selectorText.split("::").join(":").toLowerCase() + ",").indexOf(selector) !== -1) {
+          //note: IE adds an extra ":" to pseudo selectors, so .myClass:after becomes .myClass::after, so we need to strip the extra one out.
+          if (pseudo) {
+            a.push(cs.style);
+          } else {
+            return cs.style;
+          }
+        }
+      }
+    }
+
+    return a;
+  },
+  register: _initCore
+};
+_getGSAP() && gsap.registerPlugin(CSSRulePlugin);
 
 
 /***/ }),

@@ -1,4 +1,3 @@
-import * as $ from 'jquery'
 import { gsap } from "gsap";
 
 const hoverEl = document.querySelectorAll('.js-hover')
@@ -19,13 +18,18 @@ const portfoliosArr = (objectToArray(portfolios));
 
 hrefArray = document.querySelectorAll(".navigation-link")
 
-portfoliosArr.forEach((el, i) => {
-    image = document.createElement('div')
-    document.getElementById("works_images").appendChild(image)
-    image.className = "project-preview"
-    image.style.backgroundImage = `url('${url}/${el}/${el}_portfolio.jpg')`
-    imgArray.push(image)
-})
+var observer = new IntersectionObserver(function (entries) {
+    //when #works is visible load images (something like lazyloading)
+    if (entries[0].isIntersecting === true)
+        portfoliosArr.forEach((el, i) => {
+            image = document.createElement('div')
+            document.getElementById("works_images").appendChild(image)
+            image.className = "project-preview"
+            image.style.backgroundImage = `url('${url}/${el}/${el}_portfolio.jpg')`
+            imgArray.push(image)
+        })
+}, { threshold: [0] });
+observer.observe(document.querySelector("#works"));
 
 
 hoverEl.forEach((el, i) => {

@@ -1,44 +1,31 @@
 import gsap from 'gsap'
 
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { LightProbeGenerator } from 'three/examples/jsm/lights/LightProbeGenerator'
 
-import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
-
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { AfterimagePass } from 'three/examples/jsm/postprocessing/AfterimagePass.js'
 
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
-import { VignetteShader } from 'three/examples/jsm/shaders/VignetteShader.js';
-
 import Stats from 'three/examples/jsm/libs/stats.module'
+// import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+// import { LightProbeGenerator } from 'three/examples/jsm/lights/LightProbeGenerator'
 
 import {
-    animateParticles, enviroParticles, bisonHeadLoad, fpsChecker, navCameraPos, cameraInit, cameraMove, onWindowResize, sceneInit, rendererInit,
-    bisonHead, isFpsReadyToCheck, isNavOpened, width, height, camera, cameraTargetPos, cameraTargetVector3, cameraTargetLookAtVector3, cameraTargetLookAt, cursorObject, avgFps, renderer, canvas
+    animateParticles, enviroParticles, bisonHeadLoad, fpsChecker, cameraInit, cameraMove, sceneInit, navCameraPos, rendererInit,
+    bisonHead, isFpsReadyToCheck, isNavOpened, camera, cameraTargetPos, cameraTargetVector3, cameraTargetLookAtVector3, cameraTargetLookAt, cursorObject, avgFps, renderer, canvas
 } from './components/threejs/threeJsClasses.js';
+
 //Objects
-let scene, stats,
-    parameters, cubeMaterial, controls, clock, iResolutionMultiplierValue;
+let scene, stats, controls, clock, iResolutionMultiplierValue;
 
 //Shaders
 let uniforms
-
-//Loaders
-const textureLoader = new THREE.TextureLoader()
-
-let tl = gsap.timeline()
-
-const gui = new GUI()
 
 clock = new THREE.Clock();
 
 var mouse = { x: 0, y: 0 };
 var mousePos;
-
-const materials = [], objects = [];
 
 const postprocessing = {};
 
@@ -48,15 +35,22 @@ let wallGeo, wallMat, wall;
 let readyToMove = false;
 let readyToRotate = false;
 
+// const textureLoader = new THREE.TextureLoader()
+// const materials = [], objects = [];
+// let tl = gsap.timeline()
+let windowHalfX = window.innerWidth / 2;
+let windowHalfY = window.innerHeight / 2;
+let width = window.innerWidth;
+let height = window.innerHeight;
 function init() {
     const container = document.createElement('div');
     document.body.appendChild(container);
     scene = new THREE.Scene();
 
     //!Inits
-    cameraInit()
-    rendererInit()
-    sceneInit()
+    cameraInit(scene, width, height)
+    rendererInit(width, height)
+    sceneInit(1, 8, scene)
     lightsInit()
     container.appendChild(renderer.domElement);
 
@@ -76,7 +70,7 @@ function init() {
     }
 
     loadModels()
-    enviroParticles(30000)
+    enviroParticles(30000, 3, -10, 2.5, -10, 10, 90, scene)
     initPostprocessing();
 
     setTimeout(() => {
@@ -107,7 +101,7 @@ function mouseInteractivity() {
     cursorObject.position.z = camera.position.z
 }
 
-let composer, shaderVignette, effectVignette, afterimagePass, renderPass;
+let composer, effectVignette, afterimagePass, renderPass;
 function initPostprocessing() {
     renderPass = new RenderPass(scene, camera);
     composer = new EffectComposer(renderer);
@@ -119,15 +113,8 @@ function initPostprocessing() {
 
 function postProcessingEnable() {
     afterimagePass = new AfterimagePass();
-    afterimagePass.uniforms["damp"].value = 0.875;
-
-    shaderVignette = VignetteShader;
-    effectVignette = new ShaderPass(shaderVignette);
-    effectVignette.uniforms["offset"].value = 0;
-    effectVignette.uniforms["darkness"].value = 2.0;
-
+    afterimagePass.uniforms["damp"].value = 0.5;
     composer.addPass(afterimagePass);
-    composer.addPass(effectVignette);
 }
 
 function postProcessingDisable() {
@@ -153,6 +140,41 @@ function lightsInit() {
     scene.add(directionalLight);
 }
 
+let bisonHeadResponsivePosX, bisonHeadScaleResponsive
+function bisonResponsive() {
+    bisonHeadResponsivePosX = Math.min(Math.max(2.5 - (1000 / width), 0), 3);
+    bisonHeadScaleResponsive = Math.min(Math.max((width / 1000), 0.5), 0.75)
+    bisonHead.position.set(bisonHeadResponsivePosX, bisonHead.position.y, bisonHead.position.z)
+    bisonHead.scale.set(bisonHeadScaleResponsive, bisonHeadScaleResponsive, bisonHeadScaleResponsive)
+}
+
+function onWindowResize() {
+    windowHalfX = window.innerWidth / 2;
+    windowHalfY = window.innerHeight / 2;
+
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(width, height);
+    postprocessing.composer.setSize(width, height);
+
+    bisonResponsive()
+}
+
+// window.addEventListener('deviceorientation', handleOrientation);
+// function handleOrientation(event) {
+//     const alpha = event.alpha;
+//     const beta = event.beta;
+//     const gamma = event.gamma;
+
+//     // bisonHead.rotation.x = Math.min(Math.max(beta / 100, -1), 1)
+//     bisonHead.rotation.y = Math.min(Math.max(gamma / 20 + 5, 0), 50)
+//     // bisonHead.rotation.z = Math.min(Math.max(alpha / 100, -1), 1)
+// }
+
 var delta;
 function animate(time) {
     delta = clock.getDelta();
@@ -166,19 +188,20 @@ function animate(time) {
     render();
     stats.end();
 
-    cameraMove(delta)
+    cameraMove(delta, readyToMove)
     cameraScrollPos()
-    animateParticles(time)
-    fpsChecker()
+    animateParticles(time, locoScrollPosValue, scene)
+    // fpsChecker()
 }
 
 function render() {
     postprocessing.composer.render(0.1);
+    // renderer.render(scene, camera);
 }
 
-var path = location.pathname;
 var postProcessingEnabled = false;
 function cameraScrollPos() {
+    var tl = new gsap.timeline()
     switch (startSectionIndex) {
         case 0:
             if (postProcessingEnabled == true) {
@@ -187,12 +210,17 @@ function cameraScrollPos() {
             }
             if (isNavOpened % 2 == 0) {
                 cameraTargetPos.position.copy(cameraTargetVector3)
-                gsap.to(cameraTargetLookAt.position, {
+
+                cameraTargetLookAtVector3.x = 0
+                cameraTargetLookAtVector3.y = 2
+                cameraTargetLookAtVector3.z = 0
+
+                tl.to(cameraTargetLookAt.position, {
                     duration: 3,
                     ease: 'expo.out',
                     x: cameraTargetLookAtVector3.x,
                     y: cameraTargetLookAtVector3.y,
-                    z: cameraTargetLookAtVector3.z
+                    z: cameraTargetLookAtVector3.z,
                 })
             } else {
                 cameraTargetPos.position.set(0, 2, -2);
@@ -209,8 +237,13 @@ function cameraScrollPos() {
             }
             if (isNavOpened % 2 == 0) {
                 cameraTargetPos.position.set(0, 2, 15)
+
+                cameraTargetLookAtVector3.x = 90
+                cameraTargetLookAtVector3.y = 2
+                cameraTargetLookAtVector3.z = 0
+
                 bisonHead.lookAt(cursorObject.position)
-                gsap.to(cameraTargetLookAt.position, {
+                tl.to(cameraTargetLookAt.position, {
                     duration: 3,
                     ease: 'expo.out',
                     x: cameraTargetLookAtVector3.x,
@@ -337,7 +370,10 @@ function loadModels() {
     // iconsLoad()
     let bisonHeadPos = new THREE.Vector3(2, 0, 10)
 
-    bisonHeadLoad(0.75, bisonHeadPos)
+    bisonHeadLoad(0.75, bisonHeadPos, scene)
+    setTimeout(() => {
+        bisonResponsive()
+    }, 1000);
 }
 
 function vertexShader() {
@@ -435,8 +471,8 @@ init()
 animate()
 
 //other stuff
-let navCameraPosValue = new THREE.Vector3(0, 2, -2)
+let navCameraPosValue = new THREE.Vector3(0, 2, -1)
 const navBurger = document.getElementById("nav-burger")
-// navBurger.addEventListener("click", navCameraPos(navCameraPosValue, cameraTargetVector3));
-
-export { scene, readyToMove, readyToRotate, postprocessing };
+navBurger.addEventListener("click", function () {
+    navCameraPos(navCameraPosValue, cameraTargetVector3);
+});

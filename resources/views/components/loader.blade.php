@@ -1,10 +1,10 @@
 <div class="courtain">
-    <div class="progress" id="PreLoaderBar">
+    <!-- <div class="progress" id="PreLoaderBar">
         <div class="indeterminate"></div>
-    </div>
+    </div> -->
     
-    <div class="cursor"></div>
-<div class="cursor-follower"></div>
+    <div id="cursor" class="cursor"></div>
+<div id="cursor-follower" class="cursor-follower"></div>
 
 
     <div class="courtain-wrapper">
