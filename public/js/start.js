@@ -66824,29 +66824,30 @@ function render() {
 }
 
 var postProcessingEnabled = false;
+var scrollCamTl = new gsap__WEBPACK_IMPORTED_MODULE_6__["default"].timeline();
+
+function cameraRotateOnScroll() {
+  scrollCamTl.to(_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAt.position, {
+    duration: 3,
+    ease: 'expo.out',
+    x: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.x,
+    y: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.y,
+    z: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.z
+  });
+}
 
 function cameraScrollPos() {
-  var tl = new gsap__WEBPACK_IMPORTED_MODULE_6__["default"].timeline();
-
   switch (startSectionIndex) {
     case 0:
-      if (postProcessingEnabled == true) {
-        postProcessingEnabled = false;
-        postProcessingDisable();
-      }
-
+      // if (postProcessingEnabled == true) {
+      //     postProcessingEnabled = false;
+      //     postProcessingDisable()
+      // }
       if (_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.isNavOpened % 2 == 0) {
-        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.copy(_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetVector3);
-        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.x = 0;
-        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.y = 2;
-        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.z = 0;
-        tl.to(_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAt.position, {
-          duration: 3,
-          ease: 'expo.out',
-          x: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.x,
-          y: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.y,
-          z: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.z
-        });
+        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.copy(_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetVector3); // cameraTargetLookAtVector3.x = 0
+        // cameraTargetLookAtVector3.y = 2
+        // cameraTargetLookAtVector3.z = 0
+        // cameraRotateOnScroll()
       } else {
         _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, -2);
       }
@@ -66854,29 +66855,20 @@ function cameraScrollPos() {
       break;
 
     case 1:
-      if (postProcessingEnabled == false) {
-        postProcessingEnabled = true;
-
-        if (_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.avgFps > 30) {
-          setTimeout(function () {
-            postProcessingEnable();
-          }, 500);
-        }
-      }
-
+      // if (postProcessingEnabled == false) {
+      //     postProcessingEnabled = true;
+      //     if (avgFps > 30) {
+      //         setTimeout(() => {
+      //             postProcessingEnable()
+      //         }, 500);
+      //     }
+      // }
       if (_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.isNavOpened % 2 == 0) {
         _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, 15);
-        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.x = 90;
-        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.y = 2;
-        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.z = 0;
-        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.bisonHead.lookAt(_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cursorObject.position);
-        tl.to(_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAt.position, {
-          duration: 3,
-          ease: 'expo.out',
-          x: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.x,
-          y: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.y,
-          z: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.z
-        });
+        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.bisonHead.lookAt(_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cursorObject.position); // cameraTargetLookAtVector3.x = 90
+        // cameraTargetLookAtVector3.y = 2
+        // cameraTargetLookAtVector3.z = 0
+        // cameraRotateOnScroll()
       } else {
         _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, -2);
       }
@@ -66885,14 +66877,13 @@ function cameraScrollPos() {
 
     case 2:
       if (_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.isNavOpened % 2 == 0) {
-        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, 30);
-        gsap__WEBPACK_IMPORTED_MODULE_6__["default"].to(_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAt.position, {
-          duration: 3,
-          ease: 'expo.out',
-          x: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.x,
-          y: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.y,
-          z: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.z
-        });
+        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, 30); // gsap.to(cameraTargetLookAt.position, {
+        //     duration: 3,
+        //     ease: 'expo.out',
+        //     x: cameraTargetLookAtVector3.x,
+        //     y: cameraTargetLookAtVector3.y,
+        //     z: cameraTargetLookAtVector3.z
+        // })
       } else {
         _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, -2);
       }
@@ -66901,14 +66892,13 @@ function cameraScrollPos() {
 
     case 3:
       if (_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.isNavOpened % 2 == 0) {
-        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, 45);
-        gsap__WEBPACK_IMPORTED_MODULE_6__["default"].to(_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAt.position, {
-          duration: 3,
-          ease: 'expo.out',
-          x: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.x,
-          y: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.y,
-          z: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.z
-        });
+        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, 45); // gsap.to(cameraTargetLookAt.position, {
+        //     duration: 3,
+        //     ease: 'expo.out',
+        //     x: cameraTargetLookAtVector3.x,
+        //     y: cameraTargetLookAtVector3.y,
+        //     z: cameraTargetLookAtVector3.z
+        // })
       } else {
         _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, -2);
       }
@@ -66917,14 +66907,13 @@ function cameraScrollPos() {
 
     case 4:
       if (_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.isNavOpened % 2 == 0) {
-        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, 60);
-        gsap__WEBPACK_IMPORTED_MODULE_6__["default"].to(_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAt.position, {
-          duration: 3,
-          ease: 'expo.out',
-          x: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.x,
-          y: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.y,
-          z: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.z
-        });
+        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, 60); // gsap.to(cameraTargetLookAt.position, {
+        //     duration: 3,
+        //     ease: 'expo.out',
+        //     x: cameraTargetLookAtVector3.x,
+        //     y: cameraTargetLookAtVector3.y,
+        //     z: cameraTargetLookAtVector3.z
+        // })
       } else {
         _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, -2);
       }
@@ -66933,14 +66922,13 @@ function cameraScrollPos() {
 
     case 5:
       if (_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.isNavOpened % 2 == 0) {
-        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, 75);
-        gsap__WEBPACK_IMPORTED_MODULE_6__["default"].to(_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAt.position, {
-          duration: 3,
-          ease: 'expo.out',
-          x: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.x,
-          y: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.y,
-          z: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.z
-        });
+        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, 75); // gsap.to(cameraTargetLookAt.position, {
+        //     duration: 3,
+        //     ease: 'expo.out',
+        //     x: cameraTargetLookAtVector3.x,
+        //     y: cameraTargetLookAtVector3.y,
+        //     z: cameraTargetLookAtVector3.z
+        // })
       } else {
         _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, -2);
       }
@@ -66949,14 +66937,13 @@ function cameraScrollPos() {
 
     case 6:
       if (_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.isNavOpened % 2 == 0) {
-        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, 90);
-        gsap__WEBPACK_IMPORTED_MODULE_6__["default"].to(_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAt.position, {
-          duration: 3,
-          ease: 'expo.out',
-          x: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.x,
-          y: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.y,
-          z: _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetLookAtVector3.z
-        });
+        _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, 90); // gsap.to(cameraTargetLookAt.position, {
+        //     duration: 3,
+        //     ease: 'expo.out',
+        //     x: cameraTargetLookAtVector3.x,
+        //     y: cameraTargetLookAtVector3.y,
+        //     z: cameraTargetLookAtVector3.z
+        // })
       } else {
         _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraTargetPos.position.set(0, 2, -2);
       }

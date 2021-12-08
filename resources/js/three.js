@@ -200,56 +200,54 @@ function render() {
 }
 
 var postProcessingEnabled = false;
+var scrollCamTl = new gsap.timeline()
+function cameraRotateOnScroll() {
+    scrollCamTl.to(cameraTargetLookAt.position, {
+        duration: 3,
+        ease: 'expo.out',
+        x: cameraTargetLookAtVector3.x,
+        y: cameraTargetLookAtVector3.y,
+        z: cameraTargetLookAtVector3.z,
+    })
+}
+
 function cameraScrollPos() {
-    var tl = new gsap.timeline()
     switch (startSectionIndex) {
         case 0:
-            if (postProcessingEnabled == true) {
-                postProcessingEnabled = false;
-                postProcessingDisable()
-            }
+            // if (postProcessingEnabled == true) {
+            //     postProcessingEnabled = false;
+            //     postProcessingDisable()
+            // }
             if (isNavOpened % 2 == 0) {
                 cameraTargetPos.position.copy(cameraTargetVector3)
 
-                cameraTargetLookAtVector3.x = 0
-                cameraTargetLookAtVector3.y = 2
-                cameraTargetLookAtVector3.z = 0
+                // cameraTargetLookAtVector3.x = 0
+                // cameraTargetLookAtVector3.y = 2
+                // cameraTargetLookAtVector3.z = 0
+                // cameraRotateOnScroll()
 
-                tl.to(cameraTargetLookAt.position, {
-                    duration: 3,
-                    ease: 'expo.out',
-                    x: cameraTargetLookAtVector3.x,
-                    y: cameraTargetLookAtVector3.y,
-                    z: cameraTargetLookAtVector3.z,
-                })
             } else {
                 cameraTargetPos.position.set(0, 2, -2);
             }
             break;
         case 1:
-            if (postProcessingEnabled == false) {
-                postProcessingEnabled = true;
-                if (avgFps > 30) {
-                    setTimeout(() => {
-                        postProcessingEnable()
-                    }, 500);
-                }
-            }
+            // if (postProcessingEnabled == false) {
+            //     postProcessingEnabled = true;
+            //     if (avgFps > 30) {
+            //         setTimeout(() => {
+            //             postProcessingEnable()
+            //         }, 500);
+            //     }
+            // }
             if (isNavOpened % 2 == 0) {
                 cameraTargetPos.position.set(0, 2, 15)
-
-                cameraTargetLookAtVector3.x = 90
-                cameraTargetLookAtVector3.y = 2
-                cameraTargetLookAtVector3.z = 0
-
                 bisonHead.lookAt(cursorObject.position)
-                tl.to(cameraTargetLookAt.position, {
-                    duration: 3,
-                    ease: 'expo.out',
-                    x: cameraTargetLookAtVector3.x,
-                    y: cameraTargetLookAtVector3.y,
-                    z: cameraTargetLookAtVector3.z
-                })
+
+                // cameraTargetLookAtVector3.x = 90
+                // cameraTargetLookAtVector3.y = 2
+                // cameraTargetLookAtVector3.z = 0
+
+                // cameraRotateOnScroll()
             } else {
                 cameraTargetPos.position.set(0, 2, -2);
             }
@@ -259,13 +257,13 @@ function cameraScrollPos() {
             if (isNavOpened % 2 == 0) {
                 cameraTargetPos.position.set(0, 2, 30)
 
-                gsap.to(cameraTargetLookAt.position, {
-                    duration: 3,
-                    ease: 'expo.out',
-                    x: cameraTargetLookAtVector3.x,
-                    y: cameraTargetLookAtVector3.y,
-                    z: cameraTargetLookAtVector3.z
-                })
+                // gsap.to(cameraTargetLookAt.position, {
+                //     duration: 3,
+                //     ease: 'expo.out',
+                //     x: cameraTargetLookAtVector3.x,
+                //     y: cameraTargetLookAtVector3.y,
+                //     z: cameraTargetLookAtVector3.z
+                // })
             } else {
                 cameraTargetPos.position.set(0, 2, -2);
             }
@@ -275,13 +273,13 @@ function cameraScrollPos() {
             if (isNavOpened % 2 == 0) {
                 cameraTargetPos.position.set(0, 2, 45)
 
-                gsap.to(cameraTargetLookAt.position, {
-                    duration: 3,
-                    ease: 'expo.out',
-                    x: cameraTargetLookAtVector3.x,
-                    y: cameraTargetLookAtVector3.y,
-                    z: cameraTargetLookAtVector3.z
-                })
+                // gsap.to(cameraTargetLookAt.position, {
+                //     duration: 3,
+                //     ease: 'expo.out',
+                //     x: cameraTargetLookAtVector3.x,
+                //     y: cameraTargetLookAtVector3.y,
+                //     z: cameraTargetLookAtVector3.z
+                // })
             } else {
                 cameraTargetPos.position.set(0, 2, -2);
             }
@@ -291,13 +289,13 @@ function cameraScrollPos() {
             if (isNavOpened % 2 == 0) {
                 cameraTargetPos.position.set(0, 2, 60)
 
-                gsap.to(cameraTargetLookAt.position, {
-                    duration: 3,
-                    ease: 'expo.out',
-                    x: cameraTargetLookAtVector3.x,
-                    y: cameraTargetLookAtVector3.y,
-                    z: cameraTargetLookAtVector3.z
-                })
+                // gsap.to(cameraTargetLookAt.position, {
+                //     duration: 3,
+                //     ease: 'expo.out',
+                //     x: cameraTargetLookAtVector3.x,
+                //     y: cameraTargetLookAtVector3.y,
+                //     z: cameraTargetLookAtVector3.z
+                // })
             } else {
                 cameraTargetPos.position.set(0, 2, -2);
             }
@@ -307,13 +305,13 @@ function cameraScrollPos() {
             if (isNavOpened % 2 == 0) {
                 cameraTargetPos.position.set(0, 2, 75)
 
-                gsap.to(cameraTargetLookAt.position, {
-                    duration: 3,
-                    ease: 'expo.out',
-                    x: cameraTargetLookAtVector3.x,
-                    y: cameraTargetLookAtVector3.y,
-                    z: cameraTargetLookAtVector3.z
-                })
+                // gsap.to(cameraTargetLookAt.position, {
+                //     duration: 3,
+                //     ease: 'expo.out',
+                //     x: cameraTargetLookAtVector3.x,
+                //     y: cameraTargetLookAtVector3.y,
+                //     z: cameraTargetLookAtVector3.z
+                // })
             } else {
                 cameraTargetPos.position.set(0, 2, -2);
             }
@@ -323,13 +321,13 @@ function cameraScrollPos() {
             if (isNavOpened % 2 == 0) {
                 cameraTargetPos.position.set(0, 2, 90)
 
-                gsap.to(cameraTargetLookAt.position, {
-                    duration: 3,
-                    ease: 'expo.out',
-                    x: cameraTargetLookAtVector3.x,
-                    y: cameraTargetLookAtVector3.y,
-                    z: cameraTargetLookAtVector3.z
-                })
+                // gsap.to(cameraTargetLookAt.position, {
+                //     duration: 3,
+                //     ease: 'expo.out',
+                //     x: cameraTargetLookAtVector3.x,
+                //     y: cameraTargetLookAtVector3.y,
+                //     z: cameraTargetLookAtVector3.z
+                // })
             } else {
                 cameraTargetPos.position.set(0, 2, -2);
             }
