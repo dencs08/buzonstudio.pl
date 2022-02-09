@@ -49,7 +49,7 @@ gtag('config', 'G-M2VGTFKH7L');
                     Wiemy, że czasami ciężko komuś zaufać
                 </h1>
 
-                <h2 class="mb-5">Wierzymy jendak, że nasze doswiadczenie i usługi mogą to zmienić dlatego też, w naszym studio naszę pracę opieramy na wynikach tak aby dostarczyć Tobie usługę której potrzebujesz.</h2>
+                <h2 class="mb-5">Wierzymy jendak, że nasze doswiadczenie i usługi mogą to zmienić, dlatego też, w naszym studio nasze pracę opieramy na wynikach tak aby dostarczyć Tobie usługę której potrzebujesz.</h2>
 
 
                 <x-arrow/>
@@ -62,43 +62,22 @@ gtag('config', 'G-M2VGTFKH7L');
                     <div class="col-md-6 d-flex justify-content-center place-items-center">
                         <div class="card gs gs_fromLeft">
                             <div class="card-body gs gs_fromLeft">
-                                <h3 class="card-header my-0 mb-1 gs gs_fromLeft">Imię Nazwisko</h3>
-                                <h4 class="my-0 gs gs_fromLeft">Firma Stanowisko</h4>
-                                <p class="gs gs_fromLeft">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi explicabo eos corporis corrupti esse repudiandae vero dolorum quisquam temporibus illum, consequatur necessitatibus iste quibusdam ut laboriosam dolorem porro doloribus ipsa!</p>
+                                <h3 class="card-header my-0 mb-1 gs gs_fromLeft">Jarosław Buzon</h3>
+                                <h4 class="my-0 gs gs_fromLeft">KOMB Constructions</h4>
+                                <p class="gs gs_fromLeft">Wspaniała opieka, pomoc i zrozumienie. Świetne pomysły i rewelacyjne rozwiązania. Szczerze polecam. Jarek Buzon</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 d-flex justify-content-center place-items-center">
-                        <div class="card gs gs_fromRight">
-                            <div class="card-body gs gs_fromRight">
-                                <h3 class="card-header my-0 mb-1 gs gs_fromRight">Imię Nazwisko</h3>
-                                <h4 class="my-0 gs gs_fromRight">Firma Stanowisko</h4>
-                                <p class="gs gs_fromRight">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi explicabo eos corporis corrupti esse repudiandae vero dolorum quisquam temporibus illum, consequatur necessitatibus iste quibusdam ut laboriosam dolorem porro doloribus ipsa!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div data-scroll data-scroll-speed="2" class="row">
                     <div class="col-md-6 d-flex justify-content-center place-items-center">
                         <div class="card gs gs_fromLeft">
                             <div class="card-body gs gs_fromLeft">
-                                <h3 class="card-header my-0 mb-1 gs gs_fromLeft">Imię Nazwisko</h3>
-                                <h4 class="my-0 gs gs_fromLeft">Firma Stanowisko</h4>
-                                <p class=" gs gs_fromLeft">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi explicabo eos corporis corrupti esse repudiandae vero dolorum quisquam temporibus illum, consequatur necessitatibus iste quibusdam ut laboriosam dolorem porro doloribus ipsa!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 d-flex justify-content-center place-items-center">
-                        <div class="card gs gs_fromRight">
-                            <div class="card-body gs gs_fromRight">
-                                <h3 class="card-header my-0 mb-1 gs gs_fromRight">Imię Nazwisko</h3>
-                                <h4 class="my-0 gs gs_fromRight">Firma Stanowisko</h4>
-                                <p class=" gs gs_fromRight">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi explicabo eos corporis corrupti esse repudiandae vero dolorum quisquam temporibus illum, consequatur necessitatibus iste quibusdam ut laboriosam dolorem porro doloribus ipsa!</p>
+                                <h3 class="card-header my-0 mb-1 gs gs_fromLeft">Jolanta Brasuń - Sitkowska</h3>
+                                <h4 class="my-0 gs gs_fromLeft">Biuro Rachunkowe JBS</h4>
+                                <p class=" gs gs_fromLeft">Bardzo konkretna i rzeczowa współpraca. Nie pierwszy już zrealizowany projekt i na pewno nie ostatni. Świetna komunikacja i dużą elastyczność. Polecam. Jola Brasuń</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
 
     <x-footer/>

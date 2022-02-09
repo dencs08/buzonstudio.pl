@@ -57,8 +57,8 @@ function init() {
 
     //! Controls
     // controls = new OrbitControls(camera, renderer.domElement)
-    stats = new Stats();
-    container.appendChild(stats.dom);
+    // stats = new Stats();
+    // container.appendChild(stats.dom);
     container.style.touchAction = 'none';
     window.addEventListener('resize', onWindowResize);
     // container.addEventListener('pointermove', onPointerMove);
@@ -116,7 +116,7 @@ function initPostprocessing() {
 
     postprocessing.composer = composer;
     composer.addPass(renderPass)
-    postProcessingEnable()
+    // postProcessingEnable()
 }
 
 function postProcessingEnable() {
@@ -160,9 +160,9 @@ function animate(time) {
 
     requestAnimationFrame(animate, renderer.domElement);
 
-    stats.begin();
+    // stats.begin();
     render();
-    stats.end();
+    // stats.end();
 
     cameraMove(delta, readyToMove)
     animateParticles(time, locoScrollPosValue, scene)
@@ -172,9 +172,9 @@ function animate(time) {
 }
 
 function loadModels() {
-    let bisonHeadPos = new THREE.Vector3(0, -0.5, -4)
+    let bisonHeadPos = new THREE.Vector3(0, 0, -2.25)
 
-    bisonHeadLoad(1, bisonHeadPos, scene)
+    bisonHeadLoad(0.8, bisonHeadPos, scene)
 }
 
 init()

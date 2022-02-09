@@ -52,8 +52,7 @@ gtag('config', 'G-M2VGTFKH7L');
                     Dla was budujemy <br> wspaniałe <span id="typed"></span>
                 </h1>
 
-                <h2 class="mb-5">W naszym studio kreujemy prace które, działają, zdobywają serca użytkowników i zapadają w pamięć
-                    Tworzymy strony internetowe, wizualizacje architektoniczne, 
+                <h2 class="mb-5">W naszym studio kreujemy prace które, działają, zdobywają serca użytkowników i zapadają w pamięć. Tworzymy wszystko od A do Z, tak jak chcesz.
                 </h2>
                 <x-arrow/>
             </div>

@@ -329,7 +329,7 @@ function mainWebEnter() {
         scaleY: 0
       }
     }, "-=0.6");
-  } else if (path.includes("/portfolio")) {} else {
+  } else if (path.includes("/portfolio")) {} else if (path == "/polityka") {} else {
     var arrow = document.getElementsByClassName('arrow-down-icon');
 
     var _three = document.getElementById('web_gl');

@@ -67,7 +67,7 @@
                 <h4 class="my-0 headerline anim-stagger1">Przyciągaj uwagę</h4>
                 <h3 class="mt-2 mb-3 anim-stagger1">Wyróżnij się od konkurencji</h3>
                 <p class="anim-stagger1">
-                    Dzięki naszemu <span data-tooltip="Branding to m.in. logo, jest to wygląd Twojej marki, to on wpływa na to jak spostrzegają Cię klienci." class="text-highlight cursor-pointer">brandingowi</span> stworzonym pod Twoje potrzeby, Twoja marka będzie niepowtarzalna,
+                    Dzięki naszemu <span data-tooltip="Branding to m.in. logo, jest to wygląd Twojej marki, to on wpływa na to jak postrzegają Cię klienci." class="text-highlight cursor-pointer">brandingowi</span> stworzonym pod Twoje potrzeby, Twoja marka będzie niepowtarzalna,
                     sama w sobie będzie "przyciągać wzrok" a klienci będą ją utożsamiać jako wyjątkową i unikalną.
                     Nasz proces tworzenia stron internetowych i brandingu zrobi to wszystko za Ciebie.
                 </p>
@@ -133,13 +133,12 @@
                 </div>
         </section>
 
-
         <!-- Lets talk -->
 
         <section data-scroll-section id="letsTalk-section" class="scroll-snap-start section sixth">
             <div id="letsTalk-content" class="container text-center">
                 <h4 class="anim-stagger5">Rozwiń swój biznes razem z nami!</h4>
-                <h3 class="anim-stagger5">Zatrudnij nas a my zajmiemy się resztą ✌</h3>
+                <h3 class="anim-stagger5">Zatrudnij nas a my zajmiemy się resztą.</h3>
                 <div class="button-trail mt-5 anim-stagger5">
                     <form>
                         <a href="kontakt">

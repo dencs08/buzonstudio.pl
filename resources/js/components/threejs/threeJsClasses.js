@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { random } from 'gsap/all'
 
 const gltfLoader = new GLTFLoader()
 
@@ -8,13 +9,20 @@ const gltfLoader = new GLTFLoader()
 
 var url = new URL("../", document.baseURI).href
 let bisonHead, bisonHeadMaterialParam, bisonHeadMaterial;
+let balloonModel, balloonMaterialParam1, balloonMaterialParam2, balloonMaterial1, balloonMaterial2;
+let handModel, handsMaterialParam, handsMaterial;
+let coinsModel, coinsMaterialParam, coinsMaterial;
+
+let ballonsArr = [];
+let handsArr = [];
+let coinsArr = [];
 function bisonHeadLoad(bisonScale, bisonPos, scene) {
     let envmaploader = new THREE.PMREMGenerator(renderer);
 
     new RGBELoader().load(url + '3d/studio_small_09_1k.hdr', function (hdrmap) {
         let envmap = envmaploader.fromCubemap(hdrmap);
         bisonHeadMaterialParam = {
-            color: 0x00ffff,
+            color: 0x007A7C,
             metalness: 0.9,
             roughness: 0.5,
             clearcoat: 1.0,
@@ -35,6 +43,144 @@ function bisonHeadLoad(bisonScale, bisonPos, scene) {
             scene.add(bisonHead)
             bisonHead.scale.set(bisonScale, bisonScale, bisonScale)
             bisonHead.position.set(bisonPos.x, bisonPos.y, bisonPos.z)
+        })
+    });
+}
+let balloonIndex = 0;
+function balloonLoad(balloonScale, balloonPosX, balloonPosY, balloonPosZ, balloonRotX, balloonRotY, balloonRotZ, scene) {
+
+    let envmaploader = new THREE.PMREMGenerator(renderer);
+
+    new RGBELoader().load(url + '3d/studio_small_09_1k.hdr', function (hdrmap) {
+        let envmap = envmaploader.fromCubemap(hdrmap);
+        balloonMaterialParam1 = {
+            color: 0x292929,
+            metalness: 0.9,
+            roughness: 0.5,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.1,
+            reflectivity: 0,
+            // normalMap: texture,
+            // normalScale: new THREE.Vector2(0.15, 0.15),
+            envMap: envmap.texture
+        }
+
+        balloonMaterial1 = new THREE.MeshPhysicalMaterial(balloonMaterialParam1)
+
+        gltfLoader.load(url + "3d/models/balloon.glb", (glb) => {
+            balloonModel = glb.scene
+            balloonModel.traverse((o) => {
+                if (o.isMesh) o.material = balloonMaterial1;
+            });
+            scene.add(balloonModel)
+            balloonModel.scale.set(balloonScale, balloonScale, balloonScale)
+            balloonModel.position.set(balloonPosX[balloonIndex], balloonPosY[balloonIndex], balloonPosZ[balloonIndex])
+            balloonModel.rotation.set(balloonRotX[balloonIndex], balloonRotY[balloonIndex], balloonRotZ[balloonIndex])
+            ballonsArr.push(balloonModel)
+            balloonIndex++;
+        })
+    });
+}
+function balloonLoadSpecial(balloonScale, balloonPosX, balloonPosY, balloonPosZ, balloonRotX, balloonRotY, balloonRotZ, scene) {
+    let envmaploader = new THREE.PMREMGenerator(renderer);
+
+    new RGBELoader().load(url + '3d/studio_small_09_1k.hdr', function (hdrmap) {
+        let envmap = envmaploader.fromCubemap(hdrmap);
+        balloonMaterialParam2 = {
+            color: 0x007A7C,
+            metalness: 0.9,
+            roughness: 0.5,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.1,
+            reflectivity: 0,
+            // normalMap: texture,
+            // normalScale: new THREE.Vector2(0.15, 0.15),
+            envMap: envmap.texture
+        }
+
+        balloonMaterial2 = new THREE.MeshPhysicalMaterial(balloonMaterialParam2)
+
+        gltfLoader.load(url + "3d/models/balloon.glb", (glb) => {
+            balloonModel = glb.scene
+            balloonModel.traverse((o) => {
+                if (o.isMesh) o.material = balloonMaterial2;
+            });
+            scene.add(balloonModel)
+            balloonModel.scale.set(balloonScale, balloonScale, balloonScale)
+            balloonModel.position.set(balloonPosX[2], balloonPosY[2], balloonPosZ[2])
+            balloonModel.rotation.set(balloonRotX[2], balloonRotY[2], balloonRotZ[2])
+            ballonsArr.push(balloonModel)
+        })
+    });
+}
+let handsIndex = 0;
+function handsLoad(handScale, handPosX, handPosY, handPosZ, handRot, scene) {
+    let envmaploader = new THREE.PMREMGenerator(renderer);
+
+    new RGBELoader().load(url + '3d/studio_small_09_1k.hdr', function (hdrmap) {
+        let envmap = envmaploader.fromCubemap(hdrmap);
+        handsMaterialParam = {
+            color: 0x007A7C,
+            metalness: 0.9,
+            roughness: 0.5,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.1,
+            reflectivity: 0,
+            // normalMap: texture,
+            // normalScale: new THREE.Vector2(0.15, 0.15),
+            envMap: envmap.texture
+        }
+
+        handsMaterial = new THREE.MeshPhysicalMaterial(handsMaterialParam)
+
+        gltfLoader.load(url + "3d/models/hand.glb", (glb) => {
+            handModel = glb.scene
+            handModel.traverse((o) => {
+                if (o.isMesh) o.material = handsMaterial;
+            });
+            scene.add(handModel)
+            handModel.scale.set(handScale, handScale, handScale)
+            handModel.position.set(handPosX[handsIndex], handPosY[handsIndex], handPosZ[handsIndex])
+            handModel.rotation.set(handRot.x, handRot.y, handRot.z)
+            handsArr.push(handModel)
+            handsIndex++;
+        })
+    });
+}
+
+function coinsLoad(coinScale, coinPosY, scene) {
+    let envmaploader = new THREE.PMREMGenerator(renderer);
+
+    new RGBELoader().load(url + '3d/studio_small_09_1k.hdr', function (hdrmap) {
+        let envmap = envmaploader.fromCubemap(hdrmap);
+        coinsMaterialParam = {
+            color: 0x007A7C,
+            metalness: 0.9,
+            roughness: 0.5,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.1,
+            reflectivity: 0,
+            // normalMap: texture,
+            // normalScale: new THREE.Vector2(0.15, 0.15),
+            envMap: envmap.texture
+        }
+
+        coinsMaterial = new THREE.MeshPhysicalMaterial(coinsMaterialParam)
+
+        gltfLoader.load(url + "3d/models/coin.glb", (glb) => {
+            let randomCoinZPos = Math.random() * (43.75 - 43.2) + 43.2
+            let randomCoinXRot = Math.random() * (1 - 0 + 1) + 0
+            let randomCoinYRot = Math.random() * (1 - 0 + 1) + 0
+            let randomCoinZRot = Math.random() * (1 - 0 + 1) + 0
+            coinsModel = glb.scene
+            coinsModel.traverse((o) => {
+                if (o.isMesh) o.material = coinsMaterial;
+            });
+            scene.add(coinsModel)
+            coinsModel.scale.set(coinScale, coinScale, coinScale)
+            coinsModel.position.set(0, coinPosY, randomCoinZPos)
+            coinsModel.rotation.set(randomCoinXRot, randomCoinYRot, randomCoinZRot)
+            coinsArr.push(coinsModel)
         })
     });
 }
@@ -97,7 +243,7 @@ function enviroParticles(particleAmount, minX, maxX, minY, maxY, minZ, maxZ, sce
     }
 
     particleGeo.setAttribute('position', new THREE.Float32BufferAttribute(particleVerts, 3));
-    particleMat = new THREE.PointsMaterial({ size: 0.01, sizeAttenuation: true, map: sprite, alphaTest: 0.1, transparent: true });
+    particleMat = new THREE.PointsMaterial({ size: 0.01, sizeAttenuation: true, map: sprite, alphaTest: 0, transparent: true });
     particles = new THREE.Points(particleGeo, particleMat);
     scene.add(particles);
 }
@@ -257,7 +403,7 @@ function rendererInit(width, height) {
 
 function sceneInit(fogStart, fogEnd, scene) {
     // scene.fog = new THREE.FogExp2(0x111111, 0.2)
-    scene.fog = new THREE.Fog(0x040404, fogStart, fogEnd);
+    scene.fog = new THREE.Fog(0x111111, fogStart, fogEnd);
     // scene.background = new THREE.Color(0x111111);
 }
 
@@ -285,6 +431,6 @@ function clearThree(scene) {
 }
 
 export {
-    bisonHeadLoad, animateParticles, enviroParticles, fpsChecker, navCameraPos, cameraInit, cameraMove, sceneInit, rendererInit,
-    bisonHead, isFpsReadyToCheck, isNavOpened, camera, cameraTargetPos, cameraTargetVector3, cameraTargetLookAtVector3, cameraTargetLookAt, cursorObject, avgFps, renderer, canvas
+    bisonHeadLoad, balloonLoad, balloonLoadSpecial, handsLoad, coinsLoad, animateParticles, enviroParticles, fpsChecker, navCameraPos, cameraInit, cameraMove, sceneInit, rendererInit,
+    bisonHead, coinsArr, ballonsArr, handsArr, balloonModel, isFpsReadyToCheck, isNavOpened, camera, cameraTargetPos, cameraTargetVector3, cameraTargetLookAtVector3, cameraTargetLookAt, cursorObject, avgFps, renderer, canvas
 };

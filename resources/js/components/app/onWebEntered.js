@@ -108,6 +108,7 @@ function mainWebEnter() {
         },
             "-=0.6")
     } else if (path.includes("/portfolio")) {
+    } else if (path == "/polityka") {
     } else {
         const arrow = document.getElementsByClassName('arrow-down-icon')
         const three = document.getElementById('web_gl')

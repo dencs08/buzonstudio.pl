@@ -11,6 +11,10 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "bisonHeadLoad": () => (/* binding */ bisonHeadLoad),
+/* harmony export */   "balloonLoad": () => (/* binding */ balloonLoad),
+/* harmony export */   "balloonLoadSpecial": () => (/* binding */ balloonLoadSpecial),
+/* harmony export */   "handsLoad": () => (/* binding */ handsLoad),
+/* harmony export */   "coinsLoad": () => (/* binding */ coinsLoad),
 /* harmony export */   "animateParticles": () => (/* binding */ animateParticles),
 /* harmony export */   "enviroParticles": () => (/* binding */ enviroParticles),
 /* harmony export */   "fpsChecker": () => (/* binding */ fpsChecker),
@@ -20,6 +24,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "sceneInit": () => (/* binding */ sceneInit),
 /* harmony export */   "rendererInit": () => (/* binding */ rendererInit),
 /* harmony export */   "bisonHead": () => (/* binding */ bisonHead),
+/* harmony export */   "coinsArr": () => (/* binding */ coinsArr),
+/* harmony export */   "ballonsArr": () => (/* binding */ ballonsArr),
+/* harmony export */   "handsArr": () => (/* binding */ handsArr),
+/* harmony export */   "balloonModel": () => (/* binding */ balloonModel),
 /* harmony export */   "isFpsReadyToCheck": () => (/* binding */ isFpsReadyToCheck),
 /* harmony export */   "isNavOpened": () => (/* binding */ isNavOpened),
 /* harmony export */   "camera": () => (/* binding */ camera),
@@ -38,17 +46,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var gltfLoader = new three_examples_jsm_loaders_GLTFLoader_js__WEBPACK_IMPORTED_MODULE_1__.GLTFLoader(); // import { threeJsDNone } from '../app/onWebEntered';
 
 var url = new URL("../", document.baseURI).href;
 var bisonHead, bisonHeadMaterialParam, bisonHeadMaterial;
+var balloonModel, balloonMaterialParam1, balloonMaterialParam2, balloonMaterial1, balloonMaterial2;
+var handModel, handsMaterialParam, handsMaterial;
+var coinsModel, coinsMaterialParam, coinsMaterial;
+var ballonsArr = [];
+var handsArr = [];
+var coinsArr = [];
 
 function bisonHeadLoad(bisonScale, bisonPos, scene) {
   var envmaploader = new three__WEBPACK_IMPORTED_MODULE_2__.PMREMGenerator(renderer);
   new three_examples_jsm_loaders_RGBELoader_js__WEBPACK_IMPORTED_MODULE_0__.RGBELoader().load(url + '3d/studio_small_09_1k.hdr', function (hdrmap) {
     var envmap = envmaploader.fromCubemap(hdrmap);
     bisonHeadMaterialParam = {
-      color: 0x00ffff,
+      color: 0x007A7C,
       metalness: 0.9,
       roughness: 0.5,
       clearcoat: 1.0,
@@ -67,6 +82,136 @@ function bisonHeadLoad(bisonScale, bisonPos, scene) {
       scene.add(bisonHead);
       bisonHead.scale.set(bisonScale, bisonScale, bisonScale);
       bisonHead.position.set(bisonPos.x, bisonPos.y, bisonPos.z);
+    });
+  });
+}
+
+var balloonIndex = 0;
+
+function balloonLoad(balloonScale, balloonPosX, balloonPosY, balloonPosZ, balloonRotX, balloonRotY, balloonRotZ, scene) {
+  var envmaploader = new three__WEBPACK_IMPORTED_MODULE_2__.PMREMGenerator(renderer);
+  new three_examples_jsm_loaders_RGBELoader_js__WEBPACK_IMPORTED_MODULE_0__.RGBELoader().load(url + '3d/studio_small_09_1k.hdr', function (hdrmap) {
+    var envmap = envmaploader.fromCubemap(hdrmap);
+    balloonMaterialParam1 = {
+      color: 0x292929,
+      metalness: 0.9,
+      roughness: 0.5,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.1,
+      reflectivity: 0,
+      // normalMap: texture,
+      // normalScale: new THREE.Vector2(0.15, 0.15),
+      envMap: envmap.texture
+    };
+    balloonMaterial1 = new three__WEBPACK_IMPORTED_MODULE_2__.MeshPhysicalMaterial(balloonMaterialParam1);
+    gltfLoader.load(url + "3d/models/balloon.glb", function (glb) {
+      balloonModel = glb.scene;
+      balloonModel.traverse(function (o) {
+        if (o.isMesh) o.material = balloonMaterial1;
+      });
+      scene.add(balloonModel);
+      balloonModel.scale.set(balloonScale, balloonScale, balloonScale);
+      balloonModel.position.set(balloonPosX[balloonIndex], balloonPosY[balloonIndex], balloonPosZ[balloonIndex]);
+      balloonModel.rotation.set(balloonRotX[balloonIndex], balloonRotY[balloonIndex], balloonRotZ[balloonIndex]);
+      ballonsArr.push(balloonModel);
+      balloonIndex++;
+    });
+  });
+}
+
+function balloonLoadSpecial(balloonScale, balloonPosX, balloonPosY, balloonPosZ, balloonRotX, balloonRotY, balloonRotZ, scene) {
+  var envmaploader = new three__WEBPACK_IMPORTED_MODULE_2__.PMREMGenerator(renderer);
+  new three_examples_jsm_loaders_RGBELoader_js__WEBPACK_IMPORTED_MODULE_0__.RGBELoader().load(url + '3d/studio_small_09_1k.hdr', function (hdrmap) {
+    var envmap = envmaploader.fromCubemap(hdrmap);
+    balloonMaterialParam2 = {
+      color: 0x007A7C,
+      metalness: 0.9,
+      roughness: 0.5,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.1,
+      reflectivity: 0,
+      // normalMap: texture,
+      // normalScale: new THREE.Vector2(0.15, 0.15),
+      envMap: envmap.texture
+    };
+    balloonMaterial2 = new three__WEBPACK_IMPORTED_MODULE_2__.MeshPhysicalMaterial(balloonMaterialParam2);
+    gltfLoader.load(url + "3d/models/balloon.glb", function (glb) {
+      balloonModel = glb.scene;
+      balloonModel.traverse(function (o) {
+        if (o.isMesh) o.material = balloonMaterial2;
+      });
+      scene.add(balloonModel);
+      balloonModel.scale.set(balloonScale, balloonScale, balloonScale);
+      balloonModel.position.set(balloonPosX[2], balloonPosY[2], balloonPosZ[2]);
+      balloonModel.rotation.set(balloonRotX[2], balloonRotY[2], balloonRotZ[2]);
+      ballonsArr.push(balloonModel);
+    });
+  });
+}
+
+var handsIndex = 0;
+
+function handsLoad(handScale, handPosX, handPosY, handPosZ, handRot, scene) {
+  var envmaploader = new three__WEBPACK_IMPORTED_MODULE_2__.PMREMGenerator(renderer);
+  new three_examples_jsm_loaders_RGBELoader_js__WEBPACK_IMPORTED_MODULE_0__.RGBELoader().load(url + '3d/studio_small_09_1k.hdr', function (hdrmap) {
+    var envmap = envmaploader.fromCubemap(hdrmap);
+    handsMaterialParam = {
+      color: 0x007A7C,
+      metalness: 0.9,
+      roughness: 0.5,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.1,
+      reflectivity: 0,
+      // normalMap: texture,
+      // normalScale: new THREE.Vector2(0.15, 0.15),
+      envMap: envmap.texture
+    };
+    handsMaterial = new three__WEBPACK_IMPORTED_MODULE_2__.MeshPhysicalMaterial(handsMaterialParam);
+    gltfLoader.load(url + "3d/models/hand.glb", function (glb) {
+      handModel = glb.scene;
+      handModel.traverse(function (o) {
+        if (o.isMesh) o.material = handsMaterial;
+      });
+      scene.add(handModel);
+      handModel.scale.set(handScale, handScale, handScale);
+      handModel.position.set(handPosX[handsIndex], handPosY[handsIndex], handPosZ[handsIndex]);
+      handModel.rotation.set(handRot.x, handRot.y, handRot.z);
+      handsArr.push(handModel);
+      handsIndex++;
+    });
+  });
+}
+
+function coinsLoad(coinScale, coinPosY, scene) {
+  var envmaploader = new three__WEBPACK_IMPORTED_MODULE_2__.PMREMGenerator(renderer);
+  new three_examples_jsm_loaders_RGBELoader_js__WEBPACK_IMPORTED_MODULE_0__.RGBELoader().load(url + '3d/studio_small_09_1k.hdr', function (hdrmap) {
+    var envmap = envmaploader.fromCubemap(hdrmap);
+    coinsMaterialParam = {
+      color: 0x007A7C,
+      metalness: 0.9,
+      roughness: 0.5,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.1,
+      reflectivity: 0,
+      // normalMap: texture,
+      // normalScale: new THREE.Vector2(0.15, 0.15),
+      envMap: envmap.texture
+    };
+    coinsMaterial = new three__WEBPACK_IMPORTED_MODULE_2__.MeshPhysicalMaterial(coinsMaterialParam);
+    gltfLoader.load(url + "3d/models/coin.glb", function (glb) {
+      var randomCoinZPos = Math.random() * (43.75 - 43.2) + 43.2;
+      var randomCoinXRot = Math.random() * (1 - 0 + 1) + 0;
+      var randomCoinYRot = Math.random() * (1 - 0 + 1) + 0;
+      var randomCoinZRot = Math.random() * (1 - 0 + 1) + 0;
+      coinsModel = glb.scene;
+      coinsModel.traverse(function (o) {
+        if (o.isMesh) o.material = coinsMaterial;
+      });
+      scene.add(coinsModel);
+      coinsModel.scale.set(coinScale, coinScale, coinScale);
+      coinsModel.position.set(0, coinPosY, randomCoinZPos);
+      coinsModel.rotation.set(randomCoinXRot, randomCoinYRot, randomCoinZRot);
+      coinsArr.push(coinsModel);
     });
   });
 }
@@ -116,7 +261,7 @@ function enviroParticles(particleAmount, minX, maxX, minY, maxY, minZ, maxZ, sce
     size: 0.01,
     sizeAttenuation: true,
     map: sprite,
-    alphaTest: 0.1,
+    alphaTest: 0,
     transparent: true
   });
   particles = new three__WEBPACK_IMPORTED_MODULE_2__.Points(particleGeo, particleMat);
@@ -285,7 +430,7 @@ function rendererInit(width, height) {
 
 function sceneInit(fogStart, fogEnd, scene) {
   // scene.fog = new THREE.FogExp2(0x111111, 0.2)
-  scene.fog = new three__WEBPACK_IMPORTED_MODULE_2__.Fog(0x040404, fogStart, fogEnd); // scene.background = new THREE.Color(0x111111);
+  scene.fog = new three__WEBPACK_IMPORTED_MODULE_2__.Fog(0x111111, fogStart, fogEnd); // scene.background = new THREE.Color(0x111111);
 }
 
 function clearThree(scene) {
@@ -67152,9 +67297,9 @@ function init() {
   lightsInit();
   container.appendChild(_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.renderer.domElement); //! Controls
   // controls = new OrbitControls(camera, renderer.domElement)
+  // stats = new Stats();
+  // container.appendChild(stats.dom);
 
-  stats = new three_examples_jsm_libs_stats_module__WEBPACK_IMPORTED_MODULE_3__["default"]();
-  container.appendChild(stats.dom);
   container.style.touchAction = 'none';
   window.addEventListener('resize', onWindowResize); // container.addEventListener('pointermove', onPointerMove);
   // document.addEventListener('pointermove', render);
@@ -67204,8 +67349,7 @@ function initPostprocessing() {
   var renderPass = new three_examples_jsm_postprocessing_RenderPass_js__WEBPACK_IMPORTED_MODULE_0__.RenderPass(scene, _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.camera);
   composer = new three_examples_jsm_postprocessing_EffectComposer_js__WEBPACK_IMPORTED_MODULE_1__.EffectComposer(_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.renderer);
   postprocessing.composer = composer;
-  composer.addPass(renderPass);
-  postProcessingEnable();
+  composer.addPass(renderPass); // postProcessingEnable()
 }
 
 function postProcessingEnable() {
@@ -67243,18 +67387,18 @@ var delta;
 function animate(time) {
   delta = clock.getDelta();
   time *= 0.001;
-  requestAnimationFrame(animate, _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.renderer.domElement);
-  stats.begin();
-  render();
-  stats.end();
+  requestAnimationFrame(animate, _components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.renderer.domElement); // stats.begin();
+
+  render(); // stats.end();
+
   (0,_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.cameraMove)(delta, readyToMove);
   (0,_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.animateParticles)(time, locoScrollPosValue, scene); // fpsChecker()
   // console.log(renderer.info.render)
 }
 
 function loadModels() {
-  var bisonHeadPos = new three__WEBPACK_IMPORTED_MODULE_5__.Vector3(0, -0.5, -4);
-  (0,_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.bisonHeadLoad)(1, bisonHeadPos, scene);
+  var bisonHeadPos = new three__WEBPACK_IMPORTED_MODULE_5__.Vector3(0, 0, -2.25);
+  (0,_components_threejs_threeJsClasses_js__WEBPACK_IMPORTED_MODULE_4__.bisonHeadLoad)(0.8, bisonHeadPos, scene);
 }
 
 init();

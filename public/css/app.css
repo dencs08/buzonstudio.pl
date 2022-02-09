@@ -7223,11 +7223,13 @@ a {
   .three_disabler,
 .three_enabler {
     left: 78%;
+    top: 90.5vh;
   }
 }
 @media (max-width: 400px) {
   .three_disabler,
 .three_enabler {
     left: 72.5%;
+    top: 89.5vh;
   }
 }
