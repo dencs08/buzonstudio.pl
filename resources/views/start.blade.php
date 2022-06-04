@@ -1,50 +1,30 @@
-<!DOCTYPE html>
-<html lang="pl">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="W bisonstudio zajmujemy się, tworzeniem stron i sklepów internetowych, wizualizacji aplikacji czy brandingu, zlecenia realizujemy od A do Z">
-        <link rel="canonical" href="https://www.bisonstudio.pl"/>
-        <link rel="apple-touch-icon" href="{{asset('images/logos/logo_white-cropped.svg')}}">
-        <link rel="shortcut icon" href="{{asset('images/logos/logo_white-cropped.svg')}}" />
-        <link rel="stylesheet" href="css/app.css" />
-        <link rel="stylesheet" href="css/start.css" />
-        <title>Tworzenie Stron Internetowych UI UX DESIGN</title>
+@extends('layouts.master')
+@section('title', 'Start')
 
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-M2VGTFKH7L"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+@section('meta')
+<meta name="description" content=''>
+@endsection
 
-            gtag('config', 'G-M2VGTFKH7L');
-        </script>
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/start.css') }}">
+@endsection
 
-<script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:2678438,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
+@section('js')
+    <x-global-js-variables/>
+    <!-- <script src="{{ asset('js/start.js') }}"></script> -->
+@endsection
 
-    </head>
-    <body class="antialiased">
-
-        <!-- WEBGL -->
-        <canvas id="web_gl"></canvas>
+@section('content')
 
         <x-loader/>
 
         <x-3d-disable/>
         <x-navbar/>
-<div id="web-content">
-    <div id="fullpage">
-    <x-background-image/>
+        <div id="web-content">
+        <div id="fullpage">
+        <x-background-image/>
+
+        <!-- Hero -->
         <section data-scroll-section id="landing-page" class="scroll-snap-start section first">
             <div  id="landing-content" class="container landing-page-content first-content">
                 <h1 class="anim-stagger0">
@@ -61,7 +41,6 @@
 
         
         <!-- Attention -->
-
         <section data-scroll-section id="attention" class="scroll-snap-start section second">
             <div id="attention-content" class="container aboutus second-content">
                 <h4 class="my-0 headerline anim-stagger1">Przyciągaj uwagę</h4>
@@ -75,7 +54,6 @@
         </section>
 
         <!-- Remembered -->
-
         <section data-scroll-section id="remembered" class="scroll-snap-start section third">
             <div id="remembered-content" class="container aboutus row ">
                 <div class="col-md-6 d-none d-md-block"></div>
@@ -94,7 +72,6 @@
         </section>
 
         <!-- Sales -->
-
         <section data-scroll-section id="sales" class="scroll-snap-start section fourth">
             <div  id="sales-content" class="container aboutus">
                 <h4 class="my-0 headerline anim-stagger3">Pozwól swojemu biznesowi na rozwój</h4>
@@ -111,7 +88,6 @@
         </section>
 
         <!-- Portfolio -->
-
         <section data-scroll-section id="portfolio" class="scroll-snap-start section fifth">
                 <div  id="portfolio-content" class="container">
                     <h4 class="my-0 headerline anim-stagger4">Nasze prace</h4>
@@ -134,7 +110,6 @@
         </section>
 
         <!-- Lets talk -->
-
         <section data-scroll-section id="letsTalk-section" class="scroll-snap-start section sixth">
             <div id="letsTalk-content" class="container text-center">
                 <h4 class="anim-stagger5">Rozwiń swój biznes razem z nami!</h4>
@@ -152,13 +127,10 @@
                 </div>                
             </div>
         </section>
+
         <x-footer/>
+
     </div>
 </div>
 
-        <x-global-js-variables/>
-
-        <script src="js/app.js"></script>
-        <script src="js/start.js"></script>
-    </body>
-</html>
+@endsection
