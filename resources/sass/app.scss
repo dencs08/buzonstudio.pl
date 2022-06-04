@@ -4,7 +4,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap");
 
 // Variables
-@import "variables";
+@import "components/variables";
 
 //Bootstrap
 // required bootstrap components
@@ -23,9 +23,9 @@
 //imports
 @import "components/navbar";
 @import "components/footer";
-@import "utilities";
-@import "buttons";
-@import "animations";
+@import "components/utilities";
+@import "components/buttons";
+@import "components/animations";
 
 //main rules
 *,
