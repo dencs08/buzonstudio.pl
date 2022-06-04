@@ -17,7 +17,7 @@ import Stats from 'three/examples/jsm/libs/stats.module'
 import {
     animateParticles, enviroParticles, bisonHeadLoad, fpsChecker, cameraInit, cameraMove, sceneInit, navCameraPos, rendererInit,
     bisonHead, isFpsReadyToCheck, isNavOpened, camera, cameraTargetPos, cameraTargetVector3, cameraTargetLookAtVector3, cameraTargetLookAt, cursorObject, avgFps, renderer, canvas
-} from './components/threejs/threeJsClasses.js';
+} from './threeJsClasses.js';
 
 //Objects
 let scene, stats, controls, clock;

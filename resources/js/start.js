@@ -1,6 +1,6 @@
 import { gsap } from "gsap";
 import * as fullpage from 'fullpage.js'
-import { isLandingAnimDone } from '../app/onWebEntered'
+import { isLandingAnimDone } from './components/onWebEntered'
 
 var sections = document.getElementsByClassName("section");
 
