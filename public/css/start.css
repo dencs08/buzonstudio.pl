@@ -18,9 +18,7 @@ html.fp-enabled,
 }
 
 .fp-section {
-  position: relative;
-  /* Safari<=5 Android<=3 */
-  /* <=28 */
+  position: relative; /* Safari<=5 Android<=3 */ /* <=28 */
   box-sizing: border-box;
 }
 
@@ -37,8 +35,7 @@ html.fp-enabled,
   z-index: 1;
   height: 100%;
   overflow: hidden;
-  position: relative;
-  /* Safari<=6 Android<=4.3 */
+  position: relative; /* Safari<=6 Android<=4.3 */
   transition: all 0.3s ease-out;
 }
 
@@ -61,14 +58,10 @@ html.fp-enabled,
 }
 
 .fp-controlArrow {
-  -webkit-user-select: none;
-  /* webkit (safari, chrome) browsers */
-  -moz-user-select: none;
-  /* mozilla browsers */
-  -khtml-user-select: none;
-  /* webkit (konqueror) browsers */
-  -ms-user-select: none;
-  /* IE10+ */
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+  -moz-user-select: none; /* mozilla browsers */
+  -khtml-user-select: none; /* webkit (konqueror) browsers */
+  -ms-user-select: none; /* IE10+ */
   position: absolute;
   z-index: 4;
   top: 50%;
@@ -419,16 +412,13 @@ body {
   #portfolio {
     height: unset !important;
   }
-
   .main {
     margin-left: 0px;
     text-align: center;
   }
-
   .slide-track {
     white-space: normal;
   }
-
   .portfolio-item {
     display: block;
     min-height: 150px;
@@ -444,13 +434,11 @@ body {
   #clients {
     display: none;
   }
-
   .portfolio-item {
     min-height: 150px;
     max-height: 500px;
     height: 40vh;
   }
-
   .btn-landing1 {
     margin-top: 25px;
     margin-bottom: 25px;
@@ -461,13 +449,11 @@ body {
   .landing-page-content {
     margin-top: 125px;
   }
-
   .portfolio-item {
     min-height: 150px;
     max-height: 400px;
     height: 35vh;
   }
-
   .portfolio-btn-container {
     text-align: center;
   }

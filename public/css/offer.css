@@ -170,12 +170,10 @@
     margin-right: 0px;
     margin-bottom: 50px;
   }
-
   .col-content2 {
     width: 90%;
     margin-left: 0px;
   }
-
   .project-preview-wrapper {
     display: none;
   }
@@ -184,7 +182,6 @@
   body {
     overflow-y: scroll !important;
   }
-
   .project-preview {
     width: clamp(150px, 40vh, 300px);
     height: clamp(100px, 25vh, 200px);
@@ -194,7 +191,6 @@
   body {
     overflow-y: scroll !important;
   }
-
   .project-preview {
     display: none;
   }
@@ -203,7 +199,6 @@
   h1 {
     font-size: clamp(1rem, 4vw, 1.5rem) !important;
   }
-
   h2 {
     font-size: clamp(0.8rem, 3vw, 1.3rem) !important;
   }

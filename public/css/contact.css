@@ -57,7 +57,6 @@
     width: 20em;
     font-size: 12px;
   }
-
   .contact-form .form-field {
     position: relative;
     margin: 18px 0;
@@ -93,12 +92,12 @@
   display: inline-block;
   position: relative;
   width: 20em;
-  background: #ffffff0d !important;
+  background: rgba(255, 255, 255, 0.0509803922) !important;
   margin-bottom: 25px;
   margin-left: 5px;
   margin-right: 5px;
   padding: 2.5em 0em;
-  border: 1px solid #72727280 !important;
+  border: 1px solid rgba(114, 114, 114, 0.5019607843) !important;
   border-radius: 100px;
   color: #444 !important;
   font-size: 14px;
@@ -107,7 +106,7 @@
   transition: 0.5s all;
 }
 #Contact input[type=checkbox] + label:hover {
-  background: #24242480 !important;
+  background: rgba(36, 36, 36, 0.5019607843) !important;
   color: #ffffff !important;
   transform: scale(0.9);
 }
@@ -141,10 +140,10 @@
 .contact-form .input-text {
   display: block;
   width: 100%;
-  border: 0.5px solid #d8d8d880 !important;
+  border: 0.5px solid rgba(216, 216, 216, 0.5019607843) !important;
   border-radius: 50px;
   padding: 2.1em 2.5em;
-  background-color: #ffffff0d !important;
+  background-color: rgba(255, 255, 255, 0.0509803922) !important;
   color: #ffffff !important;
   transition: 0.5s all;
 }
