@@ -134,6 +134,11 @@ return [
     |
     */
 
+    'mail' => env('MAIL_USERNAME', 'mail missing'),
+    'fb' => env('APP_FB', 'fb missing'),
+    'ig' => env('APP_IG', 'ig missing'),
+    'phone' => env('APP_PHONE', 'phone missing'),
+
     'providers' => [
 
         /*
