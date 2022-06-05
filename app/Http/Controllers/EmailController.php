@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
 {
-    public function create()
+    public function view()
     {
-        return view('kontakt');
+        return view('contact');
     }
 
     public function sendEmail(Request $request)
