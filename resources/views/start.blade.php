@@ -20,12 +20,11 @@
         <section data-scroll-section id="landing-page">
             <div id="landing-content" class="container landing-page-content">
                 <h1>
-                    BUZONSTUDIO - MIEJSCE <br>
-                    KTÓRE, TWORZY DLA CIEBIE.
+                    BUZONSTUDIO - 
                     
                 </h1>
 
-                <h2>Strony internetowe, wizualizacje, branding, UI, UX i więcej..</h2>
+                <h2>Strony internetowe, wizualizacje, branding, marketing online i więcej..</h2>
 
                 <a href="/portfolio"><button class="btn btn-primary btn-landing1">PORTFOLIO</button></a>
                 <a class="a_btn btn-landing2" href="oferta">CO ROBIMY?</a>
