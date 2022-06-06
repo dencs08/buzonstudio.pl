@@ -13,8 +13,6 @@
         <title>@yield('title')</title>
     </head>
     <body class="antialiased">
-        <x-loader/>
-
         <div id="swup" class="transition-fade">
             <canvas id="web_gl"></canvas>
             @yield('content')
