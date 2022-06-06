@@ -16,12 +16,12 @@
 
 @section('content')
 
-        <section section data-scroll-section id="landing-page">
-            <div data-scroll data-scroll-speed="3" class="container landing-page-content">
-                <h1>Zacznijmy owocną współpracę!</h1>
+        <section data-scroll-section id="landing-page">
+            <div data-scroll data-scroll-speed="3" class="container">
+                <h1 class="lh-1">Zacznijmy owocną współpracę!</h1>
 
-                <h2 class="mb-5 w-50">
-                    Powiedz nam co jest dla Ciebie najważniejsze, a my zrealizujemy to od A do Z.
+                <h2 class="mb-5 fw-medium">
+                    Powiedz nam czego potrzebujesz, a my zrealizujemy to od A do Z.
                 </h2>
 
                 <x-arrow/>
@@ -30,7 +30,7 @@
 
         <!-- Contact -->
 
-        <section data-scroll-section id="Contact">
+        <section data-scroll-section id="Contact" class="mb-5 pb-5">
             <div class="container text-center">
                 <div data-scroll data-scroll-speed="1.25">
                     <h3 class="gs gs_fromBottom">Co możemy dla Ciebie zrobić?</h3>
@@ -48,7 +48,7 @@
                     <div class="control-group-error">
                         <h3 class="control-group-error-text">Wybierz conajmniej jedną z poniższych opcji:</h3>
                     </div>
-                    <div class="gs gs_fromBottom control-group ">
+                    <div class="gs gs_fromBottom control-group">
                         <input class="form_subject" type="checkbox" id="talk" name="controlInfo[]" value="Chcę porozmawiać">
                         <label for="talk">
                             <span class="label-name">Chcę porozmawiać</span>
@@ -119,10 +119,8 @@
                     </div>
                 </div>
             </form>
-
         </section>
 
         <x-footer/>
-        </div>
 
 @endsection
