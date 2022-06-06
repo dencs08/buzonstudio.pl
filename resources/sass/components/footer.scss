@@ -1,160 +1,58 @@
 //!footer
 #footer {
-    // position: relative;
-    h3 {
-        font-size: clamp(1.65rem, 2.25vw, 3.2rem);
+    position: relative;
+    .footer-section-divider {
+        margin-top: 30px;
+        margin-bottom: 65px;
+    }
+    .footer-header {
+        font-size: clamp(3rem, 7vw, 10rem);
     }
 
-    h4 {
-        font-weight: 500;
-        font-size: clamp(1.3rem, 1.5vw, 3rem);
-        line-height: 48px;
-        color: $font-color-tertiary;
+    .mail-link {
+        font-size: clamp(2rem, 4vw, 8.5rem);
+    }
 
-        span {
-            position: relative;
-            padding-bottom: 5px;
+    .phone-number {
+        font-size: clamp(1.35rem, 2.1vw, 6rem);
+    }
+
+    .footer-social-icons {
+        img {
+            height: clamp(40px, 2.5vw, 60px);
+            width: clamp(40px, 2.5vw, 60px);
+        }
+    }
+
+    .footer-portfolio {
+        overflow: hidden;
+        position: absolute;
+        top: 37.5%;
+        .footer-portfolio-wrapper {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            width: clamp(150px, 37.5vw, 1300px);
+            height: auto;
+
+            aspect-ratio: 12/7;
+
+            transition: filter 0.5s;
         }
 
-        span::after {
-            position: absolute;
-            left: 0;
-            bottom: 0;
+        img {
             width: 100%;
-            height: 1px;
-            border-bottom: 1px solid $primary-color;
-            content: "";
+            height: 100%;
+            object-fit: cover;
         }
     }
-}
 
-.footer_row {
-    margin-bottom: 100px;
-}
+    ul {
+        font-size: clamp(1.15rem, 1.5vw, 2rem);
 
-.btn-primary {
-    span {
-        font-size: clamp(0.7rem, 1.5vw, 1rem);
-    }
+        list-style-type: none;
 
-    svg {
-        path {
-            margin-left: 10px;
-            fill: $primary-color;
-        }
-    }
-}
-
-.btn-primary:hover {
-    svg {
-        path {
-            fill: $body-bg;
-        }
-    }
-}
-
-.mail-href {
-    font-weight: 500;
-    font-size: clamp(1.5rem, 2.25vw, 3rem);
-    line-height: 48px;
-    color: $font-color-tertiary;
-}
-
-.underfooter-container {
-    margin-top: -20px;
-
-    font-size: clamp(0.8rem, 0.7vw, 0.9rem);
-}
-
-.copyright-container {
-    margin-top: -20px;
-    text-align: center;
-}
-
-.privacy-policy {
-    color: $font-color-tertiary;
-
-    padding-bottom: 0.15rem;
-    z-index: 1;
-}
-
-.copyright {
-    color: $font-color-fourth;
-}
-
-.footer-icon-div {
-    display: inline-block;
-
-    width: clamp(2rem, 3.5vw, 3rem) !important;
-    height: clamp(2rem, 3.5vw, 3rem) !important;
-
-    margin-right: clamp(0.7rem, 2vw, 1rem) !important;
-    margin-top: clamp(0.5rem, 2vh, 1.5rem) !important;
-    margin-bottom: clamp(0.5rem, 3.5vh, 3rem) !important;
-
-    cursor: pointer;
-
-    .footer-icon {
-        fill: $font-color-secondary;
-        transition: 0.5s all;
-    }
-}
-
-.footer-icon-div:hover {
-    .footer-icon {
-        fill: $primary-color !important;
-        color: $primary-color !important;
-    }
-}
-
-@media (max-width: $md-screen-size) {
-    #footer {
-        h4 {
-            font-size: clamp(0.9rem, 6vw, 1.25rem);
-            line-height: 1rem;
-        }
-        h3 {
-            font-size: clamp(1rem, 7vw, 1.3rem);
-        }
-    }
-    .copyright-container {
-        text-align: end;
-    }
-    .underfooter-container {
-        margin-top: 50px;
-    }
-    .mail-href {
-        font-size: clamp(1rem, 2.5vw, 1.5rem);
-        line-height: 28px;
-    }
-
-    .second-col-footer {
-        margin-top: 35px;
-    }
-}
-
-@media (max-width: $sm-screen-size) {
-    #footer {
-        text-align: center;
-    }
-    .privacy-container {
-        text-align: center;
-        margin-bottom: 30px;
-        left: 0%;
-        right: 0%;
-    }
-    .privacy-policy {
-        text-align: center;
-    }
-    .privacy-policy::after {
-        border: none !important;
-    }
-    .copyright-container {
-        text-align: center;
-        margin-top: 10px;
-    }
-
-    .second-col-footer {
-        margin-top: 20px;
+        margin-left: -40px;
     }
 }

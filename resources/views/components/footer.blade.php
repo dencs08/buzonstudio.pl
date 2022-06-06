@@ -1,106 +1,69 @@
 <!-- Footer -->
-<section data-scroll-section id="footer">
-    
-        <!-- Clients section -->
-        <section id="clients">
-            <div class="container clients-content">
-                <h4  class="lh-sm mb-2 gs gs_fromTop">Oni juz nam zaufali:</h4>
-                <div style="text-align:center;"> <div></div>
-                <div class="client-logos gs gs_fromBotom">
-                    <div align="center" class="client-logo">
-                        <img
-                            src="{{asset('images/logos/client/danfit.svg')}}"
-                            alt="branding (logotyp) danfit"
-                            class="client-logo-svg"
-                            width="350" height="100"
-                        />
+<footer data-scroll-section id="footer" class="mb-2">
+
+    <section>
+        <hr class="section-divider footer-section-divider" />
+        <section>
+            <div class="container">
+                <a href="/kontakt" class="footer-header font-family-header text-uppercase fw-light link-primary lh-none">Zostańmy w kontakcie</a>
+                <div class="row">
+                    <div class="col-md-7 gs gs_fromLeft">
+
+                        <a
+                            href="mailto:{{config('app.mail')}}?subject = Oferta&body = Wiadomość"
+                            class="underline-primary mail-link fw-medium font-color-secondary"
+                            >{{config('app.mail')}}</a
+                        >
+
+                        <h4 class="phone-number font-color-dark fw-medium mb-2 mt-2">{{config('app.phone')}}</h4>
+
+                        <div class="footer-social-icons">
+                            
+                            <a href="/start">
+                                <div class="d-inline me-2 link-primary">
+                                    <img src="{{asset('images/logos/favicon/buzonstudio_favicon_white.svg')}}" alt="logotyp {{config('app.name')}}">
+                                </div>
+                            </a>
+
+                            <a href="{{config('app.fb')}}" rel="noreferrer" target="_blank">
+                                <div class="d-inline me-2 link-primary">
+                                    <img src="{{asset('images/social/fb.svg')}}" alt="buzonstudio facebook">
+                                </div>
+                            </a>
+
+                            <a href="{{config('app.ig')}}" rel="noreferrer" target="_blank">
+                                <div class="d-inline me-2 link-primary">
+                                    <img src="{{asset('images/social/ig.svg')}}" alt="buzonstudio instagram">
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="footer-links text-uppercase mt-4 mb-5 fw-light">
+                            <ul>
+                                <li class="my-2"><a href="/start" class="underline-dark">start</a></li>
+                                <li class="my-2"><a href="/oferta" class="underline-dark">oferta</a></li>
+                                <li class="my-2"><a href="/portfolio" class="underline-dark">portfolio</a></li>
+                                <li class="my-2"><a href="/kontakt" class="underline-dark">kontakt</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div align="center" class="client-logo">
-                        <img
-                            src="{{asset('images/logos/client/komb.svg')}}"
-                            alt="branding (logotyp) komb"
-                            class="client-logo-svg"
-                            width="350" height="100"
-                        />
+                    
+                    <div data-scroll class="col-md-5 gs gs_fromRight">
+                        <div class="footer-portfolio">
+                            <div class="footer-portfolio-wrapper">
+                                <img src="{{asset('images/portfolio/bielany/back.jpg')}}" alt="projekt bielanypark stworzony przez bizonstudio">
+                            </div>
+                        </div>
                     </div>
-                    <div align="center" class="client-logo">
-                        <img
-                            src="{{asset('images/logos/buzonstudio_white.svg')}}"
-                            alt="branding (logotyp) bisonstudio"
-                            class="client-logo-svg"
-                            width="350" height="100"
-                        />
-                    </div>
-                    <div align="center" class="client-logo">
-                        <img
-                            src="{{asset('images/logos/client/zielonewidoki.svg')}}"
-                            alt="branding (logotyp) zielonewidoki"
-                            class="client-logo-svg"
-                            width="350" height="100"
-                        />
-                    </div>
-                    <div align="center" class="client-logo">
-                        <img
-                            src="{{asset('images/logos/client/ats.svg')}}"
-                            alt="branding (logotyp) ats-konsulting"
-                            class="client-logo-svg"
-                            width="350" height="100"
-                        />
-                    </div>
+                </div>
+
+                <div class="font-family-header text-uppercase mt-2">
+                    <a href="/polityka" class="underline-dark text-start float-start me-5 font-color-dark">Polityka prywatności</a>
+                    <span class="cursor-pointer text-start float-start font-color-dark">WYŁĄCZ 3D</span>
+                    <span class="font-color-darker float-end">© 2021 {{config('app.name')}} wszelkie prawa zastrzeżone.</span>
                 </div>
             </div>
         </section>
-        <hr class="section-divider" />
-        <div id="footer-content" class="container">
-            <div class="row footer_row">
-                <div data-scroll  class="col-md-6 gs gs_fromLeft">
-                    <h3 class="mt-0 mb-4">Zostańmy w kontakcie</h3>
-
-                    <a
-                        href="mailto:{{config('app.mail')}}?subject = Oferta&body = Wiadomość"
-                        class="my-0 mail-href underline"
-                        >{{config('app.mail')}}</a
-                    >
-
-                    <h4 class="my-0 mt-3 mb-4">{{config('app.phone')}}</h4>
-
-                    <a href="{{config('app.fb')}}" rel="noreferrer" target="_blank">
-                    <div class="footer-icon-div">
-                        <img id="facebook-icon" class="footer-icon" src="{{asset('images/social/facebook.svg')}}" alt="">
-                    </div>
-                    </a>
-
-
-                    <a href="{{config('app.ig')}}" rel="noreferrer" target="_blank">
-                    <div class="footer-icon-div">
-                        <img id="ig-icon" class="footer-icon" src="{{asset('images/social/ig.svg')}}" alt="">
-                    </div>
-                    </a>
-                </div>
-                <div data-scroll class="col-md-6 gs gs_fromRight second-col-footer">
-                    <div class="float-md-end">
-                        <h3 class="mt-0 mb-2">Zainteresowaliśmy Cię?</h3>
-                        <h4 class="mt-0 mb-4">Sprawdź naszą ofertę!</h4>
-                        <a class="a_btn" href="/oferta">
-                            Tworzenie stron i więcej <img class="arrow-right-icon" width="55" height="8" src="{{asset('images/arrows/arrow_right.svg')}}" alt="">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="underfooter-container">
-                <div class="privacy-container">
-                    <a
-                        href="/polityka"
-                        class="privacy-policy underline"
-                        >Polityka prywatności</a
-                    >
-                </div>
-                <div class="copyright-container">
-                    <span class="copyright">
-                        © 2021 bisonstudio wszelkie prawa zastrzeżone.
-                    </span>
-                </div>
-            </div>
-        </div>
         <div class="scroll-blocker"></div>
     </section>
+</footer>
