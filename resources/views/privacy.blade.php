@@ -2,7 +2,7 @@
 @section('title', 'Buzon Studio - Polityka Prywatności')
 
 @section('meta')
-<meta name="description" content='Wejście i korzystanie ze strony bisonstudio jest równoznaczne z zaakceptowaniem naszej polityki prywatności.'>
+<meta name="description" content='Wejście i korzystanie ze strony {{config("app.name")}} jest równoznaczne z zaakceptowaniem naszej polityki prywatności.'>
 <link rel="canonical" href="https://www.buzon.studio/polityka"/>
 @endsection
 
@@ -16,11 +16,11 @@
 
 @section('content')
 
-    <div id="privacy-policy-content">
+    <div id="privacy-policy">
         <div data-scroll-section class="container">
-        <h1>Polityka prywatności bisonstudio</h1>
+        <h1>Polityka prywatności {{config("app.name")}}</h1>
         <p class="gs gs_fromLeft">
-            Ta polityka prywatności (“<strong>Polityka</strong>”) zawarta na tej Stronie zarządza prywatnością informacji naszych uzytkownikow i odwiedzających, które zbieramy, uzywmy, ujawniamy i zarządzamy poprzez uzywanie Strony bisonstudio (“<strong>Strony</strong>”).<br />
+            Ta polityka prywatności (“<strong>Polityka</strong>”) zawarta na tej Stronie zarządza prywatnością informacji naszych uzytkownikow i odwiedzających, które zbieramy, uzywmy, ujawniamy i zarządzamy poprzez uzywanie Strony {{config("app.name")}} (“<strong>Strony</strong>”).<br />
             Poprzez uzywanie Strony, zgadzasz sie w pełni na warunki polityki zawartej w ninejszym dokumencie i oświadzasz, ze Twoja odpowiedzialnością jest zapoznanies się z nią i z prowadzanymi do niej poprawkami. Jeśli nie akceptujesz takiej polityki prywatności, proszę nie korzystaj ze Strony.
         </p>
         <p class="gs gs_fromLeft">
@@ -31,7 +31,7 @@
             Zarządzanie spotkaniami i ich rezerwowanie. <br>
             Powiadamiać Cię o nowościach. <br>
             Uzywac w sprawie komunikacji user-to-user.<br>
-            Uzywac do jakiejkolwiek aktywnosci ziwązanej z projektami bisonstudio. <br>
+            Uzywac do jakiejkolwiek aktywnosci ziwązanej z projektami {{config("app.name")}}. <br>
             Tworzenie kontentu, reklam, akcji promocyjnych i ofert rekomendownych dla Ciebie.<br>
             Prosić o opinię i monitorować uzytkowanie Strony w celu usprawnienia Twojego doświadczenia.<br>
             Odpowadać na zapytania klientów.
@@ -70,7 +70,7 @@
         </p>
         <p class="gs gs_fromLeft">
             <strong>9. Modyfikacja polityki prywatności</strong><br />
-            Przyjmujesz do wiadomości, ze ta polityka prywatności jest obiektem modyfikacji, alternacji i poprawek przez bisonstudio przez cały czas, bez lub z powiadomieniem Ciebie o nich. Zgadzasz się równiez z tym, ze jakiekolwiek modyfikacje są w wazne i mają wpływ po ich zamieszczeniu w tej Witrynie.
+            Przyjmujesz do wiadomości, ze ta polityka prywatności jest obiektem modyfikacji, alternacji i poprawek przez {{config("app.name")}} przez cały czas, bez lub z powiadomieniem Ciebie o nich. Zgadzasz się równiez z tym, ze jakiekolwiek modyfikacje są w wazne i mają wpływ po ich zamieszczeniu w tej Witrynie.
         </p>
     </div>
     <x-footer/>
