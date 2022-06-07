@@ -11,6 +11,13 @@ body {
     }
 }
 
+//!offer
+#offer {
+    p {
+        font-size: clamp(0.8rem, 1.15vw, 2.75rem);
+    }
+}
+
 //!portfolio
 #portfolio {
     a {
@@ -34,7 +41,6 @@ body {
     }
 
     .main-track {
-        margin-left: 80px;
         color: $font-color-secondary;
         background: transparent;
         padding: 0;
@@ -102,10 +108,6 @@ body {
             }
         }
     }
-
-    // .portfolio_image-item {
-    //     pointer-events: none;
-    // }
 }
 
 //! Clients
