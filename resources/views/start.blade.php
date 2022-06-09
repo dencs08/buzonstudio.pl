@@ -38,8 +38,8 @@
                 </h3>
             </div>
             <div class="grid-item main-track">
-                <div class="slide-track pb-6 mb-4">
-                    <div class="track-item mx-auto ms-5 me-md-5 d-md-inline-block link-activate-wrapper">
+                <div class="slide-track pb-5 pb-lg-6 mb-1">
+                    <div class="track-item mx-auto ms-md-5 me-md-5 mb-6 mb-sm-5 mb-md-0 d-md-inline-block link-activate-wrapper">
                         <div class="info-wrapper">
                             <div class="info">
                                 <h3 class="font-family-header my-0 link-bracket-display link-move">danfit</h3>
@@ -48,13 +48,13 @@
                             </div>
                         </div>
                         <a href="portfolio/danfit" class="portfolio-item">
-                            <img src="{{ asset('images/portfolio/danfit/danfit_portfolio.jpg') }}" alt="tworzenie logotypu i brandingu dla marki danfit" class="portfolio_image-item">
+                            <img src="{{ asset('images/portfolio/danfit/danfit_portfolio.jpg') }}" alt="tworzenie logo i brandingu dla marki danfit" class="portfolio_image-item">
                         </a>
                     </div>
-                    <div class="track-item mx-auto me-md-5 d-md-inline-block">
+                    <div class="track-item mx-auto me-md-5 mb-6 mb-sm-5 mb-md-0 d-md-inline-block link-activate-wrapper">
                         <div class="info-wrapper">
                             <div class="info">
-                                <h3 class="font-family-header my-0">castle</h3>
+                                <h3 class="font-family-header my-0 link-bracket-display link-move">castle</h3>
                                 <p class="font-family-primary font-color-secondary mt-0 mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. At consequuntur asperiores iure reprehenderit sapiente ducimus officia.</p>
                                 <span class="font-family-primary font-color-dark">E-COMMERCE</span>
                             </div>
@@ -63,40 +63,40 @@
                             <img src="{{ asset('images/portfolio/castle3d/castle3d_portfolio.jpg')}}" alt="wizualizacja archietktoniczna 3D" class="portfolio_image-item">
                         </a>
                     </div>
-                    <div class="track-item mx-auto me-md-5 d-md-inline-block">                        
+                    <div class="track-item mx-auto me-md-5 mb-6 mb-sm-5 mb-md-0 d-md-inline-block link-activate-wrapper">                        
                         <div class="info-wrapper">
                             <div class="info">
-                                <h3 class="font-family-header my-0">watch</h3>
+                                <h3 class="font-family-header my-0 link-bracket-display link-move">watch</h3>
                                 <p class="font-family-primary font-color-secondary mt-0 mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. At consequuntur asperiores iure reprehenderit sapiente ducimus officia.</p>
                                 <span class="font-family-primary font-color-dark">E-COMMERCE</span>
                             </div>
                         </div>
                         <a href="portfolio/watch3d" class="portfolio-item">
-                            <img src="images/portfolio/watch3d/watch3d_portfolio.jpg" alt="wizualizacja produktu zegarka w 3D" class="portfolio_image-item">
+                            <img src="{{asset('images/portfolio/watch3d/watch3d_portfolio.jpg')}}" alt="wizualizacja produktu zegarka w 3D" class="portfolio_image-item">
                         </a>
                     </div>
-                    <div class="track-item mx-auto me-md-5 d-md-inline-block">                        
+                    <div class="track-item mx-auto me-md-5 mb-6 mb-sm-5 mb-md-0 d-md-inline-block link-activate-wrapper">                        
                         <div class="info-wrapper">
                             <div class="info">
-                                <h3 class="font-family-header my-0">komb</h3>
+                                <h3 class="font-family-header my-0 link-bracket-display link-move">komb</h3>
                                 <p class="font-family-primary font-color-secondary mt-0 mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. At consequuntur asperiores iure reprehenderit sapiente ducimus officia.</p>
                                 <span class="font-family-primary font-color-dark">E-COMMERCE</span>
                             </div>
                         </div>
                         <a href="portfolio/komb" class="portfolio-item">
-                            <img src="images/portfolio/komb/komb_portfolio.jpg" alt="wizualizacja reklamy busa w 3D" class="portfolio_image-item">
+                            <img src="{{asset('images/portfolio/komb/komb_portfolio.jpg')}}" alt="wizualizacja reklamy busa w 3D" class="portfolio_image-item">
                         </a>
                     </div>
-                    <div class="track-item mx-auto me-md-5 d-md-inline-block">
+                    <div class="track-item mx-auto me-md-5 d-md-inline-block link-activate-wrapper">
                         <div class="info-wrapper">
                             <div class="info">
-                                <h3 class="font-family-header my-0">zielonewidoki</h3>
+                                <h3 class="font-family-header my-0 link-bracket-display link-move">zielonewidoki</h3>
                                 <p class="font-family-primary font-color-secondary mt-0 mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. At consequuntur asperiores iure reprehenderit sapiente ducimus officia.</p>
                                 <span class="font-family-primary font-color-dark">E-COMMERCE</span>
                             </div>
                         </div>
                         <a href="portfolio/zielonewidoki" class="portfolio-item">
-                            <img src="images/portfolio/zielonewidoki/zielonewidoki_portfolio.jpg" alt="tworzenie stron internetowych i brandingu dla marki zielonewidoki" class="portfolio_image-item">
+                            <img src="{{asset('images/portfolio/zielonewidoki/zielonewidoki_portfolio.jpg')}}" alt="tworzenie stron internetowych i brandingu dla marki zielonewidoki" class="portfolio_image-item">
                         </a>
                     </div>
                 </div>
@@ -108,9 +108,9 @@
 
         <!-- Aboutus -->
         <section data-scroll-section id="aboutUs">
-            <div class="container d-flex vh-50 align-items-center">
+            <div class="container d-flex align-items-center">
                 <div class="col-md-7"></div>
-                <div class="col-md-5 pe-5">
+                <div class="col-12 col-sm-9 col-md-5 pe-1 pe-lg-5">
                     <p class="font-color-dark">
                         <b class="text-uppercase">{{config('app.name')}}</b> to 5 lat doświadczenia w tworzeniu projektów i pomaganiu markom w zwiększaniu efektywności ich działania. Stawiamy czoło wyzwaniom i osiągamy cele poprzez współpracę z Wami. Dzięki naszej pracy, wspólnie możemy uzyskać wspaniałe efekty.
                     </p>
@@ -120,35 +120,35 @@
 
         <!-- Offer -->
         <section data-scroll-section id="offer">
-            <div class="container vh-50">
+            <div class="container mb-5 mb-lg-0">
                 <div data-scroll-speed="2">
                     <h3 class="gs gs_fromLeft headerline">Działamy po to abyś się rozwijał</h3>
                 </div>
-                <div class="row d-flex justify-content-center">
+                <div class="row">
                     <div class="col-md-6 d-flex justify-content-center mb-3 mb-md-0 px-2 px-lg-5 link-activate-wrapper">
-                        <div data-scroll-speed="1">
-                            <div data-scroll-speed="1.5">
+                        <div data-scroll-speed="1" class="offer-div">
+                            <div data-scroll-speed="1.5" class="offer-info-div">
                                 <a href="/oferta" class="gs gs_fromTop font-family-header my-0 link-primary">
                                     <h3 class="my-0 link-bracket-display link-move">Produkty cyfrowe</h3>
                                 </a>
-                            </div>
-                            <div data-scroll-speed="1.25">
                                 <p class="gs gs_fromLeft">Tworzymy i rozwijamy, strony internetowe, aplikacje, wizualizacje, grafiki, projekty UI i UX adekwatnie pod Twoje potrzeby, tak abyś otrzymał najlepiej dostosowany produkt który pracuje dla Ciebie.</p>
                             </div>
-
+                            <div class="img">
+                                <img src="{{asset('images/branding.jpg')}}" alt="">                            
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6 d-flex justify-content-center px-2 px-lg-5 link-activate-wrapper">
-                        <div data-scroll-speed="3">
-                            <div data-scroll-speed="1.5">
+                        <div data-scroll-speed="3" class="offer-div">
+                            <div data-scroll-speed="1.5" class="offer-info-div">
                                 <a href="/oferta" class="gs gs_fromTop font-family-header my-0 link-primary">
                                     <h3 class="my-0 link-bracket-display link-move">Branding</h3>
                                 </a>
+                                <p class="gs gs_fromLeft">Dziś branding jest najważniejszym elementem każdego dobrze prosperującego biznesu, łatwe do zapamiętania logo, charakterystyczna identyfikacja wizualna czy dobrze obrana strategia marketingowa, ma ogromne znaczenie w jaki sposób będziesz odbierany na rynku</p>
                             </div>
-                            <div data-scroll-speed="1.25">
-                                <p class="gs gs_fromLeft">Dziś branding jest najważniejszym elementem każdego dobrze prosperującego biznesu, łatwe do zapamiętania logo, charakterystyczna identyfikacja wizualna czy dobrze obrana strategia marketingowa, ma ogromne znaczenie w jaki sposób będziesz odbierany na rynku.</p>
+                            <div class="img">
+                                <img src="{{asset('images/branding.jpg')}}" alt="">
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -156,8 +156,8 @@
         </section>
 
         <!-- Lets talk -->
-        <section data-scroll-section id="letsTalk-section">
-            <div class="container text-center vh-50 mt-5">
+        <section data-scroll-section id="contact">
+            <div class="container text-center">
                 <h4>Napisz do nas!</h4>
                 <h3 class="my-0">Zatrudnij nas a my zajmiemy się resztą.</h3>
                 <div class="button-trail mt-5">
