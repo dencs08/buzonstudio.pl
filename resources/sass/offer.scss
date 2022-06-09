@@ -1,39 +1,40 @@
 @import "utilities/variables";
 @import "components/typed";
+@import "components/offer";
+@import "components/clients";
 
-//!offer
 #offer {
-    img {
-        width: clamp(300px, 30vw, 1080px);
-        height: auto;
+    ul {
+        display: block;
     }
 
-    .offer-wrapper {
-        position: relative;
+    .contact {
+        display: block;
     }
+}
 
-    .info-header {
-        position: absolute;
-        top: 91%;
-
-        margin-left: clamp(10px, 2vw, 25px);
+#process {
+    h3 {
+        font-size: clamp(1.8rem, 6vw, 6rem);
     }
-
-    .info {
-        margin-top: 50px;
-        margin-left: clamp(10px, 2vw, 25px);
-    }
-
-    p {
-        font-size: clamp(0.8rem, 1.05vw, 2.75rem);
-    }
-
-    li {
-        font-size: clamp(0.8rem, 1vw, 2.75rem);
-        margin: 0.4em 0 0.4em -1em;
+    h4 {
+        font-size: clamp(1.2rem, 2.5vw, 2.5rem);
+        margin-bottom: 0;
+        width: fit-content;
     }
     a {
-        font-size: clamp(1rem, 1.5vw, 3rem);
+        font-size: clamp(1rem, 1.3vw, 3rem);
+        color: $font-color-tertiary;
+
+        transition: color 0.3s ease 0s;
+        &:hover {
+            .underline-primary:before {
+                width: 90%;
+                left: 0;
+
+                background-color: $primary-color !important;
+            }
+        }
     }
 }
 
@@ -122,18 +123,4 @@
     transition: opacity 0.6s;
     pointer-events: none;
     mix-blend-mode: difference;
-}
-
-@media (max-width: $md-screen-size) {
-    //!offer
-    #offer {
-        .offer-wrapper {
-            img {
-                width: clamp(150px, 100%, 1080px) !important;
-            }
-        }
-        h3 {
-            font-size: clamp(1.6rem, 8vw, 4rem);
-        }
-    }
 }

@@ -64,7 +64,7 @@ h1 {
     line-height: clamp(1.75rem, 10vw, 10rem);
     margin: 0;
 
-    font-weight: 400;
+    font-weight: 300;
 }
 
 h2 {
@@ -167,20 +167,8 @@ a {
     perspective: 1px;
 }
 
-//! Clients
-#clients {
-    .client-logo {
-        width: clamp(150px, 12vw, 200px) !important;
-    }
-}
-
 @media (max-width: $md-screen-size) {
-    h2 {
-        font-size: clamp(0.75rem, 3vw, 1.1rem);
-    }
     #landing-page {
         height: clamp(200px, 50vh, 1080px);
-
-        display: block;
     }
 }

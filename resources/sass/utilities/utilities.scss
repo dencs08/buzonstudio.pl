@@ -130,8 +130,10 @@
             }
         }
         .underline {
+            color: $primary-color !important;
             &:before {
                 background-color: $primary-color !important;
+                width: 90%;
             }
         }
         .link-move {
@@ -158,6 +160,14 @@
 
     border: 0.5px solid rgba(126, 126, 126, 0.25);
     overflow: hidden;
+}
+
+.section-mt {
+    margin-top: clamp(50px, 12.5vw, 400px);
+}
+
+.section-mb {
+    margin-bottom: clamp(100px, 12.5vw, 400px);
 }
 
 .scroll-blocker {

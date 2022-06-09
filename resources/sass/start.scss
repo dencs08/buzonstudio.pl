@@ -1,4 +1,6 @@
 @import "utilities/variables";
+@import "components/offer";
+@import "components/clients";
 
 body {
     // overflow-y: hidden !important;
@@ -114,31 +116,13 @@ body {
     }
 }
 
-//!offer
 #offer {
-    img {
-        width: clamp(300px, 30vw, 1080px);
-        height: auto;
+    ul {
+        display: none;
     }
 
-    .offer-wrapper {
-        position: relative;
-    }
-
-    .info-header {
-        position: absolute;
-        top: 91%;
-
-        margin-left: clamp(10px, 2vw, 25px);
-    }
-
-    .info {
-        margin-top: 50px;
-        margin-left: clamp(10px, 2vw, 25px);
-    }
-
-    p {
-        font-size: clamp(0.8rem, 1.05vw, 2.75rem);
+    .contact {
+        display: none;
     }
 }
 
@@ -193,18 +177,6 @@ body {
             span {
                 font-size: clamp(0.65rem, 2vw, 3rem) !important;
             }
-        }
-    }
-
-    //!offer
-    #offer {
-        .offer-wrapper {
-            img {
-                width: clamp(150px, 100%, 1080px) !important;
-            }
-        }
-        h3 {
-            font-size: clamp(1.6rem, 8vw, 4rem);
         }
     }
 }

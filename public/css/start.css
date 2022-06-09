@@ -1,7 +1,56 @@
-#aboutUs p {
-  font-size: clamp(0.8rem, 1.2vw, 2.5rem);
+#offer img {
+  width: clamp(300px, 30vw, 1080px);
+  height: auto;
+}
+#offer .offer-wrapper {
+  position: relative;
+}
+#offer .offer-wrapper h3 {
+  font-weight: 300 !important;
+}
+#offer .info-header {
+  position: absolute;
+  top: 91%;
+  margin-left: clamp(10px, 2vw, 25px);
+}
+#offer .info {
+  margin-top: 50px;
+  margin-left: clamp(10px, 2vw, 25px);
+}
+#offer p {
+  font-size: clamp(0.8rem, 1.05vw, 2.75rem);
+}
+#offer li {
+  font-size: clamp(0.8rem, 1vw, 2.75rem);
+  margin: 0.4em 0 0.4em -1em;
+}
+#offer a {
+  font-size: clamp(1rem, 1.2vw, 3rem);
 }
 
+@media (max-width: 768px) {
+  #offer .offer-wrapper img {
+    width: clamp(150px, 100%, 1080px) !important;
+  }
+  #offer .offer-wrapper .info-header {
+    top: 96%;
+  }
+  #offer .offer-wrapper h3 {
+    font-size: clamp(1.3rem, 5vw, 4rem);
+  }
+}
+#clients .client-logo {
+  width: clamp(150px, 12vw, 200px) !important;
+}
+
+@media (max-width: 768px) {
+  #clients h2 {
+    font-size: clamp(0.75rem, 3vw, 1.1rem);
+  }
+  #clients .client-logo {
+    width: clamp(100px, 8vw, 150px) !important;
+  }
+}
 #portfolio a {
   font-size: clamp(0.8rem, 2vw, 3rem);
 }
@@ -13,14 +62,10 @@
   cursor: -webkit-grab;
   cursor: grab;
 }
-#portfolio .slide-track a {
-  color: rgba(0, 0, 0, 0) !important;
-}
 #portfolio .portfolio-container {
   width: 100%;
 }
 #portfolio .main-track {
-  margin-left: 80px;
   color: #ececec;
   background: transparent;
   padding: 0;
@@ -29,7 +74,7 @@
 
 .portfolio-item {
   display: inline-block;
-  width: clamp(550px, 37.5vw, 1300px);
+  width: clamp(550px, 33.75vw, 1300px);
   height: auto;
   aspect-ratio: 10/7;
   margin: 0.5em 8em 0.5em 0em;
@@ -52,12 +97,12 @@
 
 .track-item {
   position: relative;
-  width: clamp(550px, 37.5vw, 1300px);
+  width: clamp(550px, 33.75vw, 1300px);
   height: auto;
 }
 .track-item .info-wrapper {
   position: absolute;
-  top: 87%;
+  top: 84%;
   left: 5%;
   z-index: 2;
   width: 80%;
@@ -70,10 +115,35 @@
   font-size: clamp(1.8rem, 4.5vw, 6.5rem);
 }
 .track-item .info-wrapper .info p {
-  font-size: clamp(0.8rem, 1.3vw, 4.25rem);
+  font-size: clamp(0.8rem, 1.05vw, 4.25rem);
 }
 .track-item .info-wrapper .info span {
-  font-size: clamp(0.8rem, 1.2vw, 3rem);
+  font-size: clamp(0.8rem, 1vw, 3rem);
+}
+
+.link-activate-wrapper:hover .portfolio-item {
+  filter: brightness(110%) saturate(110%);
+}
+.link-activate-wrapper:hover .portfolio-item .portfolio_image-item {
+  transform: scale(1.175);
+}
+
+#aboutUs .container {
+  height: clamp(300px, 25vw, 750px);
+}
+#aboutUs p {
+  font-size: clamp(0.8rem, 1.05vw, 2.5rem);
+}
+
+#offer ul {
+  display: none;
+}
+#offer .contact {
+  display: none;
+}
+
+#contact {
+  height: clamp(300px, 30vw, 1080px);
 }
 
 #clients {
@@ -93,4 +163,25 @@
 #clients .client-logo img {
   vertical-align: middle;
   aspect-ratio: attr(width)/attr(height);
+}
+
+@media (max-width: 768px) {
+  .info-wrapper {
+    top: 86%;
+  }
+  .portfolio-item {
+    width: clamp(150px, 90vw, 1300px);
+  }
+  .track-item {
+    width: clamp(150px, 90vw, 1300px);
+  }
+  .track-item .info h3 {
+    font-size: clamp(1.8rem, 10vw, 4rem) !important;
+  }
+  .track-item .info p {
+    font-size: clamp(0.65rem, 2vw, 4.25rem) !important;
+  }
+  .track-item .info span {
+    font-size: clamp(0.65rem, 2vw, 3rem) !important;
+  }
 }
