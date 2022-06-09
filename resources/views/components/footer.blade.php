@@ -4,9 +4,9 @@
     <section>
         <hr class="section-divider footer-section-divider" />
         <section>
-            <div class="container">
-                <a href="/kontakt" class="footer-header font-family-header text-uppercase fw-light lh-none link-primary">
-                    <h3 class="my-0 link-bracket-display">Zostańmy w kontakcie</h3>
+            <div class="container text-center text-md-start">
+                <a href="/kontakt" class="font-family-header text-uppercase fw-light lh-none link-primary">
+                    <h3 class="my-2 my-md-0 link-bracket-display">Zostańmy w kontakcie</h3>
                 </a>
                 <div class="row">
                     <div class="col-md-7 gs gs_fromLeft">
@@ -19,22 +19,22 @@
 
                         <h4 class="phone-number font-color-dark fw-medium mb-2 mt-2">{{config('app.phone')}}</h4>
 
-                        <div class="footer-social-icons">
+                        <div class="footer-social-icons mt-3 mt-md-2">
                             
                             <a href="/start">
-                                <div class="d-inline me-2 link-primary">
+                                <div class="d-inline me-md-2 mx-1 mx-md-0 link-primary">
                                     <img src="{{asset('images/logos/favicon/buzonstudio_favicon_white.svg')}}" alt="logotyp {{config('app.name')}}">
                                 </div>
                             </a>
 
                             <a href="{{config('app.fb')}}" rel="noreferrer" target="_blank">
-                                <div class="d-inline me-2 link-primary">
+                                <div class="d-inline me-md-2 mx-1 mx-md-0 link-primary">
                                     <img src="{{asset('images/social/fb.svg')}}" alt="buzonstudio facebook">
                                 </div>
                             </a>
 
                             <a href="{{config('app.ig')}}" rel="noreferrer" target="_blank">
-                                <div class="d-inline me-2 link-primary">
+                                <div class="d-inline me-md-2 mx-1 mx-md-0 link-primary">
                                     <img src="{{asset('images/social/ig.svg')}}" alt="buzonstudio instagram">
                                 </div>
                             </a>
@@ -50,19 +50,25 @@
                         </div>
                     </div>
                     
-                    <div data-scroll class="col-md-5 gs gs_fromRight">
+                    <div data-scroll class="col-md-5 d-md-block d-none gs gs_fromRight">
                         <div class="footer-portfolio">
                             <div class="footer-portfolio-wrapper">
-                                <img src="{{asset('images/portfolio/bielany/back.jpg')}}" alt="projekt bielanypark stworzony przez bizonstudio">
+                                <img src="{{asset('images/portfolio/bielany/back.jpg')}}" alt="">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="font-family-header text-uppercase mt-2">
-                    <a href="/polityka" class="underline-dark text-start float-start me-5 font-color-dark">Polityka prywatności</a>
-                    <span class="cursor-pointer text-start float-start font-color-dark">WYŁĄCZ 3D</span>
-                    <span class="font-color-darker float-end">© 2021 {{config('app.name')}} wszelkie prawa zastrzeżone.</span>
+                <div class="font-family-header text-uppercase text-center text-md-start mt-2">
+                    <div class="d-block d-md-inline-block mt-2 mt-md-0 me-0 me-md-4">
+                        <a href="/polityka" class="underline-dark font-color-dark">Polityka prywatności</a>
+                    </div>
+                    <div class="d-block d-md-inline-block mt-2 mt-md-0">
+                        <span class="cursor-pointer font-color-dark">WYŁĄCZ 3D</span>
+                    </div>
+                    <div class="d-block d-md-inline-block mt-2 mt-md-0 float-none float-md-end">
+                        <span class="font-color-darker">© 2021 {{config('app.name')}} wszelkie prawa zastrzeżone.</span>
+                    </div>
                 </div>
             </div>
         </section>

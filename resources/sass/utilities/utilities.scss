@@ -217,6 +217,12 @@
         margin-top: 75px;
         margin-bottom: 50px;
     }
+
+    .link-bracket-display {
+        &::after {
+            display: none;
+        }
+    }
 }
 
 @media (max-width: $sm-screen-size) {
