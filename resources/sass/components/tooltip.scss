@@ -45,3 +45,11 @@
     transform: translateY(0%);
     transition: all 0.5s;
 }
+
+@media (max-width: $md-screen-size) {
+    [data-tooltip]:hover:before,
+    [data-tooltip]:hover:after {
+        visibility: hidden;
+        opacity: 0;
+    }
+}
