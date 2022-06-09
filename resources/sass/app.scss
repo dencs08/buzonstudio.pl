@@ -161,7 +161,7 @@ a {
 }
 
 #landing-page {
-    height: 95vh;
+    height: clamp(75vh, 90vh, 100vh);
 
     display: flex;
     align-items: center;
@@ -169,4 +169,15 @@ a {
 
 [data-scroll-section] {
     perspective: 1px;
+}
+
+@media (max-width: $md-screen-size) {
+    h2 {
+        font-size: clamp(0.75rem, 3vw, 1.1rem);
+    }
+    #landing-page {
+        height: clamp(200px, 50vh, 1080px);
+
+        display: block;
+    }
 }
