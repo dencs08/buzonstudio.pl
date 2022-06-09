@@ -156,10 +156,6 @@ a {
     left: 50%;
 }
 
-#clients {
-    display: none;
-}
-
 #landing-page {
     height: clamp(75vh, 90vh, 100vh);
 
@@ -169,6 +165,31 @@ a {
 
 [data-scroll-section] {
     perspective: 1px;
+}
+
+//! Clients
+#clients {
+    display: block !important;
+
+    h4 {
+        font-size: clamp(0.75rem, 3vw, 0.9rem);
+    }
+
+    .client-logo {
+        position: relative;
+        display: inline-block;
+
+        width: clamp(150px, 12vw, 200px);
+
+        padding: 10px;
+        margin: clamp(10px, 1vh, 25px) clamp(10px, 2.5vw, 50px);
+
+        text-align: center;
+        img {
+            vertical-align: middle;
+            aspect-ratio: attr(width) / attr(height);
+        }
+    }
 }
 
 @media (max-width: $md-screen-size) {
