@@ -22,47 +22,57 @@
                     Dla was budujemy <br> wspaniałe <span id="typed"></span>
                 </h1>
 
-                <h2 class="mb-5">W naszym studio kreujemy prace które, działają, zdobywają serca użytkowników i zapadają w pamięć. Tworzymy wszystko od A do Z, tak jak chcesz.
+                <h2 class="fw-normal">W naszym studio kreujemy prace które, działają, zdobywają serca użytkowników i zapadają w pamięć. Tworzymy wszystko od A do Z, tak jak chcesz.
                 </h2>
                 <x-arrow/>
             </div>
         </section>
 
         <section data-scroll-section id="offer">
-            <div class="container">
-                <div data-scroll data-scroll-speed="2">
+            <div class="container mb-5 mb-lg-0">
+                <div data-scroll-speed="2">
                     <h3 class="gs gs_fromLeft headerline">Działamy po to abyś się rozwijał</h3>
                 </div>
                 <div class="row">
-                    <div data-scroll class="col-md-6 d-flex justify-content-center">
-                        <div data-scroll data-scroll-speed="1" class="col-content1">
-                            <div data-scroll data-scroll-speed="1.5">
-                                <h2 class="gs gs_fromTop">Produkty cyfrowe</h2>
+                    <div class="col-md-6 px-0 px-md-3 px-lg-5 mb-4 mb-md-0 link-activate-wrapper">
+                        <div data-scroll-speed="3" class="offer-wrapper">
+                            <div class="d-flex d-md-block justify-content-center">
+                                <img src="{{asset('images/branding.jpg')}}" alt="">
                             </div>
-                            <div data-scroll data-scroll-speed="1.25">
-                                <p class="gs gs_fromLeft">Tworzymy i rozwijamy, strony internetowe, aplikacje, wizualizacje, grafiki, projekty UI i UX adekwatnie pod Twoje potrzeby, tak abyś otrzymał najlepiej dostosowany produkt który działa. </p>
+                            <div data-scroll-speed="1.5" class="info-header my-0">
+                                <span class="gs gs_fromTop font-family-header my-0">
+                                    <h3 class="my-0 link-bracket-display link-move">Produkty cyfrowe</h3>
+                                </span>
                             </div>
-                            <ul data-scroll data-scroll-speed="1">
-                                <li data-scroll-speed="0.5"><span class="gs gs_fromFadeIn">Strony internetowe</span></li>
-                                <li data-scroll-speed="0.75"><span class="gs gs_fromFadeIn">E-commerce</span></li>
-                                <li data-scroll-speed="1.0"><span class="gs gs_fromFadeIn">UI / UX </span></li>
-                                <li data-scroll-speed="1.25"><span class="gs gs_fromFadeIn">Projekty graficzne</span></li>
-                                <li data-scroll-speed="1.5"><span class="gs gs_fromFadeIn">Wizualizacje 3D</span></li>
-                                <li data-scroll-speed="1.75"><span class="gs gs_fromFadeIn">Modelowanie 3D</span></li>
-                                <li data-scroll-speed="2.0"><span class="gs gs_fromFadeIn">Aplikacje</span></li>
-                                <li data-scroll-speed="2.25"><span class="gs gs_fromFadeIn">Gry</span></li>
+                        </div>
+                        <div class="info mt-3 mt-md-3 mt-lg-4 pe-3 pe-md-0">
+                            <p class="gs gs_fromLeft font-color-dark">Tworzymy i rozwijamy, strony internetowe, aplikacje, wizualizacje, grafiki, projekty UI i UX adekwatnie pod Twoje potrzeby, tak abyś otrzymał najlepiej dostosowany produkt który pracuje dla Ciebie.</p>
+                            <ul class="text-uppercase font-color-darker">
+                                <li data-scroll-speed="0.5"><span class="gs gs_fromFadeIn">Strony internetowe</span> </li>
+                                <li data-scroll-speed="0.75"><span class="gs gs_fromFadeIn">E-commerce</span> </li>
+                                <li data-scroll-speed="1.0"><span class="gs gs_fromFadeIn">UI / UX </span> </li>
+                                <li data-scroll-speed="1.25"><span class="gs gs_fromFadeIn">Projekty graficzne</span> </li>
+                                <li data-scroll-speed="1.5"><span class="gs gs_fromFadeIn">Wizualizacje 3D</span> </li>
+                                <li data-scroll-speed="1.75"><span class="gs gs_fromFadeIn">Modelowanie 3D</span> </li>
+                                <li data-scroll-speed="2.0"><span class="gs gs_fromFadeIn">Aplikacje</span> </li>
+                                <li data-scroll-speed="2.25"><span class="gs gs_fromFadeIn">Gry</span> </li>
                             </ul>
                         </div>
                     </div>
-                    <div data-scroll class="col-md-6 d-flex justify-content-center">
-                        <div data-scroll data-scroll-speed="3" class="col-content2">
-                            <div data-scroll data-scroll-speed="1.5">
-                                <h2 class="gs gs_fromTop">Branding</h2>
+                    <div class="col-md-6 px-0 px-md-3 px-lg-5 link-activate-wrapper">
+                        <div data-scroll-speed="3" class="offer-wrapper">
+                            <div class="d-flex d-md-block justify-content-center">
+                                <img src="{{asset('images/branding.jpg')}}" alt="">
                             </div>
-                            <div data-scroll data-scroll-speed="1.25">
-                                <p class="gs gs_fromLeft">Dziś branding jest najważniejszym elementem każdego dobrze prosperującego biznesu, łatwe do zapamiętania logo, charakterystyczna identyfikacja wizualna czy dobrze obrana strategia marketingowa, to wszystko ma znaczenie w jaki sposób odbierze Ciebie przyszły klient.</p>
+                            <div data-scroll-speed="1.5" class="info-header">
+                                <span class="gs gs_fromTop font-family-header my-0">
+                                    <h3 class="my-0 link-bracket-display link-move">Branding</h3>
+                                </span>
                             </div>
-                            <ul>
+                        </div>
+                        <div class="info mt-3 mt-md-3 mt-lg-4 pe-3 pe-md-0">
+                            <p class="gs gs_fromLeft font-color-dark">Dziś branding jest najważniejszym elementem każdego dobrze prosperującego biznesu, łatwe do zapamiętania  logo, charakterystyczna identyfikacja wizualna czy dobrze obrana strategia marketingowa, ma ogromne znaczenie w jaki sposób będziesz odbierany na    rynku</p>
+                            <ul class="text-uppercase font-color-darker">
                                 <li data-scroll-speed="0.5"><span class="gs gs_fromFadeIn">Nazewnictwo</span> </li>
                                 <li data-scroll-speed="0.75"><span class="gs gs_fromFadeIn">Identyfikacja wizualna</span> </li>
                                 <li data-scroll-speed="1.0"><span class="gs gs_fromFadeIn">Logotypy</span> </li>
@@ -72,25 +82,22 @@
                         </div>
                     </div>
                 </div>
-                <div id="liquid"></div>
-                    <a data-scroll-speed="1.5" href="kontakt" class="contact-us underline gs gs_fromLeft">Napisz do nas i stwórzmy coś razem.</a>
+            </div>
+            <div class="container mt-5">
+                <a data-scroll-speed="1.5" href="/kontakt" class="gs gs_fromLeft underline-primary link-arrow">
+                    Napisz do nas i stwórzmy coś razem
+                </a>
             </div>
         </section>
 
-        <section data-scroll-section id="works">
+        
+        <section id="process">
             <div class="container">
-            <div data-scroll data-scroll-speed="1.5">
-                <h3 class="gs gs_fromLeft headerline">Nasze prace</h3>
-            </div>
-            <div class="project-preview d-sm-block d-none"></div>
-            <div class="navigation-wrapper">
-                <div class="project-overlay"></div>
-                    <ul id="works_images" class="navigation-list">
-
-                    </ul>
-                </div>
+                <h3 class="headerline">Nasz proces</h3>
             </div>
         </section>
+        
+        <x-clients/>
 
         <x-footer/>
         </div>

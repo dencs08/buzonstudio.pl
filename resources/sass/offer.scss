@@ -1,70 +1,40 @@
-@import "components/variables";
+@import "utilities/variables";
 @import "components/typed";
 
-//!landing page
-#landing-page {
-    height: 100vh;
-    display: grid;
-
-    place-items: center;
-}
-
-.landing-page-content {
-    margin-bottom: clamp(5rem, 20vh, 9rem);
-}
-
+//!offer
 #offer {
-    margin-bottom: 150px;
-    h2 {
-        font-size: clamp(1.75rem, 2.25vw, 2rem);
-        font-weight: 300 !important;
-
-        color: $font-color-secondary;
+    img {
+        width: clamp(300px, 30vw, 1080px);
+        height: auto;
     }
 
-    h3 {
-        font-size: clamp(2rem, 3.5vw, 3rem);
-        font-weight: 500;
+    .offer-wrapper {
+        position: relative;
+    }
 
-        color: $font-color-primary;
+    .info-header {
+        position: absolute;
+        top: 91%;
+
+        margin-left: clamp(10px, 2vw, 25px);
+    }
+
+    .info {
+        margin-top: 50px;
+        margin-left: clamp(10px, 2vw, 25px);
     }
 
     p {
-        font-size: clamp(0.85rem, 1.3vw, 1.2rem);
-        font-weight: 400;
-
-        color: $font-color-tertiary;
+        font-size: clamp(0.8rem, 1.05vw, 2.75rem);
     }
 
-    ul {
-        li {
-            font-size: clamp(0.85rem, 1.3vw, 1.2rem);
-            font-weight: 400;
-
-            color: $font-color-fourth;
-            height: 32.5px;
-        }
+    li {
+        font-size: clamp(0.8rem, 1vw, 2.75rem);
+        margin: 0.4em 0 0.4em -1em;
     }
-    .contact-us {
-        margin-top: clamp(2em, 3.5vh, 4em);
-        font-size: clamp(1rem, 3vw, 2.5rem);
-        color: $font-color-primary;
-        &:hover {
-            color: $primary-color;
-        }
+    a {
+        font-size: clamp(1rem, 1.5vw, 3rem);
     }
-}
-
-.col-content1 {
-    width: 70%;
-
-    margin-right: -75px;
-}
-
-.col-content2 {
-    width: 70%;
-
-    margin-left: -75px;
 }
 
 #works {
@@ -137,10 +107,6 @@
         display: flex;
         justify-content: center;
     }
-
-    .visible {
-        opacity: 1;
-    }
 }
 
 .project-preview {
@@ -158,50 +124,16 @@
     mix-blend-mode: difference;
 }
 
-@media (max-width: $lg-screen-size) {
-    .col-content1 {
-        width: 90%;
-
-        margin-right: 0px;
-        margin-bottom: 50px;
-    }
-
-    .col-content2 {
-        width: 90%;
-
-        margin-left: 0px;
-    }
-
-    .project-preview-wrapper {
-        display: none;
-    }
-}
-
-@media (max-width: 1024px) {
-    body {
-        overflow-y: scroll !important;
-    }
-    .project-preview {
-        width: clamp(150px, 40vh, 300px);
-        height: clamp(100px, 25vh, 200px);
-    }
-}
-
 @media (max-width: $md-screen-size) {
-    body {
-        overflow-y: scroll !important;
-    }
-    .project-preview {
-        display: none;
-    }
-}
-
-@media (max-width: $xs-screen-size) {
-    h1 {
-        font-size: clamp(1rem, 4vw, 1.5rem) !important;
-    }
-
-    h2 {
-        font-size: clamp(0.8rem, 3vw, 1.3rem) !important;
+    //!offer
+    #offer {
+        .offer-wrapper {
+            img {
+                width: clamp(150px, 100%, 1080px) !important;
+            }
+        }
+        h3 {
+            font-size: clamp(1.6rem, 8vw, 4rem);
+        }
     }
 }
