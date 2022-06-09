@@ -1,0 +1,17 @@
+//! Clients
+#clients {
+    .client-logo {
+        width: clamp(150px, 12vw, 200px) !important;
+    }
+}
+
+@media (max-width: $md-screen-size) {
+    #clients {
+        h2 {
+            font-size: clamp(0.75rem, 3vw, 1.1rem);
+        }
+        .client-logo {
+            width: clamp(100px, 8vw, 150px) !important;
+        }
+    }
+}

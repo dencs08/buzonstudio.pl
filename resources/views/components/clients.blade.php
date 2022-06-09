@@ -2,7 +2,7 @@
     <div class="container">
         <h4 class="mb-2 gs gs_fromTop">Oni juz nam zaufali:</h4>
         <div class="gs gs_fromBotom row d-flex-center">
-            <div class="col-12 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
+            <div class="col-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
                 <div class="client-logo">
                     <img
                         src="{{asset('images/logos/client/danfit.svg')}}"
@@ -11,7 +11,7 @@
                     />
                 </div>
             </div>
-            <div class="col-12 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
+            <div class="col-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
                 <div class="client-logo">
                     <img
                         src="{{asset('images/logos/client/komb.svg')}}"
@@ -20,7 +20,7 @@
                     />
                 </div>
             </div>
-            <div class="col-12 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
+            <div class="col-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
                 <div class="client-logo">
                     <img
                         src="{{asset('images/logos/client/zielonewidoki.svg')}}"
@@ -29,7 +29,7 @@
                     />
                 </div>
             </div>
-            <div class="col-12 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
+            <div class="col-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
                 <div class="client-logo">
                     <img
                         src="{{asset('images/logos/client/ats.svg')}}"
@@ -38,7 +38,7 @@
                     />
                 </div>
             </div>
-            <div class="col-12 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
+            <div class="col-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
                 <div class="client-logo">
                     <img
                         src="{{asset('images/logos/client/bielany.svg')}}"
