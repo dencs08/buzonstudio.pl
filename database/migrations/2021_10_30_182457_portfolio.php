@@ -17,11 +17,12 @@ class Portfolio extends Migration
             $table->id();
             $table->string('name');
             $table->string('info');
-            $table->json('responsibilities');
-            $table->json('links');
-            $table->json('goals');
-            $table->json('images');
-            $table->string('alts');
+            $table->foreignId('responsibilities_fk');
+            $table->foreignId('links_fk');
+            $table->foreignId('goals_fk');
+            $table->foreignId('images_fk');
+            $table->foreignId('alts_fk');
+            $table->foreignId('team_fk');
         });
     }
 
