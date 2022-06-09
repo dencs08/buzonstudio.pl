@@ -32,7 +32,7 @@
 
         <section id="process" class="section-mb">
             <div class="container">
-                <div class="row">
+                <div class="row mb-3 mb-md-5">
                     <div class="col-12 col-md-6 text-uppercase">
                         <div>
                             <h3 class="headerline my-0 lh-1">Nasz</h3>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="link-activate-wrapper contact">
                     <a href="/kontakt">Jeśli jesteś zainteresowany
-                        <a data-scroll-speed="1.5" href="/kontakt" class="gs gs_fromLeft underline-primary mt-3 mt-md-5 font-color-primary">
+                        <a data-scroll-speed="1.5" href="/kontakt" class="gs gs_fromLeft underline-primary font-color-primary">
                             zdzwońmy się
                         </a>
                     </a>

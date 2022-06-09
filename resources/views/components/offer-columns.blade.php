@@ -1,5 +1,5 @@
 <section data-scroll-section id="offer" class="section-mb">
-    <div class="container mb-lg-0">
+    <div class="container mb-2 mb-md-2 mb-lg-4 mb-xl-5">
         <div data-scroll-speed="2">
             <h3 class="gs gs_fromLeft headerline">Działamy po to abyś się rozwijał</h3>
         </div>
@@ -59,7 +59,7 @@
     
     <div class="container">
         <div class="link-activate-wrapper contact">
-            <a href="/kontakt" class="underline-primary mt-2 mt-md-2 mt-lg-4 mt-xl-5 font-color-primary">Napisz do nas
+            <a href="/kontakt" class="underline-primary font-color-primary">Napisz do nas
                 <a data-scroll-speed="1.5" href="/kontakt" class="gs gs_fromLeft font-color-dark">
                     i stwórzmy coś razem
                 </a>
