@@ -35,6 +35,10 @@
     a {
         font-size: clamp(1rem, 1.2vw, 3rem);
     }
+
+    .contact {
+        width: fit-content;
+    }
 }
 
 @media (max-width: $md-screen-size) {

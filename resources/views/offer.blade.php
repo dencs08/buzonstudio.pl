@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="link-activate-wrapper">
+                <div class="link-activate-wrapper contact">
                     <a href="/kontakt">Jeśli jesteś zainteresowany
                         <a data-scroll-speed="1.5" href="/kontakt" class="gs gs_fromLeft underline-primary mt-3 mt-md-5 font-color-primary">
                             zdzwońmy się

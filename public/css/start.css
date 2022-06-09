@@ -27,6 +27,11 @@
 #offer a {
   font-size: clamp(1rem, 1.2vw, 3rem);
 }
+#offer .contact {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
 
 @media (max-width: 768px) {
   #offer .offer-wrapper img {

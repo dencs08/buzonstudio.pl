@@ -60,6 +60,11 @@
 #offer a {
   font-size: clamp(1rem, 1.2vw, 3rem);
 }
+#offer .contact {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
 
 @media (max-width: 768px) {
   #offer .offer-wrapper img {
@@ -110,6 +115,11 @@
   width: 90%;
   left: 0;
   background-color: #00ff80 !important;
+}
+#process .contact {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 #works .navigation-wrapper ul {

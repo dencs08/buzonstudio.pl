@@ -58,7 +58,7 @@
     </div>
     
     <div class="container">
-        <div class="link-activate-wrapper">
+        <div class="link-activate-wrapper contact">
             <a href="/kontakt" class="underline-primary mt-2 mt-md-2 mt-lg-4 mt-xl-5 font-color-primary">Napisz do nas
                 <a data-scroll-speed="1.5" href="/kontakt" class="gs gs_fromLeft font-color-dark">
                     i stwórzmy coś razem
