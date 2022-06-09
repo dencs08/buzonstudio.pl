@@ -5,7 +5,7 @@
         <hr class="section-divider footer-section-divider" />
         <section>
             <div class="container text-center text-md-start">
-                <a href="/kontakt" class="font-family-header text-uppercase fw-light lh-none link-primary">
+                <a href="/kontakt" class="font-family-header text-uppercase lh-none link-primary">
                     <h3 class="my-2 my-md-0 link-bracket-display">Zostańmy w kontakcie</h3>
                 </a>
                 <div class="row">
