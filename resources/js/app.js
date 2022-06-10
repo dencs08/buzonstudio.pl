@@ -10,3 +10,17 @@
 
 // background_img.style.height = height * 2.5 + "px";
 // background_img.style.width = width + "px";
+
+import { portfolioInit } from './portfolio';
+
+function init() {
+    if (document.querySelector("body")) {
+
+    }
+    if (document.querySelector("#fullpage")) {
+        if (window.innerWidth < 992) return
+        portfolioInit()
+    }
+}
+
+init()

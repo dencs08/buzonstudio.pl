@@ -53,7 +53,7 @@
                     <div data-scroll class="col-md-5 d-md-block d-none gs gs_fromRight">
                         <div class="footer-portfolio">
                             <div class="footer-portfolio-wrapper">
-                                <img src="{{asset('images/portfolio/bielany/back.jpg')}}" alt="">
+                                <img src="{{asset('images/portfolio/bielanypark/bielanypark_night1.jpg')}}" alt="">
                             </div>
                         </div>
                     </div>
