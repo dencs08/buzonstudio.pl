@@ -16,7 +16,7 @@ class Responsibilities extends Migration
         Schema::create('responsibilities', function (Blueprint $table) {
             $table->id();
             $table->string('responsibility');
-            $table->foreignId('portfolio_fk');
+            $table->string('portfolio_fk');
         });
     }
 

@@ -16,7 +16,7 @@ class Images extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->string('image');
-            $table->foreignId('portfolio_fk');
+            $table->string('portfolio_fk');
         });
     }
 

@@ -16,7 +16,7 @@ class Alts extends Migration
         Schema::create('alts', function (Blueprint $table) {
             $table->id();
             $table->string('alt');
-            $table->foreignId('portfolio_fk');
+            $table->string('portfolio_fk');
         });
     }
 

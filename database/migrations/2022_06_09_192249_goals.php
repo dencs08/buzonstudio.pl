@@ -16,7 +16,7 @@ class Goals extends Migration
         Schema::create('goals', function (Blueprint $table) {
             $table->id();
             $table->string('goal');
-            $table->foreignId('portfolio_fk');
+            $table->string('portfolio_fk');
         });
     }
 

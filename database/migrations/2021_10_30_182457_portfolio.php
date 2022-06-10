@@ -17,12 +17,14 @@ class Portfolio extends Migration
             $table->id();
             $table->string('name');
             $table->string('info');
-            $table->foreignId('responsibilities_fk');
-            $table->foreignId('links_fk');
-            $table->foreignId('goals_fk');
-            $table->foreignId('images_fk');
-            $table->foreignId('alts_fk');
-            $table->foreignId('team_fk');
+            $table->string('website');
+            $table->enum('category', ['Strona Internetowa', 'Wizualizacja 3D', 'Model 3D' ,'Branding', 'Projekt Graficzny', 'UI', 'UX', 'Gra', 'Aplikacja', 'Logo', 'Marketing']);
+            // $table->foreignId('responsibilities_fk');
+            // $table->foreignId('links_fk');
+            // $table->foreignId('goals_fk');
+            // $table->foreignId('images_fk');
+            // $table->foreignId('alts_fk');
+            // $table->foreignId('team_fk');
         });
     }
 

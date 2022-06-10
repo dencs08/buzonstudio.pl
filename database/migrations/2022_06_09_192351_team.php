@@ -16,7 +16,7 @@ class Team extends Migration
         Schema::create('team', function (Blueprint $table) {
             $table->id();
             $table->string('member');
-            $table->foreignId('portfolio_fk');
+            $table->string('portfolio_fk');
         });
     }
 
