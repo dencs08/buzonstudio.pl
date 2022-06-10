@@ -36,79 +36,27 @@
                 <h3 class="mt-1 mb-2">
                     Projekty z, których jesteśmy dumni
                 </h3>
-            </div>
+            </div>            
             <div class="grid-item main-track">
                 <div class="slide-track pb-5 pb-lg-6 mb-1">
-                    <a href="/portfolio/danfit">
+
+                @foreach ($portfolio_data as $portfolio)
+                    <a href="/portfolio/{{$portfolio->name}}">
                         <div class="track-item mx-auto ms-md-5 me-md-5 mb-6 mb-sm-5 mb-md-0 d-md-inline-block link-activate-wrapper">
                             <div class="info-wrapper">
                                 <div class="info">
-                                    <h3 class="font-family-header my-0 link-bracket-display link-move">danfit</h3>
-                                    <p class="font-family-primary font-color-secondary mt-0 mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. At consequuntur asperiores iure reprehenderit sapiente ducimus officia.</p>
-                                    <span class="font-family-primary font-color-dark">E-COMMERCE</span>
+                                    <h3 class="font-family-header my-0 link-bracket-display link-move">{{$portfolio->name}}</h3>
+                                    <p class="font-family-primary font-color-secondary mt-0 mb-2">{{$portfolio->info}}</p>
+                                    <span class="font-family-primary font-color-dark">{{$portfolio->category}}</span>
                                 </div>
                             </div>
-                            <a href="portfolio/danfit" class="portfolio-item">
-                                <img src="{{ asset('images/portfolio/danfit/danfit_portfolio.jpg') }}" alt="tworzenie logo i brandingu dla marki danfit" class="portfolio_image-item">
+                            <a href="portfolio/{{$portfolio->name}}" class="portfolio-item">
+                                <img src="{{ asset('images/portfolio/' . $portfolio->name . '/' . $portfolio->name . '_portfolio.jpg') }}" alt="tworzenie logo i brandingu dla marki danfit" class="portfolio_image-item">
                             </a>
                         </div>
                     </a>
-                    <a href="portfolio/castle3d">
-                        <div class="track-item mx-auto me-md-5 mb-6 mb-sm-5 mb-md-0 d-md-inline-block link-activate-wrapper">
-                            <div class="info-wrapper">
-                                <div class="info">
-                                    <h3 class="font-family-header my-0 link-bracket-display link-move">castle</h3>
-                                    <p class="font-family-primary font-color-secondary mt-0 mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. At consequuntur asperiores iure reprehenderit sapiente ducimus officia.</p>
-                                    <span class="font-family-primary font-color-dark">E-COMMERCE</span>
-                                </div>
-                            </div>
-                            <a href="portfolio/castle3d" class="portfolio-item">
-                                <img src="{{ asset('images/portfolio/castle3d/castle3d_portfolio.jpg')}}" alt="wizualizacja archietktoniczna 3D" class="portfolio_image-item">
-                            </a>
-                        </div>
-                    </a>
-                    <a href="portfolio/watch3d">
-                        <div class="track-item mx-auto me-md-5 mb-6 mb-sm-5 mb-md-0 d-md-inline-block link-activate-wrapper">
-                            <div class="info-wrapper">
-                                <div class="info">
-                                    <h3 class="font-family-header my-0 link-bracket-display link-move">watch</h3>
-                                    <p class="font-family-primary font-color-secondary mt-0 mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. At consequuntur asperiores iure reprehenderit sapiente ducimus officia.</p>
-                                    <span class="font-family-primary font-color-dark">E-COMMERCE</span>
-                                </div>
-                            </div>
-                            <a href="portfolio/watch3d" class="portfolio-item">
-                                <img src="{{asset('images/portfolio/watch3d/watch3d_portfolio.jpg')}}" alt="wizualizacja produktu zegarka w 3D" class="portfolio_image-item">
-                            </a>
-                        </div>
-                    </a>
-                    <a href="portfolio/komb">
-                        <div class="track-item mx-auto me-md-5 mb-6 mb-sm-5 mb-md-0 d-md-inline-block link-activate-wrapper">
-                            <div class="info-wrapper">
-                                <div class="info">
-                                    <h3 class="font-family-header my-0 link-bracket-display link-move">komb</h3>
-                                    <p class="font-family-primary font-color-secondary mt-0 mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. At consequuntur asperiores iure reprehenderit sapiente ducimus officia.</p>
-                                    <span class="font-family-primary font-color-dark">E-COMMERCE</span>
-                                </div>
-                            </div>
-                            <a href="portfolio/komb" class="portfolio-item">
-                                <img src="{{asset('images/portfolio/komb/komb_portfolio.jpg')}}" alt="wizualizacja reklamy busa w 3D" class="portfolio_image-item">
-                            </a>
-                        </div>
-                    </a>
-                    <a href="portfolio/zielonewidoki">
-                        <div class="track-item mx-auto me-md-5 d-md-inline-block link-activate-wrapper">
-                            <div class="info-wrapper">
-                                <div class="info">
-                                    <h3 class="font-family-header my-0 link-bracket-display link-move">zielonewidoki</h3>
-                                    <p class="font-family-primary font-color-secondary mt-0 mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. At consequuntur asperiores iure reprehenderit sapiente ducimus officia.</p>
-                                    <span class="font-family-primary font-color-dark">E-COMMERCE</span>
-                                </div>
-                            </div>
-                            <a href="portfolio/zielonewidoki" class="portfolio-item">
-                                <img src="{{asset('images/portfolio/zielonewidoki/zielonewidoki_portfolio.jpg')}}" alt="tworzenie stron internetowych i brandingu dla marki zielonewidoki" class="portfolio_image-item">
-                            </a>
-                        </div>
-                    </a>
+                @endforeach
+                    
                 </div>
             </div>  
             <div class="portfolio-btn-container container">
