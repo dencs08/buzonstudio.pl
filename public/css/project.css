@@ -1,0 +1,43 @@
+#landing-page {
+  margin-top: clamp(200px, 20vh, 600px);
+  position: relative;
+}
+#landing-page h1 {
+  position: absolute;
+  top: -5%;
+  z-index: 2;
+}
+#landing-page .image-wrapper {
+  aspect-ratio: 16/9;
+  transition: filter 0.25s ease 0.25s;
+  overflow: hidden;
+}
+#landing-page .image-wrapper:hover {
+  filter: brightness(110%) saturate(110%);
+}
+#landing-page .image-wrapper:hover img {
+  transform: scale(1.175);
+}
+#landing-page .image-wrapper img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: transform 0.5s ease 0s;
+}
+
+#info h4 {
+  font-size: clamp(0.8rem, 1.6vw, 2rem);
+}
+#info span.website {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+}
+
+#images .portfolio_image_wrapper {
+  display: grid;
+  place-items: center;
+  margin-bottom: clamp(50px, 7vh, 100px);
+}
+#images .portfolio_image {
+  width: 85%;
+}

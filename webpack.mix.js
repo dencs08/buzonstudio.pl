@@ -11,6 +11,7 @@ mix.js([
     .sass('resources/sass/testimonials.scss', 'public/css')
     .sass('resources/sass/privacy.scss', 'public/css')
     .sass('resources/sass/portfolio.scss', 'public/css')
+    .sass('resources/sass/project.scss', 'public/css')
     .sass('resources/sass/contact.scss', 'public/css');
 
 mix.browserSync('127.0.0.1:8000');
