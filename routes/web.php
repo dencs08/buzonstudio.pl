@@ -10,3 +10,11 @@ Route::get('kontakt', [App\Http\Controllers\EmailController::class, 'view']);
 Route::post('/kontaktsent', [App\Http\Controllers\EmailController::class, 'sendEmail'])->name('send.email');
 Route::get('portfolio', [App\Http\Controllers\AppController::class, 'portfolio']);
 Route::get('portfolio/{name}', [App\Http\Controllers\AppController::class, 'project']);
+
+// Route::get('/', function(){
+//     return view('webbuilding');
+// });
+
+// Route::get('/{any}', function ($any) {
+//     return view('webbuilding');
+// })->where('any', '.*');
