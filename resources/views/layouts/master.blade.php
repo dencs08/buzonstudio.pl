@@ -13,7 +13,8 @@
         <title>@yield('title')</title>
     </head>
     <body class="antialiased">
-        <div id="swup" class="transition-fade">
+        <x-navbar/>
+        <div data-page-content id="swup" class="transition-fade">
             <canvas id="web_gl"></canvas>
             @yield('content')
             @yield('js')
