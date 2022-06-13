@@ -169,6 +169,10 @@ a {
 
 @media (max-width: $md-screen-size) {
     #landing-page {
-        height: clamp(200px, 50vh, 1080px);
+        height: auto;
+
+        h2 {
+            font-size: clamp(0.7rem, 2.2vw, 1.5rem);
+        }
     }
 }

@@ -1,78 +1,25 @@
 @import "utilities/variables";
 
-//!landing page
 .control-group-error {
     display: none;
     opacity: 0;
 }
 
 .control-group-error-text {
-    margin-top: 0px !important;
-    margin-bottom: clamp(25px, 5vh, 100px);
-    color: $font-color-tertiary !important;
     font-size: clamp(0.9rem, 1.9vw, 2rem);
 }
 
-.email-sent {
-    margin-top: clamp(100px, 25vh, 350px);
-    margin-bottom: clamp(100px, 40vh, 500px);
-}
-
-.submit-container {
-    padding-top: clamp(2em, 5vh, 5em);
-}
-
-@media (max-width: $lg-screen-size) {
-}
-
-@media (max-width: $md-screen-size) {
-    #Contact {
-        input[type="checkbox"] + label {
-            width: 20em;
-
-            font-size: 12px;
-        }
+#thanks-email {
+    p {
+        font-size: clamp(1.1rem, 1.7vw, 4rem);
     }
-
-    .contact-form {
-        .form-field {
-            position: relative;
-            margin: 18px 0;
-        }
-        .input-text {
-            border-radius: 30px;
-
-            padding: 1.25em 1.75em;
-
-            &:focus,
-            &.not-empty {
-                + .label {
-                    transform: translate(-5px, -35px);
-                    font-size: $font-size-base * 0.85;
-                }
-            }
-        }
-        .label {
-            top: 18px;
-
-            font-size: $font-size-base * 0.8;
-            line-height: 16px;
-        }
-
-        textarea {
-            max-width: 100%;
-            border-radius: 35px !important;
-        }
+    a {
+        font-size: clamp(0.9rem, 1.5vw, 3rem);
     }
 }
 
 //!contact
 #Contact {
-    width: 75%;
-    margin-right: auto;
-    margin-left: auto;
-    text-align: center;
-
     input[type="checkbox"] {
         display: none;
     }
@@ -84,17 +31,14 @@
 
         background: #ffffff0d !important;
 
-        margin-bottom: 25px;
-        margin-left: 5px;
-        margin-right: 5px;
-
         padding: 2.5em 0em;
         border: 1px solid #72727280 !important;
         border-radius: 100px;
 
+        margin: 5px 10px 5px 10px;
+
         color: #444 !important;
         font-size: 14px;
-        text-align: center;
 
         cursor: pointer;
 
@@ -135,6 +79,20 @@
     .form-field {
         position: relative;
         margin: 32px 0;
+
+        label {
+            position: absolute;
+            left: 30px;
+            top: 23px;
+
+            font-size: $font-size-base !important;
+            line-height: 26px;
+            font-weight: 300;
+            color: $font-color-fourth !important;
+
+            cursor: text;
+            transition: all 0.25s ease-in-out;
+        }
     }
 
     .contact_main_row {
@@ -164,7 +122,7 @@
 
         &:focus,
         &.not-empty {
-            + .label {
+            + label {
                 transform: translateY(-55px);
                 font-size: $font-size-base * 1.2;
                 color: $font-color-tertiary !important;
@@ -172,19 +130,6 @@
                 transition: all 0.25s;
             }
         }
-    }
-    .label {
-        position: absolute;
-        left: 30px;
-        top: 19px;
-
-        font-size: $font-size-base !important;
-        line-height: 26px;
-        font-weight: 300;
-        color: $font-color-fourth !important;
-
-        cursor: text;
-        transition: all 0.25s ease-in-out;
     }
 
     textarea {
@@ -194,10 +139,53 @@
     }
 }
 
-@media (max-width: $sm-screen-size) {
+@media (max-width: $md-screen-size) {
     #Contact {
         input[type="checkbox"] + label {
             width: 20em;
+
+            font-size: 12px;
+        }
+    }
+
+    .contact-form {
+        .form-field {
+            position: relative;
+            margin: 18px 0;
+
+            label {
+                position: absolute;
+                top: 15px;
+
+                font-size: $font-size-base * 0.8;
+                line-height: 16px;
+            }
+        }
+        .input-text {
+            border-radius: 30px;
+
+            padding: 1.25em 1.75em;
+
+            &:focus,
+            &.not-empty {
+                + label {
+                    transform: translate(-5px, -40px);
+                    font-size: $font-size-base * 0.85;
+                }
+            }
+        }
+
+        textarea {
+            max-width: 100%;
+            border-radius: 35px !important;
+        }
+    }
+}
+
+@media (max-width: $sm-screen-size) {
+    #Contact {
+        input[type="checkbox"] + label {
+            width: clamp(10em, 80%, 20em);
 
             font-size: 10px;
         }

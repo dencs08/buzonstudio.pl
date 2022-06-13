@@ -35,10 +35,15 @@
 }
 
 .btn-submit {
-    width: 40%;
+    width: 35%;
     border: none;
     background: $primary-color !important;
     color: $body-bg !important;
+
+    padding-top: clamp(1em, 1.4vw, 2.5em);
+    padding-bottom: clamp(1em, 1.4vw, 2.5em);
+    padding-left: clamp(3em, 3.5vw, 6.5em);
+    padding-right: clamp(3em, 3.5vw, 6.5em);
 
     transition: 0.5s all;
 }
@@ -63,11 +68,11 @@
 }
 
 .button-trail a:hover {
-    background: $primary-color;
+    background: #10d673;
     color: $font-color-primary !important;
     border-radius: 50px;
-    box-shadow: 0 0 5px $primary-color, 0 0 12.5px $primary-color,
-        0 0 25px $primary-color, 0 0 50px $primary-color;
+    box-shadow: 0 0 5px #10d673, 0 0 12.5px #10d673, 0 0 25px #10d673,
+        0 0 50px #10d673;
     border: none !important;
 }
 
@@ -81,7 +86,7 @@
     left: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, $primary-color);
+    background: linear-gradient(90deg, transparent, #10d673);
     animation: btn-anim1 1s linear infinite;
     animation-delay: 0s;
 }
@@ -101,7 +106,7 @@
     right: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(180deg, transparent, $primary-color);
+    background: linear-gradient(180deg, transparent, #10d673);
     animation: btn-anim2 1s linear infinite;
     animation-delay: 0.25s;
 }
@@ -121,7 +126,7 @@
     right: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(270deg, transparent, $primary-color);
+    background: linear-gradient(270deg, transparent, #10d673);
     animation: btn-anim3 1s linear infinite;
     animation-delay: 0.5s;
 }
@@ -141,7 +146,7 @@
     left: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(360deg, transparent, $primary-color);
+    background: linear-gradient(360deg, transparent, #10d673);
     animation: btn-anim4 1s linear infinite;
     animation-delay: 0.75s;
 }

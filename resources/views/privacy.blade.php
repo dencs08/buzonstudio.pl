@@ -16,9 +16,10 @@
 
 @section('content')
 
-    <div id="privacy-policy">
+        <div class="container pt-5 pt-md-6">
+            <h1>Polityka prywatności {{config("app.name")}}</h1>
+        </div>
         <div data-scroll-section class="container">
-        <h1>Polityka prywatności {{config("app.name")}}</h1>
         <p class="gs gs_fromLeft">
             Ta polityka prywatności (“<strong>Polityka</strong>”) zawarta na tej Stronie zarządza prywatnością informacji naszych uzytkownikow i odwiedzających, które zbieramy, uzywmy, ujawniamy i zarządzamy poprzez uzywanie Strony {{config("app.name")}} (“<strong>Strony</strong>”).<br />
             Poprzez uzywanie Strony, zgadzasz sie w pełni na warunki polityki zawartej w ninejszym dokumencie i oświadzasz, ze Twoja odpowiedzialnością jest zapoznanies się z nią i z prowadzanymi do niej poprawkami. Jeśli nie akceptujesz takiej polityki prywatności, proszę nie korzystaj ze Strony.

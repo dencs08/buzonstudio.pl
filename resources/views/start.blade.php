@@ -18,7 +18,7 @@
 
         <!-- Hero -->
         <section data-scroll-section id="landing-page">
-            <div id="landing-content" class="container landing-page-content mt-5">
+            <div class="container mt-3 mt-lg-0 mt-xl-4 pt-5 pt-md-6">
                 <h1 class="fw-light">
                     BUZONSTUDIO INNOWACYJNE USŁUGI IT.  
                 </h1>
@@ -26,23 +26,22 @@
                 <h2 class="fw-normal font-family-primary pe-0 pe-md-6">Jesteśmy kreatywnym studio w branży IT zajmującym sie dostarczniem najlepszych <a href="/portfolio" class="link-primary underline-primary fw-bold">produktów</a> i <a href="/oferta" class="link-primary underline-primary fw-bold">usług</a> IT. Tworzymy strony internetowe, wizualizacje, branding, marketing online i inne produkty cyfrowe z pomocą metody <span data-tooltip="Dzięki All-in-One zaosczędzisz czas i pieniądze, nie martw się o zatrudnianie kilku zespołów osobno - my realizujemy wszystko od A do Z." class="text-highlight cursor-pointer"><a href="/oferta" class="link-primary underline-primary">All-in-One.</a></span></h2>
                 <x-arrow/>
             </div>
-
         </section>
 
         <!-- Portfolio -->
         <section data-scroll-section id="portfolio">
             <div  id="portfolio-content" class="container mt-5">
                 <h4 class="my-0 headerline">Nasze prace</h4>
-                <h3 class="mt-1 mb-2">
+                <h3 class="mt-1 mb-3">
                     Projekty z, których jesteśmy dumni
                 </h3>
             </div>            
             <div class="grid-item main-track">
-                <div class="slide-track pb-5 pb-lg-6 mb-1">
+                <div class="slide-track pb-2 pb-md-3 pb-lg-6 mb-1">
 
                 @foreach ($portfolio_data as $portfolio)
                     <a href="/portfolio/{{$portfolio->name}}">
-                        <div class="track-item mx-auto ms-md-5 me-md-5 mb-6 mb-sm-5 mb-md-0 d-md-inline-block link-activate-wrapper">
+                        <div class="track-item mx-auto ms-md-5 me-md-5 mb-6 mb-lg-0 d-md-inline-block link-activate-wrapper">
                             <div class="info-wrapper">
                                 <div class="info">
                                     <h3 class="font-family-header my-0 link-bracket-display link-move">{{$portfolio->name}}</h3>
@@ -50,7 +49,7 @@
                                     <span class="font-family-primary font-color-dark">{{$portfolio->category}}</span>
                                 </div>
                             </div>
-                            <a href="portfolio/{{$portfolio->name}}" class="portfolio-item">
+                            <a href="portfolio/{{$portfolio->name}}" class="portfolio-item px-2 px-md-0">
                                 <img src="{{ asset('images/portfolio/' . $portfolio->name . '/' . $portfolio->name . '_portfolio.jpg') }}" alt="tworzenie logo i brandingu dla marki danfit" class="portfolio_image-item">
                             </a>
                         </div>

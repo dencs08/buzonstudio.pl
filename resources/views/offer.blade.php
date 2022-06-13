@@ -17,7 +17,7 @@
 @section('content')
 
         <section data-scroll-section id="landing-page">
-            <div data-scroll data-scroll-speed="3" class="container landing-page-content">
+            <div data-scroll data-scroll-speed="3" class="container mt-3 mt-lg-0 mt-xl-4 pt-5 pt-md-6">
                 <h1>
                     Dla was budujemy <br> wspaniałe <span id="typed"></span>
                 </h1>

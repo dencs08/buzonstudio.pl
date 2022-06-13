@@ -36,12 +36,10 @@ body {
 .portfolio-item {
     display: inline-block;
 
-    width: clamp(550px, 33.75vw, 1300px);
+    width: clamp(450px, 33.75vw, 1300px);
     height: auto;
 
     aspect-ratio: 10/7;
-
-    margin: 0.5em 8em 0.5em 0em;
 
     transition: filter 0.25s ease 0.25s;
 
@@ -67,7 +65,7 @@ body {
 .track-item {
     position: relative;
 
-    width: clamp(550px, 33.75vw, 1300px);
+    width: clamp(450px, 33.75vw, 1300px);
     height: auto;
     .info-wrapper {
         position: absolute;
@@ -158,14 +156,14 @@ body {
 @media (max-width: $md-screen-size) {
     //!portfolio
     .info-wrapper {
-        top: 86%;
+        top: 90% !important;
     }
     .portfolio-item {
-        width: clamp(150px, 90vw, 1300px);
+        width: 100%;
     }
 
     .track-item {
-        width: clamp(150px, 90vw, 1300px);
+        width: 100%;
 
         .info {
             h3 {
