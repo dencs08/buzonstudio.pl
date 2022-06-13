@@ -1,98 +1,78 @@
-<!-- Navbar -->
-<nav id="navbar">
-    <div class="">
-    <input data-stick-cursor type="checkbox" id="active" />
-    <label data-stick-cursor id="nav-burger" for="active" class="menu-btn"
-        ><span id="nav-closer"></span
-    ></label>
-    <div id="nav-bg"></div>
-    <div id="nav-wrapper" class="wrapper">
-        <div class="nav-container container">
-            <div id="nav-content-outlined">
-                <a href="/start" class="img-nav-a">
-                    <img src="{{asset('images/logos/buzonstudio_white.svg')}}" class="img-nav" alt="buzonstudio logo (branding)" />
-                </a>
-            </div>
-
-            <div id="scaled-content" class="nav-main-content">
-                <div class="row">
-                    <div
-                        class="
-                            col-lg-6
-                            d-flex
-                            justify-content-start justify-content-lg-center
-                            align-items-center
-                        "
-                    >
-                        <ul id="nav-ul">
-                            <li class="nav-li">
-                                <span class="nav-number">01</span
-                                ><a href="/start" class="nav-item">Strona Główna</a>
-                            </li>
-                            <li class="nav-li">
-                                <span class="nav-number">02</span
-                                ><a href="/oferta" class="nav-item">Oferta</a>
-                            </li>
-                            <li class="nav-li">
-                                <span class="nav-number">03</span
-                                ><a href="/portfolio" class="nav">Portfolio</a>
-                            </li>
-                            <li class="nav-li">
-                                <span class="nav-number">04</span
-                                ><a href="/kontakt" class="nav-item">Kontakt</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div
-                        class="
-                            col-lg-6
-                            d-flex
-                            justify-content-start justify-content-lg-center
-                            align-items-center
-                            mt-lg-0 mt-5
-                        "
-                    >
-                        <div id="nav-info" class="nav-info d-none d-sm-block">
-                            <p class="my-0 p1">
-                                Studio które działa po to abyś Ty mógł rozwijać
-                            </p>
-                            <p class="my-0 p2">
-                                Tworzymy dla marek, pracujemy dla ludzi.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div
-                class="
-                    nav-icons-container
-                    mx-auto
-                    d-flex
-                    justify-content-center
-                    align-items-end
-                "
-            >
-            <a href="{{config('app.fb')}}" rel="noreferrer" target="_blank">                
-                <div class="nav-icon-div cursor_expand">
-                    <img class="footer-icon" src="{{asset('images/social/facebook.svg')}}" alt="">
-                </div>
+<header class="position-fixed">
+    <div class="row vw-100 px-3 px-lg-4">
+        <div class="col-2 px-0 mx-0 d-flex justify-content-start align-items-center">
+            <a href="/start" class="d-flex align-items-center">
+                <img src="{{asset('images/logos/buzonstudio_white_cropped.svg')}}" alt="buzonstudio logo (branding)" />
             </a>
+        </div>
+        <div class="col-4 px-0 mx-0"></div>
+        <div class="col-4 px-0 mx-0"></div>
+        <div class="col-2 px-0 mx-0 d-flex justify-content-end align-items-center">
+            <button data-hamburger class="hamburger hamburger--collapse p-0 d-flex align-items-center" type="button"
+                aria-label="Menu" aria-controls="navigation" aria-expanded="false">
+                <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+                </span>
+            </button>
+        </div>
+    </div>
+</header>
 
-                <a href="{{config('app.ig')}}" rel="noreferrer" target="_blank">
-                    <div class="nav-icon-div cursor_expand">
-                        <img class="footer-icon" src="{{asset('images/social/ig.svg')}}" alt="">
+<nav data-navigation id="navigation" class="position-fixed">  
+    <div class="wrapper d-flex-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 d-flex justify-content-start justify-content-lg-center align-items-center">
+                    <ul class="ps-0">
+                        <li>
+                            <span class="nav-number">01</span>
+                            <a href="/start" class="link-primary font-family-header">
+                                Strona Główna
+                            </a>
+                        </li>
+                        <li>
+                            <span class="nav-number">02</span>
+                            <a href="/oferta" class="link-primary font-family-header">
+                                Oferta
+                            </a>
+                        </li>
+                        <li>
+                            <span class="nav-number">03</span>
+                            <a href="/portfolio" class="link-primary font-family-header">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li>
+                            <span class="nav-number">04</span>
+                            <a href="/kontakt" class="link-primary font-family-header">
+                                Kontakt
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav-contact col-lg-6 d-flex justify-content-start justify-content-lg-center align-items-center">
+                    <div class="my-0 font-color-secondary">
+                        <a href="mailto:{{config('app.mail')}}?subject = Oferta&body = Wiadomość" class="underline-primary mail-link fw-medium font-color-secondary">
+                            {{config('app.mail')}}
+                        </a>
+                    </d>
+                    <div class="my-0 font-color-dark mt-1 mt-lg-0">
+                        {{config('app.phone')}}
                     </div>
-                </a>
+                </div>
             </div>
         </div>
-        <div class="nav-copyright-container container">
-            <span class="nav-copyright">
-                        Wykorzystujemy pliki cookies. W związku z tym, korzystając z naszej strony decydujesz się na ich wykorzystanie zgodnie z ustawieniami przeglądarki. Więcej możesz przeczytać w naszej polityce prywatności. <br>
-            </span>
+        <div class="nav-icons mx-automt-3 mt-lg-0">
+            <div class="icon-wrapper mx-0 me-2 mx-lg-2 d-inline-block">
+                <a href="{{config('app.fb')}}" rel="noreferrer" target="_blank">                
+                    <img src="{{asset('images/social/fb.svg')}}" alt="">
+                </a>
+            </div>
+            <div class="icon-wrapper mx-0 mx-lg-2 d-inline-block">
+                <a href="{{config('app.ig')}}" rel="noreferrer" target="_blank">
+                    <img src="{{asset('images/social/ig.svg')}}" alt="">
+                </a>
+            </div>
         </div>
     </div>    
-    </div>
 </nav>
-
-<div id="nav-floater">
-</div>

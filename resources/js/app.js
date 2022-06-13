@@ -12,10 +12,11 @@
 // background_img.style.width = width + "px";
 
 import { portfolioInit } from './portfolio';
+import { navInit } from './components/navbar';
 
 function init() {
     if (document.querySelector("body")) {
-
+        navInit()
     }
     if (document.querySelector("#fullpage")) {
         if (window.innerWidth < 992) return
