@@ -44,9 +44,9 @@ class AppController extends Controller
             'name' => $project->name ?? 'Portfolio o nazwie ' . $name . ' nie istnieje',
             'website' => $project->website ?? '',
             'info' => $project->info ?? '',
-            'responsibilities' => $responsibilities ?? '',
-            'goals' => $goals ?? '',
-            'images' => $images ?? ''
+            'responsibilities' => json_decode($responsibilities, false) ?? '',
+            'goals' => json_decode($goals, false) ?? '',
+            'images' => json_decode($images, false) ?? ''
         ]);
     }
 
@@ -78,8 +78,8 @@ class AppController extends Controller
             case "castle3d":
                 $castle=$project;
                 break;
-            case "ats":
-                $ats=$project;
+            case "zielonewidoki":
+                $zielonewidoki=$project;
                 break;
             }
         } 
@@ -87,12 +87,12 @@ class AppController extends Controller
         // put it in array in my own order
         $portfolio_row_first[] = $bielanypark;
         $portfolio_row_first[] = $meble;
-        $portfolio_row_second[] = $danfit;
+        $portfolio_row_second[] = $zielonewidoki;
         $portfolio_row_second[] = $komb;
+        $portfolio_row_third[] = $danfit;
         $portfolio_row_third[] = $watch3d;
-        $portfolio_row_third[] = $jaguar;
         $portfolio_row_fourth[] = $castle;
-        $portfolio_row_fourth[] = $ats;
+        $portfolio_row_fourth[] = $jaguar;
 
         $portfolio_sections[] = $portfolio_row_first;
         $portfolio_sections[] = $portfolio_row_second;
