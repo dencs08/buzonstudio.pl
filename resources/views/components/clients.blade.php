@@ -2,8 +2,8 @@
     <div class="container">
         <h4 class="mb-2 gs gs_fromTop">Oni juz nam zaufali:</h4>
         <div class="gs gs_fromBotom row d-flex-center">
-            <div class="col-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
-                <div class="client-logo">
+            <div class="col-12 col-xsm-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
+                <div class="client-logo m-0 py-0 px-3 px-xsm-2 px-md-4 px-lg-0">
                     <img
                         src="{{asset('images/logos/client/danfit.svg')}}"
                         alt="branding (logotyp) danfit"
@@ -11,8 +11,8 @@
                     />
                 </div>
             </div>
-            <div class="col-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
-                <div class="client-logo">
+            <div class="col-12 col-xsm-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
+                <div class="client-logo m-0 py-0 px-3 px-xsm-2 px-md-4 px-lg-0">
                     <img
                         src="{{asset('images/logos/client/komb.svg')}}"
                         alt="branding (logotyp) komb"
@@ -20,8 +20,8 @@
                     />
                 </div>
             </div>
-            <div class="col-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
-                <div class="client-logo">
+            <div class="col-12 col-xsm-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
+                <div class="client-logo m-0 py-0 px-3 px-xsm-2 px-md-4 px-lg-0">
                     <img
                         src="{{asset('images/logos/client/zielonewidoki.svg')}}"
                         alt="branding (logotyp) zielonewidoki"
@@ -29,8 +29,8 @@
                     />
                 </div>
             </div>
-            <div class="col-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
-                <div class="client-logo">
+            <div class="col-12 col-xsm-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
+                <div class="client-logo m-0 py-0 px-3 px-xsm-2 px-md-4 px-lg-0">
                     <img
                         src="{{asset('images/logos/client/ats.svg')}}"
                         alt="branding (logotyp) ats-konsulting"
@@ -38,8 +38,8 @@
                     />
                 </div>
             </div>
-            <div class="col-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
-                <div class="client-logo">
+            <div class="col-12 col-xsm-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
+                <div class="client-logo m-0 py-0 px-3 px-md-4 px-lg-0">
                     <img
                         src="{{asset('images/logos/client/bielany.svg')}}"
                         alt="branding (logotyp) bielanypark"
