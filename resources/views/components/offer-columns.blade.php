@@ -7,16 +7,16 @@
             <div class="col-md-6 px-0 px-md-3 px-lg-5 mb-4 mb-md-0 link-activate-wrapper">
                 <a href="/oferta">
                     <div data-scroll-speed="3" class="offer-wrapper">
-                        <div class="d-flex d-md-block justify-content-center">
+                        <div class="d-flex justify-content-center">
                             <img src="{{asset('images/branding.jpg')}}" alt="">
                         </div>
-                        <div data-scroll-speed="1.5" class="info-header my-0">
+                        <div data-scroll-speed="1.5" class="info-header my-0 ms-2 ms-md-0">
                             <a href="/oferta" class="gs gs_fromTop font-family-header my-0">
                                 <h3 class="my-0 link-bracket-display link-move">Produkty cyfrowe</h3>
                             </a>
                         </div>
                     </div>
-                    <div class="info mt-3 mt-md-3 mt-lg-4 pe-3 pe-md-0">
+                    <div class="info mt-3 mt-md-3 mt-lg-4 pe-3 pe-md-0 ms-2 ms-md-0">
                         <p class="gs gs_fromLeft font-color-dark">Tworzymy i rozwijamy, strony internetowe, aplikacje, wizualizacje, grafiki, projekty UI i UX adekwatnie pod Twoje potrzeby, tak abyś otrzymał najlepiej dostosowany produkt który pracuje dla Ciebie.</p>
                         <ul class="text-uppercase font-color-darker">
                             <li data-scroll-speed="0.5"><span class="gs gs_fromFadeIn">Strony internetowe</span> </li>
@@ -33,7 +33,7 @@
             <div class="col-md-6 px-0 px-md-3 px-lg-5 link-activate-wrapper">
                 <a href="/oferta">
                     <div data-scroll-speed="3" class="offer-wrapper">
-                        <div class="d-flex d-md-block justify-content-center">
+                        <div class="d-flex justify-content-center">
                             <img src="{{asset('images/branding.jpg')}}" alt="">
                         </div>
                         <div data-scroll-speed="1.5" class="info-header">
