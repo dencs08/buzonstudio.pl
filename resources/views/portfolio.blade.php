@@ -16,7 +16,7 @@
 
 @section('content')
 
-    <div id="fullpage">
+    <div g-component="Portfolio" id="fullpage">
 
     	    <div section> 
                 <div anim-stagger-0 class="row mt-5 mt-lg-0">

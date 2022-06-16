@@ -49,7 +49,7 @@
                                     <span class="font-family-primary font-color-dark">{{$portfolio->category}}</span>
                                 </div>
                             </div>
-                            <a href="portfolio/{{$portfolio->name}}" class="portfolio-item px-2 px-md-0">
+                            <a href="/portfolio/{{$portfolio->name}}" class="portfolio-item px-2 px-md-0">
                                 <img src="{{ asset('images/portfolio/' . $portfolio->name . '/' . $portfolio->name . '_portfolio.jpg') }}" alt="tworzenie logo i brandingu dla marki danfit" class="portfolio_image-item">
                             </a>
                         </div>
@@ -101,5 +101,4 @@
         <x-clients/>
 
         <x-footer/>
-
 @endsection

@@ -1,85 +1,87 @@
 import { gsap } from "gsap";
+import Component from 'gia/Component';
 
-const HAMBURGER = document.querySelector('[data-hamburger]')
-const NAVIGATION = document.querySelector('[data-navigation]')
-const PAGECONTENT = document.querySelector('[data-page-content]')
-let tl = gsap.timeline()
 let isAnimating = false
+const hamburger = document.querySelector('[data-hamburger]')
+const navigation = document.querySelector('[data-navigation]')
+const pagecontent = document.querySelector('[data-page-content]')
+let tl = gsap.timeline()
 let yBodyPos = 0;
+export default class Navbar extends Component {
+    constructor(element) {
+        super(element);
 
-function init() {
-    hamburgerClassToggle()
-}
+    }
 
-function hamburgerClassToggle() {
-    HAMBURGER.addEventListener('click', function () {
+    mount() {
+        hamburger.addEventListener('click', this.hamburgerClassToggle.bind(this));
+    }
+
+    hamburgerClassToggle() {
         if (isAnimating) return
         isAnimating = true
 
-        HAMBURGER.classList.toggle("is-active")
-        NAVIGATION.classList.toggle('is-active')
+        hamburger.classList.toggle("is-active")
+        navigation.classList.toggle('is-active')
 
-        if (NAVIGATION.classList.contains("is-active")) {
-            navbarShow()
+        if (navigation.classList.contains("is-active")) {
+            this.navbarShow()
         } else {
-            navbarHide()
+            this.navbarHide()
         }
-    })
+    }
+
+    navbarShow() {
+        tl.fromTo(pagecontent, { scale: 1 }, {
+            duration: 0.85,
+            scale: 1.15,
+            ease: "expo",
+        })
+        tl.fromTo(pagecontent, { opacity: 1 }, {
+            duration: 0.75,
+            opacity: 0,
+            ease: "expo",
+        }, "-=0.8")
+        tl.fromTo(navigation, { scale: 0.8 }, {
+            duration: 0.7,
+            scale: 1,
+            ease: "expo",
+        }, "-=0.5")
+        tl.fromTo(navigation, { opacity: 0 }, {
+            duration: 0.7,
+            opacity: 1,
+            ease: "expo",
+            onComplete: function () {
+                isAnimating = false
+            }
+        }, "-=0.6")
+    }
+
+    navbarHide() {
+        tl.to(navigation, {
+            duration: 0.6,
+            scale: 0.6,
+            ease: "expo",
+        })
+        tl.to(navigation, {
+            duration: 0.5,
+            opacity: 0,
+            ease: "expo",
+        }, "-=0.6")
+        tl.to(pagecontent, {
+            duration: 0.6,
+            opacity: 1,
+            ease: "expo",
+
+        }, "-=0.2")
+        tl.to(pagecontent, {
+            duration: 0.75,
+            scale: 1,
+            ease: "expo",
+            onComplete: function () {
+                navigation.classList.remove('is-active')
+                isAnimating = false
+            }
+        }, "-=0.6")
+    }
 }
-
-function navbarShow() {
-    tl.fromTo(PAGECONTENT, { scale: 1 }, {
-        duration: 0.85,
-        scale: 1.15,
-        ease: "expo",
-    })
-    tl.fromTo(PAGECONTENT, { opacity: 1 }, {
-        duration: 0.75,
-        opacity: 0,
-        ease: "expo",
-    }, "-=0.8")
-    tl.fromTo(NAVIGATION, { scale: 0.8 }, {
-        duration: 0.7,
-        scale: 1,
-        ease: "expo",
-    }, "-=0.5")
-    tl.fromTo(NAVIGATION, { opacity: 0 }, {
-        duration: 0.7,
-        opacity: 1,
-        ease: "expo",
-        onComplete: function () {
-            isAnimating = false
-        }
-    }, "-=0.6")
-}
-
-function navbarHide() {
-    tl.to(NAVIGATION, {
-        duration: 0.6,
-        scale: 0.6,
-        ease: "expo",
-    })
-    tl.to(NAVIGATION, {
-        duration: 0.5,
-        opacity: 0,
-        ease: "expo",
-    }, "-=0.6")
-    tl.to(PAGECONTENT, {
-        duration: 0.6,
-        opacity: 1,
-        ease: "expo",
-
-    }, "-=0.2")
-    tl.to(PAGECONTENT, {
-        duration: 0.75,
-        scale: 1,
-        ease: "expo",
-        onComplete: function () {
-            NAVIGATION.classList.remove('is-active')
-            isAnimating = false
-        }
-    }, "-=0.6")
-}
-
-
-export { init as navInit }

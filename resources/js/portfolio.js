@@ -1,66 +1,64 @@
 import { gsap } from 'gsap'
 import * as fullpage from 'fullpage.js'
+import Component from 'gia/Component';
 
-function init() {
+var staggerParamFrom = {
+    y: 25,
+    opacity: 0,
+}
 
-    var staggerParamFrom = {
-        y: 25,
-        opacity: 0,
+var staggerParamTo = {
+    y: 0,
+    opacity: 1,
+    duration: 0.5,
+    stagger: 0.2,
+}
+
+var staggerParamToDelay = "-=0"
+
+var animateInParam = {
+    autoAlpha: 1,
+    opacity: 0.75,
+    duration: 0,
+    ease: "power2",
+};
+
+var animateOutDownParam = {
+    autoAlpha: 0,
+    opacity: 0,
+    duration: 0.25,
+    ease: "power1",
+};
+
+let tlIn = new gsap.timeline();
+
+export default class Portfolio extends Component {
+    constructor(element) {
+        super(element);
+
+        this.sections = document.querySelectorAll("[section]");
     }
 
-    var staggerParamTo = {
-        y: 0,
-        opacity: 1,
-        duration: 0.5,
-        stagger: 0.2,
+    mount() {
+        this.portfolio()
     }
 
-    var staggerParamToDelay = "-=0"
-
-    var animateInParam = {
-        autoAlpha: 1,
-        opacity: 0.75,
-        duration: 0,
-        ease: "power2",
-    };
-
-    var animateOutDownParam = {
-        autoAlpha: 0,
-        opacity: 0,
-        duration: 0.25,
-        ease: "power1",
-    };
-
-    var sections = document.querySelectorAll("[section]");
-
-    function hideElements() {
-        for (let i = 1; i < sections.length; i++) {
-            const section = sections[i];
-            gsap.to(section, {
-                opacity: 0
-            });
-        }
+    unmount() {
+        fullpage_api.destroy('all');
     }
 
-    function gsapStaggerAnim(i) {
-        tlIn.fromTo("[anim-stagger-" + i + ']',
-            staggerParamFrom,
-            staggerParamTo,
-            staggerParamToDelay);
-    }
+    portfolio() {
 
-    let tlIn = new gsap.timeline();
-    (() => {
         const animateIn = ({ currentIndex }) => {
-            for (let i = 0; i < sections.length; i++) {
-                const section = sections[i];
+            for (let i = 0; i < this.sections.length; i++) {
+                const section = this.sections[i];
                 if (currentIndex === i) {
                     if (currentIndex === 0) {
                         tlIn.to(section, animateInParam)
-                        gsapStaggerAnim(0);
+                        this.gsapStaggerAnim(0);
                     } else {
                         gsap.to(section, animateInParam)
-                        gsapStaggerAnim(i)
+                        this.gsapStaggerAnim(i)
                     }
                 }
             }
@@ -68,15 +66,15 @@ function init() {
 
         const animateOut = ({ currentIndex, direction }) => {
             if (direction === "down") {
-                for (let i = 0; i < sections.length; i++) {
-                    const section = sections[i];
+                for (let i = 0; i < this.sections.length; i++) {
+                    const section = this.sections[i];
                     if (currentIndex === i) {
                         tlIn.to(section, animateOutDownParam)
                     }
                 }
             } else {
-                for (let i = 0; i < sections.length; i++) {
-                    const section = sections[i];
+                for (let i = 0; i < this.sections.length; i++) {
+                    const section = this.sections[i];
                     if (currentIndex === i) {
                         tlIn.to(section, animateOutDownParam)
                     }
@@ -84,7 +82,7 @@ function init() {
             }
         };
 
-        const fullPage = new fullpage("#fullpage", {
+        this.fullPage = new fullpage("#fullpage", {
             licenseKey: '6193823F-901948D3-ACA324B5-09340F06',
             navigation: true,
             // navigationTooltips: [''],
@@ -97,7 +95,7 @@ function init() {
                 setTimeout(() => {
                     fullpage_api.setAllowScrolling(true)
                     fullpage_api.setKeyboardScrolling(true)
-                }, 600);
+                }, 500);
             },
             onLeave: function (origin, destination, nextIndex, direction) {
                 animateOut({ currentIndex: origin.index, direction })
@@ -107,13 +105,28 @@ function init() {
                 }, 50);
             },
         });
-        const switchIndex = () => {
-            const { index } = fullPage.getActiveSection()
-        };
 
-        switchIndex()
-        hideElements()
-    })()
+        this.switchIndex()
+        this.hideElements()
+    }
+
+    switchIndex() {
+        const { index } = this.fullPage.getActiveSection()
+    };
+
+    hideElements() {
+        for (let i = 1; i < this.sections.length; i++) {
+            const section = this.sections[i];
+            gsap.to(section, {
+                opacity: 0
+            });
+        }
+    }
+
+    gsapStaggerAnim(i) {
+        tlIn.fromTo("[anim-stagger-" + i + ']',
+            staggerParamFrom,
+            staggerParamTo,
+            staggerParamToDelay);
+    }
 }
-
-export { init as portfolioInit }
