@@ -26,25 +26,25 @@
                     <ul class="ps-0">
                         <li>
                             <span class="nav-number">01</span>
-                            <a href="/start" class="link-primary font-family-header">
+                            <a web-link href="/start" class="link-primary font-family-header">
                                 Strona Główna
                             </a>
                         </li>
                         <li>
                             <span class="nav-number">02</span>
-                            <a href="/oferta" class="link-primary font-family-header">
+                            <a web-link href="/oferta" class="link-primary font-family-header">
                                 Oferta
                             </a>
                         </li>
                         <li>
                             <span class="nav-number">03</span>
-                            <a href="/portfolio" class="link-primary font-family-header">
+                            <a web-link href="/portfolio" class="link-primary font-family-header">
                                 Portfolio
                             </a>
                         </li>
                         <li>
                             <span class="nav-number">04</span>
-                            <a href="/kontakt" class="link-primary font-family-header">
+                            <a web-link href="/kontakt" class="link-primary font-family-header">
                                 Kontakt
                             </a>
                         </li>

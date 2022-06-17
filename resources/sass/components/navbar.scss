@@ -46,6 +46,10 @@ nav {
             li {
                 a {
                     font-size: clamp(2rem, 6vw, 5rem);
+
+                    &.active {
+                        color: $primary-color;
+                    }
                 }
             }
         }
