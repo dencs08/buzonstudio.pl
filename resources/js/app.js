@@ -18,7 +18,6 @@ import SwupPreloadPlugin from '@swup/preload-plugin'
 import SwupProgressPlugin from '@swup/progress-plugin'
 import SwupGaPlugin from '@swup/ga-plugin'
 import SwupJsPlugin from '@swup/js-plugin'
-import SwupScrollPlugin from '@swup/scroll-plugin';
 import SwupFormsPlugin from '@swup/forms-plugin';
 
 import gsap from 'gsap'
@@ -29,8 +28,9 @@ import config from 'gia/config'
 import components from './components/giaComponents'
 
 import { navbarToggle } from './components/navbar';
+import { locoCreate, locoReload } from './components/locomotive-scroll';
 
-config.set('log', false);
+config.set('log', true);
 loadComponents(components)
 
 const jsTransitionOptions = [
@@ -68,9 +68,7 @@ const swupOptions = {
         new SwupPreloadPlugin(),
         new SwupGaPlugin(),
         new SwupFormsPlugin(),
-        new SwupScrollPlugin({
-            animateScroll: false,
-        }),
+
         new SwupProgressPlugin({
             delay: 1000
         }),
@@ -92,6 +90,7 @@ const swup = new Swup(swupOptions)
 
 swup.on('contentReplaced', function () {
     loadComponents(components)
+    // locomotiveReload()
     // document.querySelectorAll('[data-swup]').forEach(function (container) {
     //     loadComponents(components, container)
     // })
@@ -104,5 +103,6 @@ swup.on('willReplaceContent', function () {
 })
 
 swup.on('transitionEnd', function () {
-    // locoReload()
+    locoCreate()
+    locoReload()
 })
