@@ -16,10 +16,11 @@
 
 @section('content')
 
-        <div class="container pt-5 pt-md-6">
-            <h1>Polityka prywatności {{config("app.name")}}</h1>
-        </div>
-        <div data-scroll-section class="container">
+    <div data-scroll-section g-component="Locomotive" class="container pt-5 pt-md-6">
+        <h1>Polityka prywatności {{config("app.name")}}</h1>
+    </div>
+
+    <div data-scroll-section class="container">
         <p class="gs gs_fromLeft">
             Ta polityka prywatności (“<strong>Polityka</strong>”) zawarta na tej Stronie zarządza prywatnością informacji naszych uzytkownikow i odwiedzających, które zbieramy, uzywmy, ujawniamy i zarządzamy poprzez uzywanie Strony {{config("app.name")}} (“<strong>Strony</strong>”).<br />
             Poprzez uzywanie Strony, zgadzasz sie w pełni na warunki polityki zawartej w ninejszym dokumencie i oświadzasz, ze Twoja odpowiedzialnością jest zapoznanies się z nią i z prowadzanymi do niej poprawkami. Jeśli nie akceptujesz takiej polityki prywatności, proszę nie korzystaj ze Strony.
@@ -74,7 +75,7 @@
             Przyjmujesz do wiadomości, ze ta polityka prywatności jest obiektem modyfikacji, alternacji i poprawek przez {{config("app.name")}} przez cały czas, bez lub z powiadomieniem Ciebie o nich. Zgadzasz się równiez z tym, ze jakiekolwiek modyfikacje są w wazne i mają wpływ po ich zamieszczeniu w tej Witrynie.
         </p>
     </div>
+
     <x-footer/>
-</div>
 
 @endsection

@@ -16,7 +16,7 @@
 
 @section('content')
 
-        <section data-scroll-section id="landing-page">
+        <section data-scroll-section g-component="Locomotive" id="landing-page">
             <div data-scroll data-scroll-speed="3" class="container mt-3 mt-lg-0 mt-xl-4 pt-5 pt-md-6">
                 <h1>
                     Dla was budujemy <br> wspaniałe <span id="typed"></span>
@@ -30,7 +30,7 @@
 
         <x-offer-columns/>
 
-        <section id="process" class="section-mb">
+        <section data-scroll-section id="process" class="section-mb">
             <div class="container">
                 <div class="row mb-3 mb-md-5">
                     <div class="col-12 col-md-6 text-uppercase">
@@ -69,7 +69,6 @@
                 </div>
 
             </div>
-
 
         </section>
         

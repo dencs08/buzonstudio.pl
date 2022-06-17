@@ -16,7 +16,7 @@
 
 @section('content')
 
-    <section id="landing-page">
+    <section data-scroll-section g-component="Locomotive" id="landing-page">
         <div class="container">
             <div>
                 <h1>{{$name}}</h1>
@@ -27,7 +27,7 @@
         </div>
     </section>
     
-    <section id="info" class="mb-4 mb-md-5">
+    <section data-scroll-section id="info" class="mb-4 mb-md-5">
         <div class="container">
             <div class="row mb-3 mb-md-5">
                 <h3 class="headerline font-family-header">Podsumowanie realizacji</h3>
@@ -78,7 +78,7 @@
     </section>
     
     @if (!empty($images))
-    <section id="images">
+    <section data-scroll-section id="images">
         <div class="container">
             @foreach($images as $image)
             <div class="portfolio_image_wrapper">

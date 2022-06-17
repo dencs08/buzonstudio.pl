@@ -17,7 +17,7 @@
 @section('content')
 
         <!-- Hero -->
-        <section data-scroll-section id="landing-page">
+        <section data-scroll-section g-component="Locomotive" id="landing-page">
             <div class="container mt-3 mt-lg-0 mt-xl-4 pt-5 pt-md-6">
                 <h1 class="fw-light">
                     BUZONSTUDIO INNOWACYJNE USŁUGI IT.  

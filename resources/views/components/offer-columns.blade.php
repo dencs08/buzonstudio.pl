@@ -1,6 +1,6 @@
 <section data-scroll-section id="offer" class="section-mb">
     <div class="container mb-2 mb-md-2 mb-lg-4 mb-xl-5">
-        <div data-scroll-speed="2">
+        <div>
             <h3 class="gs gs_fromLeft headerline">Działamy po to abyś się rozwijał</h3>
         </div>
         <div class="row">

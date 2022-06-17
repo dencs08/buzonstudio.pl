@@ -1,4 +1,4 @@
-<section id="clients">
+<section data-scroll-section id="clients">
     <div class="container">
         <h4 class="mb-2 gs gs_fromTop">Oni juz nam zaufali:</h4>
         <div class="gs gs_fromBotom row d-flex-center">

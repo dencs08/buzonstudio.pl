@@ -15,7 +15,7 @@
 
 @section('content')
 
-    <section data-scroll-section id="landing-page">
+    <section data-scroll-section g-component="Locomotive" id="landing-page">
         <div data-scroll data-scroll-speed="3" class="container landing-page-content">
             <h1>Udało się! Email został wysłany,</h1>
             <h2 class="fw-normal font-family-primary">Odezwiemy się do Ciebie poprzez email podany w formularzu.</h2>
