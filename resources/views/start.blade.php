@@ -36,24 +36,33 @@
                     Projekty z, których jesteśmy dumni
                 </h3>
             </div>
-            <div data-gs data-gs_fromBottom class="grid-item main-track">
-                <div class="slide-track pb-2 pb-md-3 pb-lg-6 mb-1">
+            <div g-component="PortfolioSlider" class="grid-item main-track">
+                <div cursor-action data-cursor-label="↔" slide-track class="slide-track pb-2 pb-md-3 pb-lg-6 mb-1">
+
+                @php
+                    $delay = 0;
+                @endphp
 
                 @foreach ($portfolio_data as $portfolio)
-                    <a href="/portfolio/{{$portfolio->name}}">
+                    <a cursor-expand href="/portfolio/{{$portfolio->name}}">
                         <div class="track-item mx-auto ms-md-5 me-md-5 mb-6 mb-lg-0 d-md-inline-block link-activate-wrapper">
                             <div class="info-wrapper">
-                                <div class="info">
+                                <div data-gs data-gs_fromBottom data-gs-delay="{{$delay}}" class="info">
                                     <h3 class="font-family-header my-0 link-bracket-display link-move">{{$portfolio->name}}</h3>
                                     <p class="font-family-primary font-color-secondary mt-0 mb-2">{{$portfolio->info}}</p>
                                     <span class="font-family-primary font-color-dark">{{$portfolio->category}}</span>
                                 </div>
                             </div>
-                            <a href="/portfolio/{{$portfolio->name}}" class="portfolio-item px-2 px-md-0">
+                            <a data-gs data-gs_fromBottom data-gs-delay="{{$delay}}" href="/portfolio/{{$portfolio->name}}" class="portfolio-item px-2 px-md-0">
                                 <img src="{{ asset('images/portfolio/' . $portfolio->name . '/' . $portfolio->name . '_portfolio.jpg') }}" alt="tworzenie logo i brandingu dla marki danfit" class="portfolio_image-item">
                             </a>
                         </div>
                     </a>
+
+                @php
+                    $delay += 0.2;
+                @endphp
+
                 @endforeach
                     
                 </div>
