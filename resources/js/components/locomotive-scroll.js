@@ -73,19 +73,26 @@ function animateFrom(elem, direction) {
     direction = direction || 1;
     var x = 0,
         y = direction * 100;
-    if (elem.getAttribute("[data-gs_fromLeft]")) {
+    console.log("animating");
+    console.log(elem);
+    if (elem.hasAttribute("data-gs_fromLeft")) {
+        console.log("left");
         x = -100;
         y = 0;
-    } else if (elem.getAttribute("[data-gs_fromRight]")) {
+    } else if (elem.hasAttribute("data-gs_fromRight")) {
+        console.log("right");
         x = 100;
         y = 0;
-    } else if (elem.getAttribute("[data-gs_fromBottom]")) {
+    } else if (elem.hasAttribute("data-gs_fromBottom")) {
+        console.log("bottom");
         y = 50;
         x = 0;
-    } else if (elem.getAttribute("[data-gs_fromTop]")) {
+    } else if (elem.hasAttribute("data-gs_fromTop")) {
+        console.log("top");
         y = -50;
         x = 0;
-    } else if (elem.getAttribute("[data-gs_fromFadeIn]")) {
+    } else if (elem.hasAttribute("data-gs_fromFadeIn")) {
+        console.log("fade");
         y = 0;
         x = 0;
     }
