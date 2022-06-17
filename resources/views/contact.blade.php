@@ -16,7 +16,7 @@
 
 @section('content')
 
-        <section data-scroll-section id="landing-page">
+        <section data-scroll-section g-component="Locomotive" id="landing-page">
             <div data-scroll data-scroll-speed="3" class="container mt-3 mt-lg-0 mt-xl-4 pt-5 pt-md-6">
                 <h1 class="lh-1">Zacznijmy owocną współpracę!</h1>
 
@@ -33,9 +33,9 @@
         <section data-scroll-section id="Contact">
             <div class="container text-center">
                 <div data-scroll data-scroll-speed="1.25">
-                    <h3>Co możemy dla Ciebie zrobić?</h3>
+                    <h3 data-gs data-gs_fromTop>Co możemy dla Ciebie zrobić?</h3>
                 </div>
-            <form id="contact-form" name="myForm" name="contact-form" class="contact-form validate-form" action="{{ route('send.email') }}" method="post">
+            <form data-swup-form id="contact-form" name="myForm" name="contact-form" class="contact-form validate-form" action="{{ route('send.email') }}" method="post">
                 @csrf
                 @if(session()->has('message'))
                     <div class="alert alert-success">

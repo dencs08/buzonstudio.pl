@@ -5,11 +5,11 @@
         <hr class="section-divider footer-section-divider" />
         <section>
             <div class="container text-center text-md-start">
-                <a href="/kontakt" class="font-family-header text-uppercase lh-none link-primary">
+                <a data-gs data-gs_fromTop href="/kontakt" class="font-family-header text-uppercase lh-none link-primary">
                     <h3 class="my-2 my-md-0 link-bracket-display">Zostańmy w kontakcie</h3>
                 </a>
                 <div class="row">
-                    <div class="col-md-7 gs gs_fromLeft">
+                    <div data-gs data-gs_fromBottom class="col-md-7">
 
                         <a
                             href="mailto:{{config('app.mail')}}?subject = Oferta&body = Wiadomość"
@@ -42,15 +42,15 @@
 
                         <div class="footer-links text-uppercase mt-4 mb-5 fw-light">
                             <ul>
-                                <li class="my-2"><a href="/start" class="underline-dark">start</a></li>
-                                <li class="my-2"><a href="/oferta" class="underline-dark">oferta</a></li>
-                                <li class="my-2"><a href="/portfolio" class="underline-dark">portfolio</a></li>
-                                <li class="my-2"><a href="/kontakt" class="underline-dark">kontakt</a></li>
+                                <li data-gs data-gs_fromBottom class="my-2"><a href="/start" class="underline-dark">start</a></li>
+                                <li data-gs data-gs_fromBottom class="my-2"><a href="/oferta" class="underline-dark">oferta</a></li>
+                                <li data-gs data-gs_fromBottom class="my-2"><a href="/portfolio" class="underline-dark">portfolio</a></li>
+                                <li data-gs data-gs_fromBottom class="my-2"><a href="/kontakt" class="underline-dark">kontakt</a></li>
                             </ul>
                         </div>
                     </div>
                     
-                    <div data-scroll class="col-md-5 d-md-block d-none gs gs_fromRight">
+                    <div class="col-md-5 d-md-block d-none">
                         <div class="footer-portfolio">
                             <div class="footer-portfolio-wrapper">
                                 <img src="{{asset('images/portfolio/bielanypark/bielanypark_night1.jpg')}}" alt="">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
 
-                <div class="font-family-header text-uppercase text-center text-md-start mt-2">
+                <div data-gs data-gs_fromBottom class="font-family-header text-uppercase text-center text-md-start mt-2">
                     <div class="d-block d-md-inline-block mt-2 mt-md-0 me-0 me-md-4">
                         <a href="/polityka" class="underline-dark font-color-dark">Polityka prywatności</a>
                     </div>
