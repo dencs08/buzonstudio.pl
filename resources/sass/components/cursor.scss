@@ -1,52 +1,118 @@
+@import "utilities/variables";
+
 .cursor {
     position: absolute;
+
     background-color: $primary-color;
-    width: 8px;
-    height: 8px;
     border-radius: 100%;
-    z-index: 1;
-    transition: 0.3s cubic-bezier(0.75, -1.27, 0.3, 2.33) transform,
-        0.2s cubic-bezier(0.75, -0.27, 0.3, 1.33) opacity;
+
+    width: 6px;
+    height: 6px;
+
     user-select: none;
     pointer-events: none;
-    z-index: 10000;
-    transform: scale(1);
-    transform: translate(-4px, -4px);
 
-    &.active {
+    transform: translate(-3px, -3px);
+
+    transition: 0.3s transform, 0.2s opacity;
+
+    z-index: 10000;
+
+    &.active-action {
+        opacity: 0;
+    }
+
+    &.active-expand {
         opacity: 0.5;
         transform: scale(0);
     }
 
-    &.hovered {
-        opacity: 0.08;
+    &.active-shrink {
+        opacity: 1;
     }
 }
+
 .cursor-follower {
     position: absolute;
+
     background-color: rgba(255, 255, 255, 0);
-    width: 35px;
-    height: 35px;
+
+    width: 60px;
+    height: 60px;
+
     border-radius: 100%;
-    border: 1px rgba(255, 255, 255, 0.4) solid;
-    z-index: 1;
-    transition: 0.6s cubic-bezier(0.75, -1.27, 0.3, 2.33) transform,
-        0.2s cubic-bezier(0.75, -0.27, 0.3, 1.33) opacity;
+    border: 1px rgba(201, 201, 201, 0.205) solid;
+
+    transform: translate(-19px, -19px);
+
     user-select: none;
     pointer-events: none;
-    z-index: 10000;
-    transform: translate(-5px, -6px);
 
-    &.active {
-        background-color: rgba(255, 255, 255, 0.35);
+    transition: 0.3s transform, 0.2s background-color;
+
+    z-index: 10000;
+
+    &.active-action {
+        background-color: $primary-color;
         border: none;
-        opacity: 1;
-        transform: scale(1.85);
+        transform: scale(1.85) translate(-8px, -8px);
     }
 
-    &.hovered {
+    &.active-expand {
+        background-color: rgba(255, 255, 255, 0.2);
+        border: none;
+        transform: scale(1.85) translate(-8px, -8px);
+    }
+
+    &.active-shrink {
         background-color: rgba(255, 255, 255, 0.35);
         border: none;
-        opacity: 0.08;
+        transform: scale(0.2) translate(-90px, -90px);
+    }
+
+    [cursor-label] {
+        text-align: center;
+        text-transform: uppercase;
+
+        font-weight: 600;
+        font-size: 22px;
+
+        opacity: 0;
+
+        pointer-events: none;
+
+        transform: translate(0px, -2px);
+
+        z-index: 999999 !important;
+
+        &.active-action {
+            opacity: 1;
+
+            // transform: translate(4px, -7px);
+        }
+
+        &.active-expand {
+            opacity: 0;
+        }
+
+        &.active-shrink {
+            opacity: 0;
+        }
     }
 }
+
+[cursor-action] {
+    cursor: none !important;
+}
+
+// [cursor-expand] {
+//     cursor: pointer !important;
+// }
+
+// [cursor-action] {
+//     cursor: none !important;
+// }
+
+// [cursor-action] {
+//     cursor: none !important;
+// }
