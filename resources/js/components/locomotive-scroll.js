@@ -33,7 +33,7 @@ function create() {
     locoScroll = new LocomotiveScroll({
         el: document.querySelector('[data-locomotive-scroll]'),
         smooth: true,
-        lerp: .085,
+        lerp: .1,
         // firefoxMultiplier: 50,
     });
 
@@ -58,8 +58,8 @@ function create() {
         hide(elem);
         ScrollTrigger.create({
             trigger: elem,
-            start: "top bottom",
-            end: "top top",
+            start: scrollTriggerStart(),
+            end: "bottom top",
             once: true,
             scroller: "[data-locomotive-scroll]",
             markers: true,
@@ -68,36 +68,50 @@ function create() {
     });
 }
 
+function scrollTriggerStart() {
+    //get one height or the other (some browsers / devices doesnt provide both)
+    const height = document.documentElement.clientHeight
+    let start = ""
+    if (height == 0) {
+        height = window.innerHeight
+        let startTriggerNumber = height * 0.95;
+        start = "top " + startTriggerNumber
+    } else {
+        let startTriggerNumber = height * 0.95;
+        start = "top " + startTriggerNumber
+    }
+
+    return start;
+}
+
 //!auto animations
 function animateFrom(elem, direction) {
     direction = direction || 1;
     var x = 0,
         y = direction * 100;
-    console.log("animating");
-    console.log(elem);
     if (elem.hasAttribute("data-gs_fromLeft")) {
-        console.log("left");
         x = -100;
         y = 0;
     } else if (elem.hasAttribute("data-gs_fromRight")) {
-        console.log("right");
         x = 100;
         y = 0;
     } else if (elem.hasAttribute("data-gs_fromBottom")) {
-        console.log("bottom");
         y = 50;
         x = 0;
     } else if (elem.hasAttribute("data-gs_fromTop")) {
-        console.log("top");
         y = -50;
         x = 0;
     } else if (elem.hasAttribute("data-gs_fromFadeIn")) {
-        console.log("fade");
         y = 0;
         x = 0;
     }
     elem.style.transform = "translate(" + x + "px, " + y + "px)";
     elem.style.opacity = "0";
+
+    let delay = elem.getAttribute("data-gs-delay")
+    if (isNaN(delay) || delay == null) {
+        delay = 0.15
+    }
 
     gsap.fromTo(elem, { x: x, y: y, autoAlpha: 0 }, {
         autoAlpha: 1,
@@ -105,7 +119,7 @@ function animateFrom(elem, direction) {
         ease: "expo",
         y: 0,
         x: 0,
-        delay: 0.25
+        delay: delay
     });
 }
 
