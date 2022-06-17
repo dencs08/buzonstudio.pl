@@ -43,42 +43,44 @@
                     </div>
                 @endif
                 <div data-scroll data-scroll-speed="1.5">
-                    <div class="control-group-error">
-                        <h3 class="control-group-error-text font-color-dark">Wybierz conajmniej jedną z poniższych opcji:</h3>
-                    </div>
-                    <div class="control-group">
-                        <input class="form_subject" type="checkbox" id="talk" name="controlInfo[]" value="Chcę porozmawiać">
-                        <label for="talk">
-                            <span class="label-name">Chcę porozmawiać</span>
-                        </label>
-
-                        <input class="form_subject" type="checkbox" id="website" name="controlInfo[]" value="Strona Internetowa">
-                        <label for="website">
-                            <span class="label-name">Strona Internetowa</span>
-                        </label>
-
-                        <input class="form_subject" type="checkbox" id="app" name="controlInfo[]" value="Aplikacja">
-                        <label for="app">
-                            <span class="label-name">Aplikacja</span>
-                        </label>
-
-                        <input class="form_subject" type="checkbox" id="branding" name="controlInfo[]" value="Branding">
-                        <label for="branding">
-                            <span class="label-name">Branding</span>
-                        </label>
-
-                        <input class="form_subject" type="checkbox" id="other" name="controlInfo[]" value="Coś Innego">
-                        <label for="other">
-                            <span class="label-name">Coś Innego</span>
-                        </label>
+                    <div data-gs data-gs_fromFadeIn>
+                        <div class="control-group-error">
+                            <h3 class="control-group-error-text font-color-dark">Wybierz conajmniej jedną z poniższych opcji:</h3>
+                        </div>
+                        <div class="control-group">
+                            <input class="form_subject" type="checkbox" id="talk" name="controlInfo[]" value="Chcę porozmawiać">
+                            <label for="talk">
+                                <span class="label-name">Chcę porozmawiać</span>
+                            </label>
+    
+                            <input class="form_subject" type="checkbox" id="website" name="controlInfo[]" value="Strona Internetowa">
+                            <label for="website">
+                                <span class="label-name">Strona Internetowa</span>
+                            </label>
+    
+                            <input class="form_subject" type="checkbox" id="app" name="controlInfo[]" value="Aplikacja">
+                            <label for="app">
+                                <span class="label-name">Aplikacja</span>
+                            </label>
+    
+                            <input class="form_subject" type="checkbox" id="branding" name="controlInfo[]" value="Branding">
+                            <label for="branding">
+                                <span class="label-name">Branding</span>
+                            </label>
+    
+                            <input class="form_subject" type="checkbox" id="other" name="controlInfo[]" value="Coś Innego">
+                            <label for="other">
+                                <span class="label-name">Coś Innego</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
 
-            <hr class="section-divider my-3 my-md-4 my-lg-4" />
+            <hr data-gs data-gs_fromFadeIn class="section-divider my-3 my-md-4 my-lg-4" />
 
                 <div class="row">
                     <div data-scroll data-scroll-speed="1.0" class="col-md-6">
-                        <div class="">
+                        <div data-gs data-gs_fromFadeIn>
                             <div class="form-field validate-input" data-validate = "To pole jest wymagane!">
                                 <input id="name" name="name" class="input-text js-input" type="text" required>
                                 <label for="name">Imię</label>
@@ -89,7 +91,7 @@
                         </div>
                     </div>
                     <div data-scroll data-scroll-speed="1.0" class="col-md-6">
-                        <div class="">
+                        <div data-gs data-gs_fromFadeIn>
                             <div class="form-field validate-input" data-validate = "To pole jest wymagane!">
                                 <input id="email" name="email" class="input-text js-input" type="email" required>
                                 <label for="email">E-mail</label>
@@ -101,7 +103,7 @@
                     </div>
                 </div>
                 <div data-scroll data-scroll-speed="1.5">
-                    <div class="form-field validate-input " data-validate = "To pole jest wymagane!">
+                    <div data-gs data-gs_fromFadeIn class="form-field validate-input " data-validate = "To pole jest wymagane!">
                         <textarea id="content" name="content" class="input-text js-input" cols="30" rows="10" required></textarea>
                         <label for="message">Wiadomość</label>
                         @error('content')
@@ -110,7 +112,7 @@
                     </div>
                 </div>
                 <div data-scroll data-scroll-speed="1.75">
-                    <div class="form-field text-center submit-container mt-2 mt-md-4 mt-lg-5 mb-3 mb-md-5">
+                    <div data-gs data-gs_fromBottom class="form-field text-center submit-container mt-2 mt-md-4 mt-lg-5 mb-3 mb-md-5">
                         <input type="submit" value="WYŚLIJ" class="btn btn-submit color"></input>
                     </div>
                 </div>

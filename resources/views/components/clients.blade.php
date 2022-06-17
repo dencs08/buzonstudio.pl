@@ -1,7 +1,7 @@
 <section data-scroll-section id="clients">
     <div class="container">
-        <h4 class="mb-2 gs gs_fromTop">Oni juz nam zaufali:</h4>
-        <div class="gs gs_fromBotom row d-flex-center">
+        <h4 data-gs data-gs_fromTop class="mb-2">Oni juz nam zaufali:</h4>
+        <div data-gs data-gs_fromBottom class="row d-flex-center">
             <div class="col-12 col-xsm-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">
                 <div class="client-logo m-0 py-0 px-3 px-xsm-2 px-md-4 px-lg-0">
                     <img

@@ -25,8 +25,12 @@
 
     <section data-scroll-section id="thanks-email">
         <div class="container">
-            <p class="">Dziękujemy za zaufanie, do usłyszenia wkrótce!</p>
-            <a class="font-family-primary link-primary underline-primary link-arrow" href="start">Powrót na stronę główną</a>
+            <div data-gs data-gs_fromBottom>
+                <p >Dziękujemy za zaufanie, do usłyszenia wkrótce!</p>
+            </div>
+            <div data-gs data-gs_fromBottom>
+                <a class="font-family-primary link-primary underline-primary link-arrow" href="start">Powrót na stronę główną</a>
+            </div>
         </div>
     </section>
 

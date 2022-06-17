@@ -34,35 +34,35 @@
             <div class="container">
                 <div class="row mb-3 mb-md-5">
                     <div class="col-12 col-md-6 text-uppercase">
-                        <div>
+                        <div data-gs data-gs_fromBottom>
                             <h3 class="headerline my-0 lh-1">Nasz</h3>
                         </div>
-                        <div>
+                        <div data-gs data-gs_fromBottom>
                             <h3 class="my-0 lh-1">Proces</h3>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="link-activate-wrapper">
+                        <div data-gs data-gs_fromBottom class="link-activate-wrapper">
                             <h4 class="font-family-header font-color-secondary link-bracket-display link-move">Dialog</h4>
                             <p class="font-color-dark mt-0 pe-2 pe-sm-5 pe-md-2 pe-lg-5">Podstawą każdego dobrze zrealizowanego projektu jest zrozumienie Twoich potrzeb w celu realizacji odpowiedniej wizji i wymagań. Wspólnie analizujemy podstawy i kryteria, które muszą być spełnione.</p>
                         </div>
-                        <div class="link-activate-wrapper">
+                        <div data-gs data-gs_fromBottom class="link-activate-wrapper">
                             <h4 class="font-family-header font-color-secondary link-bracket-display link-move">Koncepcja</h4>
                             <p class="font-color-dark mt-0 pe-2 pe-sm-5 pe-md-2 pe-lg-5">Opracowujemy środowisko i wykonanie technicznege w celu przygotowania szczegółowej strategii dla projektu. Tworzymy koncepcje wizualne w celu ożywienia doświadczenia, nad którym pracujemy.</p>
                         </div>
-                        <div class="link-activate-wrapper">
+                        <div data-gs data-gs_fromBottom class="link-activate-wrapper">
                             <h4 class="font-family-header font-color-secondary link-bracket-display link-move">Realizacja</h4>
                             <p class="font-color-dark mt-0 pe-2 pe-sm-5 pe-md-2 pe-lg-5">Gdy wszystko jest gotowe, zaczynamy techniczne prace nad projektem, zgodnie z wcześniej ustalonymi kryteriami tak aby produkt był dostosowany do Twoich potrzeb.</p>
                         </div>
-                        <div class="link-activate-wrapper">
+                        <div data-gs data-gs_fromBottom class="link-activate-wrapper">
                             <h4 class="font-family-header font-color-secondary link-bracket-display link-move">Dystrybucja</h4>
                             <p class="font-color-dark mt-0 pe-2 pe-sm-5 pe-md-2 pe-lg-5">Wykonujemy końcową analizę naszej pracy i upewniamy się, że uzgodnione warunki zostały spełnione. Ostatnim krokiem jest wdrożenie Twojego nowego produktu w życie.</p>
                         </div>
                     </div>
                 </div>
-                <div class="link-activate-wrapper contact">
+                <div data-gs data-gs_fromLeft class="link-activate-wrapper contact">
                     <a href="/kontakt">Jeśli jesteś zainteresowany
-                        <a data-scroll-speed="1.5" href="/kontakt" class="gs gs_fromLeft underline-primary font-color-primary">
+                        <a data-scroll-speed="1.5" href="/kontakt" class="underline-primary font-color-primary">
                             zdzwońmy się
                         </a>
                     </a>
