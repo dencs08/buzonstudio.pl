@@ -7,7 +7,7 @@
             <div class="col-md-6 px-0 px-md-3 px-lg-5 mb-4 mb-md-0 link-activate-wrapper">
                 <a href="/oferta">
                     <div data-scroll-speed="3" class="offer-wrapper">
-                        <div class="d-flex justify-content-center">
+                        <div data-gs data-gs_fromBottom class="d-flex justify-content-center">
                             <img src="{{asset('images/branding.jpg')}}" alt="">
                         </div>
                         <div data-scroll-speed="1.5" class="info-header my-0 ms-2 ms-md-0">
@@ -33,7 +33,7 @@
             <div class="col-md-6 px-0 px-md-3 px-lg-5 link-activate-wrapper">
                 <a href="/oferta">
                     <div data-scroll-speed="3" class="offer-wrapper">
-                        <div class="d-flex justify-content-center">
+                        <div data-gs data-gs_fromBottom class="d-flex justify-content-center">
                             <img src="{{asset('images/branding.jpg')}}" alt="">
                         </div>
                         <div data-scroll-speed="1.5" class="info-header">

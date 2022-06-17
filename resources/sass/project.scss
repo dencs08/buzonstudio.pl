@@ -14,7 +14,7 @@
         z-index: 2;
     }
     .image-wrapper {
-        width: clamp(130px, 100%, 2080px);
+        width: clamp(130px, 100%, 100%);
         height: auto;
 
         aspect-ratio: 16/9;
@@ -51,7 +51,7 @@
     .portfolio_image_wrapper {
         margin-bottom: clamp(50px, 6vw, 200px);
 
-        width: clamp(130px, 100%, 2080px);
+        width: clamp(130px, 100%, 100%);
         height: auto;
 
         // aspect-ratio: 16/9;

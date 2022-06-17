@@ -49,27 +49,27 @@
                         </div>
                         <div class="control-group">
                             <input class="form_subject" type="checkbox" id="talk" name="controlInfo[]" value="Chcę porozmawiać">
-                            <label for="talk">
+                            <label cursor-shrink for="talk">
                                 <span class="label-name">Chcę porozmawiać</span>
                             </label>
     
                             <input class="form_subject" type="checkbox" id="website" name="controlInfo[]" value="Strona Internetowa">
-                            <label for="website">
+                            <label cursor-shrink for="website">
                                 <span class="label-name">Strona Internetowa</span>
                             </label>
     
                             <input class="form_subject" type="checkbox" id="app" name="controlInfo[]" value="Aplikacja">
-                            <label for="app">
+                            <label cursor-shrink for="app">
                                 <span class="label-name">Aplikacja</span>
                             </label>
     
                             <input class="form_subject" type="checkbox" id="branding" name="controlInfo[]" value="Branding">
-                            <label for="branding">
+                            <label cursor-shrink for="branding">
                                 <span class="label-name">Branding</span>
                             </label>
     
                             <input class="form_subject" type="checkbox" id="other" name="controlInfo[]" value="Coś Innego">
-                            <label for="other">
+                            <label cursor-shrink for="other">
                                 <span class="label-name">Coś Innego</span>
                             </label>
                         </div>
@@ -113,7 +113,7 @@
                 </div>
                 <div data-scroll data-scroll-speed="1.75">
                     <div data-gs data-gs_fromBottom class="form-field text-center submit-container mt-2 mt-md-4 mt-lg-5 mb-3 mb-md-5">
-                        <input type="submit" value="WYŚLIJ" class="btn btn-submit color"></input>
+                        <input cursor-action data-cursor-label="⟶" type="submit" value="WYŚLIJ" class="btn btn-submit color"></input>
                     </div>
                 </div>
             </form>

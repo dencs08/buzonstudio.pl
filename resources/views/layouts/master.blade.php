@@ -14,6 +14,7 @@
     </head>
     <body class="antialiased">
         <x-navbar/>
+        <x-cursor/>
         <div data-page-content data-locomotive-scroll id="swup">
             <canvas id="web_gl"></canvas>
             @yield('content')

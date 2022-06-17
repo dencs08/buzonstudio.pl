@@ -28,6 +28,7 @@ import config from 'gia/config'
 import components from './components/giaComponents'
 
 import { navbarToggle } from './components/navbar';
+import { cursorClassRemove } from './components/cursor';
 import { locoCreate, locoReload } from './components/locomotive-scroll';
 
 config.set('log', true);
@@ -90,7 +91,7 @@ const swup = new Swup(swupOptions)
 
 swup.on('contentReplaced', function () {
     loadComponents(components)
-    // locomotiveReload()
+
     // document.querySelectorAll('[data-swup]').forEach(function (container) {
     //     loadComponents(components, container)
     // })
@@ -98,6 +99,7 @@ swup.on('contentReplaced', function () {
 
 swup.on('willReplaceContent', function () {
     removeComponents()
+    cursorClassRemove()
     if (!document.querySelector("[data-navigation]").classList.contains('is-active')) return
     navbarToggle()
 })
