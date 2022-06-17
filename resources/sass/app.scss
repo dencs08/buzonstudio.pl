@@ -52,6 +52,7 @@ body {
     color: $font-color-primary;
     font-family: $font-family-primary;
     overflow-x: hidden;
+    overflow-y: hidden;
     background-color: $body-bg !important;
     // background-image: url("/images/bg_img.png") !important;
     // background-position: center !important;
@@ -164,8 +165,23 @@ a {
     align-items: center;
 }
 
+//locomotive fixes
 [data-scroll-section] {
     perspective: 1px;
+}
+
+.c-scrollbar_thumb {
+    background-color: $font-color-primary !important;
+    opacity: 0.3;
+    width: 7px;
+    border-radius: 10px;
+    margin: 2px;
+}
+
+@media (max-width: 1023px) {
+    body {
+        overflow-y: scroll;
+    }
 }
 
 @media (max-width: $md-screen-size) {
