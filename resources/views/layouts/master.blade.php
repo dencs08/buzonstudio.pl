@@ -14,7 +14,7 @@
     </head>
     <body class="antialiased">
         <x-navbar/>
-        <div data-page-content data-locomotive-scroll id="swup" class="transition-fade">
+        <div data-page-content data-locomotive-scroll id="swup">
             <canvas id="web_gl"></canvas>
             @yield('content')
             @yield('js')
