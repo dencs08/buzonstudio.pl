@@ -1,21 +1,3 @@
-.transition-fade {
-    transform: translateX(0);
-    transition: transform 0.5s ease 0s;
-    // animation: isDone 1s;
-}
-
-html.is-animating .transition-fade {
-    transform: translateX(100%);
-    transition: transform 0.5s ease 0s;
-    // animation: isAnimating 1s;
-}
-
-html.is-leaving .transition-fade {
-    transform: translateX(-100%);
-    transition: transform 0.5s ease 0s;
-    // animation: isLeaving 1s;
-}
-
 .swup-progress-bar {
     height: 4px;
     background-color: #52d67a;
