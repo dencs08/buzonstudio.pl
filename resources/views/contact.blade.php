@@ -30,12 +30,12 @@
 
         <!-- Contact -->
 
-        <section data-scroll-section id="Contact">
+        <section data-scroll-section g-component="ContactForm" id="Contact">
             <div class="container text-center">
                 <div data-scroll data-scroll-speed="1.25">
                     <h3 data-gs data-gs_fromTop>Co możemy dla Ciebie zrobić?</h3>
                 </div>
-            <form data-swup-form id="contact-form" name="myForm" name="contact-form" class="contact-form validate-form" action="{{ route('send.email') }}" method="post">
+            <form id="contact-form" name="contact-form" class="contact-form validate-form" action="{{ route('send.email') }}" method="post">
                 @csrf
                 @if(session()->has('message'))
                     <div class="alert alert-success">
