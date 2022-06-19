@@ -3,29 +3,19 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import LocomotiveScroll from 'locomotive-scroll';
 import Component from 'gia/Component';
 
-let locoScroll;
+const header = document.querySelector('[data-header]')
+var locoScroll;
 export default class Locomotive extends Component {
-    async require() {
-        this.throttle = await import('locomotive-scroll');
-        this.throttle = await import('gsap');
-        this.throttle = await import('gsap/ScrollTrigger');
-    }
-
     constructor(element) {
         super(element)
-
-        document.addEventListener("DOMContentLoaded", function () {
-            create()
-        });
     }
 
     mount() {
-
     }
 
     unmount() {
+        locoScroll.stop()
         locoScroll.destroy()
-        // locoScroll = null;
     }
 }
 
@@ -34,10 +24,9 @@ function create() {
         el: document.querySelector('[data-locomotive-scroll]'),
         smooth: true,
         lerp: .1,
+        getDirection: true,
         // firefoxMultiplier: 50,
     });
-
-    locoScroll.on("scroll", ScrollTrigger.update);
 
     gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.scrollerProxy("[data-locomotive-scroll]", {
@@ -62,7 +51,7 @@ function create() {
             end: "bottom top",
             once: true,
             scroller: "[data-locomotive-scroll]",
-            markers: true,
+            // markers: true,
             onEnter: function () { animateFrom(elem) },
         });
     });
@@ -74,10 +63,10 @@ function scrollTriggerStart() {
     let start = ""
     if (height == 0) {
         height = window.innerHeight
-        let startTriggerNumber = height * 0.95;
+        let startTriggerNumber = height * 0.9;
         start = "top " + startTriggerNumber
     } else {
-        let startTriggerNumber = height * 0.95;
+        let startTriggerNumber = height * 0.9;
         start = "top " + startTriggerNumber
     }
 
@@ -132,52 +121,22 @@ function hide(elem) {
     gsap.set(elem, { autoAlpha: 0 });
 }
 
-export { create as locoCreate, reload as locoReload }
+function onScrollHideHeader() {
+    locoScroll.on("scroll", (args) => {
+        ScrollTrigger.update()
+        if (args.direction == 'down') {
+            header.style.top = "-100px";
+        } else {
+            header.style.top = "0"
+        }
+    })
+}
 
-// if (location.pathname == "/kontakt") {
-//     const subjectButtonsGroup = document.querySelectorAll(".control-group")
-//     const subjectButtons = document.querySelectorAll(".form_subject")
-//     const target = document.querySelector('#Contact');
-//     const buttonsError = document.querySelector(".control-group-error")
-//     let checkNumber = 0;
+function scrollTo(target, offset) {
+    locoScroll.scrollTo(target, {
+        offset: offset
+    });
+}
 
-//     function validateForm() {
-//         document.getElementById('contact-form').addEventListener("submit", function () {
-//             for (let i = 0; i < subjectButtons.length; i++) {
-//                 const element = subjectButtons[i];
+export { create as locoCreate, reload as locoReload, onScrollHideHeader, scrollTo as locoScrollTo }
 
-//                 if (element.checked) {
-//                     checkNumber++
-//                 }
-//             }
-
-//             if (checkNumber < 1) {
-//                 event.preventDefault()
-//                 locoScroll.scrollTo(target, {
-//                     offset: -200
-//                 });
-
-//                 let errorTl = new gsap.timeline()
-//                 errorTl.to(buttonsError, {
-//                     onStart: function () { buttonsError.style.display = "block" },
-//                     opacity: 1,
-//                     duration: 1.5,
-//                     delay: 0.25,
-//                 })
-//                 errorTl.to(buttonsError, {
-//                     opacity: 0,
-//                     duration: 0.5,
-//                     repeat: 3,
-//                     yoyo: true,
-//                     ease: "sine"
-//                 })
-
-//                 return false;
-//             }
-
-//             return true;
-//         }, false);
-//     }
-
-//     window.addEventListener("load", validateForm, false);
-// }

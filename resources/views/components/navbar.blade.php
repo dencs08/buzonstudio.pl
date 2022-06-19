@@ -1,4 +1,4 @@
-<header g-component="Navbar" class="position-fixed">
+<header g-component="Navbar" data-header class="position-fixed">
     <div class="row vw-100 px-3 px-lg-4">
         <div class="col-2 px-0 mx-0 d-flex justify-content-start align-items-center">
             <a href="/start" class="d-flex align-items-center">

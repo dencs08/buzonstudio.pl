@@ -1,6 +1,7 @@
 @import "../../../node_modules/hamburgers/_sass/hamburgers/hamburgers";
 
 header {
+    transition: top 0.3s;
     div {
         height: clamp(80px, 7.5vw, 150px) !important;
     }

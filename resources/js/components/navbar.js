@@ -1,9 +1,12 @@
 import { gsap } from "gsap";
 import Component from 'gia/Component';
 
-let isAnimating = false
 const hamburger = document.querySelector('[data-hamburger]')
 const navigation = document.querySelector('[data-navigation]')
+const navLinks = document.querySelectorAll('[web-link]');
+const firstNavLink = document.querySelector('[web-link]');
+const header = document.querySelector('[data-header]')
+let isAnimating = false
 let pagecontent;
 let tl = gsap.timeline()
 let yBodyPos = 0;
@@ -15,8 +18,8 @@ export default class Navbar extends Component {
     }
 
     mount() {
-        hamburger.addEventListener('click', navbarToggle.bind(this));
-
+        hamburger.addEventListener('click', navbarToggle.bind(this))
+        header.style.top = "0"
         updateActiveLink()
     }
 }
@@ -89,8 +92,6 @@ function navbarHide() {
     }, "-=0.6")
 }
 
-const navLinks = document.querySelectorAll('[web-link]');
-const firstNavLink = document.querySelector('[web-link]');
 function updateActiveLink() {
     var pathLink = location.pathname;
     var currentLink = pathLink.replace('/', '');
