@@ -19,6 +19,7 @@ import SwupProgressPlugin from '@swup/progress-plugin'
 import SwupGaPlugin from '@swup/ga-plugin'
 import SwupJsPlugin from '@swup/js-plugin'
 import SwupFormsPlugin from '@swup/forms-plugin';
+import SwupDebugPlugin from '@swup/debug-plugin';
 
 import gsap from 'gsap'
 
@@ -29,7 +30,7 @@ import components from './components/giaComponents'
 
 import { navbarToggle } from './components/navbar';
 import { cursorClassRemove } from './components/cursor';
-import { locoCreate, locoReload } from './components/locomotive-scroll';
+import { locoCreate, locoReload, onScrollHideHeader } from './components/locomotive-scroll';
 
 config.set('log', true);
 loadComponents(components)
@@ -69,7 +70,7 @@ const swupOptions = {
         new SwupPreloadPlugin(),
         new SwupGaPlugin(),
         new SwupFormsPlugin(),
-
+        new SwupDebugPlugin(),
         new SwupProgressPlugin({
             delay: 1000
         }),
@@ -89,22 +90,45 @@ const swupOptions = {
 
 const swup = new Swup(swupOptions)
 
-swup.on('contentReplaced', function () {
-    loadComponents(components)
-
-    // document.querySelectorAll('[data-swup]').forEach(function (container) {
-    //     loadComponents(components, container)
-    // })
-})
+document.addEventListener("DOMContentLoaded", function () {
+    locoCreate()
+    onScrollHideHeader()
+});
 
 swup.on('willReplaceContent', function () {
     removeComponents()
     cursorClassRemove()
+})
+
+swup.on('contentReplaced', function () {
+    loadComponents(components)
+
     if (!document.querySelector("[data-navigation]").classList.contains('is-active')) return
     navbarToggle()
 })
 
 swup.on('transitionEnd', function () {
+    if (!document.querySelector("[g-component='Locomotive']")) return
     locoCreate()
     locoReload()
+    onScrollHideHeader()
 })
+
+function disablePlugin(pluginName) {
+    swup.unuse(pluginName)
+}
+
+function enablePlugin(pluginName) {
+    swup.use(new pluginName())
+}
+
+export { disablePlugin as swupDisablePlugin, enablePlugin as swupEnablePlugin }
+
+// document.addEventListener('swup:transitionEnd', (event) => {
+//     if (!document.querySelector("#landing-page")) return
+//     let landingPage = document.querySelector("#landing-page")
+
+//     if (!landingPage.getAttribute("g-component") == "Locomotive") return
+//     create()
+//     reload()
+// });

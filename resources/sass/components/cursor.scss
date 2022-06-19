@@ -55,7 +55,7 @@
     &.active-action {
         background-color: $primary-color;
         border: none;
-        transform: scale(1.85) translate(-8px, -8px);
+        transform: scale(2.35) translate(-8px, -8px);
     }
 
     &.active-expand {
@@ -74,7 +74,7 @@
         text-align: center;
         text-transform: uppercase;
 
-        font-weight: 600;
+        font-weight: 300;
         font-size: 22px;
 
         opacity: 0;
