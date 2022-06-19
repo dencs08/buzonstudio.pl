@@ -30,6 +30,7 @@
         "@barba/core": "^2.9.7",
         "@popperjs/core": "^2.10.2",
         "@swup/body-class-plugin": "^1.0.2",
+        "@swup/debug-plugin": "^1.0.3",
         "@swup/forms-plugin": "^1.1.1",
         "@swup/ga-plugin": "^1.1.0",
         "@swup/head-plugin": "^1.2.0",
