@@ -40,7 +40,7 @@
                             </a>
                         </div>
 
-                        <div class="footer-links text-uppercase mt-4 mb-5 fw-light">
+                        <div class="footer-links text-uppercase mt-4 fw-light">
                             <ul>
                                 <li data-gs data-gs_fromBottom class="my-2"><a href="/start" class="underline-dark">start</a></li>
                                 <li data-gs data-gs_fromBottom class="my-2"><a href="/oferta" class="underline-dark">oferta</a></li>
@@ -59,7 +59,7 @@
                     </div>
                 </div>
 
-                <div data-gs data-gs_fromBottom class="font-family-header text-uppercase text-center text-md-start mt-2">
+                <div data-gs data-gs_fromBottom class="font-family-header text-uppercase text-center text-md-start pt-5">
                     <div class="d-block d-md-inline-block mt-2 mt-md-0 me-0 me-md-4">
                         <a href="/polityka" class="underline-dark font-color-dark">Polityka prywatności</a>
                     </div>
