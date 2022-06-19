@@ -1,5 +1,5 @@
 <section data-scroll-section id="clients">
-    <div class="container">
+    <div data-scroll data-scroll-speed="1.1" class="container">
         <h4 data-gs data-gs_fromTop class="mb-2">Oni juz nam zaufali:</h4>
         <div class="row d-flex-center">
             <div class="col-12 col-xsm-6 col-sm-4 col-md-4 col-lg-2 mx-auto d-flex-center">

@@ -19,7 +19,12 @@
         <section data-scroll-section g-component="Locomotive" id="landing-page">
             <div data-scroll data-scroll-speed="3" class="container mt-3 mt-lg-0 mt-xl-4 pt-5 pt-md-6">
                 <h1>
-                    Dla was budujemy <br> wspaniałe <span id="typed"></span>
+                    <div>
+                        <span g-component="TypedOffer" id="typed"></span> 
+                    </div>
+                    <div>
+                        Pod Twoje potrzeby.
+                    </div>
                 </h1>
 
                 <h2 class="fw-normal">W naszym studio kreujemy prace które, działają, zdobywają serca użytkowników i zapadają w pamięć. Tworzymy wszystko od A do Z, tak jak chcesz.
@@ -33,7 +38,7 @@
         <section data-scroll-section id="process" class="section-mb">
             <div class="container">
                 <div class="row mb-3 mb-md-5">
-                    <div class="col-12 col-md-6 text-uppercase">
+                    <div data-scroll data-scroll-speed="0.5" class="col-12 col-md-6 text-uppercase">
                         <div data-gs data-gs_fromBottom>
                             <h3 class="headerline my-0 lh-1">Nasz</h3>
                         </div>
@@ -41,7 +46,7 @@
                             <h3 class="my-0 lh-1">Proces</h3>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div data-scroll data-scroll-speed="5" class="col-md-6">
                         <div data-gs data-gs_fromBottom class="link-activate-wrapper">
                             <h4 class="font-family-header font-color-secondary link-bracket-display link-move">Dialog</h4>
                             <p class="font-color-dark mt-0 pe-2 pe-sm-5 pe-md-2 pe-lg-5">Podstawą każdego dobrze zrealizowanego projektu jest zrozumienie Twoich potrzeb w celu realizacji odpowiedniej wizji i wymagań. Wspólnie analizujemy podstawy i kryteria, które muszą być spełnione.</p>

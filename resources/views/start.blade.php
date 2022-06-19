@@ -31,8 +31,8 @@
         <!-- Portfolio -->
         <section data-scroll-section id="portfolio">
             <div data-gs data-gs_fromBottom id="portfolio-content" class="container mt-5">
-                <h4 class="my-0 headerline">Nasze prace</h4>
-                <h3 class="mt-1 mb-3">
+                <h4 data-scroll data-scroll-speed="0.8" class="my-0 headerline">Nasze prace</h4>
+                <h3 data-scroll data-scroll-speed="1" class="mt-1 mb-3">
                     Projekty z, których jesteśmy dumni
                 </h3>
             </div>
@@ -68,7 +68,9 @@
                 </div>
             </div>  
             <div data-gs data-gs_fromLeft class="portfolio-btn-container container">
-                <a href="/portfolio" class="link-primary underline-primary link-arrow my-4 text-uppercase fw-medium">Więcej prac</a>
+                <div data-scroll data-scroll-speed="1.5">
+                    <a href="/portfolio" class="link-primary underline-primary link-arrow my-4 text-uppercase fw-medium">Więcej prac</a>
+                </div>
             </div>
         </section>
 
@@ -76,7 +78,7 @@
         <section data-scroll-section id="aboutUs">
             <div class="container d-flex align-items-center">
                 <div class="col-md-7"></div>
-                <div class="col-12 col-sm-9 col-md-5 pe-1 pe-lg-5">
+                <div data-scroll data-scroll-speed="1" class="col-12 col-sm-9 col-md-5 pe-1 pe-lg-5">
                     <p data-gs data-gs_fromRight class="font-color-dark">
                         <b class="text-uppercase">{{config('app.name')}}</b> to 5 lat doświadczenia w tworzeniu projektów i pomaganiu markom w zwiększaniu efektywności ich działania. Stawiamy czoło wyzwaniom i osiągamy cele poprzez współpracę z Wami. Dzięki naszej pracy, wspólnie możemy uzyskać wspaniałe efekty.
                     </p>
@@ -90,19 +92,25 @@
         <!-- Lets talk -->
         <section data-scroll-section id="contact">
             <div class="container text-center">
-                <h4 data-gs data-gs_fromTop>Napisz do nas!</h4>
-                <h3 data-gs data-gs_fromTop class="my-0">Zatrudnij nas a my zajmiemy się resztą.</h3>
-                <div data-gs data-gs_fromBottom class="button-trail mt-5">
-                    <form>
-                        <a href="/kontakt">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            Porozmawiajmy!
-                        </a>
-                    </form>
-                </div>                
+                <div data-scroll data-scroll-speed="2">
+                    <h4 data-gs data-gs_fromTop>Napisz do nas!</h4>
+                </div>
+                <div data-scroll data-scroll-speed="1.5">
+                    <h3 data-gs data-gs_fromTop class="my-0">Zatrudnij nas a my zajmiemy się resztą.</h3>
+                </div>
+                <div data-scroll data-scroll-speed="1">
+                    <div data-gs data-gs_fromBottom class="button-trail mt-5">
+                        <form>
+                            <a href="/kontakt">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                Porozmawiajmy!
+                            </a>
+                        </form>
+                    </div>                
+                </div>
             </div>
         </section>
 
