@@ -1,0 +1,54 @@
+@import "~locomotive-scroll/dist/locomotive-scroll";
+
+#canvas {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+
+    pointer-events: none !important;
+}
+
+.planes-loaded #canvas {
+    opacity: 1;
+}
+
+.planes-loaded #planes {
+    opacity: 1;
+}
+
+.plane-wrapper {
+    position: relative;
+
+    width: 75%;
+    height: 60vh;
+    margin: 10vh 25% 10vh 0;
+
+    .plane-distort {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        img {
+            display: none;
+        }
+    }
+}
+
+.no-curtains .plane-distort {
+    display: flex;
+    overflow: hidden;
+}
+
+.no-curtains .plane-distort img {
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+}
