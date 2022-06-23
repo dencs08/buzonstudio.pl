@@ -11,6 +11,10 @@ Route::post('/kontaktsent', [App\Http\Controllers\EmailController::class, 'sendE
 Route::get('portfolio', [App\Http\Controllers\AppController::class, 'portfolio']);
 Route::get('portfolio/{name}', [App\Http\Controllers\AppController::class, 'project']);
 
+
+Route::get('/test', function(){
+    return view('test');
+});
 // Route::get('/', function(){
 //     return view('webbuilding');
 // });
